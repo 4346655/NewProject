@@ -1,0 +1,58 @@
+﻿@model NewProject.Models.LoginModels
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="~/Assets/font/fontawesome/css/all.css" rel="stylesheet" />
+    <link href="~/Assets/css/Login_Register.css" rel="stylesheet" />
+    <link href="~/Assets/css/Main.css" rel="stylesheet" />
+
+    <title>Đăng nhập</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="form-input">
+
+            <div class="content">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.ValidationSummary(true, null, new { @class = "alert alert-success" });
+                    <div class="list-login" style="width:450px">
+                        <form action="" class="list-login">
+                            <h3>ĐĂNG NHẬP</h3>
+
+                            <i class="fa-solid fa-user user"></i>
+                            <input class="login" id="username" name="username" type="text" value="" placeholder="Tên Đăng Nhập "><br />
+
+                            <div class="output">
+                                <i class="fa-sharp fa-solid fa-key key"></i>
+
+                                <input class="login" id="password" name="password" type="password" placeholder="Mật Khẩu"> <br />
+                                <div class="about">
+                                    <a href="/quen-mat-khau"><p class="qmk">Quên mật khẩu?</p></a>
+                                    <a href="/dang-ki"><p class="dk">Đăng kí</p></a>
+                                </div>
+
+                            </div>
+                            <button>Đăng Nhập</button>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

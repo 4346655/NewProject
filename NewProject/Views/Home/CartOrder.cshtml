@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "CartOrder";
+}
+
+<html>
+    <head>
+        <title>Giỏ hàng</title>
+    </head>
+    <body>
+        <div style="width:500px">
+            <div >
+                @Html.Action("Index", "Cart")
+            </div>
+            <div style="background-color:lightgray ">
+                @Html.Action("Index", "Order")
+            </div>
+        </div>
+    </body>
+</html>
+
+

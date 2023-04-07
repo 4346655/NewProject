@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Box";
+    Layout =null;
+}
+
+@model List<Models.DTO.Loai_Sach>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+
+</head>
+<body>
+    <div class="container search" style="margin-top: 100px;">
+        <div class="list-search">
+            <span class="xx">Bạn Muốn Tìm gì?</span>
+            <br><br>
+           
+                <ul class="list-option">
+                    @foreach (var item in Model)
+                    {
+                        <li><a href="#content-@item.ID">@item.Loaisach</a></li>
+                    }
+                    </ul>
+         
+        </div>
+        <div class="wp-content1">
+
+            <!-- <img src="https://photo2.tinhte.vn/data/attachment-files/2021/11/5734331_44a78149149ec38db391afb7065155ac.jpg" alt="" width="1300px" height="100px"> -->
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quibusdam tenetur libero odio fugit placeat temporibus mollitia exercitationem vel nobis maxime laborum vero eveniet, dignissimos quae! Alias aliquam doloribus sed?
+        </div>
+    </div>
+</body>
+</html>

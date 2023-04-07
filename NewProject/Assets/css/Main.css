@@ -1,0 +1,104 @@
+﻿body {
+    background: url("../image/it3.jpg");
+    background-position-y: -15px;
+    background-size: cover;
+}
+
+.content {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.list-login {
+    max-width: 450px;
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 0px 17px rgb(115, 186, 120);
+    opacity: 0.8;
+    text-align: center;
+    padding: 30px 30px 40px 50px;
+    border-radius: 15px;
+}
+
+    .list-login h3 {
+        margin-bottom: 20px;
+        color: white;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+.login {
+    margin-bottom: 20px;
+    border: none;
+    outline: none;
+    /* text-align: center; */
+    padding-top: 15px;
+    width: 100%;
+    background: transparent;
+    text-align: left;
+    color: antiquewhite;
+    border-bottom: 1px solid white;
+}
+
+.list-login button {
+    width: 100%;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    margin-top: 13px;
+    padding-top: 7px;
+    padding-bottom: 9px;
+    border-radius: 10px;
+}
+
+    .list-login button:hover {
+        background-color: orange;
+        transition: all 0.1s;
+    }
+
+input::placeholder {
+    color: bisque;
+    /* border-bottom: 1px solid white; */
+}
+
+i.user {
+    position: absolute;
+    left: 535px;
+    color: white;
+    bottom: 410px;
+}
+
+i.key {
+    position: absolute;
+    left: 535px;
+    bottom: 349px;
+    color: white;
+}
+
+h3 {
+    position: relative;
+}
+
+.about {
+    display: flex;
+    font-size: 13px;
+    position: relative;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+p.qmk {
+    position: absolute;
+    left: 20px;
+    /* margin-right: 300px; */
+}
+
+p.dk {
+    position: absolute;
+    right: 30px;
+}
+
+div.submit {
+    width: 100px;
+}

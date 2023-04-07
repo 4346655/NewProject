@@ -1,0 +1,73 @@
+﻿@model List<Models.DTO.GioHang>
+@{
+    ViewBag.Title = "Index";
+
+}
+<html>
+<head>
+    <title>gio hang</title>
+    <link href="~/Assets/font/fontawesome/css/all.css" rel="stylesheet" />
+    <link href="~/Assets/css/Cart.css" rel="stylesheet" />
+</head>
+    <body>
+        <div style="margin-top:40px;">
+            <div id="wrapper">
+
+                <div class="t-head ">
+                    <p>GIỎ HÀNG CỦA BẠN </p>
+
+                </div>
+                <div class="content container2">
+
+                    <ul class="table" style="display: flex;">
+                        <li>Hình Ảnh</li>
+                        <li>Sản Phẩm</li>
+                        <li>Số Lượng</li>
+                        <li>Giá</li>
+                        <li>Tổng Tiền</li>
+                        <li>#</li>
+                    </ul>
+                    <hr>
+
+
+                    @if (Model.Count > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <ul class="table-product" style="display: flex;">
+                                <li style="width:110px;"><img src="@item.Sach.Anh" alt=""></li>
+                                <li style="width:300px;">@item.Sach.TenSach</li>
+                                <li style="width:50px;">@item.SoLuong</li>
+                                <li style="width:40px;">@(item.Sach.Gia-item.Sach.Gia_giam)</li>
+                                <li style="width:160px;">@(item.SoLuong * (item.Sach.Gia - item.Sach.Gia_giam)) </li>
+                                <li>
+                                    <a href="/xoa-gio-hang-@item.ID">Xóa</a>  |
+                                    <a href="/xac-minh-don-hang-@item.Sach.ID-@item.SoLuong">Mua</a>
+                                </li>
+                            </ul>
+                            <hr />
+                        }
+                    }
+
+                </div>
+                <div class="footer container2" style="display: flex;">
+                    <div class="ship">
+                       
+
+                        <br> <a href="/trang-chu">Tiếp Tục Mua Hàng</a>
+                    </div>
+                    <div class="option-buy">
+
+                    </div>
+                    <div class="other">
+
+                    </div>
+                </div>
+            </div>
+            @Html.Action("Index","Order")
+
+
+
+        </div>
+    </body>
+</html>

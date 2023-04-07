@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Models.DTO.TaiKhoan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LoaiTK.Ten_LoaiTK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenTaiKhoan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MatKhau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trangthai)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoaiTK.Ten_LoaiTK)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenTaiKhoan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MatKhau)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Trangthai)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,56 @@
+﻿
+
+@model NewProject.Models.RegisterModels
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Assets/font/fontawesome/css/all.css" rel="stylesheet" />
+    <link href="~/Assets/css/Login_Register.css" rel="stylesheet" />
+    <link href="~/Assets/css/Main.css" rel="stylesheet" />
+
+    <title>REGISTER-DAng Ky</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="form-input">
+
+            <div class="content">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.ValidationSummary(true, null, new { @class = "alert alert-success" });
+                    <div class="list-login" style="width:450px">
+                        <form action="index.html">
+
+                            <h3>Đăng kí</h3>
+                            <input class="login" id="username" name="username" type="text" value="" placeholder="Tên Đăng Nhập "><br />
+                            <div class="output">
+                                <input class="login" id="password" name="password" type="password" placeholder="Mật Khẩu"> <br />
+                            </div>
+                            <div class="output">
+                                <input class="login" id="confirm" name="confirm" type="password" placeholder=" Xác Nhận Mật Khẩu"> <br />
+                                <div class="about">
+                                    <a href="/dang-nhap"><p class="qmk">Đăng nhập</p></a>
+                                    <a href="/trang-chu"><p class="dk">Trang chủ</p></a>
+                                </div>
+                            </div>
+                            <button>Đăng Kí</button>
+
+
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

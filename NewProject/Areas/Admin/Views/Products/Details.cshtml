@@ -1,0 +1,80 @@
+﻿@model Models.DTO.Sach
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<html>
+    <head>
+        <title> Chi tiết</title>
+    </head>
+    <body style="margin-top:60px">
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-7">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">@Model.TenSach</h3>
+                            <p>@Model.Mota</p>
+                           
+                                <div class="col-md-4">
+                                    <label class="form-label">Thể loại</label>
+                                    <input type="text" value="@Model.Loai_Sach.Loaisach" readonly>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Tác giả</label>
+                                    <input type="text" value="@Model.TacGia" readonly>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Nhà xuất bản</label>
+                                    <input type="text" value="@Model.NhaXuatBan" readonly>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Giá</label>
+                                    <input type="text" class="form-control" value="@Model.Gia" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Giá đang giảm</label>
+                                    <input type="text" class="form-control" value="@Model.Gia_giam" readonly>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Số lượng</label>
+                                    <input type="text" class="form-control" value="@Model.SoLuong" readonly>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Số lượng đã bán</label>
+                                    <input type="text" class="form-control" value="@Model.SoLuong_DaBan" readonly>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="form-label">Trạng thái</label>
+                                    @if (Model.Trangthai == true)
+                                    {
+                                        <input type="text" class="form-control" value="Đang bán" readonly>
+                                    }
+                                    else
+                                    {
+                                        <input type="text" class="form-control" value="Dừng bán" readonly>
+                                    }
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="validationDefault05" class="form-label">Hình ảnh</label>
+                                    <img src="@Model.Anh" width="100" />
+                                </div>
+                           </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+        <p style="margin-top:60px">
+            <a href="/sua-san-pham-3">Chỉnh sửa</a> | 
+            <a href="/san-pham">Trở lại</a>
+        </p>
+
+    </body>
+</html>

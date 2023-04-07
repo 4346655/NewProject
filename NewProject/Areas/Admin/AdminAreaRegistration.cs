@@ -1,0 +1,205 @@
+﻿using System.Web.Mvc;
+
+namespace NewProject.Areas.Admin
+{
+    public class AdminAreaRegistration : AreaRegistration 
+    {
+        public override string AreaName 
+        {
+            get 
+            {
+                return "Admin";
+            }
+        }
+
+        public override void RegisterArea(AreaRegistrationContext context) 
+        {
+            context.MapRoute(
+              "phan quyen",
+              "phan-quyen",
+              new { Controller = "Home1", action = "Error", id = UrlParameter.Optional }
+           );
+            //----------------------------------------------------------------------------
+            context.MapRoute(
+               "Tai khoan",
+               "tai-khoan",
+               new { Controller = "Accounts", action = "Index", id = UrlParameter.Optional }
+            );
+            context.MapRoute(
+               "Them tai khoan",
+               "them-tai-khoan",
+               new { Controller = "Accounts", action = "Create", id = UrlParameter.Optional }
+            );
+            context.MapRoute(
+               "Sua tai khoan",
+               "sua-tai-khoan-{id}",
+               new { Controller = "Accounts", action = "Edit" }
+            );
+            context.MapRoute(
+               "Chi tiet tai khoan",
+               "chi-tiet-tai-khoan-{id}",
+               new { Controller = "Accounts", action = "Deltails" }
+            );
+            context.MapRoute(
+               "Xoa tai khoan",
+               "xoa-tai-khoan-{id}",
+               new { Controller = "Accounts", action = "Delete" }
+            );
+
+            //----------------------------------------------------------------------------
+            context.MapRoute(
+              "Khach hang",
+              "khach-hang",
+              new { Controller = "Customers", action = "Index", id = UrlParameter.Optional }
+             );
+            context.MapRoute(
+              "Them khach hang",
+              "them-khach-hang",
+              new { Controller = "Customers", action = "Create", id = UrlParameter.Optional }
+             );
+            context.MapRoute(
+              "Sua khach hang",
+              "sua-khach-hang-{id}",
+              new { Controller = "Customers", action = "Edit" }
+             );
+            context.MapRoute(
+              "Chi tiet khach hang",
+              "chi-tiet-khach-hang-{id}",
+              new { Controller = "Customers", action = "Details" }
+             );
+            context.MapRoute(
+              "Xoa khach hang",
+              "xoa-khach-hang-{id}",
+              new { Controller = "Customers", action = "Delete" }
+             );
+            //----------------------------------------------------------------------------
+            context.MapRoute(
+              "San pham",
+              "san-pham",
+            new { Controller = "Products", action = "Index", id = UrlParameter.Optional }
+            );
+            context.MapRoute(
+              "Them san pham",
+              "them-san-pham",
+            new { Controller = "Products", action = "Create", id = UrlParameter.Optional }
+            );
+            context.MapRoute(
+              "Sua san pham",
+              "sua-san-pham-{id}",
+            new { Controller = "Products", action = "Edit" }
+            );
+            context.MapRoute(
+              "Chi tiet san pham",
+              "chi-tiet-san-pham-{id}",
+            new { Controller = "Products", action = "Details" }
+            );
+            context.MapRoute(
+              "Xoa san pham",
+              "xoa-san-pham-{id}",
+            new { Controller = "Products", action = "Delete" }
+            );
+
+            context.MapRoute(
+              "Thung rac san pham",
+              "thung-rac-san-pham",
+            new { Controller = "Products", action = "Statefalse" }
+            );
+            context.MapRoute(
+              "Xoa vv san pham",
+              "delete-san-pham-{id}",
+            new { Controller = "Products", action = "Dele" }
+            );
+
+            context.MapRoute(
+              "Bo thung rac san pham",
+              "bo-san-pham-{id}",
+            new { Controller = "Products", action = "Del" }
+            );
+            context.MapRoute(
+              "Quay lai san pham",
+              "quay-lai-san-pham-{id}",
+            new { Controller = "Products", action = "Restore" }
+            );
+
+            //----------------------------------------------------------------------------
+            context.MapRoute(
+             "Danh muc san pham",
+             "danh-muc",
+            new { Controller = "Categories", action = "Index", id = UrlParameter.Optional }
+            );
+            context.MapRoute(
+             "Them danh muc san pham",
+             "them-danh-muc",
+            new { Controller = "Categories", action = "Create", id = UrlParameter.Optional }
+            );
+            context.MapRoute(
+             "Xoa danh muc san pham",
+             "xoa-danh-muc-{id}",
+            new { Controller = "Categories", action = "Dele" }
+            );
+            context.MapRoute(
+             "Sua danh muc san pham",
+             "sua-danh-muc-{id}",
+            new { Controller = "Categories", action = "Edit" }
+            );
+            //----------------------------------------------------------------------------
+            context.MapRoute(
+                "Don hang",
+                "don-hang",
+            new { Controller = "Orders", action = "Index", id = UrlParameter.Optional }
+            );
+            context.MapRoute(
+                "Them don hang",
+                "them-don-hang",
+            new { Controller = "Orders", action = "Create", id = UrlParameter.Optional }
+            );
+            context.MapRoute(
+                "Sua don hang",
+                "sua-don-hang-{id}",
+            new { Controller = "Orders", action = "Edit" }
+            );
+            context.MapRoute(
+                "Xoa don hang",
+                "xoa-don-hang-{id}",
+            new { Controller = "Orders", action = "Delete" }
+             );
+            context.MapRoute(
+                "Chi tiet don hang",
+                "chi-tiet-don-hang-{id}",
+            new { Controller = "Orders", action = "Details" }
+             );
+            //----------------------------------------------------------------------------
+            context.MapRoute(
+                "Ma giam gia",
+                "ma-giam-gia",
+             new { Controller = "Vouchers", action = "Index", id = UrlParameter.Optional }
+             );
+            context.MapRoute(
+                "Them giam gia",
+                "them-ma-giam-gia",
+             new { Controller = "Vouchers", action = "Create", id = UrlParameter.Optional }
+             );
+            context.MapRoute(
+                "Sua giam gia",
+                "sua-ma-giam-gia-{id}",
+             new { Controller = "Vouchers", action = "Edit" }
+             );
+            context.MapRoute(
+               "Xoa giam gia",
+               "xoa-ma-giam-gia-{id}",
+            new { Controller = "Vouchers", action = "Delete" }
+            );
+            context.MapRoute(
+                "trang chu quan li",
+                "trang-chu-quan-li",
+             new { Controller = "Home1", action = "Index", id = UrlParameter.Optional }
+             );
+
+            context.MapRoute(
+                "Admin_default",
+                "Admin/{controller}/{action}/{id}",
+                new { action = "Index", id = UrlParameter.Optional }
+            );
+        }
+    }
+}

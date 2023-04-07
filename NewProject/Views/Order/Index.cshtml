@@ -1,0 +1,97 @@
+﻿@model List<Models.DTO.DonHang>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div id="wrapper" style="margin-top:40px;">
+
+        <div class="t-head ">
+            <p>ĐƠN HÀNG CỦA BẠN </p>
+
+        </div>
+        <div class="content container2">
+
+            <ul class="table" style="display: flex;">
+                <li>Hình Ảnh</li>
+                <li>Sản Phẩm</li>
+                <li>Số Lượng</li>
+                <li>Giá</li>
+                <li>Tổng Tiền</li>
+                <li>#</li>
+            </ul>
+            <hr>
+
+
+            @if (Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <ul class="table-product" style="display: flex;">
+                        <li style="width:110px;"><img src="@item.Sach.Anh" alt=""></li>
+                        <li style="width:300px;">
+                            <p>@item.Sach.TenSach</p>
+                            @if (item.Trang_thai == 1)
+                            {
+                                <p style="color:lightcoral">Đang chuẩn bị</p>
+                            }
+                            else if (item.Trang_thai == 2)
+                            {
+                                <p style="color:lightcoral">Đang giao</p>
+                            }
+                            else if (item.Trang_thai == 3)
+                            {
+                                <p style="color:lightcoral">Đã giao</p>
+                            }
+					        else
+					        {
+                                <p style="color:lightcoral">Đã hủy</p>
+					        }
+                        </li>
+                        <li style="width:50px;">@item.SoLuong</li>
+                        <li style="width:40px;">@(item.Sach.Gia-item.Sach.Gia_giam)</li>
+                        <li style="width:160px;">@(item.SoLuong * (item.Sach.Gia - item.Sach.Gia_giam)) </li>
+                        <li>
+                            @if (item.Trang_thai != 0)
+                            {
+                            <a href="/huy-don-@item.ID">Hủy đơn hàng</a>
+                            }
+					        else
+					        {
+                                <a href="/mua-lai-@item.ID">Mua lại</a>
+					        }
+                        </li>
+                        
+                       
+                    </ul>
+                    <hr />
+                }
+            }
+
+        </div>
+        <div class="footer container2" style="display: flex;">
+            <div class="ship">
+                <img src="https://tse3.mm.bing.net/th?id=OIP.CP-sjgkPd7kWOrqsIbBgHAHaDy&pid=Api&P=0" alt="" style="width: 400px; height: auto;">
+
+                <br> <a href="/trang-chu">Tiếp Tục Mua Hàng</a>
+            </div>
+            <div class="option-buy">
+
+            </div>
+            <div class="other">
+
+            </div>
+        </div>
+    </div>
+
+
+   
+</body>
+</html>

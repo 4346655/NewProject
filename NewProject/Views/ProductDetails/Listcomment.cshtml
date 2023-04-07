@@ -1,0 +1,68 @@
+﻿@model List<Models.DTO.BinhLuan>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Listcomment</title>
+    <style>
+        .user-comment{
+            width:100%;
+            display:flex;
+            margin-top:10px;
+        }
+        .avt_comment {
+            width: 70px;
+            border-radius: 50px;
+            
+        }
+        .info_user{
+            margin-left:30px;
+            background-color:lightgray;
+            flex:3;
+            display:flex;
+            border-radius:10px;
+        }
+        .comment-content {
+            flex: 9;
+            margin-left: 20px;
+            background-color: lightgray;
+            border-radius: 10px;
+            
+        }
+        .anh{
+
+        }
+        .thongtin{
+            margin-left:20px;
+        }
+    </style>
+</head>
+<body>
+
+    @foreach (var item in Model)
+    {
+    <div class="user-comment">
+        <div class="info_user">
+            <div class="anh">
+                <img src="@item.KhachHang.AnhDaiDien" class="avt_comment" />
+            </div>
+            <div class="thongtin">
+                <p>@item.KhachHang.HoTen</p>
+                <p>@item.Sach.TenSach</p>
+            </div>
+            
+        </div>
+        <div class="comment-content" >
+            <p style="margin-left:30px;">@item.NoiDung</p>
+        </div>
+    </div>
+
+      }
+      
+    </body>
+</html>

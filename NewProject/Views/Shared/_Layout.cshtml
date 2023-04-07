@@ -1,0 +1,88 @@
+﻿@using NewProject.Models
+@using Models.DAO
+@using NewProject.Controllers
+@{
+
+    var ac = new AccountDao();
+    var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <link href="~/Assets/font/fontawesome/css/all.css" rel="stylesheet" />
+    <link href="~/Assets/css/Homecss.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header" class="">
+            <div class="header-item">
+                <div class="item-small">
+                    <a href=""><img src="~/Assets/image/logochude.png" alt="" style="height: 86px;"></a>
+                </div>
+                <div class="item-small">
+                    <form action="" id="search-1">     
+                        <input class="input-search" type="text" name="search" placeholder="Bạn muốn tìm gì?" width="200px">
+                        
+                    </form> 
+                </div>
+                <div class="item-small">
+                 
+                    <ul class="container1">
+                        <li><a href="/trang-chu">Trang Chủ </a></li>
+                        <li><a href="/dang-ki">Đăng Ký </a></li>
+                        <li>
+                            @{
+
+                                if (session == null)
+                                {
+                                    <a href="/dang-nhap">Đăng nhập</a>
+                                }
+                                else
+                                {
+                                    var account = ac.Byname(session.username);
+                                    if (account == 2)
+                                    {
+                                        <a href="">@session.username</a>
+                                        <ul class="list-noname colorx">
+                                            <li><a href="/ho-so">Hồ Sơ</a> <a href=""><i class="fa-solid fa-user red" style="color: white;"></i></a></li>
+                                            <li> <a href="/gio-hang">Giỏ Hàng</a>    <a href="" class="cart"> <i class="fa-solid fa-cart-shopping red " style="color: white;"></i> </a></li>
+                                            <li><a href="/dang-xuat">Đăng Xuất</a> <a href=""><i class="fa-solid fa-right-from-bracket red" style="color: white;"></i></a></li>
+                                            <li><a href="/trang-chu-quan-li">Trang chủ quản lí</a></li>
+                                        </ul>
+
+                                    }
+                                    else
+                                    {
+                                    <a href="">@session.username</a>
+                                    <ul class="list-noname colorx">
+                                        <li><a href="/ho-so">Hồ Sơ</a> <a href=""><i class="fa-solid fa-user red" style="color: white;"></i></a></li>
+                                        <li> <a href="/gio-hang">Giỏ Hàng</a>    <a href="" class="cart"> <i class="fa-solid fa-cart-shopping red " style="color: white;"></i> </a></li>
+                                        <li><a href="/dang-xuat">Đăng Xuất</a> <a href=""><i class="fa-solid fa-right-from-bracket red" style="color: white;"></i></a></li>
+                                    </ul>
+                                        }
+                                    }
+                                }
+
+                        </li>
+                    </ul>
+                   
+                </div>
+                
+            </div>
+            
+            
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+
+        </div>
+    </div>
+    <script src="~/Content/ckfinder/ckfinder/ckfinder.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

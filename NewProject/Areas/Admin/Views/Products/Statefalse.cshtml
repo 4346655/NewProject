@@ -1,0 +1,115 @@
+﻿@model PagedList.IPagedList<Models.DTO.Sach>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<string> li = new List<string>();
+}
+
+<html>
+<head>
+    <title>Sản phẩm</title>
+    <style>
+        .table-product {
+            background-color: lightcyan;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+    <link href="~/Areas/Admin/Assets/css/Modal.css" rel="stylesheet" />
+</head>
+<body style="margin-top:60px;">
+    <p>
+        <a href="/san-pham">Trở lại</a>
+        @using (Html.BeginForm("Statefalse", "Products", FormMethod.Get))
+        {
+            <div>
+                <input type="text" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
+                <button type="submit">Tìm</button>
+            </div>
+
+        }
+    </p>
+    <div class="table-product">
+        <table class="table">
+            <tr>
+                <th> Hình ảnh</th>
+                <th> Danh mục</th>
+                <th> Tên sách</th>
+                <th> Số lượng</th>
+                <th> Giá</th>
+                <th> Trạng thái </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@item.Anh" width="100" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Loai_Sach.Loaisach)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenSach)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoLuong)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gia)
+                    </td>
+                    <td>
+                        @if (item.Trangthai == false)
+                        {
+                            <p>Dừng bán</p>
+                        }
+                    </td>
+                    <td>
+                        <a href="/quay-lai-san-pham-@item.ID">Khôi phục</a> |
+                        <a href="/chi-tiet-san-pham-@item.ID">Chi tiết</a> |
+
+                        <a id="delete-@item.ID" data-toggle="modal" data-target="#confirm-delete">Xóa</a>
+                        <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">Xác nhận xóa</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Bạn có chắc chắn muốn xóa sản phẩm này không?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                                        <a class="btn btn-danger btn-ok">Xóa</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                
+            }
+
+        </table>
+    </div>
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
+<script>
+    $(document).ready(function () {
+        // Get the ID of the item to delete when the modal is shown
+        $('#confirm-delete').on('show.bs.modal', function (e) {
+            var id = $(e.relatedTarget).attr('id').split('-')[1];
+            $(this).find('.btn-ok').attr('href', '/delete-san-pham-' + id);
+        });
+    });
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,81 @@
+﻿@model PagedList.IPagedList<Models.DTO.Sach>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+    <head>
+        <title>Sản phẩm</title>
+        <style>
+            .table-product
+            {
+                background-color:lightcyan;
+            }
+        </style>
+    </head>
+    <body style="margin-top:60px;">
+        <p>
+            <a href="/them-san-pham">Thêm sản phẩm</a> |
+            <a href="/thung-rac-san-pham">Thùng rác</a>
+            @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+            {
+                <div>
+                    <input type="text" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
+                    <button type="submit">Tìm</button>
+                </div>
+
+            }
+        </p>
+        <div class="table-product">
+            <table class="table">
+                <tr>
+                    <th> Hình ảnh</th>
+                    <th> Danh mục</th>
+                    <th> Tên sách</th>
+                    <th> Số lượng</th>
+                    <th> Giá</th>
+                    <th> Trạng thái </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="@item.Anh" width="100" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Loai_Sach.Loaisach)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenSach)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SoLuong)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gia)
+                        </td>
+                        <td>
+                            @if (item.Trangthai == true)
+                            {
+                                <p>Đang bán</p>
+                            }
+                        </td>
+                        <td>
+                            <a href="/sua-san-pham-@item.ID">Sửa</a> |
+                            <a href="/chi-tiet-san-pham-@item.ID">Chi tiết</a> |
+                            <a href="/bo-san-pham-@item.ID">Xóa</a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+        @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
+    </body>
+</html>
+

@@ -1,0 +1,21 @@
+﻿@model List<Models.DTO.Loai_Sach>
+@{
+    ViewBag.Title = "Listpr";
+    Layout = null;
+}
+
+    @if (Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            <div id="content-@item.ID" class="">
+                <div class="head container">
+                    <div class="box ">
+                        @item.Loaisach
+                    </div>
+                </div>
+                @Html.Action("Listproduct", "Home", new { id = item.ID })
+            </div>
+            <br />
+        }
+    }

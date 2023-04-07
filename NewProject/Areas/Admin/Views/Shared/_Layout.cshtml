@@ -1,0 +1,166 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                ADMIN
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/trang-chu-quan-li">Trang chủ</a></li>
+                    <li><a href="/tai-khoan">Tài khoản</a></li>
+                    <li><a href="/khach-hang">Khách hàng</a></li>
+                    <li><a href="/san-pham">Sản phẩm</a></li>
+                    <li><a href="/danh-muc">Danh mục sản phẩm</a></li>
+                    <li><a href="/don-hang">Đơn hàng</a></li>
+                    <li><a href="/ma-giam-gia">Mã giảm giá</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+    </div>
+    <script src="~/Content/ckeditor/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckfinder/ckfinder/ckfinder.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/fontawesome-free-6.3.0-web/css/all.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/navigation.css">
+</head>
+
+<body>
+
+    <!-- ============navigation=========== -->
+    <div class="container">
+        <div class="navigation">
+            <ul class="navigation-list">
+                <li>
+                    <a href="">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">ADMIN</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="" class="home">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">HOME</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./taikhoan.html" class="TaiKhoan">
+                        <span class="icon">
+                            <ion-icon name="key-outline"></ion-icon>
+                        </span>
+                        <span class="title">Tài khoản</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./sanpham.html" class="Sanpham">
+                        <span class="icon">
+                            <ion-icon name="book-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sản phẩm</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="">
+                        <span class="icon">
+                            <ion-icon name="cart-outline"></ion-icon>
+                        </span>
+                        <span class="title">Đơn hàng</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="">
+                        <span class="icon">
+                            <ion-icon name="copy-outline"></ion-icon>
+                        </span>
+                        <span class="title">Danh mục </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="">
+                        <span class="icon">
+                            <ion-icon name="notifications-outline"></ion-icon>
+                        </span>
+                        <span class="title">Thông báo</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="">
+                        <span class="icon">
+                            <ion-icon name="medkit-outline"></ion-icon>
+                        </span>
+                        <span class="title">Voucher</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- ==============main======================= -->
+        <div class="main">
+            <div class="header">
+                <div class="header__totggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+                <div class="header__search">
+                    <label>
+                        <input type="text" placeholder="Tìm kiếm ở đây ">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div>
+                <div class="header__user">
+                    <img src="https://haycafe.vn/wp-content/uploads/2022/02/Anh-gai-xinh-Viet-Nam.jpg" alt="">
+                </div>
+            </div>
+            <!--  -->
+        </div>
+    </div>
+    <script src="./js/main.js"></script>
+    <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
+</body>
+
+</html>
+
+<!-- dotnet add packaget -->

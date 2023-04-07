@@ -1,0 +1,81 @@
+﻿@model PagedList.IPagedList<Models.DTO.KhachHang>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+    <title>Khách hàng</title>
+</head>
+<body style="margin-top:60px;">
+
+    <p>
+
+        @using (Html.BeginForm("Index", "Customers", FormMethod.Get))
+        {
+            <div>
+                <input type="text" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
+                <button type="submit">Tìm</button>
+            </div>
+
+        }
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Tên tài khoản
+            </th>
+            <th>
+                Họ tên
+            </th>
+            <th>
+                Địa chỉ
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Ảnh đại diện
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaiKhoan.TenTaiKhoan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoTen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Diachi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SDT)
+                </td>
+                <td>
+                    <img src="@item.AnhDaiDien" width="100" />
+                   
+                </td>
+                <td>
+                    <a href="/sua-khach-hang-@item.ID">Sửa</a> |
+                    <a href="/chi-tiet-khach-hang-@item.ID">Chi tiết</a> |
+                    <a href="/xoa-khach-hang-@item.ID">Xóa</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
+</body>
+</html>

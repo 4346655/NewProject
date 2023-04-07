@@ -1,0 +1,77 @@
+﻿@model PagedList.IPagedList<Models.DTO.Magiamgia>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+    <head>
+        <title>Mã giảm giá</title>
+    </head>
+    <body style="margin-top:60px;">
+        <p>
+            <a href="/them-danh-muc">Thêm danh mục</a>
+            @using (Html.BeginForm("Index", "Vouchers", FormMethod.Get))
+            {
+                <div>
+                    <input type="text" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
+                    <button type="submit">Tìm</button>
+                </div>
+
+            }
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                   Mã
+                </th>
+
+                <th>
+                    Số lượng
+                </th>
+
+                <th>
+                   Trị giá
+                </th>
+
+                <th>
+                   Trạng thái
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ma)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Soluong)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Giatri)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Trangthai)
+                    </td>
+
+                    <td>
+                        <a href="/sua-ma-giam-gia-@item.ID">Sửa</a>|
+                        <a href="/xoa-ma-giam-gia-@item.ID">Xóa</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+        @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
+    </body>
+</html>
+
