@@ -13,31 +13,23 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>Hồ sơ</title>
-
-    <link href="~/Assets/css/bootstrap-icons.css" rel="stylesheet" />
-    <link href="~/Assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Assets/css/profile.css" rel="stylesheet" />
+<link href="~/Clientassets/css/bootstrap-icons.css" rel="stylesheet" />
+<link href="~/Clientassets/css/user.css" rel="stylesheet" />
+   
 </head>
 
 <body>
     <div class="body-content">
-
-
 
         <div class="left-body">
             <div class="col-xl-4  top-left-body">
                 <div class="card1">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                        <img src="@Model.AnhDaiDien" alt="Profile" class="round" style="border:1px solid">
-                        <h2>@Model.HoTen</h2>
-                        <h3>@Model.SDT</h3>
-                        <div class="social-links mt-2">
-                            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-                        </div>
+                        <img src="@Model.AnhDaiDien" alt="Profile" class="round" style="border:1px solid;margin-left:20px;margin-top:30px;">
+                        <h2 style="margin-left:40px;">@Model.HoTen</h2>
+                        <h3 style="margin-left:100px;">@Model.SDT</h3>
+
                     </div>
                 </div>
 
@@ -54,180 +46,176 @@
         </div>
 
         <div class="right-body">
-            <section class="section profile">
-                <div class="row">
+            <div class="title_profile">
+                <div class="center_profile">
+                    <button class="btn-func" id="btn1">Thông tin</button>
+                    <button class="btn-func" id="btn2">Chỉnh sửa</button>
+                    <button class="btn-func" id="btn3">Đổi mật khẩu </button>
+                </div>
+            </div>
+            <div id="content" class="body_profile"></div>
+            <div id="content1" style="display:block;">
+                <div class="subdiv">
+                    <div class="body_content">
+                        <div class="namecolumm"><p class="cnt_column">Họ và tên</p></div>
+                        <div class="contentcolumn"> <input class="content_column" value="@Model.HoTen" readonly /> </div>
 
+                    </div>
+                    <div class="body_content">
+                        <div class="namecolumm"><p class="cnt_column">Địa chỉ</p></div>
+                        <div class="contentcolumn"> <input class="content_column" value="@Model.Diachi" readonly /> </div>
 
-                    <div class="col-xl-8">
+                    </div>
 
-                        <div class="card">
-                            <div class="card-body pt-3">
-                                <!-- Bordered Tabs -->
-                                <ul class="nav nav-tabs nav-tabs-bordered">
-                                    <li class="nav-item">
-                                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Tổng quát</button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Chỉnh sửa</button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Đổi mật khẩu</button>
-                                    </li>
-                                </ul>
-                                <div class="tab-content pt-2">
-                                    <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                                        <br /><br />
-                                        <h5 class="card-title">Chi tiết hồ sơ</h5>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label ">Họ và tên</div>
-                                            <div class="col-lg-9 col-md-8">@Model.HoTen</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label">Tên đăng nhập</div>
-                                            <div class="col-lg-9 col-md-8">@Model.TaiKhoan.TenTaiKhoan</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label">Số điện thoại</div>
-                                            <div class="col-lg-9 col-md-8">@Model.SDT</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label">Địa chỉ</div>
-                                            <div class="col-lg-9 col-md-8">@Model.Diachi</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label">Email</div>
-                                            <div class="col-lg-9 col-md-8">@Model.Email</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label">Số đơn hàng đang có</div>
-                                            <div class="col-lg-9 col-md-8">@Model.DonHangs.Count()</div>
-                                        </div>
-                                        <div class="row" style="display:flex">
-                                            <div class="col-lg-3 col-md-4 label" style="flex:1">Mã giảm giá của bạn</div>
-                                            <div style="flex:3">
-                                                @{
-                                                    var model = new AccountDao();
-                                                    var li = model.GetMGG(Model.TaiKhoan.ID);
+                </div>
+                <div class="subdiv">
 
-                                                    if (li.Count() > 0)
-                                                    {
-                                                        foreach (var item in li)
-                                                        {
-                                                            <div class="col-lg-9 col-md-8">@item</div>
-                                                        }
+                    <div class="body_content">
 
-                                                    }
-                                                    else
-                                                    {
-                                                        <div class="col-lg-9 col-md-8">Chưa có mã giảm giá nào</div>
-                                                    }
-                                                }
-                                            </div>
-                                        </div>
+                        <div class="namecolumm"><p class="cnt_column">Email </p></div>
+                        <div class="contentcolumn"> <input class="content_column" value="@Model.Email" readonly /> </div>
 
-                                    </div>
+                    </div>
+                    <div class="body_content">
 
-                                    <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+                        <div class="namecolumm"><p class="cnt_column">Số điện thoại</p></div>
+                        <div class="contentcolumn"> <input class="content_column" value="@Model.SDT" readonly /> </div>
 
-                                        <!-- Profile Edit Form -->
+                    </div>
 
-                                        <form action="/sua-ho-so" method="get">
-                                            <div class="row mb-3">
-                                                <label for="avt" class="col-md-4 col-lg-3 col-form-label">Ảnh đại diện</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <img src="@Model.AnhDaiDien" width="100">
-                                                    <div class="pt-2">
+                </div>
+                <div class="subdiv">
 
-                                                        <input type="hidden" id="txtImage" name="avt" />
-                                                        <input style="width:70px" type="button" value="Tải ảnh" onclick="BrowserServer('txtImage')" />
+                    <div class="body_content">
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <label for="hoten" class="col-md-4 col-lg-3 col-form-label">Họ và tên</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="hoten" type="text" class="form-control" id="hoten" value="@Model.HoTen" style="width:300px;">
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <label for="diachi" class="col-md-4 col-lg-3 col-form-label">Địa chỉ</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="diachi" type="text" class="form-control" id="diachi" value="@Model.Diachi" style="width:300px;">
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="email" type="text" class="form-control" id="email" value="@Model.Email" style="width:300px;">
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <label for="sdt" class="col-md-4 col-lg-3 col-form-label">Số điện thoại</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="sdt" type="text" class="form-control" id="sdt" value="@Model.SDT" style="width:300px;">
-                                                </div>
-                                            </div>
+                        <div class="namecolumm"><p class="cnt_column">Đơn hàng hiện có</p></div>
+                        <div class="contentcolumn"> <input class="content_column" value="@Model.DonHangs.Count()" readonly /> </div>
 
+                    </div>
 
+                </div>
+                <div class="subdiv">
 
-                                            <div>
-                                                <button type="submit" class="btn btn-primary">Lưu thông tin</button>
-                                            </div>
-                                        </form><!-- End Profile Edit Form -->
+                    <div class='body_content'>
 
-                                    </div>
-                                    <br>
+                        <div class="namecolumm"><p class="cnt_column">Mã giảm giá của bạn </p></div>
+                        @{
+                            var model = new AccountDao();
+                            var li = model.GetMGG(Model.TaiKhoan.ID);
 
+                            if (li.Count() > 0)
+                            {
+                                foreach (var item in li)
+                                {
+                                    <div class="contentcolumn"><p class="cnt_column">@item</p></div>
+                                }
 
-                                    <div class="tab-pane fade pt-3" id="profile-change-password">
-                                        <!-- Change Password Form -->
-                                        <form action="/doi-mat-khau">
+                            }
+                            else
+                            {
+                                <div class="contentcolumn"><p class="cnt_column">Chưa có mã giảm giá nào</p></div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div id="content2" style="display:none;">
+                <form action="/sua-ho-so" method="get">
+                    <div class="subdiv">
+                        <div class='body_content'>
+                            <div class="namecolumm"><p class="cnt_column">Ảnh đại diện</p></div>
+                            <div class="contentcolumn img_avt" style="width:100px;">
+                                <img src="@Model.AnhDaiDien" width="90" style="border-bottom:solid;margin-left:5px;margin-top:5px;">
+                                <div class="pt-2">
+                                    <input type="hidden" id="txtImage" name="avt" />
+                                    <input style="width:90%;height:30px;margin-left:5px;margin-bottom:5px;margin-right:5px;" type="button" value="Tải ảnh" onclick="BrowserServer('txtImage')" />
 
-                                            <div class="row mb-3">
-                                                <label class="col-md-4 col-lg-3 col-form-label">Mật khẩu hiện tại</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="oldpass" type="text" class="form-control" id="oldpass" style="width:300px;">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label class="col-md-4 col-lg-3 col-form-label">Mật khẩu mới</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="newpass" type="password" class="form-control" id="newpass" style="width:300px;">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label class="col-md-4 col-lg-3 col-form-label">Xác nhận mật khẩu</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="confirm" type="password" class="form-control" id="confirm" style="width:300px;">
-                                                </div>
-                                            </div>
-
-                                            <div class="text-center">
-                                                <button type="submit" class="btn btn-primary">Change Password</button>
-                                            </div>
-                                        </form><!-- End Change Password Form -->
-
-                                    </div>
-
-                                </div><!-- End Bordered Tabs -->
-
+                                </div>
                             </div>
+
+                        </div>
+                    </div>
+                    <div class="subdiv">
+                        <div class="body_content">
+                            <div class="namecolumm"><p class="cnt_column">Họ và tên</p></div>
+                            <div class="contentcolumn"> <input class="content_column" value="@Model.HoTen" name="hoten" /> </div>
+
+                        </div>
+                        <div class="body_content">
+                            <div class="namecolumm"><p class="cnt_column">Địa chỉ</p></div>
+                            <div class="contentcolumn"> <input class="content_column" value="@Model.Diachi" name="diachi"  /> </div>
+
                         </div>
 
                     </div>
-                </div>
-            </section>
+                    <div class="subdiv">
 
+                        <div class="body_content">
+
+                            <div class="namecolumm"><p class="cnt_column">Email </p></div>
+                            <div class="contentcolumn"> <input class="content_column" value="@Model.Email"  name="email" /> </div>
+
+                        </div>
+                        <div class="body_content">
+
+                            <div class="namecolumm"><p class="cnt_column">Số điện thoại</p></div>
+                            <div class="contentcolumn"> <input class="content_column" value="@Model.SDT" name="sdt" /> </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div>
+                        <button type="submit" style="margin-left:45%;margin-top:30px;height:50px;border-radius:10px;background-color:aqua" class="btn btn-primary">Lưu thông tin</button>
+                    </div>
+                </form>
+            </div>
+            <div id="content3" style="display:none;">
+                <form action="/doi-mat-khau">
+
+                    <div class="subdiv">
+
+                        <div class="body_content">
+
+                            <div class="namecolumm"><p class="cnt_column">Mật khẩu hiện tại </p></div>
+                            <div class="contentcolumn"> <input class="content_column" name="oldpass" id="oldpass" /> </div>
+
+                        </div>
+                    </div>
+                     <div class="subdiv">
+                        <div class="body_content">
+
+                            <div class="namecolumm"><p class="cnt_column">Mật khẩu mới</p></div>
+                            <div class="contentcolumn"> <input class="content_column" name="newpass" id="newpass" type="password" /> </div>
+
+                        </div>
+
+                    </div>
+                    <div class="subdiv">
+
+                        <div class="body_content">
+
+                            <div class="namecolumm"><p class="cnt_column">Xác nhận mật khẩu </p></div>
+                            <div class="contentcolumn"> <input class="content_column" name="confirm" id="confirm" type="password" /> </div>
+
+                        </div>
+                      
+
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" style="margin-top:30px;height:50px;border-radius:10px;background-color:aqua" class="btn btn-primary">Đổi mật khẩu</button>
+                    </div>
+                </form>
+
+            </div>
         </div>
     </div>
 
+    <script src="~/Clientassets/js/apexcharts.min.js"></script>
+    <script src="~/Clientassets/js/bootstrap.bundle.min.js"></script>
 
-
-    <script src="~/Assets/js/apexcharts.min.js"></script>
-    <script src="~/Assets/js/bootstrap.bundle.min.js"></script>
 
     <script>
         function BrowserServer(field) {
@@ -238,6 +226,34 @@
             finder.popup();
         }
     </script>
+    <script type="text/javascript">
+
+        var btn1 = document.getElementById("btn1");
+        var btn2 = document.getElementById("btn2");
+        var btn3 = document.getElementById("btn3");
+
+        var content1 = document.getElementById("content1");
+        var content2 = document.getElementById("content2");
+        var content3 = document.getElementById("content3");
+
+        btn1.addEventListener("click", function () {
+            content1.style.display = "block";
+            content2.style.display = "none";
+            content3.style.display = "none";
+        });
+
+        btn2.addEventListener("click", function () {
+            content1.style.display = "none";
+            content2.style.display = "block";
+            content3.style.display = "none";
+        });
+        btn3.addEventListener("click", function () {
+            content1.style.display = "none";
+            content2.style.display = "none";
+            content3.style.display = "block";
+        });
+    </script>
+   
 
 </body>
 

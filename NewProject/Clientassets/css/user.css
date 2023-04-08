@@ -1,0 +1,133 @@
+﻿
+.body-content {
+    display: flex;
+}
+
+
+.left-body {
+    width: 600px;
+    height: 600px;
+    flex: 1;
+ 
+}
+
+    .left-body .top-left-body {
+        width: 100%;
+        height: 70%;
+        background-color: antiquewhite;
+    }
+
+    .left-body .bot-left-body {
+        margin-top: 5%;
+        width: 300px;
+        height: 18%;
+        border-top: 3px solid;
+        background-color:antiquewhite;
+        border-radius: 20px;
+    }
+
+.top-left-body .topbutton {
+    display: flex;
+}
+
+.right-body {
+    margin-left: 30px;
+    background-color: antiquewhite;
+    width: 600px;
+    height: 525px;
+    border: 2px solid;
+    border-radius: 20px;
+    flex: 3;
+}
+
+.round {
+    border-radius: 50%;
+    width: 270px;
+    height: 250px;
+}
+
+.card1 {
+    width: 100%;
+    height: 100%;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+
+.btn-func :active {
+    background-color: green;
+}
+
+.title_profile {
+    margin-top: 20px;
+    width: 100%;
+    height: 60px;
+    border-bottom: solid;
+}
+
+.btn-func {
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.center_profile {
+    margin-left: 30%;
+}
+
+.body_profile {
+}
+
+
+.subdiv {
+    display: flex;
+}
+
+.body_content {
+    display: flex;
+    margin-left: 20px;
+    margin-top: 40px;
+}
+
+.right-body {
+    margin-left: 30px;
+}
+
+.namecolumn {
+    margin-top: 25px;
+    margin-left: 40px;
+}
+
+.content_column {
+    margin-left: 30px;
+    border-radius: 10px;
+    width: 250px;
+    height: 50px;
+}
+
+.cnt_column {
+    min-width: 100px;
+    margin-left: 25px;
+    font-size: 20px;
+}
+
+.top-left-body {
+    border: solid;
+    border-radius: 10px;
+}
+
+.img_avt {
+    margin-left: 30px;
+    border-radius: 10px;
+    border: solid;
+}
+
+.buttonfunc {
+    margin-top: 20px;
+    height: 50px;
+    margin-left: 30px;
+    border-radius: 10px;
+}
+
+.topbutton {
+    display: flex;
+}

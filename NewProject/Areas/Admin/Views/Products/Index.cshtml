@@ -14,68 +14,133 @@
             {
                 background-color:lightcyan;
             }
-        </style>
-    </head>
-    <body style="margin-top:60px;">
-        <p>
-            <a href="/them-san-pham">Thêm sản phẩm</a> |
-            <a href="/thung-rac-san-pham">Thùng rác</a>
-            @using (Html.BeginForm("Index", "Products", FormMethod.Get))
-            {
-                <div>
-                    <input type="text" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
-                    <button type="submit">Tìm</button>
-                </div>
-
+            .search {
+                width: 100px;
+                height: 30px;
+                border-radius: 10px;
+                background-color: aquamarine;
             }
-        </p>
-        <div class="table-product">
-            <table class="table">
-                <tr>
-                    <th> Hình ảnh</th>
-                    <th> Danh mục</th>
-                    <th> Tên sách</th>
-                    <th> Số lượng</th>
-                    <th> Giá</th>
-                    <th> Trạng thái </th>
-                    <th></th>
-                </tr>
 
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            <img src="@item.Anh" width="100" />
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Loai_Sach.Loaisach)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TenSach)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SoLuong)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Gia)
-                        </td>
-                        <td>
-                            @if (item.Trangthai == true)
-                            {
-                                <p>Đang bán</p>
-                            }
-                        </td>
-                        <td>
-                            <a href="/sua-san-pham-@item.ID">Sửa</a> |
-                            <a href="/chi-tiet-san-pham-@item.ID">Chi tiết</a> |
-                            <a href="/bo-san-pham-@item.ID">Xóa</a>
-                        </td>
-                    </tr>
+            .ip_search {
+                width: 860px;
+                height: 37px;
+              
+            }
+
+            .pagination {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 14px;
+            }
+
+                .pagination a,
+                .pagination span {
+                    display: inline-block;
+                    padding: 6px 12px;
+                    margin-right: 5px;
+                    border-radius: 3px;
+                    color: #007bff;
+                    background-color: #fff;
+                    border: 1px solid #007bff;
+                    text-decoration: none;
                 }
 
-            </table>
+                    .pagination a:hover,
+                    .pagination span.current {
+                        color: #fff;
+                        background-color: #007bff;
+                        border-color: #007bff;
+                    }
+
+                    .pagination span.ellipsis {
+                        display: inline-block;
+                        margin-right: 5px;
+                        color: #007bff;
+                    }
+
+                    .pagination span.disabled {
+                        display: none;
+                    }
+        </style>
+    </head>
+    <body >
+        <div class="detail">
+
+            <div class="detail_list" style="width:1300px;">
+
+                <div style="display:flex;background-color:aqua">
+                    <div style="display:flex;border:1px solid;">
+                        <a style="border:1px;width:100px; text-align:center;height:35px;border-right:1px solid" href="/thung-rac-san-pham">
+                            <p style="margin-top:5px;">Thùng rác</p>
+                        </a>
+                        <a style="border:1px;width:150px; text-align:center;height:35px;" href="/them-san-pham">
+                            <p style="margin-top:5px;">Thêm sản phẩm</p>
+                        </a>
+                    </div>
+                    
+                    @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+                    {
+                    <div style="display:flex;  ">
+                        <button type="submit" style="width:150px; text-align:center;height:37px;background-color:aqua">Tìm kiếm</button>
+                        <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
+                    </div>
+                    }
+                </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Ảnh</td>
+                                <td>Thể loại</td>
+                                <td>Tên sách</td>
+                                <td>Số lượng </td>
+                                <td>Giá</td>
+                                <td>Trạng Thái</td>
+                                <td>#</td>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <td><img src="@item.Anh" width="100" /></td>
+                                    <td>@item.Loai_Sach.Loaisach</td>
+                                    <td>@item.TenSach</td>
+                                    <td>@item.SoLuong</td>
+                                    <td>@item.Gia</td>
+                                    @if (item.Trangthai == true)
+                                    {
+                                        <td>Đang bán</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Khóa</td>
+                                    }
+                                    <td>
+                                        <a href=""> Xem</a>|
+                                        <a href="sua-san-pham-@item.ID">Sửa</a>|
+                                        <a href="">Xóa</a>
+                                    </td>
+
+                                </tr>
+                            }
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
+                </div>
+            <!-- -----------------HD gan dayh--------- -->
+
+          
         </div>
-        @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
+        
     </body>
 </html>
 

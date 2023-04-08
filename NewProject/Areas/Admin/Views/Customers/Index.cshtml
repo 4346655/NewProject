@@ -5,77 +5,158 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Khách hàng</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    
+    <style>
+        .search{
+            width:100px;
+            height:30px;
+            border-radius:10px;
+            background-color:aquamarine;
+        }
+        .ip_search {
+            width: 200px;
+            height: 30px;
+            border-radius: 10px;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+
+            .pagination a,
+            .pagination span {
+                display: inline-block;
+                padding: 6px 12px;
+                margin-right: 5px;
+                border-radius: 3px;
+                color: #007bff;
+                background-color: #fff;
+                border: 1px solid #007bff;
+                text-decoration: none;
+            }
+
+                .pagination a:hover,
+                .pagination span.current {
+                    color: #fff;
+                    background-color: #007bff;
+                    border-color: #007bff;
+                }
+
+                .pagination span.ellipsis {
+                    display: inline-block;
+                    margin-right: 5px;
+                    color: #007bff;
+                }
+
+                .pagination span.disabled {
+                    display: none;
+                }
+
+    </style>
 </head>
-<body style="margin-top:60px;">
+<body>
 
-    <p>
+    <div class="detail">
 
-        @using (Html.BeginForm("Index", "Customers", FormMethod.Get))
-        {
-            <div>
-                <input type="text" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
-                <button type="submit">Tìm</button>
-            </div>
+        <div class="detail_list" >
+            @using (Html.BeginForm("Index", "Customers", FormMethod.Get))
+            {
+                <div>
+                    <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
+                    <button type="submit" class="search">Tìm kiếm</button>
+                </div>
 
-        }
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                Tên tài khoản
-            </th>
-            <th>
-                Họ tên
-            </th>
-            <th>
-                Địa chỉ
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Số điện thoại
-            </th>
-            <th>
-                Ảnh đại diện
-            </th>
-            <th></th>
-        </tr>
+            }
+            <table>
+                <thead>
+                    <tr>
+                        <td>STT</td>
+                        <td>Thông tin</td>
+                        <td>Gmail</td>
+                        <td>Địa Chỉ</td>
+                        <td>Số DT</td>
+                        <td>Trạng Thái</td>
+                        <td>#</td>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TaiKhoan.TenTaiKhoan)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HoTen)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Diachi)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SDT)
-                </td>
-                <td>
-                    <img src="@item.AnhDaiDien" width="100" />
-                   
-                </td>
-                <td>
-                    <a href="/sua-khach-hang-@item.ID">Sửa</a> |
-                    <a href="/chi-tiet-khach-hang-@item.ID">Chi tiết</a> |
-                    <a href="/xoa-khach-hang-@item.ID">Xóa</a>
-                </td>
-            </tr>
-        }
+                    </tr>
+                </thead>
 
-    </table>
-    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+
+                        <td>@item.ID</td>
+                        <td>@item.TaiKhoan.TenTaiKhoan</td>
+                        @if (item.Email != "")
+                        {
+                            <td>@item.Email</td>
+                        }
+                        else
+                        {
+                            <td>----------------------</td>
+                        }
+                        @if (item.Diachi != "")
+                        {
+                            <td>@item.Diachi</td>
+                        }
+                        else
+                        {
+                            <td>------------</td>
+                        }
+                        @if (item.SDT != "")
+                        {
+                            <td>@item.SDT</td>
+                        }
+                        else
+                        {
+                            <td>------------</td>
+                        }
+                        @if (item.TaiKhoan.Trangthai == true)
+                        {
+                            <td>on</td>
+                            <td>
+                                <a onclick="location.reload();" href="/doi-trang-thai-khach-hang-@item.ID">off</a> <hr />
+                                <a href="">xem</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>off</td>
+                            <td>
+                                <a onclick="location.reload();" href="/doi-trang-thai-khach-hang-@item.ID">on</a>
+                                <hr />
+                                <a href="">xem</a>
+                            </td>
+                        }
+
+
+                    </tr>
+                    }
+
+
+
+
+
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
+        </div>
+        <!-- -----------------HD gan dayh--------- -->
+
+        @Html.Action("list","Orders")
+    </div>
+
 </body>
 </html>

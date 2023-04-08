@@ -1,76 +1,154 @@
-﻿@model IEnumerable<Models.DTO.DonHang>
+﻿@model PagedList.IPagedList<Models.DTO.DonHang>
+@using PagedList.Mvc
+
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.KhachHang.HoTen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sach.TenSach)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThanhToan.TenThanhToan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SoLuong)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ma_GG)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Note)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tong_gia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Trang_thai)
-        </th>
-        <th></th>
-    </tr>
+<html>
+<head>
+    <title>Đơn hàng</title>
+    <style>
+        .table-product {
+            background-color: lightcyan;
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.KhachHang.HoTen)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sach.TenSach)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ThanhToan.TenThanhToan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoLuong)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ma_GG)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Note)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tong_gia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Trang_thai)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+        .search {
+            width: 100px;
+            height: 30px;
+            border-radius: 10px;
+            background-color: aquamarine;
+        }
 
-</table>
+        .ip_search {
+            width: 860px;
+            height: 37px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+
+            .pagination a,
+            .pagination span {
+                display: inline-block;
+                padding: 6px 12px;
+                margin-right: 5px;
+                border-radius: 3px;
+                color: #007bff;
+                background-color: #fff;
+                border: 1px solid #007bff;
+                text-decoration: none;
+            }
+
+                .pagination a:hover,
+                .pagination span.current {
+                    color: #fff;
+                    background-color: #007bff;
+                    border-color: #007bff;
+                }
+
+                .pagination span.ellipsis {
+                    display: inline-block;
+                    margin-right: 5px;
+                    color: #007bff;
+                }
+
+                .pagination span.disabled {
+                    display: none;
+                }
+    </style>
+</head>
+<body>
+    <div class="detail">
+
+        <div class="detail_list" style="width:1300px;">
+
+            <div style="display:flex;background-color:aqua;height:37px;">
+                <div style="display:flex;border:1px solid;">
+                    <a style="border:1px;width:100px; text-align:center;height:35px;border-right:1px solid" href="/thung-rac-san-pham">
+                        <p style="margin-top:5px;">Thùng rác</p>
+                    </a>
+                    <a style="border:1px;width:150px; text-align:center;height:35px;" href="/them-san-pham">
+                        <p style="margin-top:5px;">Thêm sản phẩm</p>
+                    </a>
+                </div>
+
+                @using (Html.BeginForm("Index", "Orders", FormMethod.Get))
+                {
+                    <div style="display:flex;  ">
+                        <button type="submit" style="width:150px; text-align:center;height:37px;background-color:aqua">Tìm kiếm</button>
+                        <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
+                    </div>
+                }
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Khách hàng</td>
+                        <td>Tên sách</td>
+                        <td>Số lượng </td>
+                        <td>Giá</td>
+                        <td>Trạng Thái</td>
+                        <td>#</td>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+
+                        <td>@item.KhachHang.TaiKhoan.TenTaiKhoan</td>
+                        <td>@item.Sach.TenSach</td>
+                        <td>@item.SoLuong</td>
+                         <td>@(item.SoLuong * (item.Sach.Gia-item.Sach.Gia_giam))</td>
+                
+                        @if (item.Trang_thai == 1)
+                        {
+                            <td>Đang chuẩn bị</td>
+                        }
+                        else if (item.Trang_thai == 2)
+                        {
+                            <td>Đang giao</td>
+                        }
+                        else if (item.Trang_thai == 3)
+                        {
+                            <td>Đã giao</td>
+                        }
+                        else
+                        {
+                            <td>Đã hủy</td>
+                        }
+                    <td>
+                        <a href=""> Xem</a>|
+                        <a href=""> Sửa</a>|
+                        <a href="">Hủy đơn </a>
+                    </td>
+
+                    </tr>
+                    }
+
+
+
+
+
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
+        </div>
+        <!-- -----------------HD gan dayh--------- -->
+
+
+    </div>
+
+</body>
+</html>
+

@@ -10,11 +10,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/asset/font/fontawesome/css/all.css" rel="stylesheet" />
-
-    <link href="~/Assets/css/Product.css" rel="stylesheet" />
     <title>HOME</title>
-
+    <link href="~/Clientassets/css/product.css" rel="stylesheet" />
+    <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
     <div id="wrapper">
@@ -25,68 +23,54 @@
 
                     <br>
                     <div class="select">
-                        <a class="cart" href="url" onclick="addToCart()">Bỏ giỏ hàng</a>
-                        <a class="cart" href="urla" onclick="addToOrder()">Mua Ngay</a>
+                        <a class="cart" href="url" onclick="addToCart()">Bỏ giỏ hàng</a><i class="fa-solid fa-cart-shopping"></i>
+                        <a class="buy" href="urla" onclick="addToOrder()">Mua Ngay</a><i class="fa-solid fa-money-check"></i>
 
                     </div>
                 </div>
-           
+
             </div>
             <hr />
             <div id="right-content">
-                <div >
-                    <h3 class="Nameproduct">@Model.TenSach</h3>
-                </div>
-                
+                <h3 class="Nameproduct">@Model.TenSach</h3>
+
                 <div class="ct ">
                     <ul class="specific">
-
                         <li>Tác Giả:@Model.TacGia</li>
                         <li>Nhà xuất bản:@Model.NhaXuatBan</li>
                         <li>Số lượng đã bán:@Model.SoLuong_DaBan</li>
                         <li>Thể Loại:@Model.Loai_Sach.Loaisach</li>
                     </ul>
-                    <div class="price">
-                        <div class="price1">
-                            <p class="price1">Giá : @(Model.Gia-Model.Gia_giam) đ</p>
-                        </div>
-                        <div class="price2">
-                            <p class="price2">Tiết kiệm : @Model.Gia_giam</p>
-                        </div>
-                        
-                    </div>
-                    @if (Model.SoLuong > 0)
-                    {
-                    <h4>Tình trạng : Còn hàng </h4>
-                    }
-			        else
-			        {
-                        <h4>Tình trạng : Hết hàng  </h4>
-			        }
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <span>
+                        <h3 class="buy">Giá : @(Model.Gia-Model.Gia_giam)</h3>
+                        <del>@Model.Gia</del>
+
+                    </span>
                     <div class="sol">
                         <span class="sl">Số lượng</span>
-
-                        <input type="number" min="1" max="10" id="solng" style="background-color:aliceblue;border-radius:10px;width:150px">
+                        <input type="number" class="number" id="solng">
                     </div>
                 </div>
-               
                 <div class="content-footer">
-                    <hr  style="margin-top:70px;"/>
                     <ul class="specific-ft">
-                        <li><i class="fa-solid fa-rotate-left"></i>7 Ngày Miễn Phí Trả Hàng |</li>
-                        <li><i class="fa-solid fa-circle-check"></i>Hàng Chính Hãng 100% |</li>
+                        <li><i class="fa-solid fa-rotate-left"></i>7 Ngày Miễn Phí Trả Hàng</li>
+                        <li><i class="fa-solid fa-circle-check"></i>Hàng Chính Hãng 100%</li>
                         <li><i class="fa-solid fa-car-side"></i>Miễn Phí Vận Chuyển</li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div id="book-infor" class="container2" style="background-color: antiquewhite; border-radius: 10px; margin-top: 20px;margin-bottom:30px;padding-bottom:30px;" >
 
+        <div id="book-infor" class="container2" style="background-color: antiquewhite; border-radius: 10px; margin-top: 20px; margin-bottom: 20px;">
             <div class="head-inf  flex">
-
                 <ul class="info">
                     <h4>Thông tin sách</h4>
-                    <li class="flex">Tên sách  </li>
+                    <li class="flex">Mã Hàng  </li>
                     <li class="flex">Tác giả </li>
                     <li class="flex">Nhà xuất bản </li>
                     <li class="flex">Năm xuất bản</li>
@@ -94,7 +78,6 @@
                     <li class="flex">Kích thước bao bì</li>
                     <li class="flex">Số trang</li>
                     <li class="flex">Hình thức</li>
-                  
                 </ul>
                 <ul class="info-name">
                     <li>@Model.TenSach</li>
@@ -105,19 +88,15 @@
                     <li>17.5x15.5cm</li>
                     <li>350</li>
                     <li>Bìa Mềm</li>
-                  
+                    <hr>
                 </ul>
             </div>
-            <div class="Describe">
-                <div class="head_describe">
-                    <p>Mô tả</p>
-                </div>
-                <div class="content_decribe">
-                    @Model.Mota
-                </div>
+            <div class="body-inf">
+               @Model.Mota
+                <br>
             </div>
-            
         </div>
+
         <div class="comment_product">
             <!--    @Html.Action("Start", "ProductDetails", new {idsach = Model.ID})-->
             <div class="write_comment">

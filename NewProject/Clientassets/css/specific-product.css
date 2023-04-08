@@ -1,0 +1,661 @@
+#header {
+    background-color: rgb(49 39 39);
+    color: aliceblue;
+    min-height: 80px;
+    padding: 10px 10px;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 50px;
+    border-bottom: 1px solid wheat;
+    top: 0px;
+    width: 102%;
+    padding-top: 3px;
+    padding-bottom: 10px;
+    margin-top: -8px;
+    margin-left: -15px;
+    margin-right: 0px;
+}
+
+.fa-magnifying-glass {
+    position: absolute;
+    right: -115px;
+}
+
+.ds-flex {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    color: white;
+}
+
+.list-product {
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+}
+
+ul.ds-flex li a {
+    color: white;
+    text-decoration: none;
+}
+
+.container {
+    width: 1300px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0px auto;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.container2 {
+    width: 1300px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0px auto;
+    position: relative;
+}
+
+a.pad-0 img {
+    position: absolute;
+    left: 0px;
+}
+
+ul.container1 {
+    position: absolute;
+    right: 40px;
+}
+
+    ul.container1 li {
+        margin-left: 30px;
+    }
+
+        ul.container1 li a {
+            text-decoration: none;
+            padding-left: 25px;
+            font-size: 18px;
+            color: rgb(158, 218, 246);
+        }
+
+        ul.container1 li:hover a {
+            color: red;
+        }
+
+ul.container1 {
+    display: flex;
+    list-style: none;
+}
+
+form#search {
+    padding-top: 20px;
+    position: relative;
+    height: 50px;
+}
+
+button {
+    position: absolute;
+    right: 50px;
+    padding-top: 10px;
+    padding-right: 0px;
+    background: none;
+    color: black;
+    border: none;
+}
+
+h3 {
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: orange;
+    padding-left: 185px;
+    padding-bottom: 10px;
+}
+
+div.container.ds-flex {
+    height: 30px;
+    padding-bottom: 20px;
+}
+
+input {
+    height: 45px;
+    width: 433px;
+    border: 1px solid red;
+    background-color: antiquewhite;
+    border-radius: 50px;
+}
+
+    input::placeholder {
+        color: black;
+        padding-left: 10px;
+    }
+/* ul.container1 li:nth-child(3):hover .list-noname
+{
+    display: block;
+    
+    
+} */
+
+.bell {
+    padding-left: 20px;
+    color: white;
+    padding-top: 5px;
+}
+
+.cart {
+    padding-left: 20px;
+    padding-right: 20px;
+    color: white;
+    padding-top: 15px;
+}
+
+.red {
+    color: black;
+}
+
+ul.container1 li {
+    position: relative;
+}
+
+ul.container1 {
+    right: 104px;
+}
+
+#left-content {
+    flex-basis: 40%;
+    padding: 20px 20px;
+    min-height: auto;
+}
+
+#right-content {
+    flex-basis: 60%;
+    padding: 20px 20px;
+}
+
+button {
+    color: black;
+    left: 0px;
+    width: 30%;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+span {
+    display: flex;
+}
+
+img {
+    display: block;
+    padding-left: 55px;
+    left: 0px;
+}
+
+.select a {
+    display: inline-block;
+    background-color: rgb(189, 189, 242);
+    padding: 10px 28px;
+    border-radius: 5px;
+    padding-left: 56px;
+}
+
+.select {
+    display: flex;
+    justify-content: space-around;
+    border-radius: 10px;
+    position: relative;
+}
+
+.fa-cart-shopping {
+    position: absolute;
+    left: 136px !important;
+    top: 12px;
+}
+
+.fa-money-check {
+    position: absolute;
+    left: 321px;
+    top: 12px;
+    color: red;
+    display: block;
+    margin-right: 10px;
+}
+
+li {
+    list-style: none;
+}
+
+ul.specific {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+    ul.specific li {
+        flex-basis: 50%;
+        background-color: rgb(185, 241, 248);
+        display: inline-block;
+        padding-top: 10px;
+        padding-bottom: 30px;
+        border-radius: 10px;
+    }
+
+.x {
+    left: 60px;
+    display: inline-block;
+    margin-left: -45px;
+    color: blue;
+}
+
+ul.specific li {
+    display: inline-block;
+    font-size: 20px;
+    color: rgb(246, 7, 7);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+}
+
+ul.specific {
+    width: 100%;
+    padding-left: 0px;
+}
+
+.buy {
+    padding-left: 50px;
+}
+
+del {
+    padding-left: 20px;
+    padding-top: 40px;
+    display: inline-block;
+    text-align: center;
+}
+
+p {
+    background-color: rgb(90, 162, 218);
+    display: inline-block;
+    padding-bottom: 0px;
+    height: 15px;
+    padding: 5px 5px;
+    top: 15px;
+    left: 16px;
+    position: relative;
+    font-size: 18px;
+}
+
+.sol {
+    display: flex;
+}
+
+.sl {
+    margin-right: 10px;
+    padding-top: 8px;
+}
+
+body {
+    background-image: url('https://scr.vn/wp-content/uploads/2020/07/N%E1%BB%81n-m%C3%A0u-xanh-d%C6%B0%C6%A1ng-1024x768.jpeg');
+    background-size: cover;
+}
+
+ul.specific-ft {
+    display: flex;
+    margin-top: 40px;
+}
+
+    ul.specific-ft li {
+        padding-left: 20px;
+        padding-right: 20px;
+        color: rgb(237, 16, 104);
+        justify-content: space-around;
+    }
+
+.fa-rotate-left {
+    margin-right: 10px;
+}
+
+.fa-circle-check {
+    margin-right: 10px;
+}
+
+.fa-car-side {
+    margin-right: 10px;
+}
+
+.flex {
+    display: flex;
+}
+
+ul.info-name {
+    margin-left: 100px !important;
+    margin-top: 80px;
+    line-height: 1.5;
+}
+
+ul.info {
+    line-height: 1.5;
+}
+
+div.head-inf {
+    justify-content: flex-start;
+}
+
+.body-inf {
+    display: block;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 20px;
+}
+
+a.xt {
+    display: inline-block;
+    padding: 10px 10px;
+    margin-top: 10px;
+    margin-left: 607px;
+    border-radius: 5px;
+    border: 1px solid blue;
+}
+
+/* #xzx{
+    position:absolute;
+    z-index: 1;
+}
+.list-noname{
+    position: relative;
+    z-index: 30 !important;
+}
+div#header{
+    position: relative;
+    z-index: 300;
+} */
+div#content.container {
+    position: absolute;
+    z-index: 1;
+}
+
+h3 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-image: url('https://scr.vn/wp-content/uploads/2020/07/N%E1%BB%81n-m%C3%A0u-xanh-d%C6%B0%C6%A1ng-1024x768.jpeg');
+    background-size: cover;
+}
+
+ul.container1 li {
+    position: relative;
+}
+
+ul.container1 {
+    right: 104px;
+}
+
+#header {
+    position: relative;
+}
+
+.ds-flex a img {
+    position: absolute;
+    left: -19px;
+}
+
+input {
+    position: absolute;
+    left: -861px;
+}
+
+ul.container1 {
+    position: absolute;
+    bottom: -23px;
+}
+
+    ul.container1 li a {
+        font-size: 20px;
+        color: chartreuse;
+    }
+
+input::placeholder {
+    font-size: 18px;
+}
+/* .list-noname{
+    width: 212px;
+} */
+.list-search {
+    flex-basis: 30%;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/004/968/002/original/cute-abstract-modern-background-free-vector.jpg');
+    background-size: cover;
+    min-height: 200px;
+    position: relative;
+    text-align: center;
+    box-shadow: 10px 10px 10px rgb(244, 6, 6);
+    margin-right: 50px;
+}
+
+nav {
+    display: inline-block;
+    position: absolute;
+    right: 123px;
+    top: -30px;
+}
+
+    nav ul li {
+        margin-left: 25px;
+    }
+
+        nav ul li a {
+            font-size: 20px;
+            color: greenyellow;
+            padding-left: 30px;
+        }
+
+ul.list-bander li:hover .x {
+    display: block;
+    margin-bottom: 1px solid red;
+}
+
+.x {
+    display: none;
+    position: absolute;
+    width: 200px;
+    left: 40px;
+    background-color: rgb(49 39 39);
+    padding-left: 0px;
+    z-index: 3;
+}
+
+    .x li a {
+        padding-top: 15px;
+        color: white;
+        text-align: center;
+    }
+
+    .x li:hover {
+        border-bottom: 1px solid red;
+    }
+
+ul.list-bander li {
+    position: relative;
+}
+
+body {
+    background-image: url('https://scr.vn/wp-content/uploads/2020/07/N%E1%BB%81n-m%C3%A0u-xanh-d%C6%B0%C6%A1ng-1024x768.jpeg');
+    background-size: cover;
+}
+
+ul.list-bander > li:hover > a {
+    color: red;
+    transition: cubic-bezier();
+    transition: all 0,5s;
+}
+
+.fa-cart-shopping {
+    position: absolute;
+    left: 59px;
+    color: red;
+}
+
+#right-content {
+    position: relative;
+}
+
+input.number {
+    position: absolute;
+    left: 100px;
+    border-radius: 5px;
+    width: 58px;
+    height: 30px;
+}
+
+input::placeholder {
+    font-size: 20px;
+}
+
+#header {
+    position: relative;
+}
+
+.ds-flex a img {
+    position: absolute;
+    left: -19px;
+}
+
+input {
+    position: absolute;
+    left: -861px;
+}
+
+ul.container1 {
+    position: absolute;
+    bottom: -23px;
+}
+
+    ul.container1 li a {
+        font-size: 20px;
+        color: chartreuse;
+    }
+
+input::placeholder {
+    font-size: 18px;
+}
+/* .list-noname{
+    width: 212px;
+} */
+.list-search {
+    flex-basis: 30%;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/004/968/002/original/cute-abstract-modern-background-free-vector.jpg');
+    background-size: cover;
+    min-height: 200px;
+    position: relative;
+    text-align: center;
+    box-shadow: 10px 10px 10px rgb(244, 6, 6);
+    margin-right: 50px;
+}
+
+nav {
+    display: inline-block;
+    position: absolute;
+    right: 123px;
+    top: -30px;
+}
+
+    nav ul li {
+        margin-left: 25px;
+    }
+
+        nav ul li a {
+            font-size: 20px;
+            color: greenyellow;
+            padding-left: 30px;
+        }
+
+ul.list-bander li:hover .x {
+    display: block;
+    margin-bottom: 1px solid red;
+}
+
+.x {
+    display: none;
+    position: absolute;
+    width: 200px;
+    left: 40px;
+    background-color: rgb(49 39 39);
+    padding-left: 0px;
+    z-index: 3;
+}
+
+    .x li a {
+        padding-top: 15px;
+        color: white;
+        text-align: center;
+    }
+
+    .x li:hover {
+        border-bottom: 1px solid red;
+    }
+
+ul.list-bander li {
+    position: relative;
+}
+
+body {
+    background-image: url('https://scr.vn/wp-content/uploads/2020/07/N%E1%BB%81n-m%C3%A0u-xanh-d%C6%B0%C6%A1ng-1024x768.jpeg');
+    background-size: cover;
+}
+
+ul.list-bander > li:hover > a {
+    color: red;
+    transition: cubic-bezier();
+    transition: all 0,5s;
+}
+
+.fa-cart-shopping {
+    position: absolute;
+    left: 59px;
+    color: red;
+}
+
+#right-content {
+    position: relative;
+}
+
+input.number {
+    position: absolute;
+    left: 100px;
+    border-radius: 5px;
+    width: 58px;
+    height: 30px;
+}
+
+input::placeholder {
+    font-size: 20px;
+}
+
+.Describe{
+    display:flex;
+}
+.head_describe
+{
+    margin-left:40px;
+    flex:1;
+}
+.content_decribe{
+    flex:4;
+}
+.comment_product {
+    background-color: antiquewhite;
+    border-radius:10px;
+}
+.input_comment{
+   
+    margin-top:40px;
+    height:70px;
+    width:500px;
+    border-radius:10px;
+}
+.btn_comment {
+    margin-left: 30px;
+    height: 50px;
+    border-radius: 5px;
+}

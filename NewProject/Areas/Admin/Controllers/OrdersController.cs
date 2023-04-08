@@ -42,6 +42,12 @@ namespace NewProject.Areas.Admin.Controllers
             }
 
         }
+        public ActionResult list()
+		{
+            var dh = new OrdersDao();
+            var li = dh.list();
+            return View(li);
+		}
 
         // GET: Admin/Orders/Details/5
         public ActionResult Details(int? id)

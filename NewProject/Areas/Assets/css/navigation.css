@@ -1,0 +1,253 @@
+
+.container{
+    position: relative;
+    width: 100%;
+}
+
+.navigation{
+    position: fixed;
+    width: 90px;
+    height: 100%;
+    background-color: var(--blue);
+    border-left: 10px solid var(--blue);
+}
+
+.navigation.active {
+    width: 300px;
+}
+
+.navigation-list li{
+    position: relative;
+    width: 100%;
+    list-style: none;
+border-bottom-left-radius: 35px;
+border-top-left-radius: 35px;  
+font-size: 25px;
+}
+
+.navigation-list li:hover
+/* .navigation-list li.hovered */
+{
+background-color: var(--while);
+}
+
+.navigation-list li:hover.aacc{
+    background-color: var(--while);
+}
+
+.navigation-list li:nth-child(1){
+ height: 60px; 
+pointer-events: none;
+font-weight: 800;
+font-size: 40px;
+text-align: center;
+margin: 30px 0;
+
+}
+
+.navigation-list li:nth-child(1) .title{
+    color: var(--yellow);
+}
+.navigation-list li:nth-child(1) .icon ion-icon{
+    font-size: 4rem;
+    color: var(--yellow);
+}
+
+.navigation-list li a{
+    position:relative;
+    width: 100%;
+    display: block;
+    text-decoration: none;
+   display: flex;
+   padding: 5px;
+}
+
+.navigation-list li a .icon{
+    min-width: 60px;
+    height: 60px;
+    display: block;
+    line-height: 70px;
+    text-align: center;
+}
+
+.navigation-list li a .icon ion-icon{
+    font-size: 1.5rem;
+}
+.navigation-list li a .title{
+    min-width: 60px;
+    height: 60px;
+    display: none;
+    line-height: 60px;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.navigation.active li a .title{
+    display: block;
+}
+/* <!-- ==============main======================= --> */
+
+.main{
+    position: absolute;
+    width: calc(100% - 90px);
+    left: 90px;
+    min-height: 100vh;
+    background: var(--while);
+
+}
+
+
+
+.header{
+width: 100%;
+height: 100px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0 15px;
+}
+
+.header__totggle{
+cursor: pointer;
+}
+
+.header__totggle ion-icon{
+font-size: 60px;
+
+}
+
+.header__search{
+   position: relative;
+   width: 400px;
+   margin: 0 10px;
+}
+
+.header__search label{
+    position: relative;
+    width: 100%;
+}
+.header__search label input{
+width: 100%;
+height: 40px;
+border-radius: 40px;
+padding: 4px 40px;
+font-size: 16px;
+outline: none;
+text-align: left;
+}
+
+
+.header__search label ion-icon{
+
+    position: absolute;
+    top: 0;
+    left: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.header__user{
+    position: relative;
+    width: 40px;
+    height:40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+.header__user img{
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+
+}
+
+/* ==============List========= */
+
+.detail{
+position: relative;
+width: 100%;
+padding: 20px;
+display: grid;
+grid-template-columns: 2fr 1fr;
+grid-gap: 30px;
+margin-top: 20px;
+
+}
+
+.detail a{
+    text-decoration: none;
+}
+
+.detail a:hover{
+    opacity: 0.8;
+}
+.detail a h2{
+    text-align: right;
+    margin-right: 20px;
+    margin-top: 10px;
+    color:var(--yellow);
+    font-weight: 800;
+    font-size: 25px;
+}
+.detail_list{
+position: relative;
+display: grid;
+min-height: 500px;
+background-color: var(--while);
+padding: 20px; 
+box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+border-radius: 20px;
+}
+ td {
+    padding: 15px;
+}
+.detail table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.detail table thead td{
+font-weight: 600;
+color: var(--blue);
+}
+
+.detail table tr{
+    color: var(--black);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    /* viền của bảng */
+    margin-top: 10px;
+
+
+}
+
+/* ---------------sản phẩm--------------- */
+
+.detail_list tbody td img{
+    max-height: 25px;
+    max-width: 25px;
+}
+
+.detail_list tbody td ion-icon{
+    font-weight: 900;
+    font-size: 18px;
+    color: var(--while);
+    cursor: pointer;
+    border-radius: 20%;
+    padding: 5px;
+    
+}
+.detail_list tbody td ion-icon:nth-child(1){
+background-color:rgb(28, 134, 233);
+margin-right: 3px;
+}
+
+.detail_list tbody td ion-icon:nth-child(2){
+    background-color:rgb(239, 27, 8);
+    }
+.detail_list tbody td ion-icon:hover{
+    opacity: 0.5;
+}

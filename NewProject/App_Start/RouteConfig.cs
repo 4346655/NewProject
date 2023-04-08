@@ -14,6 +14,11 @@ namespace NewProject
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 			routes.MapRoute(
+				name: "Doi tran thai khach hang",
+				url: "doi-trang-thai-khach-hang-{id}",
+				defaults: new { controller = "Customers", action = "offactive" }
+			);
+			routes.MapRoute(
 				name: "Mua lai",
 				url: "mua-lai-{idorder}",
 				defaults: new { controller = "Order", action = "Rebuy", id = UrlParameter.Optional }
@@ -36,7 +41,7 @@ namespace NewProject
 			routes.MapRoute(
 				name: "Xac minh don hang",
 				url: "xac-minh-don-hang-{idsach}-{soluong}",
-				defaults: new { controller = "Order", action = "TempPage", id = UrlParameter.Optional }
+				defaults: new { controller = "Order", action = "TempPage" }
 			);
 			routes.MapRoute(
 				name: "Gio Don hang",

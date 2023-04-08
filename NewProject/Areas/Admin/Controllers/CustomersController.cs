@@ -17,7 +17,8 @@ namespace NewProject.Areas.Admin.Controllers
         private Model1 db = new Model1();
 
         // GET: Admin/Customers
-        public ActionResult Index(string Searchstring, int page = 1, int pagesize = 20)
+      
+        public ActionResult Index(string Searchstring, int page = 1, int pagesize = 5)
         {
             var ac = new AccountDao();
             var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
@@ -42,6 +43,12 @@ namespace NewProject.Areas.Admin.Controllers
             }
 
         }
+        public ActionResult offactive(int id )
+		{
+            var cs = new CustomersDao();
+            cs.offactive(id);
+            return RedirectToAction("Index","Home1");
+		}
 
         // GET: Admin/Customers/Details/5
         public ActionResult Details(int? id)

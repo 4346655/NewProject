@@ -46,7 +46,7 @@ namespace NewProject.Controllers
             var iduser = kh.GetID(session.username);
             var or = new OrdersDao();
             or.CreateNew(idsach, iduser, idthanhtoan, soluong, MGG, note);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Cart");
 		}
 
         public ActionResult HuyDon(int idorder)

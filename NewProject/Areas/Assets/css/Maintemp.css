@@ -1,0 +1,100 @@
+﻿
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #000;
+}
+
+:root {
+    --blue: #33d7d4;
+    --while: #fff;
+    --black: #000;
+    --yellow: rgb(116, 125, 15);
+    --xanh: rgb(28, 134, 233);
+    --vang: rgb(194, 188, 106);
+}
+/* ================HD gan day===== */
+
+.centerpeople {
+    position: relative;
+    display: grid;
+    max-height: 500px;
+    min-width: 200px;
+    background-color: var(--while);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+    border-radius: 20px;
+}
+
+.centerpeople-center h3 {
+    color: var(--yellow);
+    font-size: 1.6rem;
+    margin: 10px 0;
+}
+
+.pagination {
+    display: flex;
+    justify-self: end;
+    margin-right: 30px;
+}
+
+    .pagination div {
+        padding: 5px;
+        background-color: var(--yellow);
+        margin-left: 3px;
+        height: 30px;
+        width: 30px;
+        border-radius: 100%;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        background-color: var(--vang);
+        color: #fff;
+        cursor: pointer;
+        font-weight: 600;
+        border: 2px solid var(--blue);
+    }
+
+        .pagination div ion-icon {
+            /* font-weight: 600; */
+            font-size: 20px;
+            color: #fff;
+        }
+
+.centerpeople-item {
+    display: flex;
+    margin-top: 14px;
+}
+
+.centerpeople-list {
+}
+
+.centerpeople-item span {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+    .centerpeople-item span img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.centerpeople-item div p {
+    margin-left: 15px;
+    text-align: left;
+}
+
+    .centerpeople-item div p:nth-child(1) {
+        font-weight: 500;
+        font-size: 20px;
+        color: var(--vang);
+    }

@@ -20,13 +20,17 @@ namespace Models.DAO
 			IOrderedQueryable<DonHang> model = db.DonHangs.OrderByDescending(x => x.ID);
 			if (!string.IsNullOrEmpty(Searchstring))
 			{
-				model = model.Where(x => x.KhachHang.HoTen.Contains(Searchstring)).OrderByDescending(x => x.ID);
+				model = model.Where(x => x.KhachHang.TaiKhoan.TenTaiKhoan.Contains(Searchstring)).OrderByDescending(x => x.ID);
 			}
 			return model.ToPagedList(page, pagesize);
 		}
 		public List<DonHang> List_IDKH(int iduser)
 		{
 			return db.DonHangs.Where(x => x.ID_KhachHang == iduser ).ToList();
+		}
+		public List<DonHang> list()
+		{
+			return db.DonHangs.ToList();
 		}
 		public DonHang TempGH(int idsach, int iduser, int soluong)
 		{

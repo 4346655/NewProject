@@ -20,7 +20,7 @@ namespace Models.DAO
 			IOrderedQueryable<KhachHang> model = db.KhachHangs.OrderByDescending(x => x.ID);
 			if (!string.IsNullOrEmpty(Searchstring))
 			{
-				model = model.Where(x => x.HoTen.Contains(Searchstring)).OrderByDescending(x => x.ID);
+				model = model.Where(x => x.TaiKhoan.TenTaiKhoan.Contains(Searchstring)).OrderByDescending(x => x.ID);
 			}
 			return model.ToPagedList(page, pagesize);
 		}
@@ -60,5 +60,12 @@ namespace Models.DAO
 			}
 			db.SaveChanges();
 		}
+		public void offactive(int id )
+		{
+			var model = db.KhachHangs.Where(x => x.ID == id).SingleOrDefault();
+			model.TaiKhoan.Trangthai = !model.TaiKhoan.Trangthai;
+			db.SaveChanges();
+		}
+		
 	}
 }

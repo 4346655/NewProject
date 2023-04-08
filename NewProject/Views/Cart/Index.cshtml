@@ -6,8 +6,9 @@
 <html>
 <head>
     <title>gio hang</title>
-    <link href="~/Assets/font/fontawesome/css/all.css" rel="stylesheet" />
-    <link href="~/Assets/css/Cart.css" rel="stylesheet" />
+    <link href="~/Clientassets/css/cart.css" rel="stylesheet" />
+    <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
+  
 </head>
     <body>
         <div style="margin-top:40px;">
@@ -35,7 +36,7 @@
                         foreach (var item in Model)
                         {
                             <ul class="table-product" style="display: flex;">
-                                <li style="width:110px;"><img src="@item.Sach.Anh" alt=""></li>
+                                <li style="width:110px;"><img src="@item.Sach.Anh" alt="" width="100"></li>
                                 <li style="width:300px;">@item.Sach.TenSach</li>
                                 <li style="width:50px;">@item.SoLuong</li>
                                 <li style="width:40px;">@(item.Sach.Gia-item.Sach.Gia_giam)</li>

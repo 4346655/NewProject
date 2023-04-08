@@ -1,0 +1,40 @@
+﻿@model List<Models.DTO.DonHang>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>list</title>
+    <link href="~/Areas/Assets/css/Maintemp.css" rel="stylesheet" />
+    <link href="~/Areas/Assets/css/navigation.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="centerpeople">
+        <div class="centerpeople-center">
+            <h3>Mua hàng gần đây </h3>
+        </div>
+       
+        <div class="centerpeople-list">
+             @foreach (var item in Model)
+             {
+                <div class="centerpeople-item">
+                    <span>
+                        <img src="@item.KhachHang.AnhDaiDien" alt="" >
+                    </span>
+                    <div>
+                        <p>@item.KhachHang.TaiKhoan.TenTaiKhoan - @item.Sach.TenSach</p>
+                        <p>@item.KhachHang.Email</p>
+                    </div>
+                </div>
+             }
+
+
+            
+        </div>
+    </div>
+</body>
+</html>
