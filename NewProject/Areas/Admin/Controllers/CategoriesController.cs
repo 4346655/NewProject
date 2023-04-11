@@ -17,7 +17,7 @@ namespace NewProject.Areas.Admin.Controllers
         private Model1 db = new Model1();
 
         // GET: Admin/Categories
-        public ActionResult Index(string Searchstring, int page = 1, int pagesize = 20)
+        public ActionResult Index(string Searchstring, bool trangthai, int page = 1, int pagesize = 20)
         {
             var ac = new AccountDao();
             var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
@@ -35,7 +35,7 @@ namespace NewProject.Areas.Admin.Controllers
                 else
                 {
                     var dm = new CategoriesDao();
-                    var list = dm.Pagelist_dm(Searchstring, page, pagesize);
+                    var list = dm.Pagelist_dm(Searchstring, trangthai, page, pagesize);
                     ViewBag.Search = Searchstring;
                     return View(list);
                 }
@@ -46,9 +46,14 @@ namespace NewProject.Areas.Admin.Controllers
         {
             var ct = new CategoriesDao();
             ct.Delete(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { trangthai = true });
         }
-
+        public ActionResult ChangeStatus(int idls)
+        {
+            var ct = new CategoriesDao();
+            ct.ChangeStatus(idls);
+            return RedirectToAction("Index", new { trangthai = true });
+        }
         // GET: Admin/Categories/Details/5
         public ActionResult Details(int? id)
         {
@@ -56,19 +61,17 @@ namespace NewProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GioHang gioHang = db.GioHangs.Find(id);
-            if (gioHang == null)
+            Loai_Sach loai_Sach = db.Loai_Sach.Find(id);
+            if (loai_Sach == null)
             {
                 return HttpNotFound();
             }
-            return View(gioHang);
+            return View(loai_Sach);
         }
 
         // GET: Admin/Categories/Create
         public ActionResult Create()
         {
-            ViewBag.ID_KhachHang = new SelectList(db.KhachHangs, "ID", "HoTen");
-            ViewBag.ID_Sach = new SelectList(db.Saches, "ID", "TenSach");
             return View();
         }
 
@@ -77,18 +80,16 @@ namespace NewProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ID_Sach,SoLuong,ID_KhachHang")] GioHang gioHang)
+        public ActionResult Create([Bind(Include = "ID,Loaisach,Trangthai")] Loai_Sach loai_Sach)
         {
             if (ModelState.IsValid)
             {
-                db.GioHangs.Add(gioHang);
+                db.Loai_Sach.Add(loai_Sach);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_KhachHang = new SelectList(db.KhachHangs, "ID", "HoTen", gioHang.ID_KhachHang);
-            ViewBag.ID_Sach = new SelectList(db.Saches, "ID", "TenSach", gioHang.ID_Sach);
-            return View(gioHang);
+            return View(loai_Sach);
         }
 
         // GET: Admin/Categories/Edit/5
@@ -98,14 +99,12 @@ namespace NewProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GioHang gioHang = db.GioHangs.Find(id);
-            if (gioHang == null)
+            Loai_Sach loai_Sach = db.Loai_Sach.Find(id);
+            if (loai_Sach == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_KhachHang = new SelectList(db.KhachHangs, "ID", "HoTen", gioHang.ID_KhachHang);
-            ViewBag.ID_Sach = new SelectList(db.Saches, "ID", "TenSach", gioHang.ID_Sach);
-            return View(gioHang);
+            return View(loai_Sach);
         }
 
         // POST: Admin/Categories/Edit/5
@@ -113,17 +112,15 @@ namespace NewProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ID_Sach,SoLuong,ID_KhachHang")] GioHang gioHang)
+        public ActionResult Edit([Bind(Include = "ID,Loaisach,Trangthai")] Loai_Sach loai_Sach)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(gioHang).State = EntityState.Modified;
+                db.Entry(loai_Sach).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_KhachHang = new SelectList(db.KhachHangs, "ID", "HoTen", gioHang.ID_KhachHang);
-            ViewBag.ID_Sach = new SelectList(db.Saches, "ID", "TenSach", gioHang.ID_Sach);
-            return View(gioHang);
+            return View(loai_Sach);
         }
 
         // GET: Admin/Categories/Delete/5
@@ -133,12 +130,12 @@ namespace NewProject.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GioHang gioHang = db.GioHangs.Find(id);
-            if (gioHang == null)
+            Loai_Sach loai_Sach = db.Loai_Sach.Find(id);
+            if (loai_Sach == null)
             {
                 return HttpNotFound();
             }
-            return View(gioHang);
+            return View(loai_Sach);
         }
 
         // POST: Admin/Categories/Delete/5
@@ -146,8 +143,8 @@ namespace NewProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            GioHang gioHang = db.GioHangs.Find(id);
-            db.GioHangs.Remove(gioHang);
+            Loai_Sach loai_Sach = db.Loai_Sach.Find(id);
+            db.Loai_Sach.Remove(loai_Sach);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

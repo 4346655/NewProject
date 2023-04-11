@@ -5,120 +5,87 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="~/Areas/Assets/css/create.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="include">
+        <div class="left">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="main-left">
+                    <div class="item-1">
+                        <div class="item">
+                            <label>Hinh anh </label>
+                            <input class="form-control text-box single-line" id="txtImage" name="Anh" type="text" value="">
+                            <input style="width:70px" type="button" value="Upload" onclick="BrowserServer('txtImage')" />
+                        </div>
+                        <div class="item">
+                            <label>Ten sach</label>
+                            <input class="form-control text-box single-line" id="TenSach" name="TenSach" type="text" value="">
+                        </div>
+                        <div class="item">
+                            <label>Gia</label>
+                            <input class="form-control text-box single-line" data-val="true" data-val-number="The field Gia must be a number." id="Gia" name="Gia" type="number" value="">
+                        </div>
+                        <div class="item">
+                            <label>The loai</label>
+                            <select class="form-control" id="ID_LoaiSach" name="ID_LoaiSach">
+                                <option value="1">Tieu thuyet</option>
+                                <option value="2">Truyen tranh</option>
+                                <option value="3">Van hoc</option>
+                            </select>
+                        </div>
+                        <div class="item">
+                            <label for="">Trang thai</label>
+                            <select class="list-box tri-state" id="Trangthai" name="Trangthai">
+                                <option value="true">Hoat dong</option>
+                                <option value="false">Khoa</option>
+                            </select>
+                        </div>
 
-    <div class="form-horizontal">
-        <h4>Sach</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.ID_LoaiSach, "ID_LoaiSach", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ID_LoaiSach", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ID_LoaiSach, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    </div>
+                    <div class="item-2">
+                        <div class="item">
+                            <label for="">So luong</label>
+                            <input class="form-control text-box single-line" data-val="true" data-val-number="The field SoLuong must be a number." id="SoLuong" name="SoLuong" type="number" value="">
+                        </div>
+                        <div class="item">
+                            <label for="">Tac gia</label>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length="The field TacGia must be a string with a maximum length of 500." data-val-length-max="500" id="TacGia" name="TacGia" type="text" value="">
+                        </div>
+                        <div class="item">
+                            <label for="">Nha xuat ban </label>
+                            <input class="form-control text-box single-line" data-val="true" data-val-length="The field NhaXuatBan must be a string with a maximum length of 500." data-val-length-max="500" id="NhaXuatBan" name="NhaXuatBan" type="text" value="">
+                        </div>
+                        <div class="item">
+                            <label for="">Gia giam </label>
+                            <input class="form-control text-box single-line" data-val="true" data-val-number="The field Gia_giam must be a number." id="Gia_giam" name="Gia_giam" type="number" value="">
+                        </div>
+                        <div class="item">
+                            <label for="">Mo ta</label>
+                            <input class="form-control text-box single-line" id="Mota" name="Mota" type="text" value="">
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TenSach, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TenSach, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Anh, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Anh, new { htmlAttributes = new { @id = "txtImage", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Anh, "", new { @class = "text-danger" })
-                <input style="width:70px" type="button" value="Tải ảnh" onclick="BrowserServer('txtImage')" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SoLuong, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SoLuong_DaBan, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SoLuong_DaBan, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SoLuong_DaBan, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Mota, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Mota, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Mota, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Gia, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Gia, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Gia, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Gia_giam, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Gia_giam, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Gia_giam, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Trangthai, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Trangthai)
-                    @Html.ValidationMessageFor(model => model.Trangthai, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-        </div>
+                <div class="btn_submit">
+                    <button type="submit">Tao moi</button>
+                    @Html.ActionLink("Tro lai", "Index")
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.NhaXuatBan, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NhaXuatBan, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NhaXuatBan, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TacGia, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TacGia, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TacGia, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+            }
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-@section scripts
-{
     <script>
         function BrowserServer(field) {
             var finder = new CKFinder();
@@ -128,4 +95,5 @@
             finder.popup();
         }
     </script>
-}
+</body>
+</html>

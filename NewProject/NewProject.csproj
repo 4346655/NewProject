@@ -161,8 +161,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Assets\css\create.css" />
     <Content Include="Areas\Assets\css\main.css" />
     <Content Include="Areas\Assets\css\Maintemp.css" />
+    <Content Include="Areas\Assets\css\Modal_categories.css" />
+    <Content Include="Areas\Assets\css\Modal_thungrac_product.css" />
+    <Content Include="Areas\Assets\css\Modal_product.css" />
     <Content Include="Areas\Assets\css\navigation.css" />
     <Content Include="Areas\Assets\fontawesome-free-6.3.0-web\css\all.css" />
     <Content Include="Areas\Assets\fontawesome-free-6.3.0-web\css\all.min.css" />
@@ -2230,6 +2234,7 @@
     <Content Include="Clientassets\css\product.css" />
     <Content Include="Clientassets\css\register1.css" />
     <Content Include="Clientassets\css\reset.css" />
+    <Content Include="Clientassets\css\sanpham.css" />
     <Content Include="Clientassets\css\specific-product.css" />
     <Content Include="Clientassets\css\user.css" />
     <Content Include="Clientassets\font\fontawesome\css\all.css" />
@@ -2250,6 +2255,7 @@
     <Content Include="Clientassets\font\fontawesome\css\v4-shims.min.css" />
     <Content Include="Clientassets\font\fontawesome\css\v5-font-face.css" />
     <Content Include="Clientassets\font\fontawesome\css\v5-font-face.min.css" />
+    <Content Include="Clientassets\image\Hinh-Gau-Truc-Cute-Chibi-de-thuong-nhat.jpg" />
     <Content Include="Clientassets\image\it3.jpg" />
     <Content Include="Clientassets\image\logochude.png" />
     <Content Include="Clientassets\image\sale.png" />
@@ -3180,11 +3186,11 @@
     <Content Include="Areas\Admin\Views\Accounts\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Accounts\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Accounts\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Temp\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Temp\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Temp\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Temp\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Temp\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Details.cshtml" />
@@ -3268,6 +3274,11 @@
     <Content Include="Areas\Assets\fontawesome-free-6.3.0-web\webfonts\fa-v4compatibility.ttf" />
     <Content Include="Areas\Assets\fontawesome-free-6.3.0-web\webfonts\fa-v4compatibility.woff2" />
     <Content Include="Areas\Admin\Views\Orders\list.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3305,6 +3316,7 @@
     <Content Include="Views\Home\CartOrder.cshtml" />
     <Content Include="Views\Order\TempPage.cshtml" />
     <Content Include="Views\ProductDetails\Start.cshtml" />
+    <Content Include="Views\Order\ViewMGG.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

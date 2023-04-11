@@ -15,12 +15,12 @@ namespace Models.DAO
 		{
 			db = new Model1();
 		}
-		public IEnumerable<Magiamgia> Pagelist_mgg(string Searchstring, int page, int pagesize)
+		public IEnumerable<Magiamgia> Pagelist_mgg(string Searchstring,bool trangthai, int page, int pagesize)
 		{
-			IOrderedQueryable<Magiamgia> model = db.Magiamgias.OrderByDescending(x => x.ID);
+			IOrderedQueryable<Magiamgia> model = db.Magiamgias.Where(x=>x.Trangthai ==trangthai).OrderByDescending(x => x.ID);
 			if (!string.IsNullOrEmpty(Searchstring))
 			{
-				model = model.Where(x => x.Ma.Contains(Searchstring)).OrderByDescending(x => x.ID);
+				model = model.Where(x => x.Ma.Contains(Searchstring)).Where(x => x.Trangthai == trangthai).OrderByDescending(x => x.ID);
 			}
 			return model.ToPagedList(page, pagesize);
 		}

@@ -38,6 +38,7 @@ namespace NewProject.Controllers
             var order = gh.TempGH(idsach,iduser,soluong);
             return View(order);
 		}
+       
         [HttpGet]
         public ActionResult AddtoOrder(int idsach,int idthanhtoan, int soluong,string MGG,string note )
 		{

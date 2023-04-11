@@ -15,12 +15,12 @@ namespace Models.DAO
 		{
 			db = new Model1();
 		}
-		public IEnumerable<Loai_Sach> Pagelist_dm(string Searchstring, int page, int pagesize)
+		public IEnumerable<Loai_Sach> Pagelist_dm(string Searchstring,bool trangthai, int page, int pagesize)
 		{
-			IOrderedQueryable<Loai_Sach> model = db.Loai_Sach.OrderByDescending(x => x.ID);
+			IOrderedQueryable<Loai_Sach> model = db.Loai_Sach.Where(x=>x.Trangthai == trangthai).OrderByDescending(x => x.ID);
 			if (!string.IsNullOrEmpty(Searchstring))
 			{
-				model = model.Where(x => x.Loaisach.Contains(Searchstring)).OrderByDescending(x => x.ID);
+				model = model.Where(x => x.Loaisach.Contains(Searchstring)).Where(x=>x.Trangthai == trangthai).OrderByDescending(x => x.ID);
 			}
 			return model.ToPagedList(page, pagesize);
 		}
@@ -38,6 +38,12 @@ namespace Models.DAO
 		public List<Loai_Sach> List()
 		{
 			return db.Loai_Sach.Where(x => x.Trangthai == true && x.Saches.Count > 0).ToList();
+		}
+		public void ChangeStatus(int idls)
+		{
+			var model = db.Loai_Sach.Where(x => x.ID == idls).SingleOrDefault();
+			model.Trangthai = !model.Trangthai;
+			db.SaveChanges();
 		}
 	}
 }

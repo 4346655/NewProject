@@ -17,7 +17,7 @@ namespace NewProject.Areas.Admin.Controllers
         private Model1 db = new Model1();
 
         // GET: Admin/Orders
-        public ActionResult Index(string Searchstring, int page = 1, int pagesize = 20)
+        public ActionResult Index(string Searchstring, int trangthai, int page = 1, int pagesize = 20 )
         {
             var ac = new AccountDao();
             var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
@@ -35,7 +35,7 @@ namespace NewProject.Areas.Admin.Controllers
                 else
                 {
                     var dh = new OrdersDao();
-                    var list = dh.Pagelist_dh(Searchstring, page, pagesize);
+                    var list = dh.Pagelist_dh(Searchstring, page, pagesize,trangthai);
                     ViewBag.Search = Searchstring;
                     return View(list);
                 }
@@ -47,6 +47,25 @@ namespace NewProject.Areas.Admin.Controllers
             var dh = new OrdersDao();
             var li = dh.list();
             return View(li);
+		}
+        public ActionResult HuyDonAdmin(int idor)
+		{
+            var or = new OrdersDao();
+            or.HuyDon(idor);
+            return RedirectToAction("Index", new {trangthai =0});
+		}
+        public ActionResult KhoiphucAdmin(int idor)
+        {
+            var or = new OrdersDao();
+            or.Mualai(idor);
+            return RedirectToAction("Index", new { trangthai = 1 });
+        }
+        public ActionResult ChangeStatus(int idor)
+		{
+            var or = new OrdersDao();
+            or.ChangeStatus(idor);
+            int trangthai = or.getStatus(idor);
+            return RedirectToAction("Index" ,new { trangthai = trangthai });
 		}
 
         // GET: Admin/Orders/Details/5
@@ -153,7 +172,7 @@ namespace NewProject.Areas.Admin.Controllers
             DonHang donHang = db.DonHangs.Find(id);
             db.DonHangs.Remove(donHang);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index",new { trangthai=0});
         }
 
         protected override void Dispose(bool disposing)

@@ -226,9 +226,9 @@ color: var(--blue);
 
 /* ---------------sản phẩm--------------- */
 
-.detail_list tbody td img{
-    max-height: 25px;
-    max-width: 25px;
+.detail_list tbody td .img_anh {
+    max-height: 35px;
+    max-width: 35px;
 }
 
 .detail_list tbody td ion-icon{

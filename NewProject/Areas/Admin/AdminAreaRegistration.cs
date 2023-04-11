@@ -20,6 +20,8 @@ namespace NewProject.Areas.Admin
               new { Controller = "Home1", action = "Error", id = UrlParameter.Optional }
            );
             //----------------------------------------------------------------------------
+           
+            //----------------------------------------------------------------------------
             context.MapRoute(
                "Tai khoan",
                "tai-khoan",
@@ -124,8 +126,8 @@ namespace NewProject.Areas.Admin
             //----------------------------------------------------------------------------
             context.MapRoute(
              "Danh muc san pham",
-             "danh-muc",
-            new { Controller = "Categories", action = "Index", id = UrlParameter.Optional }
+             "danh-muc-{trangthai}",
+            new { Controller = "Categories", action = "Index"}
             );
             context.MapRoute(
              "Them danh muc san pham",
@@ -142,10 +144,15 @@ namespace NewProject.Areas.Admin
              "sua-danh-muc-{id}",
             new { Controller = "Categories", action = "Edit" }
             );
+            context.MapRoute(
+             "Doi trang thai danh muc",
+             "doi-trang-thai-danh-muc-{idls}",
+            new { Controller = "Categories", action = "ChangeStatus" }
+            );
             //----------------------------------------------------------------------------
             context.MapRoute(
                 "Don hang",
-                "don-hang",
+                "don-hang-{trangthai}",
             new { Controller = "Orders", action = "Index", id = UrlParameter.Optional }
             );
             context.MapRoute(
@@ -167,12 +174,27 @@ namespace NewProject.Areas.Admin
                 "Chi tiet don hang",
                 "chi-tiet-don-hang-{id}",
             new { Controller = "Orders", action = "Details" }
+            );
+             context.MapRoute(
+                "Chuyen qua giao hang",
+                "chuyen-trang-thai-{idor}",
+            new { Controller = "Orders", action = "ChangeStatus" }
+             );
+            context.MapRoute(
+                "huy don admin",
+                "huy-don-admin-{idor}",
+            new { Controller = "Orders", action = "HuyDonAdmin" }
+             );
+            context.MapRoute(
+                "khoi phuc don hang admin",
+                "khoi-phuc-don-admin-{idor}",
+            new { Controller = "Orders", action = "KhoiphucAdmin" }
              );
             //----------------------------------------------------------------------------
             context.MapRoute(
                 "Ma giam gia",
-                "ma-giam-gia",
-             new { Controller = "Vouchers", action = "Index", id = UrlParameter.Optional }
+                "ma-giam-gia-{trangthai}",
+             new { Controller = "Vouchers", action = "Index" }
              );
             context.MapRoute(
                 "Them giam gia",

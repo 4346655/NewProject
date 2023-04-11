@@ -11,7 +11,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME</title>
-    <link href="~/Clientassets/css/product.css" rel="stylesheet" />
+
+    <link href="~/Clientassets/css/sanpham.css" rel="stylesheet" />
     <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
@@ -123,6 +124,7 @@
         }
          function addToOrder() {
              var solng = document.getElementById("solng").value;
+             if (solng == 0) solng = 1;
              var urla = 'xac-minh-don-hang-@Model.ID-' + solng;
             document.querySelector(".select .buy").href = urla;
         }

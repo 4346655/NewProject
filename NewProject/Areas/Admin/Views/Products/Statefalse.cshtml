@@ -7,6 +7,9 @@
     List<string> li = new List<string>();
 }
 
+
+
+
 <html>
 <head>
     <title>Sản phẩm</title>
@@ -15,101 +18,185 @@
             background-color: lightcyan;
         }
 
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
+        .search {
+            width: 100px;
+            height: 30px;
+            border-radius: 10px;
+            background-color: aquamarine;
         }
-    </style>
-    <link href="~/Areas/Admin/Assets/css/Modal.css" rel="stylesheet" />
-</head>
-<body style="margin-top:60px;">
-    <p>
-        <a href="/san-pham">Trở lại</a>
-        @using (Html.BeginForm("Statefalse", "Products", FormMethod.Get))
-        {
-            <div>
-                <input type="text" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
-                <button type="submit">Tìm</button>
-            </div>
 
+        .ip_search {
+            width: 860px;
+            height: 37px;
         }
-    </p>
-    <div class="table-product">
-        <table class="table">
-            <tr>
-                <th> Hình ảnh</th>
-                <th> Danh mục</th>
-                <th> Tên sách</th>
-                <th> Số lượng</th>
-                <th> Giá</th>
-                <th> Trạng thái </th>
-                <th></th>
-            </tr>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <img src="@item.Anh" width="100" />
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Loai_Sach.Loaisach)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TenSach)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SoLuong)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gia)
-                    </td>
-                    <td>
-                        @if (item.Trangthai == false)
-                        {
-                            <p>Dừng bán</p>
-                        }
-                    </td>
-                    <td>
-                        <a href="/quay-lai-san-pham-@item.ID">Khôi phục</a> |
-                        <a href="/chi-tiet-san-pham-@item.ID">Chi tiết</a> |
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
 
-                        <a id="delete-@item.ID" data-toggle="modal" data-target="#confirm-delete">Xóa</a>
-                        <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h4 class="modal-title" id="myModalLabel">Xác nhận xóa</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        Bạn có chắc chắn muốn xóa sản phẩm này không?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                                        <a class="btn btn-danger btn-ok">Xóa</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                
+            .pagination a,
+            .pagination span {
+                display: inline-block;
+                padding: 6px 12px;
+                margin-right: 5px;
+                border-radius: 3px;
+                color: #007bff;
+                background-color: #fff;
+                border: 1px solid #007bff;
+                text-decoration: none;
             }
 
-        </table>
+                .pagination a:hover,
+                .pagination span.current {
+                    color: #fff;
+                    background-color: #007bff;
+                    border-color: #007bff;
+                }
+
+                .pagination span.ellipsis {
+                    display: inline-block;
+                    margin-right: 5px;
+                    color: #007bff;
+                }
+
+                .pagination span.disabled {
+                    display: none;
+                }
+    </style>
+
+    <link href="~/Areas/Assets/css/Modal_thungrac_product.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="detail">
+
+        <div class="detail_list" style="width:1300px;">
+
+            <div style="display:flex;background-color:aqua;height:37px;">
+                <div style="display: flex; border: 1px solid;">
+                    <a style="border:1px;width:100px; text-align:center;height:35px;border-right:1px solid" href="/san-pham">
+                        <p style="margin-top:5px;">Trở về</p>
+                    </a>
+                    <a style="border:1px;width:150px; text-align:center;height:35px;" href="">
+                        <p style="margin-top:5px;"></p>
+                    </a>
+                </div>
+
+                @using (Html.BeginForm("Statefalse", "Products", FormMethod.Get))
+                {
+                    <div style="display:flex;  ">
+                        <button type="submit" style="width:150px; text-align:center;height:37px;background-color:aqua">Tìm kiếm</button>
+                        <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
+                    </div>
+                }
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Ảnh</td>
+                        <td>Thể loại</td>
+                        <td>Tên sách</td>
+                        <td>Số lượng </td>
+                        <td>Giá</td>
+                        <td>Trạng Thái</td>
+                        <td>#</td>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td><img class="img_anh" src="@item.Anh" width="100" /></td>
+                            <td>@item.Loai_Sach.Loaisach</td>
+                            <td>@item.TenSach</td>
+                            <td>@item.SoLuong</td>
+                            <td>@item.Gia</td>
+                            @if (item.Trangthai == true)
+                            {
+                                <td>Đang bán</td>
+                            }
+                            else
+                            {
+                                <td>Dừng bán</td>
+                            }
+                            <td>
+                                <a href="/quay-lai-san-pham-@item.ID">Khôi phục</a> |
+                                <a href="/chi-tiet-san-pham-@item.ID">Chi tiết</a> |
+                                <a class="modal-btn" data-modal-id="modal-@item.ID">Xóa</a>
+                                <div id="modal-@item.ID" class="modal">
+                                    <div class="modal-content">
+                                        <div class="main_modal">
+                                            <div class="title_modal">
+                                                <p style="text-align:center;height:30px;">Thông báo</p>
+                                                
+                                            </div>
+                                            <div class="content_modal">
+                                                <p class="question">Bạn muốn xóa sản phẩm này ?</p>
+                                                <div class="main_body">
+                                                    <div class="main_body1">
+                                                        <img style="width:90px;" src="@item.Anh"  />
+                                                    </div>
+                                                    <div class="main_body1" style="border-left:1px solid">
+                                                        <p>@item.TenSach</p>
+                                                        <p>Giá :@item.Gia</p>
+                                                    </div>
+                                                </div>
+                                                <div class="btn_sumit">
+                                                    <a class="btnsub" href="">Hủy</a>
+                                                    <a class="btnsub" href="/delete-san-pham-@item.ID">Xóa</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+                    }
+
+
+
+
+
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
+        </div>
+
+
     </div>
-    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
-<script>
-    $(document).ready(function () {
-        // Get the ID of the item to delete when the modal is shown
-        $('#confirm-delete').on('show.bs.modal', function (e) {
-            var id = $(e.relatedTarget).attr('id').split('-')[1];
-            $(this).find('.btn-ok').attr('href', '/delete-san-pham-' + id);
+    <script>
+
+        var modalBtns = document.querySelectorAll('.modal-btn');
+
+        modalBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modalId = this.getAttribute('data-modal-id');
+                var modal = document.getElementById(modalId);
+                modal.style.display = "block";
+            });
         });
-    });
-</script>
+
+        var closeBtns = document.querySelectorAll('.close');
+        closeBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modal = this.closest('.modal');
+                modal.style.display = "none";
+            });
+        });
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        };
+
+    </script>
+
 </body>
 </html>
-
 

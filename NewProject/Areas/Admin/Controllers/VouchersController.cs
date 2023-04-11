@@ -17,7 +17,7 @@ namespace NewProject.Areas.Admin.Controllers
         private Model1 db = new Model1();
 
         // GET: Admin/Vouchers
-        public ActionResult Index(string Searchstring, int page = 1, int pagesize = 20)
+        public ActionResult Index(string Searchstring,bool trangthai, int page = 1, int pagesize = 20)
         {
             var ac = new AccountDao();
             var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
@@ -35,7 +35,7 @@ namespace NewProject.Areas.Admin.Controllers
                 else
                 {
                     var mgg = new VoucherDao();
-                    var list = mgg.Pagelist_mgg(Searchstring, page, pagesize);
+                    var list = mgg.Pagelist_mgg(Searchstring,trangthai, page, pagesize);
                     ViewBag.Search = Searchstring;
                     return View(list);
                 }
@@ -136,7 +136,7 @@ namespace NewProject.Areas.Admin.Controllers
             Magiamgia magiamgia = db.Magiamgias.Find(id);
             db.Magiamgias.Remove(magiamgia);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index",new {trangthai = true });
         }
 
         protected override void Dispose(bool disposing)

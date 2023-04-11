@@ -7,71 +7,129 @@
 }
 
 <html>
-    <head>
-        <title>Mã giảm giá</title>
-    </head>
-    <body style="margin-top:60px;">
-        <p>
-            <a href="/them-danh-muc">Thêm danh mục</a>
-            @using (Html.BeginForm("Index", "Vouchers", FormMethod.Get))
-            {
-                <div>
-                    <input type="text" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
-                    <button type="submit">Tìm</button>
+<head>
+    <title>Mã giảm giá</title>
+    <style>
+        .table-product {
+            background-color: lightcyan;
+        }
+
+        .search {
+            width: 100px;
+            height: 30px;
+            border-radius: 10px;
+            background-color: aquamarine;
+        }
+
+        .ip_search {
+            width: 580px;
+            height: 37px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+
+            .pagination a,
+            .pagination span {
+                display: inline-block;
+                padding: 6px 12px;
+                margin-right: 5px;
+                border-radius: 3px;
+                color: #007bff;
+                background-color: #fff;
+                border: 1px solid #007bff;
+                text-decoration: none;
+            }
+
+                .pagination a:hover,
+                .pagination span.current {
+                    color: #fff;
+                    background-color: #007bff;
+                    border-color: #007bff;
+                }
+
+                .pagination span.ellipsis {
+                    display: inline-block;
+                    margin-right: 5px;
+                    color: #007bff;
+                }
+
+                .pagination span.disabled {
+                    display: none;
+                }
+    </style>
+</head>
+<body>
+    <div class="detail">
+
+        <div class="detail_list" style="width:1300px;">
+
+            <div style="display:flex;background-color:aqua;height:37px;">
+                <div style="display:flex;border:1px solid;">
+                    <a style="border:1px;width:100px; text-align:center;height:35px;border-right:1px solid" href="">
+                        <p style="margin-top:5px;">Thùng rác</p>
+                    </a>
+                    <a style="border:1px;width:150px; text-align:center;height:35px;" href="">
+                        <p style="margin-top:5px;">Thêm mã giảm giá</p>
+                    </a>
                 </div>
 
-            }
-        </p>
-        <table class="table">
-            <tr>
-                <th>
-                   Mã
-                </th>
+                @using (Html.BeginForm("Index", "Vouchers", FormMethod.Get))
+                {
+                    <div style="display:flex;  ">
+                        <button type="submit" style="width:150px; text-align:center;height:37px;background-color:aqua">Tìm kiếm</button>
+                        <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
+                    </div>
+                }
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Mã giảm giá</td>
+                        <td>Giá trị</td>
+                        <td>Số lượng</td>
+                        <td>Trạng Thái</td>
+                        <td>#</td>
 
-                <th>
-                    Số lượng
-                </th>
+                    </tr>
+                </thead>
 
-                <th>
-                   Trị giá
-                </th>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
 
-                <th>
-                   Trạng thái
-                </th>
+                            <td>@item.Ma</td>
+                            <td>@item.Giatri</td>
+                            <td>@item.Soluong</td>
+                            @if (item.Trangthai == true)
+                            {
+                                <td>Hoạt động</td>
+                            }
+                            else
+                            {
+                                <td>Khóa</td>
+                            }
+                            <td><a href="/doi-trang-thai-danh-muc-@item.ID">Bỏ thùng rác</a></td>
+                        </tr>
+                    }
 
-                <th></th>
-            </tr>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ma)
-                    </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Soluong)
-                    </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Giatri)
-                    </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Trangthai)
-                    </td>
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
+        </div>
+        <!-- -----------------HD gan dayh--------- -->
 
-                    <td>
-                        <a href="/sua-ma-giam-gia-@item.ID">Sửa</a>|
-                        <a href="/xoa-ma-giam-gia-@item.ID">Xóa</a>
-                    </td>
-                </tr>
-            }
 
-        </table>
+    </div>
 
-        @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
-    </body>
+</body>
 </html>
-

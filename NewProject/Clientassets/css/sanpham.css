@@ -116,13 +116,6 @@ div.container.ds-flex {
     padding-bottom: 20px;
 }
 
-input {
-    height: 45px;
-    width: 433px;
-    border: 1px solid red;
-    background-color: antiquewhite;
-    border-radius: 50px;
-}
 
     input::placeholder {
         color: black;
@@ -274,17 +267,7 @@ del {
     text-align: center;
 }
 
-p {
-   
-    display: inline-block;
-    padding-bottom: 0px;
-    height: 15px;
-    padding: 5px 5px;
-    top: 15px;
-    left: 16px;
-    position: relative;
-    font-size: 18px;
-}
+
 
 .sol {
     display: flex;
@@ -465,6 +448,7 @@ input.number {
 input::placeholder {
     font-size: 20px;
 }
+
 .x {
     display: none;
     position: absolute;
@@ -553,10 +537,6 @@ input::placeholder {
     left: -19px;
 }
 
-input {
-    position: absolute;
-    left: -861px;
-}
 
 .Describe {
     display: flex;
@@ -578,7 +558,7 @@ input {
 
 .input_comment {
     margin-top: 40px;
-    height: 70px;
+    height: 48px;
     width: 500px;
     border-radius: 10px;
 }

@@ -38,16 +38,23 @@ namespace Models.DAO
 			{
 				if (string.Compare(newpassword, confirm) == 0 && newpassword != "")
 				{
-					TaiKhoan a = new TaiKhoan
+					if (newpassword.Length < 6 || username.Length < 8)
 					{
-						ID_LoaiTK = 1,
-						Trangthai = true,
-						TenTaiKhoan = username,
-						MatKhau = newpassword,
-					};
-					db.TaiKhoans.Add(a);
-					db.SaveChanges();
-					return 1;
+						return 3;
+					}
+					else
+					{
+						TaiKhoan a = new TaiKhoan
+						{
+							ID_LoaiTK = 1,
+							Trangthai = true,
+							TenTaiKhoan = username,
+							MatKhau = newpassword,
+						};
+						db.TaiKhoans.Add(a);
+						db.SaveChanges();
+						return 1;
+					}
 				}
 				else
 				{
@@ -124,8 +131,9 @@ namespace Models.DAO
 					Diachi = "",
 					Email = "",
 					SDT = "",
-					AnhDaiDien = "",
+					AnhDaiDien = "/Uploads/images/Hinh-Gau-Truc-Cute-Chibi-de-thuong-nhat.jpg",
 				};
+				
 				db.KhachHangs.Add(a);
 				db.SaveChanges();
 			}

@@ -24,7 +24,7 @@
         }
 
         .ip_search {
-            width: 860px;
+            width: 580px;
             height: 37px;
         }
 
@@ -72,16 +72,31 @@
 
             <div style="display:flex;background-color:aqua;height:37px;">
                 <div style="display:flex;border:1px solid;">
-                    <a style="border:1px;width:100px; text-align:center;height:35px;border-right:1px solid" href="/thung-rac-san-pham">
-                        <p style="margin-top:5px;">Thùng rác</p>
+                    @{ int key = 1; }
+                    <a style="border:1px;width:100px; text-align:center;height:35px;border-right:1px solid;" href="/don-hang-@key">
+                        <p style="margin-top:5px;">Đang chuẩn bị</p>
                     </a>
-                    <a style="border:1px;width:150px; text-align:center;height:35px;" href="/them-san-pham">
-                        <p style="margin-top:5px;">Thêm sản phẩm</p>
+                    @{ int key2 = 2; }
+                    <a style="border: 1px; width: 150px; text-align: center; height: 35px; border-right: 1px solid;background-color:aquamarine" href="/don-hang-@key2">
+                        <p style="margin-top:5px;">Đang giao </p>
+                    </a>
+                    @{ int key3 = 3; }
+                    <a style="border: 1px; width: 150px; text-align: center; height: 35px; border-right: 1px solid; background-color:lightgoldenrodyellow " href="/don-hang-@key3">
+                        <p style="margin-top:5px;">Đã giao </p>
+                    </a>
+                    @{ int key4 = 0; }
+                    <a style="border: 1px; width: 150px; text-align: center; height: 35px;  background-color: lightcoral" href="/don-hang-@key4">
+                        <p style="margin-top:5px;">Đã hủy </p>
                     </a>
                 </div>
 
                 @using (Html.BeginForm("Index", "Orders", FormMethod.Get))
                 {
+                    foreach(var item in Model)
+				    {
+                        <input type="hidden" name="trangthai" value="@item.Trang_thai" />
+                            break;
+                      }
                     <div style="display:flex;  ">
                         <button type="submit" style="width:150px; text-align:center;height:37px;background-color:aqua">Tìm kiếm</button>
                         <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
@@ -109,29 +124,43 @@
                         <td>@item.KhachHang.TaiKhoan.TenTaiKhoan</td>
                         <td>@item.Sach.TenSach</td>
                         <td>@item.SoLuong</td>
-                         <td>@(item.SoLuong * (item.Sach.Gia-item.Sach.Gia_giam))</td>
-                
+                        <td>@(item.SoLuong * (item.Sach.Gia-item.Sach.Gia_giam))</td>
+
                         @if (item.Trang_thai == 1)
                         {
                             <td>Đang chuẩn bị</td>
+                            <td>
+                                <a href=""> Xem</a>|
+                                <a href="/chuyen-trang-thai-@item.ID"> Giao</a>|
+                                <a href="/huy-don-admin-@item.ID">Hủy đơn </a>
+                            </td>
                         }
                         else if (item.Trang_thai == 2)
                         {
                             <td>Đang giao</td>
+                            <td>
+                                <a href=""> Xem</a>|
+                                <a href="/chuyen-trang-thai-@item.ID"> Hoàn thành</a>
+                            </td>
                         }
                         else if (item.Trang_thai == 3)
                         {
                             <td>Đã giao</td>
+                            <td>
+                                <a href=""> Xem</a>|
+                                <a href="/xoa-don-hang-@item.ID"> Xóa</a>
+                            </td>
                         }
                         else
                         {
                             <td>Đã hủy</td>
+                            <td>
+                                <a href=""> Xem</a>|
+                                <a href="/khoi-phuc-don-admin-@item.ID"> Khôi phục</a>|
+                                <a href="/xoa-don-hang-@item.ID"> Xóa</a>
+                            </td>
                         }
-                    <td>
-                        <a href=""> Xem</a>|
-                        <a href=""> Sửa</a>|
-                        <a href="">Hủy đơn </a>
-                    </td>
+
 
                     </tr>
                     }

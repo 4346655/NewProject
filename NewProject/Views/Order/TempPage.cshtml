@@ -13,10 +13,14 @@
             <form action="/them-moi-don-hang" method="get">
                 <input type="hidden" id="idsach" name="idsach" value="@Model.ID_Sach" />
 
-                <p>ID thanh toán</p>
-                <input type="text" id="idthanhtoan" name="idthanhtoan" />
+
+                <p>Phương thức thanh toán</p>
+                <select id="idthanhtoan" name="idthanhtoan">
+                    <option value="1">Thanh toán khi nhận</option>
+                </select>
 
                 <input type="hidden" id="soluong" name="soluong" value="@Model.SoLuong" />
+
                 <p>Mã giảm giá</p>
                 <input type="text" id="MGG" name="MGG" />
                 <p>Note</p>

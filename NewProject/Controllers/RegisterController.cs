@@ -31,6 +31,10 @@ namespace NewProject.Controllers
                 {
                     ModelState.AddModelError("", "Tên tài khoản đã tồn tại.");
                 }
+                else if(res==3)
+				{
+                    ModelState.AddModelError("", "Mật khẩu phải trên 6 kí tự và tên tài khoản trên 8 kí tự");
+                }
 				else
 				{
                     ModelState.AddModelError("", "Mật khẩu xác nhận không chính xác.");

@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Models.DTO.Sach>
+﻿@model PagedList.IPagedList<Models.DTO.Loai_Sach>
 @using PagedList.Mvc
 
 @{
@@ -8,7 +8,7 @@
 
 <html>
 <head>
-    <title>Sản phẩm</title>
+    <title>Đơn hàng</title>
     <style>
         .table-product {
             background-color: lightcyan;
@@ -22,7 +22,7 @@
         }
 
         .ip_search {
-            width: 860px;
+            width: 580px;
             height: 37px;
         }
 
@@ -85,24 +85,43 @@
         }
     </style>
 
-    <link href="~/Areas/Assets/css/Modal_product.css" rel="stylesheet" />
+    <link href="~/Areas/Assets/css/Modal_categories.css" rel="stylesheet" />
 </head>
 <body>
     <div class="detail">
 
         <div class="detail_list" style="width:1300px;">
 
-            <div style="display:flex;background-color:aqua">
+            <div style="display:flex;background-color:aqua;height:37px;">
                 <div style="display:flex;border:1px solid;">
-                    <a style="border:1px;width:100px; text-align:center;height:35px;border-right:1px solid" href="/thung-rac-san-pham">
+                    <a style="border:1px;width:100px; text-align:center;height:35px;border-right:1px solid" href="/danh-muc-false">
                         <p style="margin-top:5px;">Thùng rác</p>
                     </a>
-                    <a style="border:1px;width:150px; text-align:center;height:35px;" href="/them-san-pham">
-                        <p style="margin-top:5px;">Thêm sản phẩm</p>
-                    </a>
+                    <a class="modal-btn" data-modal-id="modal-1" style="width:120px;text-align:center"><p style="margin-top:5px">Thêm danh mục</p></a>
+                    <div id="modal-1" class="modal">
+                        <div class="modal-content">
+                            <div class="title_modal_pro">
+                                <strong style="text-align: center;font-size:25px;">Thêm danh mục</strong>
+                            </div>
+                            <div class="content_modal_pro">
+                                <div class="avt_pro" style="justify-content: center; align-items: center; display: flex">
+                                    <p>Tên danh mục</p>
+                                </div>
+                                <div class="infomation_pro">
+                                    <div class="item_modal_pro">
+                                        <p>Trạng thái: </p>
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+                @using (Html.BeginForm("Index", "Categories", FormMethod.Get))
                 {
                     <div style="display:flex;  ">
                         <button type="submit" style="width:150px; text-align:center;height:37px;background-color:aqua">Tìm kiếm</button>
@@ -113,11 +132,8 @@
             <table>
                 <thead>
                     <tr>
-                        <td>Ảnh</td>
-                        <td>Thể loại</td>
-                        <td>Tên sách</td>
-                        <td>Số lượng </td>
-                        <td>Giá</td>
+                        <td>Loại sách</td>
+                        <td>Số lượng sách</td>
                         <td>Trạng Thái</td>
                         <td>#</td>
 
@@ -129,57 +145,17 @@
                     {
                         <tr>
 
-                            <td><img class="img_anh" src="@item.Anh" width="100" /></td>
-                            <td>@item.Loai_Sach.Loaisach</td>
-                            <td>@item.TenSach</td>
-                            <td>@item.SoLuong</td>
-                            <td>@item.Gia</td>
+                            <td>@item.Loaisach</td>
+                            <td>@item.Saches.Count</td>
                             @if (item.Trangthai == true)
                             {
-                                <td>Đang bán</td>
+                                <td>Hoạt động</td>
                             }
                             else
                             {
-                                <td>Dừng bán</td>
+                                <td>Khóa</td>
                             }
-                            <td>
-                                <a class="modal-btn" data-modal-id="modal-@item.ID">Xem</a>
-                                <div id="modal-@item.ID" class="modal">
-                                    <div class="modal-content">
-                                        <div class="title_modal_pro">
-                                            <strong style="text-align: center;font-size:25px;">@item.TenSach</strong>
-                                        </div>
-                                        <div class="content_modal_pro">
-                                            <div class="avt_pro" style="justify-content: center; align-items: center; display: flex">
-                                                <img src="@item.Anh" width="250px;" >
-                                            </div>
-                                            <div class="infomation_pro">
-                                                <div class="item_modal_pro">
-                                                    <p>Giá : @item.Gia</p>
-                                                </div>
-                                                <div class="item_modal_pro">
-                                                    <p>Số lượng : @item.SoLuong</p>
-                                                </div>
-                                                <div class="item_modal_pro">
-                                                    <p>Đã bán : @item.SoLuong_DaBan</p>
-                                                </div>
-                                                <div class="item_modal_pro">
-                                                    <p>Nhà xuất bản : @item.NhaXuatBan</p>
-                                                </div>
-                                                <div class="item_modal_pro">
-                                                    <p>Tác giả : @item.TacGia</p>
-                                                </div>
-                                                <div class="item_modal_pro">
-                                                    <p>Mô tả : @item.Mota</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>|
-                                <a href="sua-san-pham-@item.ID">Sửa</a>|
-                                <a href="bo-san-pham-@item.ID">Xóa</a>
-                            </td>
-
+                            <td><a href="/doi-trang-thai-danh-muc-@item.ID">Bỏ thùng rác</a></td>
                         </tr>
                     }
 
@@ -224,3 +200,4 @@
 </body>
 </html>
 
+ 

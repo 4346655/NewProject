@@ -1,0 +1,21 @@
+﻿@model List<Models.DTO.Magiamgia>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewMGG</title>
+</head>
+<body>
+    <select id="MGG" name="MGG">
+        @foreach (var item in Model)
+        {
+            <option value="@item.Ma">@item.Ma - @item.Giatri</option>
+        }
+    </select>
+</body>
+</html>

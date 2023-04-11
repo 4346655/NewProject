@@ -5,73 +5,204 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 <html>
 <head>
-    <title>Danh mục</title>
-    <link href="~/Areas/Admin/Assets/css/Modal.css" rel="stylesheet" />
-</head>
-<body style="margin-top:60px">
-
-    <p>
-        <a href="/them-danh-muc">Thêm danh mục</a>
-        @using (Html.BeginForm("Index", "Categories", FormMethod.Get))
-        {
-            <div>
-                <input type="text" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
-                <button type="submit">Tìm</button>
-            </div>
-
+    <title>Đơn hàng</title>
+    <style>
+        .table-product {
+            background-color: lightcyan;
         }
 
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                Loại sách
-            </th>
-            <th>
-                Trạng thái
-            </th>
-            <th></th>
-        </tr>
+        .search {
+            width: 100px;
+            height: 30px;
+            border-radius: 10px;
+            background-color: aquamarine;
+        }
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Loaisach)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Trangthai)
-                </td>
-                <td>
-                    <a href="/sua-danh-muc-@item.ID">Sửa</a>|
+        .ip_search {
+            width: 580px;
+            height: 37px;
+        }
 
-                    <a id="myBtn">Xóa</a>
-                    <div id="myModal" class="modal">
-                        <div class="content-modal">
-                            <div>
-                                <span class="close">&times;</span>
-                                <p>Bán có muốn xóa danh mục này ?.</p>
-                                @using (Html.BeginForm())
-                                {
-                                    @Html.AntiForgeryToken()
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
 
-                                    <div class="form-actions no-color">
-                                        <a href="/xoa-danh-muc-@item.ID">Xóa</a>
+            .pagination a,
+            .pagination span {
+                display: inline-block;
+                padding: 6px 12px;
+                margin-right: 5px;
+                border-radius: 3px;
+                color: #007bff;
+                background-color: #fff;
+                border: 1px solid #007bff;
+                text-decoration: none;
+            }
 
-                                    </div>
-                                }
+                .pagination a:hover,
+                .pagination span.current {
+                    color: #fff;
+                    background-color: #007bff;
+                    border-color: #007bff;
+                }
+
+                .pagination span.ellipsis {
+                    display: inline-block;
+                    margin-right: 5px;
+                    color: #007bff;
+                }
+
+                .pagination span.disabled {
+                    display: none;
+                }
+
+        .title_modal_pro {
+            height: 10%;
+            width: 100%;
+            border-bottom: 1px solid;
+        }
+
+        .content_modal_pro {
+            margin-top: 30px;
+            height: 80%;
+            display: flex;
+            background-color: aquamarine;
+        }
+
+        .avt_pro {
+            width: 30%;
+            border-right: 1 solid;
+        }
+
+        .infomation_pro {
+            width: 70%;
+        }
+    </style>
+
+    <link href="~/Areas/Assets/css/Modal_categories.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="detail">
+
+        <div class="detail_list" style="width:1300px;">
+
+            <div style="display:flex;background-color:aqua;height:37px;">
+                <div style="display:flex;border:1px solid;">
+                    <a style="border:1px;width:100px; text-align:center;height:35px;border-right:1px solid" href="/danh-muc-false">
+                        <p style="margin-top:5px;">Thùng rác</p>
+                    </a>
+                    <a class="modal-btn" data-modal-id="modal-1" style="width:120px;text-align:center"><p style="margin-top:5px">Thêm danh mục</p></a>
+                    <div id="modal-1" class="modal">
+                        <div class="modal-content">
+                            <div class="title_modal_pro">
+                                <strong style="text-align: center;font-size:25px;">Thêm danh mục</strong>
+                            </div>
+                            <div class="content_modal_pro">
+                                <div class="avt_pro" style="justify-content: center; align-items: center;">
+                                    <form action="/them-danh-muc?Loaisach=Loaisach&Trangthai=Trangthai" method="get">
+                                        <div class="item_modal_pro">
+                                            <p style="flex:1">Tên danh mục</p>
+                                            <input class="form-control text-box single-line" id="Loaisach" name="Loaisach" type="text" value="" style="flex:1">
+                                        </div>
+                                        <div class="item_modal_pro">
+                                            <p>Trạng thái: </p>
+                                            <select class="list-box tri-state" id="Trangthai" name="Trangthai">
+                                                <option value="true">True</option>
+                                                <option value="false">False</option>
+                                            </select>
+                                        </div>
+                                        <div class="item_modal_pro">
+                                            <button style="margin-left:40%;height:30px;width:100px;background-color:aqua" type="submit">Tạo mới</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </td>
-            </tr>
-        }
+                </div>
 
-    </table>
-    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
-    <script src="~/Areas/Admin/Assets/js/Modal.js"></script>
+                @using (Html.BeginForm("Index", "Categories", FormMethod.Get))
+                {
+                    <div style="display:flex;  ">
+                        <button type="submit" style="width:150px; text-align:center;height:37px;background-color:aqua">Tìm kiếm</button>
+                        <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
+                    </div>
+                }
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Loại sách</td>
+                        <td>Số lượng sách</td>
+                        <td>Trạng Thái</td>
+                        <td>#</td>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.Loaisach</td>
+                            <td>@item.Saches.Count</td>
+                            @if (item.Trangthai == true)
+                            {
+                                <td>Hoạt động</td>
+                            }
+                            else
+                            {
+                                <td>Khóa</td>
+                            }
+                            <td><a href="/doi-trang-thai-danh-muc-@item.ID">Bỏ thùng rác</a></td>
+                        </tr>
+                    }
+
+
+
+
+
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
+        </div>
+        <!-- -----------------HD gan dayh--------- -->
+
+
+    </div>
+    <script>
+
+        var modalBtns = document.querySelectorAll('.modal-btn');
+
+        modalBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modalId = this.getAttribute('data-modal-id');
+                var modal = document.getElementById(modalId);
+                modal.style.display = "block";
+            });
+        });
+
+        var closeBtns = document.querySelectorAll('.close');
+        closeBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modal = this.closest('.modal');
+                modal.style.display = "none";
+            });
+        });
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        };
+
+    </script>
 </body>
 </html>
 

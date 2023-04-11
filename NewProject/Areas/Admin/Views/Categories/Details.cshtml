@@ -1,43 +1,42 @@
-﻿@model Models.DTO.GioHang
+﻿@model Models.DTO.Loai_Sach
 
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
-<h2>Details</h2>
+<!DOCTYPE html>
 
-<div>
-    <h4>GioHang</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.KhachHang.HoTen)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.KhachHang.HoTen)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sach.TenSach)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sach.TenSach)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SoLuong)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SoLuong)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Loai_Sach</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Loaisach)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Loaisach)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Trangthai)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Trangthai)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

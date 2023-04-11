@@ -13,6 +13,7 @@ namespace NewProject
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+			
 			routes.MapRoute(
 				name: "Doi tran thai khach hang",
 				url: "doi-trang-thai-khach-hang-{id}",

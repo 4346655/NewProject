@@ -15,22 +15,24 @@ namespace Models.DAO
 		{
 			db = new Model1();
 		}
-		public IEnumerable<DonHang> Pagelist_dh(string Searchstring, int page, int pagesize)
+		public IEnumerable<DonHang> Pagelist_dh(string Searchstring, int page, int pagesize,int trangthai)
 		{
-			IOrderedQueryable<DonHang> model = db.DonHangs.OrderByDescending(x => x.ID);
+			IOrderedQueryable<DonHang> model = db.DonHangs.Where(x=>x.Trang_thai==trangthai).OrderByDescending(x => x.ID);
 			if (!string.IsNullOrEmpty(Searchstring))
 			{
-				model = model.Where(x => x.KhachHang.TaiKhoan.TenTaiKhoan.Contains(Searchstring)).OrderByDescending(x => x.ID);
+				model = model.Where(x => x.KhachHang.TaiKhoan.TenTaiKhoan.Contains(Searchstring) && x.Trang_thai ==trangthai).OrderByDescending(x => x.ID);
 			}
 			return model.ToPagedList(page, pagesize);
 		}
+	
 		public List<DonHang> List_IDKH(int iduser)
 		{
 			return db.DonHangs.Where(x => x.ID_KhachHang == iduser ).ToList();
 		}
 		public List<DonHang> list()
 		{
-			return db.DonHangs.ToList();
+			var model = db.DonHangs.Where(x => x.Trang_thai == 1).OrderByDescending(x => x.ID);
+			return model.ToList();
 		}
 		public DonHang TempGH(int idsach, int iduser, int soluong)
 		{
@@ -65,8 +67,30 @@ namespace Models.DAO
 				Ma_GG = MGG,
 				Note = note,
 				Trang_thai = 1,
+				Tong_gia = 0,
 			};
 			db.Saches.Where(x => x.ID == idsach).SingleOrDefault().SoLuong -= soluong;
+			db.Saches.Where(x => x.ID == idsach).SingleOrDefault().SoLuong_DaBan += soluong;
+
+			var model = db.Magiamgias.Where(x => x.Ma == MGG).SingleOrDefault();
+			int gia = db.Saches.Where(x=>x.ID == idsach).SingleOrDefault().Gia.Value;
+			if (model != null)
+			{
+				if (model.Soluong > 0)
+				{
+					a.Tong_gia = a.SoLuong * gia - Convert.ToInt32(model.Giatri);
+					model.Soluong -= 1;
+				}
+				else
+				{
+					a.Tong_gia = a.SoLuong * gia;
+
+				}
+			}
+			else
+			{
+				a.Tong_gia = a.SoLuong * gia;
+			}
 			db.DonHangs.Add(a);
 			db.SaveChanges();
 
@@ -82,6 +106,16 @@ namespace Models.DAO
 			var model = db.DonHangs.Where(x => x.ID == idorder).SingleOrDefault();
 			model.Trang_thai = 1;
 			db.SaveChanges();
+		}
+		public void ChangeStatus(int idor)
+		{
+			var model = db.DonHangs.Where(x => x.ID == idor).SingleOrDefault();
+			model.Trang_thai += 1;
+			db.SaveChanges();
+		}
+		public int getStatus(int idor)
+		{
+			return db.DonHangs.Where(x => x.ID == idor).SingleOrDefault().Trang_thai.Value;
 		}
 		
 	}
