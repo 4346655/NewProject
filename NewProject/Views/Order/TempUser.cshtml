@@ -1,0 +1,47 @@
+﻿@model Models.DTO.KhachHang
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TempUser</title>
+    <style>
+        .content-temp {
+            width: 100%;
+            height: 600px;
+            background-color: gray;
+        }
+
+        .user {
+            width: 100%;
+            height: 50%;
+            border-bottom: 1px solid;
+            display: flex;
+        }
+
+        .order {
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="content-temp">
+            <div class="user">
+                <div class="imguser">
+                    <img class="imag" src="@Model.AnhDaiDien" width="250" />
+                </div>
+                <div class="infouser">
+
+                </div>
+            </div>
+            <div class="order">
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

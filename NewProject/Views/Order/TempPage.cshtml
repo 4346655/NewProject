@@ -7,8 +7,38 @@
 <html>
     <head>
         <title>Thông tin</title>
+        <style>
+            .content-temp{
+                width:100%;
+                height:600px;
+                background-color:gray;
+            }
+            .user{
+                width:100%;
+                height:50%;
+                border-bottom:1px solid;
+                display:flex;
+            }
+            .order{
+
+            }
+
+        </style>
     </head>
     <body>
+        <div class="content-temp">
+            <div class="user">
+                <div class="imguser">
+                   
+                </div>
+                <div class="infouser">
+
+                </div>
+            </div>
+            <div class="order">
+
+            </div>
+        </div>
         <div style="background-color:aliceblue">
             <form action="/them-moi-don-hang" method="get">
                 <input type="hidden" id="idsach" name="idsach" value="@Model.ID_Sach" />

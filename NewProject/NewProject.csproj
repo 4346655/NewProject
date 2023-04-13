@@ -3317,6 +3317,7 @@
     <Content Include="Views\Order\TempPage.cshtml" />
     <Content Include="Views\ProductDetails\Start.cshtml" />
     <Content Include="Views\Order\ViewMGG.cshtml" />
+    <Content Include="Views\Order\TempUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
