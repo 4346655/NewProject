@@ -27,21 +27,57 @@ namespace NewProject.Controllers
 			{
                 return RedirectToAction("Index", "Login");
 			}
-        }  
-        
-        [HttpGet]
+        }
+        public ActionResult Suathongtin()
+		{
+            var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
+            var kh = new CustomersDao();
+            var detail = kh.GetDetailByUsername(session.username);
+            return View(detail);
+		}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Suathongtin(string hoten, string diachi, string email , string sdt,string avt)
 		{
             var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
             var kh = new CustomersDao();
+            var detail = kh.GetDetailByUsername(session.username);
             var id = kh.GetID(session.username);
-            kh.ChangeInfo(id, hoten, diachi, email, sdt, avt);
-            return RedirectToAction("Index");
+            int key = kh.ChangeInfo(id, hoten, diachi, email, sdt, avt);
+            if(key==0)
+			{
+                ModelState.AddModelError("", "Thay đổi thành công");
+			}
+			else if(key==1) 
+            {
+                ModelState.AddModelError("", "Họ và tên của bạn chứa kí tự không hợp lệ");
+            }
+            else if (key == 3)
+            {
+                ModelState.AddModelError("", "Email không hợp lệ");
+            }
+            else if(key==2)
+			{
+                ModelState.AddModelError("", "Số điện thoại chứa kí tự không hợp lệ");
+			}
+			else
+			{
+                ModelState.AddModelError("", "Vui lòng nhập đúng số điện thoại");
+            }             
+            return View(detail);
 		}
-       
-     
-        
-        [HttpGet]
+        public ActionResult Doimatkhau()
+		{
+            var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
+            var kh = new CustomersDao();
+            var detail = kh.GetDetailByUsername(session.username);
+            return View(detail);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Doimatkhau(string oldpass, string newpass,string confirm)
 		{
             var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
@@ -65,8 +101,17 @@ namespace NewProject.Controllers
 			{
                 ModelState.AddModelError("", "Đổi mật khẩu thành công");
             }
-            return RedirectToAction("Index");
-            
+            if (session != null)
+            {
+                ac.CreateNew(session.username);
+                var khachhang = kh.GetDetailByUsername(session.username);
+                return View(khachhang);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
         }
     }
 }

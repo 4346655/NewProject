@@ -1,0 +1,36 @@
+﻿@model List<Models.DTO.Sach>
+@{
+    ViewBag.Title = "Searchbox";
+
+}
+
+<div class="body">
+    <ul class="list-product container">
+
+        @foreach (var item in Model)
+        {
+            <li>
+                <div class="product text-center">
+                    <img src="asset/image/sale.png" alt="" class="sale" width=50>
+                    <a href=""><img src="@item.Anh" alt=" " width="300" height=300></a>
+                    <div class="text">
+                        <span>@item.TenSach</span>
+                        <br>
+                        @if (item.Gia_giam == 0)
+                        {
+                            <span>PRICE:@item.Gia</span><br><br><br><br>
+                        }
+                        else
+                        {
+                            <span>PRICE:@(item.Gia-item.Gia_giam) <span>(<del>@item.Gia</del>)</span></span><br><br><br><br>
+                        }
+                    </div>
+
+                    <a href="/chi-tiet-sach-@item.ID" class="buy-now ">Chi tiết</a>
+                </div>
+            </li>
+        }
+
+    </ul>
+</div>
+

@@ -15,14 +15,30 @@ namespace NewProject
 
 
 			routes.MapRoute(
+				name: "tesst",
+				url: "test-temp-product",
+				defaults: new { controller = "Order", action = "Test_TempProduct" }
+			);
+
+			routes.MapRoute(
+				name: "Tim kiem sach",
+				url: "tim-kiem-sach",
+				defaults: new { controller = "Home", action = "Searchbox"}
+			);
+			routes.MapRoute(
+				name: "Lich su mua hang",
+				url: "lich-su-mua-hang",
+				defaults: new { controller = "Order", action = "HistoryBuyandCancel", id = UrlParameter.Optional }
+			);
+			routes.MapRoute(
+				name: "Xem sach temp",
+				url: "xem-sach-{idsach}",
+				defaults: new { controller = "Order", action = "TempProduct" }
+			);
+			routes.MapRoute(
 				name: "Xem nguoi dung",
 				url: "xem-nguoi-dung",
 				defaults: new { controller = "Order", action = "TempUser", id = UrlParameter.Optional }
-			);
-			routes.MapRoute(
-				name: "Doi tran thai khach hang",
-				url: "doi-trang-thai-khach-hang-{id}",
-				defaults: new { controller = "Customers", action = "offactive" }
 			);
 			routes.MapRoute(
 				name: "Mua lai",
@@ -62,12 +78,12 @@ namespace NewProject
 			routes.MapRoute(
 				name: "Doi mat khau",
 				url: "doi-mat-khau",
-				defaults: new { controller = "Profile", action = "Doimatkhau" }
+				defaults: new { controller = "Profile", action = "Doimatkhau", id = UrlParameter.Optional }
 			);
 			routes.MapRoute(
 				name: "Sua ho so",
 				url: "sua-ho-so",
-				defaults: new { controller = "Profile", action = "Suathongtin"}
+				defaults: new { controller = "Profile", action = "Suathongtin", id = UrlParameter.Optional }
 			);
 			routes.MapRoute(
 				name: "Ho so",

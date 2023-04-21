@@ -14,52 +14,140 @@ namespace Models.DAO
 		{
 			db = new Model1();
 		}
-		public int login(string username, string password)
+		public int login(string username,string password)
 		{
-			var model = db.TaiKhoans.Where(x => x.TenTaiKhoan == username && x.MatKhau == password).SingleOrDefault();
-
-			if (model == null)
+			if(String.IsNullOrEmpty(username)|| String.IsNullOrEmpty(password))
 			{
-				return 0;
+				return 0; //tai khoan hoac mat khau trong
 			}
 			else
 			{
-				return 1;
+					int key = 5;
+					for(int i=0;i<username.Length;i++)
+					{
+						if((int)username[i] ==32)
+						{
+							key = 1; // ten tai khoan chua dau cach
+						break;
+						}
+					}
+					if (key != 0) return key;
+					for (int i = 0; i < password.Length; i++)
+					{
+						if ((int)password[i] == 32)
+						{
+							key=1; // mat khau chua dau cach
+							break;
+						}
+					}
+					if (key != 0) return key;
+
+					var model = db.TaiKhoans.Where(x => x.TenTaiKhoan == username ).SingleOrDefault();
+					if (model == null)
+					{
+						key= 2; // khoong co tai khoan trong he thong
+					}
+					else
+					{
+						if (model.MatKhau != password)
+						{
+							key = 3; // sai mat khau
+						}
+						else
+						{
+							if (model.Trangthai == false)
+							{
+								key = 4; //bi khoa tai khoan
+							}
+							else
+							{
+								key = 5; // thanh cong
+							}
+						}
+					}
+				return key;
 			}
 		}
-		public int register(string username, string newpassword, string confirm)
+		public int checkregister(string username, string newpassword, string confirm)
 		{
 			var model = db.TaiKhoans.Where(x => x.TenTaiKhoan == username).SingleOrDefault();
 			if (model != null)
 			{
-				return 0;
+				return 0; // da co ten tai khoan nay
 			}
 			else
 			{
+				int key = 0;
+				if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(newpassword) || String.IsNullOrEmpty(confirm))
+				{
+					key = 1;// nhạp chưa đủ thông tin
+				}
+				if (key != 0) return key;
+
+				for (int i = 0; i < username.Length; i++)
+				{
+					if ((int)username[i] == 32)
+					{
+						key = 2; // ten tai khoan chua dau cach
+						break;
+					}
+				}
+				if (key != 0) return key;
+
+				for (int i = 0; i < newpassword.Length; i++)
+				{
+					if ((int)newpassword[i] == 32)
+					{
+						key = 2; // mat khau chua dau cach
+						break;
+					}
+				}
+				if (key != 0) return key;
+
 				if (string.Compare(newpassword, confirm) == 0 && newpassword != "")
 				{
-					if (newpassword.Length < 6 || username.Length < 8)
+					if (newpassword.Length < 8 || username.Length < 8)
 					{
-						return 3;
+						key = 3; // tai khoan,mat khau >8 kí tụ
 					}
 					else
 					{
-						TaiKhoan a = new TaiKhoan
-						{
-							ID_LoaiTK = 1,
-							Trangthai = true,
-							TenTaiKhoan = username,
-							MatKhau = newpassword,
-						};
-						db.TaiKhoans.Add(a);
-						db.SaveChanges();
-						return 1;
+						key = 4; // tai khoan, mat khau >8 ki tu
 					}
 				}
 				else
 				{
-					return 2;
+					key =5; // khác  mật khẩu xác nhận
 				}
+				return key;
+			}
+		}
+		public int register(string username, string newpassword, string confirm)
+		{
+			int key = checkregister(username, newpassword, confirm);
+			if (key == 4)
+			{
+				TaiKhoan a = new TaiKhoan {
+					ID_LoaiTK = 1,
+					TenTaiKhoan = username,
+					MatKhau = newpassword,
+					Trangthai = true,
+				};
+				db.TaiKhoans.Add(a);
+				Temp b = new Temp
+				{
+					ID_TK = a.ID,
+					ID_MGG = 1,
+
+				};
+				db.Temps.Add(b);
+				db.SaveChanges();
+				CreateNew(username);
+				db.SaveChanges();
+				return key;
+			}
+			else {
+				return key;
 			}
 		}
 		public int Byname(string username)

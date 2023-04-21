@@ -1,0 +1,30 @@
+﻿@model List<Models.DTO.History_Search>
+@{
+    ViewBag.Title = "HistorySearch";
+    Layout = null;
+}
+@if (Model != null && Model.Count>0)
+{
+<select class="search_input" type="text" name="tensach" placeholder="Bạn muốn tìm gì?" width="200px">
+
+    @if (Model.Count > 5)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            <option value="@Model[i].NoiDung">@Model[i].NoiDung</option>
+        }
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <option value="@item.NoiDung">@item.NoiDung </option>
+        }
+    }
+</select>
+}
+else
+{
+    <input class="search_input" type="text" name="tensach" placeholder="Bạn muốn tìm gì?" width="200px" autocomplete="off">
+ }
+

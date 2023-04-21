@@ -23,19 +23,27 @@ namespace NewProject.Controllers
             {
                 var user = new AccountDao();
                 var res = user.register(register.username, register.password, register.confirm);
-                if (res == 1)
+                if (res == 4)
                 {
-                    return RedirectToAction("Index", "Home");
+                    ModelState.AddModelError("", "Đăng kí thành công");
                 }
                 else if (res == 0)
                 {
                     ModelState.AddModelError("", "Tên tài khoản đã tồn tại.");
                 }
-                else if(res==3)
+                else if(res==1)
 				{
-                    ModelState.AddModelError("", "Mật khẩu phải trên 6 kí tự và tên tài khoản trên 8 kí tự");
+                    ModelState.AddModelError("", "Vui lòng nhập đủ thông tin");
                 }
-				else
+                else if (res == 2)
+                {
+                    ModelState.AddModelError("", "Tên tài khoản hoặc mật khẩu lỗi");
+                }
+                else if (res == 3)
+                {
+                    ModelState.AddModelError("", "Tên tài khoản , mật khẩu hơn 8 kí tự");
+                }
+                else
 				{
                     ModelState.AddModelError("", "Mật khẩu xác nhận không chính xác.");
                 }

@@ -47,7 +47,7 @@ namespace NewProject.Areas.Admin.Controllers
 		{
             var cs = new CustomersDao();
             cs.offactive(id);
-            return RedirectToAction("Index","Home1");
+            return RedirectToAction("Index","Customers");
 		}
 
         // GET: Admin/Customers/Details/5

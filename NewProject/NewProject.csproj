@@ -3318,6 +3318,13 @@
     <Content Include="Views\ProductDetails\Start.cshtml" />
     <Content Include="Views\Order\ViewMGG.cshtml" />
     <Content Include="Views\Order\TempUser.cshtml" />
+    <Content Include="Views\Order\TempProduct.cshtml" />
+    <Content Include="Views\Order\HistoryBuyandCancel.cshtml" />
+    <Content Include="Views\Home\Searchbox.cshtml" />
+    <Content Include="Views\Home\HistorySearch.cshtml" />
+    <Content Include="Views\Profile\Doimatkhau.cshtml" />
+    <Content Include="Views\Profile\Suathongtin.cshtml" />
+    <Content Include="Views\Order\Test_TempProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -197,21 +197,20 @@ ul.table{
     list-style: none;
 
 }
-ul.table li:nth-child(1)
-{
-    padding-right: 150px;
-}
+    ul.table li:nth-child(1) {
+        padding-right: 25px;
+    }
 ul.table li:nth-child(2)
 {
-    padding-right:350px;
+    padding-right: 120px;
+}
+ul.table li:nth-child(3)
+{
+    padding-right:330px;
 }
 .content{
   
     border-radius: 10px;
-}
-ul.table li:nth-child(3)
-{
-    padding-right: 150px;
 }
 ul.table li:nth-child(4)
 {
@@ -219,7 +218,11 @@ ul.table li:nth-child(4)
 }
 ul.table li:nth-child(5)
 {
-    padding-right: 100px;
+    padding-right: 150px;
+}
+ul.table li:nth-child(6)
+{
+    padding-right: 120px;
 }
 
 
@@ -227,25 +230,28 @@ ul.table-product{
     list-style: none;
 
 }
-ul.table-product li:nth-child(1)
+    ul.table-product li:nth-child(1) {
+        margin-right: 30px;
+    }
+ul.table-product li:nth-child(2)
 {
     margin-right: 81px;
 }
-ul.table-product li:nth-child(2)
+ul.table-product li:nth-child(3)
 {
     margin-right:150x;
     padding: 5px 5px;
 }
 
-ul.table-product li:nth-child(3)
+ul.table-product li:nth-child(4)
 {
     margin-left: 150px;
 }
-ul.table-product li:nth-child(4)
+ul.table-product li:nth-child(5)
 {
     margin-left: 141px;
 }
-ul.table-product li:nth-child(5)
+ul.table-product li:nth-child(6)
 {
     margin-left: 141px;
 }

@@ -27,7 +27,7 @@ namespace Models.DAO
 	
 		public List<DonHang> List_IDKH(int iduser)
 		{
-			return db.DonHangs.Where(x => x.ID_KhachHang == iduser ).ToList();
+			return db.DonHangs.Where(x => x.ID_KhachHang == iduser && (x.Trang_thai==1 || x.Trang_thai==2) ).ToList();
 		}
 		public List<DonHang> list()
 		{
@@ -58,6 +58,7 @@ namespace Models.DAO
 		}
 		public void CreateNew(int idsach, int iduser, int idthanhtoan, int soluong, string MGG, string note)
 		{
+			
 			DonHang a = new DonHang
 			{
 				ID_KhachHang = iduser,
@@ -117,6 +118,27 @@ namespace Models.DAO
 		{
 			return db.DonHangs.Where(x => x.ID == idor).SingleOrDefault().Trang_thai.Value;
 		}
-		
+		public List<DonHang> Historysearch(int iduser)
+		{
+			var model = db.DonHangs.Where(x => x.ID_KhachHang == iduser && (x.Trang_thai == 4 || x.Trang_thai == 0)).ToList();
+			return model;
+		}
+		public bool checkDonhang(int idsach,int soluong)
+		{
+			var model = db.Saches.Where(x => x.ID == idsach).SingleOrDefault();
+			if (soluong > model.SoLuong)
+				return false;
+			return true;
+		}
+		public void CreateNewRange(List<GioHang> li,int iduser, int idthanhtoan, string MGG, string note)
+		{
+			foreach(var item in li)
+			{
+				if(checkDonhang((int)item.ID_Sach,(int)item.SoLuong) == true)
+				{
+					CreateNew((int)item.ID_Sach, iduser, idthanhtoan, (int)item.SoLuong, MGG, note);
+				}
+			}
+		}
 	}
 }

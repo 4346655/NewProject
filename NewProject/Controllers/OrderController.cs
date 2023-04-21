@@ -59,6 +59,24 @@ namespace NewProject.Controllers
                 return View(user);
             }
         }
+      
+       
+        public ActionResult Test_TempProduct(int []idsach)
+        {
+           
+                var pr = new ProductsDao();
+                var product = pr.listIDRange(idsach);
+                return View(product);
+           
+
+        }
+
+        public ActionResult TempProduct(int idsach)
+		{
+            var pr = new ProductsDao();
+            var product = pr.SachDetail(idsach);
+            return View(product);
+		}
        
         [HttpGet]
         public ActionResult AddtoOrder(int idsach,int idthanhtoan, int soluong,string MGG,string note )
@@ -89,6 +107,23 @@ namespace NewProject.Controllers
             var or = new OrdersDao();
             or.Mualai(idorder);
             return RedirectToAction("Index", "Cart");
+        }
+        public ActionResult HistoryBuyandCancel()
+		{
+            var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
+            if (session != null)
+            {
+                var kh = new CustomersDao();
+                var id = kh.GetID(session.username);
+                var or = new OrdersDao();
+                var list = or.Historysearch(id);
+                return View(list);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
         }
     }
 }

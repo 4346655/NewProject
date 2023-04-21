@@ -24,9 +24,10 @@
 
             <a href=""><img src="~/Clientassets/image/logochude.png" alt="" style="height: 86px;"></a>
 
-            <form action="" id="search">
+            <form action="/tim-kiem-sach" id="search">
 
-                <input class="search_input" type="text" name="q" placeholder="Bạn muốn tìm gì?" width="200px">
+                @Html.Action("HistorySearch", "Home")
+                
                 <button class="search_header"><i class="fa-solid fa-magnifying-glass "></i></button>
 
 

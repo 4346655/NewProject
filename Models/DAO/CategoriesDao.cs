@@ -37,7 +37,7 @@ namespace Models.DAO
 		}
 		public List<Loai_Sach> List()
 		{
-			return db.Loai_Sach.Where(x => x.Trangthai == true && x.Saches.Count > 0).ToList();
+			return db.Loai_Sach.Where(x => x.Trangthai == true ).ToList();
 		}
 		public void ChangeStatus(int idls)
 		{

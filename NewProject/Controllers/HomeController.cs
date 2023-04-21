@@ -45,5 +45,38 @@ namespace NewProject.Controllers
 				return RedirectToAction("Index", "Login");
 			}
 		}
+		
+		public ActionResult Searchbox(string tensach)
+		{
+			if(String.IsNullOrEmpty(tensach))
+			{
+				return RedirectToAction("Index");
+			}
+			else
+			{
+				var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
+				if (session != null)
+				{
+					var kh = new CustomersDao();
+					var id = kh.GetID(session.username);
+					kh.addHistorySearch(id, tensach);
+				}
+					var pr = new ProductsDao();
+				var li = pr.Searchbox(tensach);
+				return View(li);
+			}
+		}
+		public ActionResult HistorySearch()
+		{
+			var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
+			if (session != null)
+			{
+				var kh = new CustomersDao();
+				var id = kh.GetID(session.username);
+				var li = kh.getListHistorySearch(id);
+				return View(li);
+			}
+			else return View();
+		}
 	}
 }

@@ -18,6 +18,17 @@
     <link href="~/Clientassets/css/reset.css" rel="stylesheet" />
 
     <title>Đăng nhập</title>
+    <style>
+        .thongbao{
+            padding-top:10px;
+            height:50px;
+            width:450px;
+            background-color:rgb(252,7,7,0.4);
+            font-size:20px;
+            color:#fff;
+            border-radius:20px;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -27,7 +38,7 @@
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken();
-                    @Html.ValidationSummary(true, null, new { @class = "alert alert-success" });
+                    @Html.ValidationSummary(true, null, new { @class = "thongbao" });
                     <div class="list-login" style="width:450px">
                         <form action="" class="list-login">
                             <h3>ĐĂNG NHẬP</h3>

@@ -10,65 +10,152 @@
     <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
   
 </head>
-    <body>
-        <div style="margin-top:40px;">
-            <div id="wrapper">
+<body>
+    <div style="margin-top:40px;">
+        <div id="wrapper">
 
-                <div class="t-head ">
-                    <p>GIỎ HÀNG CỦA BẠN </p>
+            <div class="t-head ">
+                <p>GIỎ HÀNG CỦA BẠN </p>
 
-                </div>
-                <div class="content container2">
+            </div>
+            <div class="content container2">
 
-                    <ul class="table" style="display: flex;">
-                        <li>Hình Ảnh</li>
-                        <li>Sản Phẩm</li>
-                        <li>Số Lượng</li>
-                        <li>Giá</li>
-                        <li>Tổng Tiền</li>
-                        <li>#</li>
-                    </ul>
-                    <hr>
+                <ul class="table" style="display: flex;">
+                    <li><input id="check-all" type="checkbox" style="width:20px;" /></li>
+                    <li>Hình Ảnh</li>
+                    <li>Sản Phẩm</li>
+                    <li>Số Lượng</li>
+                    <li>Giá</li>
+                    <li>Tổng Tiền</li>
+                    <li>#</li>
+                </ul>
+                <hr>
 
 
-                    @if (Model.Count > 0)
+                @if (Model.Count > 0)
+                {
+                    foreach (var item in Model)
                     {
-                        foreach (var item in Model)
-                        {
-                            <ul class="table-product" style="display: flex;">
-                                <li style="width:110px;"><img src="@item.Sach.Anh" alt="" width="100"></li>
-                                <li style="width:300px;">@item.Sach.TenSach</li>
-                                <li style="width:50px;">@item.SoLuong</li>
-                                <li style="width:40px;">@(item.Sach.Gia-item.Sach.Gia_giam)</li>
-                                <li style="width:160px;">@(item.SoLuong * (item.Sach.Gia - item.Sach.Gia_giam)) </li>
-                                <li>
-                                    <a href="/xoa-gio-hang-@item.ID">Xóa</a>  |
-                                    <a href="/xac-minh-don-hang-@item.Sach.ID-@item.SoLuong">Mua</a>
-                                </li>
-                            </ul>
-                            <hr />
-                        }
+                        <ul class="table-product" style="display: flex;">
+                            <li style="width:15px"><input id="check-@item.ID" type="checkbox" style="width:15px" data-id="@item.ID_Sach" /></li>
+                            <li style="width:95px;"><img src="@item.Sach.Anh" alt="" width="100"></li>
+                            <li style="width:280px;">@item.Sach.TenSach</li>
+                            <li style="width:50px;">@item.SoLuong</li>
+                            <li style="width:40px;">@(item.Sach.Gia-item.Sach.Gia_giam)</li>
+                            <li style="width:160px;">@(item.SoLuong * (item.Sach.Gia - item.Sach.Gia_giam)) </li>
+                            <li>
+                                -<a href="/xoa-gio-hang-@item.ID">Xóa</a> -
+                                <a href="/xac-minh-don-hang-@item.Sach.ID-@item.SoLuong">Mua</a>
+                            </li>
+                        </ul>
+                        <hr />
                     }
+                }
+
+            </div>
+            <div class="footer container2" style="display: flex;">
+                <div class="ship">
+
+
+                    <br> <a href="/trang-chu">Tiếp Tục Mua Hàng</a>
+                    <a href="#" id="btn-buy">Mua - (<small id="result"></small>)</a>
 
                 </div>
-                <div class="footer container2" style="display: flex;">
-                    <div class="ship">
-                       
+                <div class="option-buy">
 
-                        <br> <a href="/trang-chu">Tiếp Tục Mua Hàng</a>
-                    </div>
-                    <div class="option-buy">
+                </div>
+                <div class="other">
 
-                    </div>
-                    <div class="other">
-
-                    </div>
                 </div>
             </div>
-            @Html.Action("Index","Order")
-
-
-
         </div>
-    </body>
+        @Html.Action("Index", "Order")
+    </div>
+    <script>
+
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#check-all)');
+        const result = document.getElementById("result");
+
+        function countChecked() {
+            let count = 0;
+            let ids = [];
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    count++;
+                    ids.push(checkbox.dataset.id);
+                }
+            });
+            result.innerHTML = `đang chọn : ${count} sản phẩm`;
+            for (let i = 0; i < ids.length; i++) {
+                console.log("ID sản phẩm :" + ids[i]); // Hiển thị giá trị item.ID của các checkbox đã chọn trong console log
+            }
+        }
+
+        countChecked(); // Tính toán số lượng checkbox đã được chọn ban đầu
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener("click", countChecked); // Thêm sự kiện click cho từng checkbox để tính lại số lượng checkbox đã được chọn
+        });
+
+
+    </script>
+    <script>
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#check-all)');
+        const checkAll = document.getElementById("check-all");
+        const result = document.getElementById("result");
+
+        function countChecked() {
+            let count = 0;
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    count++;
+                }
+            });
+            result.innerHTML = `đang chọn : ${count} sản phẩm`;
+        }
+
+        function checkAllChanged() {
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = checkAll.checked;
+            });
+            countChecked();
+        }
+
+        checkAll.addEventListener("click", checkAllChanged);
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener("click", countChecked);
+        });
+
+
+    </script>
+    <script>
+     
+            document.getElementById("btn-buy").addEventListener("click", function () {
+            var ids = [];
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#check-all)');
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                ids.push(checkbox.getAttribute("data-id"));
+                }
+            });
+            if (ids.length > 0) {
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/test-temp-product");
+                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        window.location.href = "/test-temp-product";
+                    }
+                };
+             xhr.send(JSON.stringify({idsach: ids }));
+            } else {
+                alert("Bạn chưa chọn sản phẩm nào!");
+            }
+        });
+
+
+    </script>
+</body>
 </html>

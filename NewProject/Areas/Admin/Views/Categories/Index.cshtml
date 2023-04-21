@@ -149,20 +149,22 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
+                    <tr>
 
-                            <td>@item.Loaisach</td>
-                            <td>@item.Saches.Count</td>
-                            @if (item.Trangthai == true)
-                            {
-                                <td>Hoạt động</td>
-                            }
-                            else
-                            {
-                                <td>Khóa</td>
-                            }
+                        <td>@item.Loaisach</td>
+                        <td>@item.Saches.Count</td>
+                        @if (item.Trangthai == true)
+                        {
+                            <td>Hoạt động</td>
                             <td><a href="/doi-trang-thai-danh-muc-@item.ID">Bỏ thùng rác</a></td>
-                        </tr>
+                        }
+                        else
+                        {
+                            <td>Khóa</td>
+                            <td><a href="/doi-trang-thai-danh-muc-@item.ID">Khôi phục</a></td>
+                        }
+
+                    </tr>
                     }
 
 

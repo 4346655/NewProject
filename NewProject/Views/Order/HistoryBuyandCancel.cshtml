@@ -1,6 +1,6 @@
 ﻿@model List<Models.DTO.DonHang>
 @{
-    Layout = null;
+
 }
 
 <!DOCTYPE html>
@@ -9,6 +9,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <link href="~/Clientassets/css/cart.css" rel="stylesheet" />
+    <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
     <div id="wrapper" style="margin-top:40px;">
@@ -38,52 +40,30 @@
                         <li style="width:110px;"><img src="@item.Sach.Anh" alt="" width="100"></li>
                         <li style="width:300px;">
                             <p>@item.Sach.TenSach</p>
-                            @if (item.Trang_thai == 1)
-                            {
-                                <p style="color:lightcoral">Đang chuẩn bị</p>
-                            }
-                            else if (item.Trang_thai == 2)
-                            {
-                                <p style="color:lightcoral">Đang giao</p>
-                            }
-                            else if (item.Trang_thai == 3)
+                           @if (item.Trang_thai == 3)
                             {
                                 <p style="color:lightcoral">Đã giao</p>
                             }
-					        else
-					        {
+                            else
+                            {
                                 <p style="color:lightcoral">Đã hủy</p>
-					        }
+                            }
                         </li>
                         <li style="width:50px;">@item.SoLuong</li>
                         <li style="width:40px;">@(item.Sach.Gia-item.Sach.Gia_giam)</li>
                         <li style="width:160px;">@item.Tong_gia </li>
                         <li>
-                            @if (item.Trang_thai == 1)
-                            {
-                                <a href="/huy-don-@item.ID">Hủy đơn hàng</a>
-                            }
-                            else if (item.Trang_thai == 2)
-                            {
-                                <a href="">Không thể hủy đơn</a>
-                            }
-					        
-                            else
-                            {
+   
                                 <a href="/xac-minh-don-hang-@item.ID_Sach-@item.SoLuong">Mua lại</a>
-                            }
+
                         </li>
-                        
-                       
+
+
                     </ul>
                     <hr />
                 }
-
             }
 
-        <form action="/lich-su-mua-hang" style="height:60px">
-            <button>Lịch sử mua hàng</button>
-        </form>
         </div>
         <div class="footer container2" style="display: flex;">
             <div class="ship">
@@ -101,6 +81,6 @@
     </div>
 
 
-   
+
 </body>
 </html>

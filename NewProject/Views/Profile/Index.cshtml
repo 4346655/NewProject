@@ -15,7 +15,17 @@
     <title>Hồ sơ</title>
 <link href="~/Clientassets/css/bootstrap-icons.css" rel="stylesheet" />
 <link href="~/Clientassets/css/user.css" rel="stylesheet" />
-   
+<style>
+    .thongbao {
+        padding-top: 10px;
+        height: 50px;
+        width: 450px;
+        background-color: rgb(0,255,255,0.7);
+        font-size: 20px;
+        color: #fff;
+        border-radius: 20px;
+    }
+</style>
 </head>
 
 <body>
@@ -47,9 +57,13 @@
         <div class="right-body">
             <div class="title_profile">
                 <div class="center_profile">
-                    <button class="btn-func" id="btn1">Thông tin</button>
-                    <button class="btn-func" id="btn2">Chỉnh sửa</button>
-                    <button class="btn-func" id="btn3">Đổi mật khẩu </button>
+                    
+                        <a href="/ho-so" class="btn-func" id="btn1">Thông tin</a>
+         
+                        <a href="/sua-ho-so" class="btn-func" id="btn2">Chỉnh sửa</a>
+       
+                        <a href="/doi-mat-khau" class="btn-func" id="btn3">Đổi mật khẩu </a>
+                 
                 </div>
             </div>
             <div id="content" class="body_profile"></div>
@@ -88,7 +102,7 @@
                     <div class="body_content">
 
                         <div class="namecolumm"><p class="cnt_column">Đơn hàng hiện có</p></div>
-                        <div class="contentcolumn"> <input class="content_column" value="@Model.DonHangs.Count()" readonly /> </div>
+                        <div class="contentcolumn"> <input class="content_column" value="@Model.DonHangs.Where(x=>x.Trang_thai ==1 || x.Trang_thai==2).Count()" readonly /> </div>
 
                     </div>
 
@@ -171,44 +185,7 @@
                     </div>
                 </form>
             </div>
-            <div id="content3" style="display:none;">
-                <form action="/doi-mat-khau">
-
-                    <div class="subdiv">
-
-                        <div class="body_content">
-
-                            <div class="namecolumm"><p class="cnt_column">Mật khẩu hiện tại </p></div>
-                            <div class="contentcolumn"> <input class="content_column" name="oldpass" id="oldpass" /> </div>
-
-                        </div>
-                    </div>
-                     <div class="subdiv">
-                        <div class="body_content">
-
-                            <div class="namecolumm"><p class="cnt_column">Mật khẩu mới</p></div>
-                            <div class="contentcolumn"> <input class="content_column" name="newpass" id="newpass" type="password" /> </div>
-
-                        </div>
-
-                    </div>
-                    <div class="subdiv">
-
-                        <div class="body_content">
-
-                            <div class="namecolumm"><p class="cnt_column">Xác nhận mật khẩu </p></div>
-                            <div class="contentcolumn"> <input class="content_column" name="confirm" id="confirm" type="password" /> </div>
-
-                        </div>
-                      
-
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" style="margin-top:30px;height:50px;border-radius:10px;background-color:aqua" class="btn btn-primary">Đổi mật khẩu</button>
-                    </div>
-                </form>
-
-            </div>
+            
         </div>
     </div>
 
@@ -225,34 +202,7 @@
             finder.popup();
         }
     </script>
-    <script type="text/javascript">
-
-        var btn1 = document.getElementById("btn1");
-        var btn2 = document.getElementById("btn2");
-        var btn3 = document.getElementById("btn3");
-
-        var content1 = document.getElementById("content1");
-        var content2 = document.getElementById("content2");
-        var content3 = document.getElementById("content3");
-
-        btn1.addEventListener("click", function () {
-            content1.style.display = "block";
-            content2.style.display = "none";
-            content3.style.display = "none";
-        });
-
-        btn2.addEventListener("click", function () {
-            content1.style.display = "none";
-            content2.style.display = "block";
-            content3.style.display = "none";
-        });
-        btn3.addEventListener("click", function () {
-            content1.style.display = "none";
-            content2.style.display = "none";
-            content3.style.display = "block";
-        });
-    </script>
-   
+    
 
 </body>
 

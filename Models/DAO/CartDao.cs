@@ -20,14 +20,23 @@ namespace Models.DAO
 		}
 		public void Themsanpham(int idsach, int iduser, int soluong)
 		{
-			GioHang a = new GioHang
+			var model = db.GioHangs.Where(x => x.ID_KhachHang == iduser && x.ID_Sach == idsach).SingleOrDefault();
+			if (model == null)
 			{
-				ID_KhachHang = iduser,
-				ID_Sach = idsach,
-				SoLuong = soluong,
-			};
-			db.GioHangs.Add(a);
-			db.SaveChanges();
+				GioHang a = new GioHang
+				{
+					ID_KhachHang = iduser,
+					ID_Sach = idsach,
+					SoLuong = soluong,
+				};
+				db.GioHangs.Add(a);
+				db.SaveChanges();
+			}
+			else
+			{
+				model.SoLuong += soluong;
+				db.SaveChanges();
+			}
 		}
 		public void Xoasanpham(int id)
 		{

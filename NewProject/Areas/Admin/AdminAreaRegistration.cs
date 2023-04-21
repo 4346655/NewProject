@@ -20,7 +20,11 @@ namespace NewProject.Areas.Admin
               new { Controller = "Home1", action = "Error", id = UrlParameter.Optional }
            );
             //----------------------------------------------------------------------------
-           
+            context.MapRoute(
+               "Doi trang thai khach hang",
+               "Doi-trang-thai-khach-hang-{id}",
+               new { Controller = "Customers", action = "offactive" }
+            );
             //----------------------------------------------------------------------------
             context.MapRoute(
                "Tai khoan",

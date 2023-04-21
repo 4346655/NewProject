@@ -1,0 +1,44 @@
+﻿@model List<Models.DTO.Sach>
+@{
+
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TempProduct</title>
+    <style>
+        .imag {
+            margin-top: 20px;
+            border-radius: 50% 20%/ 10% 40%;
+        }
+
+        .imguser {
+            flex: 3;
+            text-align: center;
+            border-right: 2px solid;
+            background-color: gray;
+            border-radius: 10px;
+        }
+
+        .infouser {
+            flex: 7;
+            margin-left: 30px;
+            margin-top: 30px;
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+
+    @foreach (var item in Model)
+    {
+        @item.TenSach
+    }
+</body>
+</html>
+

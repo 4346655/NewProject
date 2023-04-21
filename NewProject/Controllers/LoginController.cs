@@ -23,14 +23,40 @@ namespace NewProject.Controllers
             {
                 var user = new AccountDao();
                 var res = user.login(login.username, login.password);
-                if (res == 1)
+                if (res == 5)
                 {
-                    //ModelState.AddModelError("", "Đăng nhập thành công");
                     Session.Add(LoginConstants.LOGIN_SESSION, login);
-                    return RedirectToAction("Index", "Home");
+                    var cs = new CustomersDao();
+                    var ac = cs.GetDetailByUsername(login.username);
+                    if (ac.TaiKhoan.ID_LoaiTK == 2)
+                    {
+                        return RedirectToAction("Index", "Home1");
+                    }
+					else
+					{
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
-                else ModelState.AddModelError("", "Đăng nhập thất bại");
-
+                else if(res==0)
+				{
+                    ModelState.AddModelError("", "Vui lòng nhập đủ thông tin.");
+                }
+                else if(res==1)
+				{
+                    ModelState.AddModelError("", "Tài khoản hoặc mật khẩu bị lỗi.");
+                }
+				else if(res==2)
+				{
+                    ModelState.AddModelError("", "Tài khoản không tồn tại");
+                }
+                else if (res == 3)
+                {
+                    ModelState.AddModelError("", "Sai mật khẩu ");
+                }
+                else if (res == 4)
+                {
+                    ModelState.AddModelError("", "Tài khoản đã bị khóa.");
+                }
             }
             return View();
         }

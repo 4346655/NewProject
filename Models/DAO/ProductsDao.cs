@@ -24,6 +24,10 @@ namespace Models.DAO
 			}
 			return model.ToPagedList(page, pagesize);
 		}
+		public List<Sach> Searchbox(string tensach)
+		{
+			return db.Saches.Where(x => x.TenSach.Contains(tensach) && x.Trangthai ==true).OrderByDescending(x=>x.ID_LoaiSach).ToList();
+		}
 		public void Delete(int id)
 		{
 			var model0 = db.Saches.Find(id);
@@ -102,6 +106,17 @@ namespace Models.DAO
 				avg += item.Sosao;
 			}
 			return (double)avg / (model.Count);
+		}
+		public List<Sach> listIDRange(int[] idsach)
+		{
+			List<Sach> model = new List<Sach>();
+			foreach(var item in idsach)
+			{
+				var itemtemp = db.Saches.Where(x => x.ID == item).SingleOrDefault();
+				model.Add(itemtemp);
+			}
+			return model;
+
 		}
 	}
 }

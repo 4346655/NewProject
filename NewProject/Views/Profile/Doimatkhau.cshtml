@@ -1,0 +1,131 @@
+﻿@model Models.DTO.KhachHang
+@using Models.DAO
+@{
+   
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Hồ sơ</title>
+    <link href="~/Clientassets/css/bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/Clientassets/css/user.css" rel="stylesheet" />
+    <style>
+        .thongbao {
+            padding-top: 10px;
+            height: 50px;
+            width: 100%;
+            background-color: rgb(0,255,255,0.7);
+            font-size: 20px;
+            color: #fff;
+      
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body-content">
+
+        <div class="left-body">
+            <div class="col-xl-4  top-left-body">
+                <div class="card1">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <img src="@Model.AnhDaiDien" alt="" class="round" style="border:1px solid;margin-left:20px;margin-top:30px;">
+                        <h2 style="margin-left:40px;">@Model.HoTen</h2>
+                        <h3 style="margin-left:100px;">@Model.SDT</h3>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="bot-left-body">
+                <div class="topbutton">
+                    <button class="buttonfunc">Đơn hàng của bạn</button>
+                    <form action="/gio-hang">
+                        <button class="buttonfunc">Giỏ hàng </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="right-body">
+            <div class="title_profile">
+                <div class="center_profile">
+                    <a href="/ho-so" class="btn-func" id="btn1">Thông tin</a>
+
+                    <a href="/sua-ho-so" class="btn-func" id="btn2">Chỉnh sửa</a>
+
+                    <a href="/doi-mat-khau" class="btn-func" id="btn3">Đổi mật khẩu </a>
+                </div>
+            </div>
+            
+            <div id="content3" style="display:block;">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, null, new { @class = "thongbao" })
+                    <form action="/doi-mat-khau" method="get">
+
+                        <div class="subdiv">
+                            <div class="body_content">
+
+                                <div class="namecolumm"><p class="cnt_column">Mật khẩu hiện tại </p></div>
+                                <div class="contentcolumn"> <input class="content_column" name="oldpass" id="oldpass" /> </div>
+
+                            </div>
+                        </div>
+                        <div class="subdiv">
+                            <div class="body_content">
+
+                                <div class="namecolumm"><p class="cnt_column">Mật khẩu mới</p></div>
+                                <div class="contentcolumn"> <input class="content_column" name="newpass" id="newpass" type="password" /> </div>
+
+                            </div>
+
+                        </div>
+                        <div class="subdiv">
+
+                            <div class="body_content">
+
+                                <div class="namecolumm"><p class="cnt_column">Xác nhận mật khẩu </p></div>
+                                <div class="contentcolumn"> <input class="content_column" name="confirm" id="confirm" type="password" /> </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="text-center">
+                            <button id="btnchangpassword" type="submit" style="margin-top:30px;height:50px;border-radius:10px;background-color:aqua" class="btn btn-primary">Đổi mật khẩu</button>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Clientassets/js/apexcharts.min.js"></script>
+    <script src="~/Clientassets/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        function BrowserServer(field) {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                document.getElementById(field).value = fileUrl;
+            };
+            finder.popup();
+        }
+    </script>
+    
+
+
+</body>
+
+</html>
+
