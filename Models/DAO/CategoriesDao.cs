@@ -15,7 +15,11 @@ namespace Models.DAO
 		{
 			db = new Model1();
 		}
-		public IEnumerable<Loai_Sach> Pagelist_dm(string Searchstring,bool trangthai, int page, int pagesize)
+		public List<Loai_Sach> List0()
+		{
+			return db.Loai_Sach.ToList();
+		}
+		public IEnumerable<Loai_Sach> DanhSachDanhMuc(string Searchstring,bool trangthai, int page, int pagesize)
 		{
 			IOrderedQueryable<Loai_Sach> model = db.Loai_Sach.Where(x=>x.Trangthai == trangthai).OrderByDescending(x => x.ID);
 			if (!string.IsNullOrEmpty(Searchstring))
@@ -24,7 +28,7 @@ namespace Models.DAO
 			}
 			return model.ToPagedList(page, pagesize);
 		}
-		public void Delete(int id)
+		public void XoaDanhMuc(int id)
 		{
 			var model = db.Saches.Where(x => x.ID_LoaiSach == id).ToList();
 			foreach (Sach i in model)
@@ -35,11 +39,47 @@ namespace Models.DAO
 			db.Loai_Sach.Remove(model1);
 			db.SaveChanges();
 		}
+		public bool IsValidTEN(string name)
+		{
+			// Kiểm tra tên danh mcuj không bắt đầu bằng khoảng trắng hoặc ký tự đặc biệt
+			if (char.IsWhiteSpace(name[0]) || char.IsPunctuation(name[0]) || char.IsSymbol(name[0]))
+			{
+				return false;
+			}
+
+			// Kiểm tra tên chỉ chứa các ký tự chữ cái, khoảng trắng, dấu gạch ngang, và các ký tự đặc biệt
+			foreach (char c in name)
+			{
+				if (!(char.IsLetter(c) || char.IsWhiteSpace(c) || c == '-' ||
+					char.IsHighSurrogate(c) || char.IsLowSurrogate(c)))
+				{
+					return false;
+				}
+			}
+
+			// Nếu không có lỗi, trả về true
+			return true;
+		}
+		public int ThemDanhMuc(string name,bool trangthai)
+		{
+			if(IsValidTEN(name))
+			{
+				Loai_Sach a = new Loai_Sach
+				{
+					Loaisach = name,
+					Trangthai = trangthai,
+				};
+				db.Loai_Sach.Add(a);
+				db.SaveChanges();
+				return 1;
+			}
+			return 0;
+		}
 		public List<Loai_Sach> List()
 		{
 			return db.Loai_Sach.Where(x => x.Trangthai == true ).ToList();
 		}
-		public void ChangeStatus(int idls)
+		public void Bat_Tat_HoatDong(int idls)
 		{
 			var model = db.Loai_Sach.Where(x => x.ID == idls).SingleOrDefault();
 			model.Trangthai = !model.Trangthai;

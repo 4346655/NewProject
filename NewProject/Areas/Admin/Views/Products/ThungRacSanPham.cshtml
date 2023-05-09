@@ -65,6 +65,31 @@
                 .pagination span.disabled {
                     display: none;
                 }
+        .ip_search {
+            width: 960px;
+            height: 70px;
+            border: none;
+            background-color: lightcyan;
+            text-align: center;
+        }
+
+            .ip_search:active {
+                border: none;
+                outline: none;
+            }
+        .button-tab {
+            width: 150px;
+            text-align: center;
+            height: 70px;
+            border-right: 1px solid;
+            text-decoration: none;
+            border:none;
+                
+        }
+
+        .button-search:hover {
+            background-color: aqua;
+        }
     </style>
 
     <link href="~/Areas/Assets/css/Modal_thungrac_product.css" rel="stylesheet" />
@@ -74,21 +99,19 @@
 
         <div class="detail_list" style="width:1300px;">
 
-            <div style="display:flex;background-color:aqua;height:37px;">
-                <div style="display: flex; border: 1px solid;">
-                    <a style="border:1px;width:100px; text-align:center;height:35px;border-right:1px solid" href="/san-pham">
-                        <p style="margin-top:5px;">Trở về</p>
+            <div style="display:flex;background-color:aqua;height:70px;">
+                <div style="display: flex; ">
+                    <a class="button-tab" href="/san-pham">
+                        <p style="margin-top:25px;">Trở về</p>
                     </a>
-                    <a style="border:1px;width:150px; text-align:center;height:35px;" href="">
-                        <p style="margin-top:5px;"></p>
-                    </a>
+                   
                 </div>
 
                 @using (Html.BeginForm("Statefalse", "Products", FormMethod.Get))
                 {
                     <div style="display:flex;  ">
-                        <button type="submit" style="width:150px; text-align:center;height:37px;background-color:aqua">Tìm kiếm</button>
-                        <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
+                        <button type="submit" class="button-tab button-search">Tìm kiếm</button>
+                        <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" autocomplete="off" placeholder="Tìm kiếm ..." />
                     </div>
                 }
             </div>

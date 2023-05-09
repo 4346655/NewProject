@@ -33,7 +33,7 @@
     width: 100%;
     position: relative;
 }
-ul.ds-flex li a {
+ul.ds-flex>li>a {
     color: white;
     text-decoration: none;
 }
@@ -55,7 +55,7 @@ ul.ds-flex li a {
 
     position: relative;
 }
-a.pad-0 img{
+a.pad-0>img{
     position: absolute;
     left: 0px;
 }
@@ -66,10 +66,10 @@ ul.container1{
     
    
 }
-ul.container1 li {
+ul.container1>li {
     margin-left: 30px;
 }
-ul.container1 li a{
+ul.container1>li>a{
     text-decoration: none;
    
     padding-left: 25px;
@@ -77,7 +77,7 @@ ul.container1 li a{
     color: rgb(158, 218, 246);
    
 }
-ul.container1 li:hover a {
+ul.container1 li:hover>a {
     color: red;
 }
 ul.container1{
@@ -98,13 +98,7 @@ button{
     color: black;
     border: none;
 }
-h3{
-    font-size: 30px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: orange;
-    padding-left: 185px;
-    padding-bottom: 10px;
-}
+
 div.container.ds-flex{
     height: 30px;
     padding-bottom: 20px;
@@ -144,7 +138,7 @@ input::placeholder{
 .red{
     color: black;
 }
-ul.container1 li{
+ul.container1>li{
     position: relative;
 
 }
@@ -153,7 +147,7 @@ ul.container1{
     right: 104px;
 }
 
-ul.container1 li{
+ul.container1>li{
     position: relative;
 
 }
@@ -174,12 +168,12 @@ ul.container1{
 .list-noname{
     left: 0px;
 }
-.list-noname li{
+.list-noname>li{
     border-bottom: 1px solid rgb(37, 36, 36);
     padding: 5px 0px;
     transition: 0.25 cubic-bezier(0.23, 1, 0.320, 1);
 }
-.list-noname li:hover{
+.list-noname>li:hover{
     border-bottom: 1px solid red;
 }
 .fa-solid{
@@ -197,14 +191,14 @@ ul.table{
     list-style: none;
 
 }
-    ul.table li:nth-child(1) {
+    ul.table>li:nth-child(1) {
         padding-right: 25px;
     }
-ul.table li:nth-child(2)
+ul.table>li:nth-child(2)
 {
     padding-right: 120px;
 }
-ul.table li:nth-child(3)
+ul.table>li:nth-child(3)
 {
     padding-right:330px;
 }
@@ -212,15 +206,15 @@ ul.table li:nth-child(3)
   
     border-radius: 10px;
 }
-ul.table li:nth-child(4)
+ul.table>li:nth-child(4)
 {
     padding-right: 150px;
 }
-ul.table li:nth-child(5)
+ul.table>li:nth-child(5)
 {
     padding-right: 150px;
 }
-ul.table li:nth-child(6)
+ul.table>li:nth-child(6)
 {
     padding-right: 120px;
 }
@@ -230,46 +224,39 @@ ul.table-product{
     list-style: none;
 
 }
-    ul.table-product li:nth-child(1) {
+    ul.table-product>li:nth-child(1) {
         margin-right: 30px;
     }
-ul.table-product li:nth-child(2)
+ul.table-product>li:nth-child(2)
 {
     margin-right: 81px;
 }
-ul.table-product li:nth-child(3)
+ul.table-product>li:nth-child(3)
 {
     margin-right:150x;
     padding: 5px 5px;
 }
 
-ul.table-product li:nth-child(4)
+ul.table-product>li:nth-child(4)
 {
     margin-left: 150px;
 }
-ul.table-product li:nth-child(5)
+ul.table-product>li:nth-child(5)
 {
     margin-left: 141px;
 }
-ul.table-product li:nth-child(6)
+ul.table-product>li:nth-child(6)
 {
     margin-left: 141px;
 }
 .x{
     margin-left: 101px;
 }
-h4{
-    font-size: 25px;
-    background-color: orange;
-    display: inline-block;
-    padding: 5px 5px;
-    border-radius: 5px;
-    margin-top: 10px;
-}
+
 .font{
     color: rgb(48, 48, 47);
 }
-.ship a{
+.ship>a{
     border: 2px solid wheat;
     text-decoration: none;
     padding: 5px 135px;
@@ -281,7 +268,7 @@ h4{
     border-radius: 5px;
 
 }
-.ship a:hover{
+.ship>a:hover{
     transform:scale(1,1.2);
     transition: all 0,5s;
     border: 2px solid rgb(194, 98, 87);

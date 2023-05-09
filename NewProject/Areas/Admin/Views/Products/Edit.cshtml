@@ -10,118 +10,124 @@
            Chỉnh sửa thông tin
             
         </title>
-        
+        <link rel="stylesheet" href="~/Areas/Assets/css/edit.css">
     </head>
-    <body style="margin-top:60px">
+    <body >
 
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-         <div class="form-horizontal">
-            <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.ID)
 
 
-            <section class="section">
-                <div class="row">
-                    <div class="col-lg-6">
+            <main>
+                <div class="left-main">
 
-                        <div class="card">
-                            <div class="card-body">
-
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Thể loại sách</label>
-                                    <div class="col-sm-10">
-                                        <select class="form-control" id="ID_LoaiSach" name="ID_LoaiSach">
-                                            <option value="1">Tiểu thuyết</option>
-                                            <option value="2">Truyện tranh</option>
-                                            <option selected="selected" value="3">Văn học</option>
-                                        </select>
-                                        <span class="field-validation-valid text-danger" data-valmsg-for="ID_LoaiSach" data-valmsg-replace="true"></span>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Tên sách</label>
-                                    <div class="col-sm-10">
-                                        @Html.EditorFor(model => model.TenSach, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="row mb-3" style="margin-top:15px">
-                                    <label class="col-sm-2 col-form-label">Ảnh</label>
-                                    <div class="col-sm-10">
-                                        @Html.EditorFor(model => model.Anh, new { htmlAttributes = new { @id = "txtImage", @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Anh, "", new { @class = "text-danger" })
-                                        <input style="width:70px" type="button" value="Tải ảnh" onclick="BrowserServer('txtImage')" />
-                                    </div>
-                                </div>
-                                <fieldset class="row mb-3" style="margin-top:15px">
-                                    <legend class="col-form-label col-sm-2 pt-0">Trạng thái</legend>
-                                    <div class="col-sm-10">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="Trangthai" id="Trangthai" value="true" checked>
-                                            <label class="form-check-label" for="gridRadios1">
-                                                Hoạt động
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="Trangthai" id="Trangthai" value="false">
-                                            <label class="form-check-label" for="gridRadios2">
-                                                Khóa
-                                            </label>
-                                        </div>
-
-                                    </div>
-                                </fieldset>
+                </div>
+                <div class="right-main">
+                    <div class="mid-right-main">
+                        <div class="left-mid">
+                            <div class="image-product">
+                                <img src="@Model.Anh">
+                                @Html.EditorFor(model => model.Anh, new { htmlAttributes = new { @id = "txtImage", @class = "form-control",@type="hidden" } })
+                                @Html.ValidationMessageFor(model => model.Anh, "", new { @class = "text-danger" })
+                                <input style="width:70px" type="button" value="Tải ảnh" onclick="BrowserServer('txtImage')" />
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-
-                        <div class="card">
-                            <div class="card-body">
-                               
-                              
-                                    <div class="col-12">
-                                        <label class="form-label">Số lượng</label>
-                                        @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+                        <div class="right-mid">
+                            <div class="right-mid-item" style="margin-top: 70px;">
+                                <h4>Thể loại</h4>
+                                <select style="width: 150px;" id="ID_LoaiSach" name="ID_LoaiSach">
+                                    @if (Model.ID_LoaiSach == 1)
+                                    {
+                                        <option value="1" selected>Tiểu thuyết</option>
+                                        <option value="2">Truyện tranh</option>
+                                        <option value="3">Văn học</option>
+                                    }
+                                    else if (Model.ID_LoaiSach == 2)
+                                    {
+                                        <option value="1">Tiểu thuyết</option>
+                                        <option value="2" selected>Truyện tranh</option>
+                                        <option value="3">Văn học</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="1">Tiểu thuyết</option>
+                                        <option value="2" >Truyện tranh</option>
+                                        <option value="3" selected>Văn học</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="right-mid-item">
+                                <h4>Tên sách</h4>
+                                @Html.EditorFor(model => model.TenSach, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="right-mid-item">
+                                <h4>Tác giả</h4>
+                                @Html.EditorFor(model => model.TacGia, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="right-mid-item">
+                                <h4>Nhà xuất bản</h4>
+                                @Html.EditorFor(model => model.NhaXuatBan, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="right-mid-item">
+                                <h4>Mô tả</h4>
+                                <textarea name="Mota" id="Mota">@Model.Mota</textarea>
+                            </div>
+                            <hr style="margin-top: 10px;width: 500px;margin-left: 50px;">
+                            <div class="number-product">
+                                <div class="right-mid-item-1">
+                                    <h4>Số lượng</h4>
+                                    @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="right-mid-item-1">
+                                    <h4>Giá</h4>
+                                    @Html.EditorFor(model => model.Gia, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="right-mid-item-1">
+                                   
+                                    <h4>Trạng thái</h4>
+                                    <div style="display: flex;">
+                                        @if (Model.Trangthai == true)
+                                        {
+                                            <p>Bật</p><input type="radio" name="Trangthai" id="Trangthai" value="true" checked>
+                                            <p style="margin-left: 20px;">Tắt</p><input type="radio" name="Trangthai" id="Trangthai" value="false">
+                                        }
+                                        else
+                                        {
+                                            <p>Bật</p><input type="radio" name="Trangthai" id="Trangthai" value="true" >
+                                            <p style="margin-left: 20px;">Tắt</p><input type="radio" name="Trangthai" id="Trangthai" value="false" checked>
+                                        }
                                     </div>
-                                    <div class="col-12">
-                                        <label class="form-label">Giá</label>
-                                        @Html.EditorFor(model => model.Gia, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Gia, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label">Nhà xuất bản</label>
-                                        @Html.EditorFor(model => model.NhaXuatBan, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.NhaXuatBan, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label">Tác giả</label>
-                                        @Html.EditorFor(model => model.TacGia, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.TacGia, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label">Mô tả</label>
-                                        @Html.EditorFor(model => model.Mota, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Mota, "", new { @class = "text-danger" })
-                                    </div>                              
+                                </div>
+                                <input type="hidden" name="DeleteStatus" value="false" />
+                            </div>
+                            <div class="btn-confirm">
+                                <button type="submit"> Lưu</button>
+                                <form action="/san-pham">
+                                    <button>Trở lại</button>
+                                </form>
                             </div>
                         </div>
-                    </div>
-            </div>
-         </section>
-            <div class="text-center" style="margin-top:50px;" >
-                <button type="submit" class="btn btn-primary" value="Save">Lưu</button>
-                <button type="reset" class="btn btn-secondary">Reset</button>
-                <a href="/san-pham">Trở lại</a>
-            </div>
-         </div>
-         }
 
-        
+                    </div>
+                </div>
+            </main>
+
+
+
+
+            
+          
+        }
+
+
         @section scripts
 {
             <script>

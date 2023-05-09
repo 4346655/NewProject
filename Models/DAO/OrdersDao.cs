@@ -15,7 +15,25 @@ namespace Models.DAO
 		{
 			db = new Model1();
 		}
-		public IEnumerable<DonHang> Pagelist_dh(string Searchstring, int page, int pagesize,int trangthai)
+	
+		public List<DonHang> List()
+		{
+			return db.DonHangs.ToList();
+		}
+		public List<DonHang> List_distinct()
+		{
+			var distinctDonHangs = db.DonHangs
+									.GroupBy(d => d.ID_Sach)
+									.Select(g => g.FirstOrDefault())
+									.ToList();
+			return distinctDonHangs;
+		}
+		public List<DonHang> List(string tensach)
+		{
+			return db.DonHangs.Where(x => x.Sach.TenSach == tensach).ToList();
+		}
+
+		public IEnumerable<DonHang> DanhSachDonHang(string Searchstring, int page, int pagesize,int trangthai)
 		{
 			IOrderedQueryable<DonHang> model = db.DonHangs.Where(x=>x.Trang_thai==trangthai).OrderByDescending(x => x.ID);
 			if (!string.IsNullOrEmpty(Searchstring))
@@ -29,7 +47,7 @@ namespace Models.DAO
 		{
 			return db.DonHangs.Where(x => x.ID_KhachHang == iduser && (x.Trang_thai==1 || x.Trang_thai==2) ).ToList();
 		}
-		public List<DonHang> list()
+		public List<DonHang> DanhSachChuanBi()
 		{
 			var model = db.DonHangs.Where(x => x.Trang_thai == 1).OrderByDescending(x => x.ID);
 			return model.ToList();
@@ -72,11 +90,14 @@ namespace Models.DAO
 			};
 			db.Saches.Where(x => x.ID == idsach).SingleOrDefault().SoLuong -= soluong;
 			db.Saches.Where(x => x.ID == idsach).SingleOrDefault().SoLuong_DaBan += soluong;
+			
+			
 
 			var model = db.Magiamgias.Where(x => x.Ma == MGG).SingleOrDefault();
 			int gia = db.Saches.Where(x=>x.ID == idsach).SingleOrDefault().Gia.Value;
 			if (model != null)
 			{
+				
 				if (model.Soluong > 0)
 				{
 					a.Tong_gia = a.SoLuong * gia - Convert.ToInt32(model.Giatri);
@@ -87,6 +108,8 @@ namespace Models.DAO
 					a.Tong_gia = a.SoLuong * gia;
 
 				}
+				var mgg = db.Temps.Where(x => x.ID_TK == iduser && x.Magiamgia.Ma == MGG).SingleOrDefault();
+				db.Temps.Remove(mgg);
 			}
 			else
 			{
@@ -108,13 +131,13 @@ namespace Models.DAO
 			model.Trang_thai = 1;
 			db.SaveChanges();
 		}
-		public void ChangeStatus(int idor)
+		public void ChuyenTiepTrangThai(int idor)
 		{
 			var model = db.DonHangs.Where(x => x.ID == idor).SingleOrDefault();
 			model.Trang_thai += 1;
 			db.SaveChanges();
 		}
-		public int getStatus(int idor)
+		public int LayTrangThai(int idor)
 		{
 			return db.DonHangs.Where(x => x.ID == idor).SingleOrDefault().Trang_thai.Value;
 		}

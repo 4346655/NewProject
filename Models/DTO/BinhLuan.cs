@@ -17,6 +17,8 @@ namespace Models.DTO
 
         public string NoiDung { get; set; }
 
+        public bool? AnDanh { get; set; }
+
         public virtual KhachHang KhachHang { get; set; }
 
         public virtual Sach Sach { get; set; }

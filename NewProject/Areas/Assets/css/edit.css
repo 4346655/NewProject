@@ -1,0 +1,115 @@
+﻿*{
+    margin:0px;
+    padding:0px;
+}
+main {
+    width: 1264px;
+    height: 520px;
+    display: flex;
+}
+
+.left-main {
+    width: 20px;
+    height: 520px;
+}
+
+.right-main {
+    width: 1000px;
+    height: 520px;
+}
+
+.mid-right-main {
+    width: 900px;
+    height: 470px;
+    margin: 25px 60px;
+    background-color: aqua;
+    display: flex;
+}
+
+.left-mid {
+    height: 470px;
+    width: 300px;
+}
+
+.image-product {
+    height: 300px;
+    width: 250px;
+    margin: 35px 25px;
+    background-color: #fff;
+}
+
+    .image-product > img {
+        height: 300px;
+        width: 250px;
+        border-radius: 10px;
+    }
+
+    .image-product > input {
+        width: 120px;
+        height: 30px;
+        margin: 20px 60px;
+        outline: none;
+        border: 0px solid;
+    }
+
+        .image-product > input:active {
+            background-color: rgb(97, 166, 245);
+        }
+
+.right-mid {
+    height: 470px;
+    width: 600px;
+}
+
+.right-mid-item {
+    display: flex;
+    margin-top: 20px;
+}
+
+    .right-mid-item > h4 {
+        min-width: 100px;
+        margin-left: 50px;
+    }
+
+    .right-mid-item > input {
+        width: 400px;
+    }
+
+    .right-mid-item > textarea {
+        width: 400px;
+        height: 60px;
+    }
+
+.number-product {
+    width: 600px;
+    height: 100px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.right-mid-item-1 {
+    margin: 20px 10px;
+}
+
+    .right-mid-item-1 > .input-1 {
+        width: 100px;
+    }
+
+    .right-mid-item-1 > h4 {
+        margin-bottom: 10px;
+    }
+
+.btn-confirm {
+    margin-left: 200px;
+}
+
+    .btn-confirm > button {
+        height: 30px;
+        width: 80px;
+        outline: none;
+        border: 0px solid;
+    }
+
+        .btn-confirm > button:active {
+            background-color: rgb(97, 166, 245);
+        }

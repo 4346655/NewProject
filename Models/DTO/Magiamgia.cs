@@ -26,6 +26,12 @@ namespace Models.DTO
 
         public int? Giatri { get; set; }
 
+        public DateTime? Time1 { get; set; }
+
+        public DateTime? Time2 { get; set; }
+
+        public bool? DeleteStatus { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Temp> Temps { get; set; }
     }

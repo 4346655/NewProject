@@ -1,0 +1,35 @@
+﻿@model List<Models.DTO.Sach>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Category_1</title>
+</head>
+<body>
+    
+
+
+    <div class="category category-1">
+        <div style="display: flex;">
+          
+            <h2>@( ViewBag.list )%</h2>
+            <p style="margin-left: 20px;">@Model[0].Loai_Sach.Loaisach</p>
+        </div>
+        <div style="width: 250px; height: 10px;border-radius: 50px; background-color: rgb(158, 158, 158)">
+
+            @{
+                var widthValue = ViewBag.list * 250 /100;
+            }
+            <div style="width: @(Convert.ToInt32(widthValue).ToString())px; height: 10px;border-radius: 50px; background-color: rgb(255, 238, 87)"></div>
+
+
+
+        </div>
+    </div>
+</body>
+</html>

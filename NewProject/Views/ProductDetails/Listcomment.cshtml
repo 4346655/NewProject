@@ -58,7 +58,14 @@
                 <img src="@item.KhachHang.AnhDaiDien" class="avt_comment" />
             </div>
             <div class="thongtin">
-                <p>@item.KhachHang.HoTen</p>
+                @if (item.AnDanh == true)
+                {
+                    <p>Người dùng :@item.ID</p>
+                }
+				else
+				{
+                    <p>@item.KhachHang.HoTen</p>
+				}
                 <p>@item.Sach.TenSach</p>
             </div>
 

@@ -11,8 +11,88 @@
     <title>Start</title>
 </head>
 <body>
-    <div> 
-        <input type="text" value="@ViewBag.NumberStart" readonly />
+    <div>
+        <p>  
+            Đánh giá : @ViewBag.NumberStart /5
+        </p>
+        @{
+            if (Convert.ToDouble(ViewBag.NumberStart) == 5)
+            {
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+
+
+            }
+            else if (Convert.ToDouble(ViewBag.NumberStart) == 4)
+            {
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+            }
+            else if (Convert.ToDouble(ViewBag.NumberStart) == 3)
+            {
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+            }
+            else if (Convert.ToDouble(ViewBag.NumberStart) == 2)
+            {
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+            }
+            else if (Convert.ToDouble(ViewBag.NumberStart) == 1)
+            {
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+
+                <i class="fa-solid fa-star-half-stroke"></i>
+            }
+            else if (Convert.ToDouble(ViewBag.NumberStart) > 4 && Convert.ToDouble(ViewBag.NumberStart) < 5)
+            {
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star-half-stroke"></i>
+            }
+            else if (Convert.ToDouble(ViewBag.NumberStart) > 3 && Convert.ToDouble(ViewBag.NumberStart) < 4)
+            {
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star-half-stroke"></i>
+                <i class="fa-regular fa-star"></i>
+            }
+            else if (Convert.ToDouble(ViewBag.NumberStart) > 2 && Convert.ToDouble(ViewBag.NumberStart) < 3)
+            {
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star-half-stroke"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+            }
+            else
+            {
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star-half-stroke"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+            }
+        }
     </div>
 </body>
 </html>

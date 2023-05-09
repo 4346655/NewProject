@@ -9,49 +9,31 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>TempUser</title>
-    <style>
-  
-        .imag{
-            margin-top:20px;
-            border-radius:50% 20%/ 10% 40%;
-        }
-        .imguser {
-            flex: 3;
-            text-align:center;
-            border-right:2px solid;
-        }
-        .infouser{
-            flex:7;
-            margin-left:30px;
-            margin-top:30px;
-        }
-    </style>
+    <link rel="stylesheet" href="~/Clientassets/css/TempPage.css">
 </head>
 <body>
-                <div class="imguser">
-                    <img class="imag" src="@Model.AnhDaiDien" width="150" />
-                </div>
-                <div class="infouser">
-                    <table style="width:90%">
-                        <thead>
-                            <tr>
-                                <th>Họ và tên</th>
-                                <th>Email</th>
-                                <th>SDT</th>
-                                <th>Địa chỉ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>@Model.HoTen</td>
-                                <td>@Model.Email</td>
-                                <td>@Model.SDT</td>
-                                <td>@Model.Diachi</td>
+    <div class="body_info" style="padding-top: 50px;">
 
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-           
+        <div class="item_info">
+            <h4>Họ và tên :</h4>
+            <input type="text" value="@Model.HoTen" readonly>
+        </div>
+        <div class="item_info">
+            <h4>Số điện thoại :</h4>
+            <input type="text" value="@Model.SDT" readonly>
+        </div>
+        <div class="item_info">
+            <h4>Email :</h4>
+            <input type="text" value="@Model.Email" readonly>
+        </div>
+        <div class="item_info">
+            <h4>Địa chỉ :</h4>
+            <input type="text" value="@Model.Diachi" readonly>
+        </div>
+
+    </div>
+
+    
+
 </body>
 </html>

@@ -10,31 +10,96 @@ namespace NewProject.Areas.Admin.Controllers
 {
     public class Home1Controller : Controller
     {
-        // GET: Admin/Home1
-        public ActionResult Index()
+        public bool Phanquyen()
         {
-            var ac = new AccountDao();
             var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
             if (session == null)
             {
-                return RedirectToAction("Error");
+
+                return false;
+
             }
             else
             {
-                var account = ac.Byname(session.username);
-                if (account != 2)
+                var account = new AccountDao();
+                var id = account.Byname(session.username);
+                if (id != 2)
                 {
-                    return RedirectToAction("Error");
-                }
-                else
-                {
-                    return View();
+                    return false;
+
                 }
             }
+            return true;
+
+
+        }
+        // GET: Admin/Home1
+        public ActionResult Index()
+        {
+            if (Phanquyen())
+            {
+
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home1");
+            }
+
         }
         public ActionResult Error()
         {
             return View();
+        }
+        public ActionResult Account_info()
+		{
+            var account = new AccountDao();
+            return View(account.List());
+
+		}
+        public ActionResult Product_info()
+		{
+            var product = new ProductsDao();
+            return View(product.List());
+        }
+        public ActionResult Order_info()
+        {
+            var order = new OrdersDao();
+            return View(order.List());
+        }
+        public ActionResult Category_info()
+        {
+            var category = new CategoriesDao();
+            return View(category.List0());
+        }
+        public ActionResult Category_info_1()
+        {
+            var category = new CategoriesDao();
+            return View(category.List0());
+        }
+        public ActionResult Category_1(int idloaisach)
+		{
+            var product = new ProductsDao();
+            var list1 = product.List(idloaisach);
+            var list = product.List();
+            int percent =  ( list1.Count() * 100 )/ list.Count();
+
+            ViewBag.list = (int)percent;
+            return View(list1);
+        }
+        public ActionResult Percent_Order()
+		{
+            var order = new OrdersDao();
+            var list = order.List_distinct();
+            return View(list);
+		}
+        public ActionResult Percent_Order1(string tensach)
+        {
+            var order = new OrdersDao();
+            var list = order.List(tensach);
+            var list1 = order.List();
+            ViewBag.list = list.Count()*100 / list1.Count();
+            return View(list);
         }
     }
 }

@@ -22,9 +22,17 @@
         }
 
         .ip_search {
-            width: 580px;
-            height: 37px;
+            width: 830px;
+            height: 70px;
+            border: none;
+            text-align: center;
+            background-color: lightcyan;
         }
+
+            .ip_search:active {
+                border: none;
+                outline: none;
+            }
 
         .pagination {
             display: flex;
@@ -83,8 +91,19 @@
         .infomation_pro {
             width: 70%;
         }
-    </style>
+        .button-tab {
+            width: 150px;
+            text-align: center;
+            height: 70px;
+            border-right: 1px solid;
+            text-decoration: none
+        }
 
+        .button-search:hover {
+            background-color: aqua;
+        }
+    </style>
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
     <link href="~/Areas/Assets/css/Modal_categories.css" rel="stylesheet" />
 </head>
 <body>
@@ -92,12 +111,21 @@
 
         <div class="detail_list" style="width:1300px;">
 
-            <div style="display:flex;background-color:aqua;height:37px;">
-                <div style="display:flex;border:1px solid;">
-                    <a style="border:1px;width:100px; text-align:center;height:35px;border-right:1px solid" href="/danh-muc-false">
-                        <p style="margin-top:5px;">Thùng rác</p>
-                    </a>
-                    <a class="modal-btn" data-modal-id="modal-1" style="width:120px;text-align:center"><p style="margin-top:5px">Thêm danh mục</p></a>
+            <div style="display:flex;background-color:aqua;height:70px;">
+                <div style="display:flex;">
+                    @if (Model[0].Trangthai == true)
+                    {
+                        <a class="button-tab" style="background-color: lightcoral" href="/danh-muc-false">
+                            <p style="margin-top:25px;">Thùng rác</p>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="button-tab" href="/danh-muc-true">
+                            <p style="margin-top:25px;">Trở lại</p>
+                        </a>
+                    }
+                    <a class="modal-btn button-tab" data-modal-id="modal-1" style="background-color:lightgreen"><p style="margin-top:25px">Thêm danh mục</p></a>
                     <div id="modal-1" class="modal">
                         <div class="modal-content">
                             <div class="title_modal_pro">
@@ -105,18 +133,14 @@
                             </div>
                             <div class="content_modal_pro">
                                 <div class="avt_pro" style="justify-content: center; align-items: center;">
-                                    <form action="/them-danh-muc?Loaisach=Loaisach&Trangthai=Trangthai" method="get">
+                                    <form action="/them-danh-muc" method="post">
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true, null, new { @class = "text-danger" })
                                         <div class="item_modal_pro">
                                             <p style="flex:1">Tên danh mục</p>
-                                            <input class="form-control text-box single-line" id="Loaisach" name="Loaisach" type="text" value="" style="flex:1">
+                                            <input class="form-control text-box single-line" id="tendanhmuc" name="tendanhmuc" type="text" value="" style="flex:1">
                                         </div>
-                                        <div class="item_modal_pro">
-                                            <p>Trạng thái: </p>
-                                            <select class="list-box tri-state" id="Trangthai" name="Trangthai">
-                                                <option value="true">True</option>
-                                                <option value="false">False</option>
-                                            </select>
-                                        </div>
+
                                         <div class="item_modal_pro">
                                             <button style="margin-left:40%;height:30px;width:100px;background-color:aqua" type="submit">Tạo mới</button>
                                         </div>
@@ -130,7 +154,7 @@
                 @using (Html.BeginForm("Index", "Categories", FormMethod.Get))
                 {
                     <div style="display:flex;  ">
-                        <button type="submit" style="width:150px; text-align:center;height:37px;background-color:aqua">Tìm kiếm</button>
+                        <button type="submit"class="button-search button-tab" style="border:none">Tìm kiếm</button>
                         <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
                     </div>
                 }

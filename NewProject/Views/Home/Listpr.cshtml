@@ -8,6 +8,8 @@
     {
         foreach (var item in Model)
         {
+            if (item.Saches.Count > 0)
+            {
             <div id="content-@item.ID" class="">
                 <div class="head container">
                     <div class="box ">
@@ -17,5 +19,6 @@
                 @Html.Action("Listproduct", "Home", new { id = item.ID })
             </div>
             <br />
+            }
         }
     }

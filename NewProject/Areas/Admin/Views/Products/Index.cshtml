@@ -22,8 +22,15 @@
         }
 
         .ip_search {
-            width: 860px;
-            height: 37px;
+            width: 830px;
+            height: 70px;
+            border: none;
+            text-align: center;
+            background-color: lightcyan;
+        }
+        .ip_search:active{
+            border:none;
+            outline:none;
         }
 
         .pagination {
@@ -83,43 +90,55 @@
         .infomation_pro {
             width: 70%;
         }
+        .button-tab {
+            width: 150px;
+            text-align: center;
+            height: 70px;
+            border-right: 1px solid;
+            text-decoration: none
+           
+        }
+        .button-search:hover{
+            background-color:aqua;
+        }
     </style>
-
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
     <link href="~/Areas/Assets/css/Modal_product.css" rel="stylesheet" />
 </head>
 <body>
     <div class="detail">
-
+    
+        </div>
         <div class="detail_list" style="width:1300px;">
 
-            <div style="display:flex;background-color:aqua">
-                <div style="display:flex;border:1px solid;">
-                    <a style="border:1px;width:100px; text-align:center;height:35px;border-right:1px solid" href="/thung-rac-san-pham">
-                        <p style="margin-top:5px;">Thùng rác</p>
+            <div style="display:flex;background-color:aqua;height:70px">
+                <div style="display:flex;outline:none">
+                    <a class="button-tab" style="background-color:lightcoral"  href="/thung-rac-san-pham">
+                        <p style="margin-top:25px;">Thùng rác</p>
                     </a>
-                    <a style="border:1px;width:150px; text-align:center;height:35px;" href="/them-san-pham">
-                        <p style="margin-top:5px;">Thêm sản phẩm</p>
+                    <a  class="button-tab" style="background-color:lightgreen" href="/them-san-pham">
+                        <p style="margin-top:25px;">Thêm sản phẩm</p>
                     </a>
                 </div>
 
                 @using (Html.BeginForm("Index", "Products", FormMethod.Get))
                 {
                     <div style="display:flex;  ">
-                        <button type="submit" style="width:150px; text-align:center;height:37px;background-color:aqua">Tìm kiếm</button>
-                        <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
+                        <button type="submit" class="button-tab button-search" style="border:none">Tìm kiếm</button>
+                        <input type="text" class="ip_search" autocomplete="off" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
                     </div>
                 }
             </div>
             <table>
                 <thead>
-                    <tr>
-                        <td>Ảnh</td>
-                        <td>Thể loại</td>
-                        <td>Tên sách</td>
-                        <td>Số lượng </td>
-                        <td>Giá</td>
-                        <td>Trạng Thái</td>
-                        <td>#</td>
+                    <tr >
+                        <td style="color:aqua;font-weight:700">Ảnh</td>
+                        <td style="color:aqua">Thể loại</td>
+                        <td style="color:aqua">Tên sách</td>
+                        <td style="color:aqua">Số lượng </td>
+                        <td style="color:aqua">Giá</td>
+                        <td style="color:aqua">Trạng Thái</td>
+                        <td style="color:aqua">#</td>
 
                     </tr>
                 </thead>
@@ -136,11 +155,11 @@
                             <td>@item.Gia</td>
                             @if (item.Trangthai == true)
                             {
-                                <td>Đang bán</td>
+                                <td><a href="/ban-hoac-dung-@item.ID" style="color:aquamarine">Đang bán</a></td>
                             }
                             else
                             {
-                                <td>Dừng bán</td>
+                                <td><a href="/ban-hoac-dung-@item.ID" style="color:coral">Dừng bán</a></td>
                             }
                             <td>
                                 <a class="modal-btn" data-modal-id="modal-@item.ID">Xem</a>
@@ -151,7 +170,7 @@
                                         </div>
                                         <div class="content_modal_pro">
                                             <div class="avt_pro" style="justify-content: center; align-items: center; display: flex">
-                                                <img src="@item.Anh" width="250px;" >
+                                                <img src="@item.Anh" width="250px;">
                                             </div>
                                             <div class="infomation_pro">
                                                 <div class="item_modal_pro">
@@ -189,6 +208,7 @@
 
                 </tbody>
             </table>
+            
             @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
         </div>
         <!-- -----------------HD gan dayh--------- -->

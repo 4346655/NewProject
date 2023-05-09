@@ -13,7 +13,7 @@ namespace Models.DTO
 
         public int? ID_Sach { get; set; }
 
-        public int Sosao { get; set; }
+        public int? Sosao { get; set; }
 
         public virtual Sach Sach { get; set; }
     }

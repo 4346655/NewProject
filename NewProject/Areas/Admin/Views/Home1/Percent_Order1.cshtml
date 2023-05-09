@@ -1,0 +1,29 @@
+﻿@model List<Models.DTO.DonHang>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Percent_Order1</title>
+</head>
+<body>
+    @foreach(var item in Model.GroupBy(x => x.ID_Sach).Select(x => x.FirstOrDefault()).Distinct())
+    {
+    <div class="second-value-item">
+        <div class="diagram-columns">
+            @{
+                var widthValue = ViewBag.list *2;
+            }
+            <div style="width: 30px; height: @(Convert.ToInt32(widthValue).ToString())px;background-color: aqua;margin-left:60px;"></div>
+        </div>
+        <div class="diagram-name">
+            <p>@item.Sach.TenSach : <small>@ViewBag.list %</small></p>
+        </div>
+    </div>
+    }
+</body>
+</html>

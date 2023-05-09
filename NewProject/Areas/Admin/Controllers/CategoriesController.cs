@@ -10,69 +10,120 @@ using Models.DAO;
 using Models.DTO;
 using NewProject.Models;
 
+
 namespace NewProject.Areas.Admin.Controllers
 {
     public class CategoriesController : Controller
     {
         private Model1 db = new Model1();
 
-        // GET: Admin/Categories
-        public ActionResult Index(string Searchstring, bool trangthai, int page = 1, int pagesize = 20)
-        {
-            var ac = new AccountDao();
+        public bool Phanquyen()
+		{
             var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
             if (session == null)
             {
-                return RedirectToAction("Error", "Home1");
+                
+                return false;
+
             }
             else
             {
-                var account = ac.Byname(session.username);
-                if (account != 2)
+                var account = new AccountDao();
+                var id = account.Byname(session.username);
+                if (id != 2)
                 {
-                    return RedirectToAction("Error", "Home1");
-                }
-                else
-                {
-                    var dm = new CategoriesDao();
-                    var list = dm.Pagelist_dm(Searchstring, trangthai, page, pagesize);
-                    ViewBag.Search = Searchstring;
-                    return View(list);
+                    return false;
+
                 }
             }
+            return true;
+          
 
         }
-        public ActionResult Dele(int id)
+
+        // GET: Admin/Categories
+        public ActionResult Index(string Searchstring, bool trangthai, int page = 1, int pagesize = 20)
         {
-            var ct = new CategoriesDao();
-            ct.Delete(id);
-            return RedirectToAction("Index", new { trangthai = true });
+            if (Phanquyen())
+            {
+                var category = new CategoriesDao();
+                var listcategory = category.DanhSachDanhMuc(Searchstring, trangthai, page, pagesize);
+                ViewBag.Search = Searchstring;
+                return View(listcategory);
+            }
+			else
+			{
+                return RedirectToAction("Error", "Home1");
+			}
+
+
         }
-        public ActionResult ChangeStatus(int idls)
-        {
-            var ct = new CategoriesDao();
-            ct.ChangeStatus(idls);
+        public ActionResult ThemDanhMuc(string tendanhmuc)
+		{
+            var category = new CategoriesDao();
+            int key = category.ThemDanhMuc(tendanhmuc, true);
+            if(key==1)
+			{
+                ModelState.AddModelError("", "Thêm danh mục mới thành công.");
+               
+            }
+			else
+			{
+                ModelState.AddModelError("", "Tên danh mục đã tồn tại hoặc bị lỗi.");
+                
+            }
             return RedirectToAction("Index", new { trangthai = true });
+
+        }
+        public ActionResult XoaDanhMuc(int id)
+        {
+            if (Phanquyen())
+            {
+                var category = new CategoriesDao();
+                category.XoaDanhMuc(id);
+                return RedirectToAction("Index", new { trangthai = true });
+            }
+            else return RedirectToAction("Error", "Home1");
+        }
+        public ActionResult Bat_Tat_HoatDong(int idls)
+        {
+            if (Phanquyen())
+            {
+                var catrgory = new CategoriesDao();
+                catrgory.Bat_Tat_HoatDong(idls);
+                return RedirectToAction("Index", new { trangthai = true });
+            }
+            else return RedirectToAction("Error", "Home1");
         }
         // GET: Admin/Categories/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Phanquyen())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                Loai_Sach loai_Sach = db.Loai_Sach.Find(id);
+                if (loai_Sach == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(loai_Sach);
             }
-            Loai_Sach loai_Sach = db.Loai_Sach.Find(id);
-            if (loai_Sach == null)
-            {
-                return HttpNotFound();
-            }
-            return View(loai_Sach);
+            else return RedirectToAction("Error", "Home1");
+           
         }
 
         // GET: Admin/Categories/Create
         public ActionResult Create()
         {
-            return View();
+            if (Phanquyen())
+            {
+                return View();
+            }
+            else return RedirectToAction("Error", "Home1");
         }
 
         // POST: Admin/Categories/Create
@@ -82,29 +133,42 @@ namespace NewProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Loaisach,Trangthai")] Loai_Sach loai_Sach)
         {
-            if (ModelState.IsValid)
-            {
-                db.Loai_Sach.Add(loai_Sach);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            return View(loai_Sach);
+            if (Phanquyen())
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Loai_Sach.Add(loai_Sach);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                return View(loai_Sach);
+            }
+            else return RedirectToAction("Error", "Home1");
+
+
+          
         }
 
         // GET: Admin/Categories/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Phanquyen())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Loai_Sach loai_Sach = db.Loai_Sach.Find(id);
+                if (loai_Sach == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(loai_Sach);
             }
-            Loai_Sach loai_Sach = db.Loai_Sach.Find(id);
-            if (loai_Sach == null)
-            {
-                return HttpNotFound();
-            }
-            return View(loai_Sach);
+            else return RedirectToAction("Error", "Home1");
+            
         }
 
         // POST: Admin/Categories/Edit/5
@@ -114,28 +178,39 @@ namespace NewProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Loaisach,Trangthai")] Loai_Sach loai_Sach)
         {
-            if (ModelState.IsValid)
+            if (Phanquyen())
             {
-                db.Entry(loai_Sach).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(loai_Sach).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(loai_Sach);
             }
-            return View(loai_Sach);
+            else return RedirectToAction("Error", "Home1");
+            
         }
 
         // GET: Admin/Categories/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+
+            if (Phanquyen())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Loai_Sach loai_Sach = db.Loai_Sach.Find(id);
+                if (loai_Sach == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(loai_Sach);
             }
-            Loai_Sach loai_Sach = db.Loai_Sach.Find(id);
-            if (loai_Sach == null)
-            {
-                return HttpNotFound();
-            }
-            return View(loai_Sach);
+            else return RedirectToAction("Error", "Home1");
+           
         }
 
         // POST: Admin/Categories/Delete/5
@@ -143,10 +218,15 @@ namespace NewProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Loai_Sach loai_Sach = db.Loai_Sach.Find(id);
-            db.Loai_Sach.Remove(loai_Sach);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (Phanquyen())
+            {
+                Loai_Sach loai_Sach = db.Loai_Sach.Find(id);
+                db.Loai_Sach.Remove(loai_Sach);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else return RedirectToAction("Error", "Home1");
+           
         }
 
         protected override void Dispose(bool disposing)

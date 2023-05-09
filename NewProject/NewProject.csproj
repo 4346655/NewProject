@@ -156,12 +156,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HashMD5\Hash_MD5.cs" />
     <Compile Include="Models\LoginModels.cs" />
     <Compile Include="Models\RegisterModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Assets\css\create.css" />
+    <Content Include="Areas\Assets\css\edit.css" />
+    <Content Include="Areas\Assets\css\Homeadmin.css" />
     <Content Include="Areas\Assets\css\main.css" />
     <Content Include="Areas\Assets\css\Maintemp.css" />
     <Content Include="Areas\Assets\css\Modal_categories.css" />
@@ -2236,6 +2239,7 @@
     <Content Include="Clientassets\css\reset.css" />
     <Content Include="Clientassets\css\sanpham.css" />
     <Content Include="Clientassets\css\specific-product.css" />
+    <Content Include="Clientassets\css\TempPage.css" />
     <Content Include="Clientassets\css\user.css" />
     <Content Include="Clientassets\font\fontawesome\css\all.css" />
     <Content Include="Clientassets\font\fontawesome\css\all.min.css" />
@@ -3196,7 +3200,7 @@
     <Content Include="Areas\Admin\Views\Products\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Products\Statefalse.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\ThungRacSanPham.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Details.cshtml" />
@@ -3273,12 +3277,20 @@
     <Content Include="Areas\Assets\fontawesome-free-6.3.0-web\webfonts\fa-solid-900.woff2" />
     <Content Include="Areas\Assets\fontawesome-free-6.3.0-web\webfonts\fa-v4compatibility.ttf" />
     <Content Include="Areas\Assets\fontawesome-free-6.3.0-web\webfonts\fa-v4compatibility.woff2" />
-    <Content Include="Areas\Admin\Views\Orders\list.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\DanhSachMoiMua.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home1\Account_info.cshtml" />
+    <Content Include="Areas\Admin\Views\Home1\Product_info.cshtml" />
+    <Content Include="Areas\Admin\Views\Home1\Order_info.cshtml" />
+    <Content Include="Areas\Admin\Views\Home1\Category_info.cshtml" />
+    <Content Include="Areas\Admin\Views\Home1\Category_info_1.cshtml" />
+    <Content Include="Areas\Admin\Views\Home1\Category_1.cshtml" />
+    <Content Include="Areas\Admin\Views\Home1\Percent_Order.cshtml" />
+    <Content Include="Areas\Admin\Views\Home1\Percent_Order1.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3325,12 +3337,14 @@
     <Content Include="Views\Profile\Doimatkhau.cshtml" />
     <Content Include="Views\Profile\Suathongtin.cshtml" />
     <Content Include="Views\Order\Test_TempProduct.cshtml" />
+    <Content Include="Views\Order\TempVoucher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Assets\image\" />
     <Folder Include="Content\ckfinder\ckfinder\userfiles\" />
+    <Folder Include="Views\decentralization\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Models.DAO
 {
 	public class AccountDao
@@ -14,6 +15,10 @@ namespace Models.DAO
 		{
 			db = new Model1();
 		}
+		public List<TaiKhoan> List()
+		{
+			return db.TaiKhoans.ToList();
+		}
 		public int login(string username,string password)
 		{
 			if(String.IsNullOrEmpty(username)|| String.IsNullOrEmpty(password))
@@ -22,7 +27,7 @@ namespace Models.DAO
 			}
 			else
 			{
-					int key = 5;
+					int key = 0;
 					for(int i=0;i<username.Length;i++)
 					{
 						if((int)username[i] ==32)
@@ -49,7 +54,7 @@ namespace Models.DAO
 					}
 					else
 					{
-						if (model.MatKhau != password)
+						if (model.MatKhau != Hash_MD5.EncryptMD5( password))
 						{
 							key = 3; // sai mat khau
 						}
@@ -125,15 +130,19 @@ namespace Models.DAO
 		public int register(string username, string newpassword, string confirm)
 		{
 			int key = checkregister(username, newpassword, confirm);
+			string pass = Hash_MD5.EncryptMD5(newpassword);
 			if (key == 4)
 			{
 				TaiKhoan a = new TaiKhoan {
 					ID_LoaiTK = 1,
 					TenTaiKhoan = username,
-					MatKhau = newpassword,
+					MatKhau =pass,
 					Trangthai = true,
 				};
 				db.TaiKhoans.Add(a);
+				
+				db.SaveChanges();
+				CreateNew(username);
 				Temp b = new Temp
 				{
 					ID_TK = a.ID,
@@ -141,8 +150,6 @@ namespace Models.DAO
 
 				};
 				db.Temps.Add(b);
-				db.SaveChanges();
-				CreateNew(username);
 				db.SaveChanges();
 				return key;
 			}
@@ -193,7 +200,7 @@ namespace Models.DAO
 						{
 							randomSDT = "error";
 						}
-						model.MatKhau = randomSDT;
+						model.MatKhau = Hash_MD5.EncryptMD5( randomSDT);
 						db.SaveChanges();
 						return randomSDT;
 					}
@@ -240,6 +247,13 @@ namespace Models.DAO
 			}
 			return li;
 		}
+		public List<Temp> GetListMGG(int iduser)
+		{
+			
+			var model = db.TaiKhoans.Where(x => x.ID == iduser).SingleOrDefault();
+			var model1 = db.Temps.Where(x => x.ID_TK == model.ID).ToList();
+			return model1;
+		}
 		public int Changepassword(int id , string oldpass,string newpass, string confirm)
 		{
 			var model = db.TaiKhoans.Where(x => x.ID == id).SingleOrDefault();
@@ -259,7 +273,7 @@ namespace Models.DAO
 				}
 				else
 				{
-					model.MatKhau = newpass;
+					model.MatKhau = Hash_MD5.EncryptMD5( newpass);
 					db.SaveChanges();
 					return 3;
 				}

@@ -23,13 +23,12 @@ namespace Models.DTO
         [StringLength(250)]
         public string TenTaiKhoan { get; set; }
 
-        [Required]
-        [StringLength(20)]
-        public string MatKhau { get; set; }
-
         public int ID_LoaiTK { get; set; }
 
         public bool? Trangthai { get; set; }
+
+        [StringLength(200)]
+        public string MatKhau { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KhachHang> KhachHangs { get; set; }

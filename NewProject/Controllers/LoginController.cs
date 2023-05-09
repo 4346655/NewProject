@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NewProject.Areas.Admin.Controllers;
 
 namespace NewProject.Controllers
 {
@@ -28,14 +29,9 @@ namespace NewProject.Controllers
                     Session.Add(LoginConstants.LOGIN_SESSION, login);
                     var cs = new CustomersDao();
                     var ac = cs.GetDetailByUsername(login.username);
-                    if (ac.TaiKhoan.ID_LoaiTK == 2)
-                    {
-                        return RedirectToAction("Index", "Home1");
-                    }
-					else
-					{
+                   
                         return RedirectToAction("Index", "Home");
-                    }
+                    
                 }
                 else if(res==0)
 				{

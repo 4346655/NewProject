@@ -15,54 +15,96 @@ namespace NewProject.Areas.Admin.Controllers
     public class VouchersController : Controller
     {
         private Model1 db = new Model1();
-
-        // GET: Admin/Vouchers
-        public ActionResult Index(string Searchstring,bool trangthai, int page = 1, int pagesize = 20)
+        public bool Phanquyen()
         {
-            var ac = new AccountDao();
             var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
             if (session == null)
             {
-                return RedirectToAction("Error", "Home1");
+
+                return false;
+
             }
             else
             {
-                var account = ac.Byname(session.username);
-                if (account != 2)
+                var account = new AccountDao();
+                var id = account.Byname(session.username);
+                if (id != 2)
                 {
-                    return RedirectToAction("Error", "Home1");
-                }
-                else
-                {
-                    var mgg = new VoucherDao();
-                    var list = mgg.Pagelist_mgg(Searchstring,trangthai, page, pagesize);
-                    ViewBag.Search = Searchstring;
-                    return View(list);
+                    return false;
+
                 }
             }
+            return true;
 
 
         }
 
+        // GET: Admin/Vouchers
+        public ActionResult Index(string Searchstring,bool trangthai, int page = 1, int pagesize = 20)
+        {
+            if (Phanquyen())
+            {
+                var mgg = new VoucherDao();
+                var list = mgg.Pagelist_mgg(Searchstring, trangthai, page, pagesize);
+                ViewBag.Search = Searchstring;
+                ViewBag.Status = trangthai;
+                return View(list);
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home1");
+            }
+
+        }
+        public ActionResult GianHan(int id, DateTime time1, DateTime time2)
+        {
+            var voucher = new VoucherDao();
+            voucher.GiaHan(id, time1, time2);
+            return RedirectToAction("Index", new {trangthai =true });
+		}
+       public ActionResult Bo_KhoiPhuc_MGG(int idvoucher)
+		{
+            var voucher = new VoucherDao();
+            voucher.SetDeleteStatus(idvoucher);
+            return RedirectToAction("index", new { trangthai = true });
+		}
+
         // GET: Admin/Vouchers/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Phanquyen())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Magiamgia magiamgia = db.Magiamgias.Find(id);
+                if (magiamgia == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(magiamgia);
             }
-            Magiamgia magiamgia = db.Magiamgias.Find(id);
-            if (magiamgia == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Error", "Home1");
             }
-            return View(magiamgia);
+
+          
         }
 
         // GET: Admin/Vouchers/Create
         public ActionResult Create()
         {
-            return View();
+            if (Phanquyen())
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home1");
+            }
+          
         }
 
         // POST: Admin/Vouchers/Create
@@ -70,31 +112,49 @@ namespace NewProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Ma,Soluong,Trangthai,Giatri")] Magiamgia magiamgia)
+        public ActionResult Create([Bind(Include = "ID,Ma,Soluong,Trangthai,Giatri,Time1,Time2,DeleteStatus")] Magiamgia magiamgia)
         {
-            if (ModelState.IsValid)
+            if (Phanquyen())
             {
-                db.Magiamgias.Add(magiamgia);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Magiamgias.Add(magiamgia);
+                    db.SaveChanges();
+                    return RedirectToAction("Index",new { trangthai = false });
+                }
+
+                return View(magiamgia);
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home1");
             }
 
-            return View(magiamgia);
+          
         }
 
         // GET: Admin/Vouchers/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Phanquyen())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Magiamgia magiamgia = db.Magiamgias.Find(id);
+                if (magiamgia == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(magiamgia);
             }
-            Magiamgia magiamgia = db.Magiamgias.Find(id);
-            if (magiamgia == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Error", "Home1");
             }
-            return View(magiamgia);
+
+          
         }
 
         // POST: Admin/Vouchers/Edit/5
@@ -104,28 +164,45 @@ namespace NewProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Ma,Soluong,Trangthai,Giatri")] Magiamgia magiamgia)
         {
-            if (ModelState.IsValid)
+            if (Phanquyen())
             {
-                db.Entry(magiamgia).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(magiamgia).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index",new {trangthai=false });
+                }
+                return View(magiamgia);
             }
-            return View(magiamgia);
+            else
+            {
+                return RedirectToAction("Error", "Home1");
+            }
+          
         }
 
         // GET: Admin/Vouchers/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+
+            if (Phanquyen())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Magiamgia magiamgia = db.Magiamgias.Find(id);
+                if (magiamgia == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(magiamgia);
             }
-            Magiamgia magiamgia = db.Magiamgias.Find(id);
-            if (magiamgia == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Error", "Home1");
             }
-            return View(magiamgia);
+          
         }
 
         // POST: Admin/Vouchers/Delete/5
@@ -133,10 +210,18 @@ namespace NewProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Magiamgia magiamgia = db.Magiamgias.Find(id);
-            db.Magiamgias.Remove(magiamgia);
-            db.SaveChanges();
-            return RedirectToAction("Index",new {trangthai = true });
+            if (Phanquyen())
+            {
+                Magiamgia magiamgia = db.Magiamgias.Find(id);
+                db.Magiamgias.Remove(magiamgia);
+                db.SaveChanges();
+                return RedirectToAction("Index", new { trangthai = true });
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home1");
+            }
+          
         }
 
         protected override void Dispose(bool disposing)

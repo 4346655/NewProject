@@ -1,6 +1,217 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/Areas/Assets/css/Homeadmin.css">
+    <link rel="stylesheet" href="~/Areas/Assets/fontawesome-free-6.3.0-web/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header>
+        <!-- tai khoan -->
+        <div class="header-item">
+            <a href="/khach-hang"><p style="margin-top: 25px;">Tài khoản</p></a>
+        </div>
+        <!-- san pham -->
+        <div class="header-item">
+            <a href="/san-pham"><p style="margin-top: 25px;">Sản phẩm</p></a>
+        </div>
+        <!-- don hang -->
+        <div class="header-item">
+            <a href="/don-hang-1"><p style="margin-top: 25px;">Đơn hàng</p></a>
+        </div>
+        <!-- danh muc -->
+        <div class="header-item">
+            <a href="/danh-muc-true"><p style="margin-top: 25px;">Danh mục sản phẩm</p></a>
+        </div>
+        <!-- thong bao -->
+        <div class="header-item">
+            <a href="#"><p style="margin-top: 25px;">Thông báo</p></a>
+        </div>
+        <!-- ma giam gia -->
+        <div class="header-item">
+            <a href="ma-giam-gia-false"><p style="margin-top: 25px;">Mã giảm giá</p></a>
+        </div>
+    </header>
+    <main>
+        <section class="main-section-1">
+            <div class="box-shop-name">
+                <div class="shop-name">
+                    <p>LAVADO</p>
+                </div>
+            </div>
+            <div class="infomation-admin">
+                <div class="user-client">
+                    <a href="/trang-chu"> <p style=" margin-top: 25px;">Trang chủ người dùng</p></a>
+                </div>
+                <div class="admin-block">
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="main-section-2">
+            <div class="box-list-item">
+                <div>
+                    <div class="main-item item-1">
+                       @Html.Action("Account_info","Home1")
+                        <div class="item-right">
+                            <div>
+                                <i class="fa-sharp fa-solid fa-people-arrows " style="margin: 20px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-item item-2">
+                        @Html.Action("Product_info", "Home1")
+                        <div class="item-right">
+                            <div>
+                                <i class="fa-sharp fa-solid fa-people-arrows " style="margin: 20px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="main-item item-3">
+                        @Html.Action("Order_info","Home1")
+                        <div class="item-right">
+                            <div>
+                                <i class="fa-sharp fa-solid fa-people-arrows " style="margin: 20px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-item item-4">
+                        @Html.Action("Category_info", "Home1")
+                        <div class="item-right">
+                            <div>
+                                <i class="fa-sharp fa-solid fa-people-arrows " style="margin: 20px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="main-section-3">
+            <div class="section-3-left">
+                <div class="section-3-left-content">
+                    <div class="revenue">
+                        <h3>Doanh thu</h3>
+                        <div class="revenue-tab">
+                            <button id="revenue-tab1" style="background-color: rgb(51, 51, 162);color: white;">Tab1</button>
+                            <button id="revenue-tab2">Tab2</button>
+                        </div>
+                    </div>
+                    <div class="revenue-values">
+                        <div id="revenue-values-1" class="revenue-values-1" style="display: block;">
+                            <div class="values first-values">
+                                @Html.Action("Category_info_1","Home1")
+                            </div>
+                           
+                            <div class="second-value" style="margin-top:20px">
+                                @Html.Action("Percent_Order","Home1")
+                            </div>
+                        </div>
+                        <div id="revenue-values-2" class="revenue-values-2" style="display: none;">
+                            <div class="values first-values">
+                                <div class="category category-1">
+                                    <div style="display: flex;">
+                                        <h2></h2>
+                                        <p style="margin-left: 20px;">Đơn hàng đang chuẩn bị : 100 / 200</p>
+                                    </div>
+                                    <div style="width: 250px; height: 10px;border-radius: 50px; background-color: rgb(158, 158, 158)">
+                                        <div style="width: 160px; height: 10px;border-radius: 50px; background-color: rgb(255, 238, 87)"></div>
+                                    </div>
+                                </div>
+                                <div class="category category-1">
+                                    <div style="display: flex;">
+                                        <h2></h2>
+                                        <p style="margin-left: 20px;">Đơn hàng đang giao : 25 / 200</p>
+                                    </div>
+                                    <div style="width: 250px; height: 10px;border-radius: 50px; background-color: rgb(158, 158, 158);">
+                                        <div style="width: 160px; height: 10px;border-radius: 50px; background-color: rgb(255, 238, 87)"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="values first-values">
+                                <div class="category category-1">
+                                    <div style="display: flex;">
+                                        <h2></h2>
+                                        <p style="margin-left: 20px;">Đơn hàng đã hoàn thành : 50 / 200 </p>
+                                    </div>
+                                    <div style="width: 250px; height: 10px;border-radius: 50px; background-color: rgb(158, 158, 158)">
+                                        <div style="width: 160px; height: 10px;border-radius: 50px; background-color: rgb(255, 238, 87)"></div>
+                                    </div>
+                                </div>
+                                <div class="category category-1" style="padding-bottom: 24px;">
+                                    <div style="display: flex;">
+                                        <h2></h2>
+                                        <p style="margin-left: 20px;">Đơn hàng đã hủy : 25 / 200</p>
+                                    </div>
+                                    <div style="width: 250px; height: 10px;border-radius: 50px; background-color: rgb(158, 158, 158);">
+                                        <div style="width: 160px; height: 10px;border-radius: 50px; background-color: rgb(255, 238, 87)"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="values first-values">
+                                <div class=" second-values">
+                                    <h3 style="margin-top: 20px;">Tổng thu từ đơn hàng đã hoàn thành : 1.300.000 VNĐ</h3>
+                                    <h3 style="margin-top: 20px;">Tổng thu từ đơn hàng đang giao : 1.300.000 VNĐ</h3>
+                                    <h3 style="margin-top: 20px;">Tổng thu từ đơn hàng đang chuẩn bị : 1.300.000 VNĐ</h3>
+                                    <div style="width: 650px;height: 50px;background-color: aqua;margin-top: 20px;">
+                                        <h2>Tổng thu nhập : 3.900.000</h2>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="section-3-right">
+                <div class="section-3-right-content">
+
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        var button_revenue_1 = document.getElementById("revenue-tab1");
+        var button_revenue_2 = document.getElementById("revenue-tab2");
+
+        var content_1 = document.getElementById("revenue-values-1");
+        var content_2 = document.getElementById("revenue-values-2");
+        button_revenue_1.addEventListener('click',function() {
+            content_1.style.display = "block";
+            content_2.style.display = "none";
+
+            button_revenue_2.style.background = "#fff";
+            button_revenue_2.style.color="black"
+
+            button_revenue_1.style.background = "rgb(51, 51, 162)";
+            button_revenue_1.style.color="white";
+        });
+        button_revenue_2.addEventListener('click',function() {
+            content_2.style.display = "block";
+            content_1.style.display = "none";
+
+            button_revenue_1.style.background = "#fff";
+            button_revenue_1.style.color="black"
+
+            button_revenue_2.style.background = "rgb(51, 51, 162)";
+            button_revenue_2.style.color="white";
+        })
+    </script>
+</body>
+</html>

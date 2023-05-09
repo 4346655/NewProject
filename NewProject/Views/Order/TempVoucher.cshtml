@@ -1,0 +1,31 @@
+﻿@model List<Models.DTO.Temp>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TempVoucher</title>
+    <link rel="stylesheet" href="~/Clientassets/css/TempPage.css">
+</head>
+<body>
+    
+    <div class="body-voucher">
+        @foreach (var item in Model)
+        {
+        <div class="content-voucher">
+            <div class="content-voucher-1">
+                <p><strong>Mã </strong>: @item.Magiamgia.Ma</p>
+
+            </div>
+            <div class="content-voucher-2">
+                <p><strong>Giá trị</strong> : @item.Magiamgia.Giatri đ</p>
+            </div>
+        </div>
+        }
+    </div>
+</body>
+</html>

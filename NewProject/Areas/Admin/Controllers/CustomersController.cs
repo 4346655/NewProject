@@ -17,59 +17,99 @@ namespace NewProject.Areas.Admin.Controllers
         private Model1 db = new Model1();
 
         // GET: Admin/Customers
-      
-        public ActionResult Index(string Searchstring, int page = 1, int pagesize = 5)
+        public bool Phanquyen()
         {
-            var ac = new AccountDao();
             var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
             if (session == null)
             {
-                return RedirectToAction("Error", "Home1");
+
+                return false;
+
             }
             else
             {
-                var account = ac.Byname(session.username);
-                if (account != 2)
+                var account = new AccountDao();
+                var id = account.Byname(session.username);
+                if (id != 2)
                 {
-                    return RedirectToAction("Error", "Home1");
-                }
-                else
-                {
-                    var kh = new CustomersDao();
-                    var list = kh.Pagelist_kh(Searchstring, page, pagesize);
-                    ViewBag.Search = Searchstring;
-                    return View(list);
+                    return false;
+
                 }
             }
+            return true;
+
 
         }
-        public ActionResult offactive(int id )
+        public ActionResult Index(string Searchstring, int page = 1, int pagesize = 5)
+        {
+            if (Phanquyen())
+            {
+                var customer = new CustomersDao();
+                var listcustomer = customer.DanhSachKhachHang(Searchstring, page, pagesize);
+                ViewBag.Search = Searchstring;
+                return View(listcustomer);
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home1");
+            }
+
+
+
+        }
+        public ActionResult Bat_Tat_HoatDong(int id )
 		{
-            var cs = new CustomersDao();
-            cs.offactive(id);
-            return RedirectToAction("Index","Customers");
+            if (Phanquyen())
+            {
+                var customer = new CustomersDao();
+                customer.Bat_Tat_HoatDong(id);
+                return RedirectToAction("Index", "Customers");
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home1");
+            }
+           
 		}
 
         // GET: Admin/Customers/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Phanquyen())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                KhachHang khachHang = db.KhachHangs.Find(id);
+                if (khachHang == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(khachHang);
             }
-            KhachHang khachHang = db.KhachHangs.Find(id);
-            if (khachHang == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Error", "Home1");
             }
-            return View(khachHang);
+
+           
         }
 
         // GET: Admin/Customers/Create
         public ActionResult Create()
         {
-            ViewBag.ID_TaiKhoan = new SelectList(db.TaiKhoans, "ID", "TenTaiKhoan");
-            return View();
+            if (Phanquyen())
+            {
+                ViewBag.ID_TaiKhoan = new SelectList(db.TaiKhoans, "ID", "TenTaiKhoan");
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home1");
+            }
+
+            
         }
        
         // POST: Admin/Customers/Create
@@ -79,31 +119,47 @@ namespace NewProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,ID_TaiKhoan,HoTen,Diachi,Email,SDT,AnhDaiDien")] KhachHang khachHang)
         {
-            if (ModelState.IsValid)
+            if (Phanquyen())
             {
-                db.KhachHangs.Add(khachHang);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.KhachHangs.Add(khachHang);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.ID_TaiKhoan = new SelectList(db.TaiKhoans, "ID", "TenTaiKhoan", khachHang.ID_TaiKhoan);
+                return View(khachHang);
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home1");
             }
 
-            ViewBag.ID_TaiKhoan = new SelectList(db.TaiKhoans, "ID", "TenTaiKhoan", khachHang.ID_TaiKhoan);
-            return View(khachHang);
+            
         }
 
         // GET: Admin/Customers/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Phanquyen())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                KhachHang khachHang = db.KhachHangs.Find(id);
+                if (khachHang == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.ID_TaiKhoan = new SelectList(db.TaiKhoans, "ID", "TenTaiKhoan", khachHang.ID_TaiKhoan);
+                return View(khachHang);
             }
-            KhachHang khachHang = db.KhachHangs.Find(id);
-            if (khachHang == null)
+            else
             {
-                return HttpNotFound();
-            }
-            ViewBag.ID_TaiKhoan = new SelectList(db.TaiKhoans, "ID", "TenTaiKhoan", khachHang.ID_TaiKhoan);
-            return View(khachHang);
+                return RedirectToAction("Error", "Home1");
+            }           
         }
 
         // POST: Admin/Customers/Edit/5
@@ -113,29 +169,47 @@ namespace NewProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,ID_TaiKhoan,HoTen,Diachi,Email,SDT,AnhDaiDien")] KhachHang khachHang)
         {
-            if (ModelState.IsValid)
+            if (Phanquyen())
             {
-                db.Entry(khachHang).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(khachHang).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.ID_TaiKhoan = new SelectList(db.TaiKhoans, "ID", "TenTaiKhoan", khachHang.ID_TaiKhoan);
+                return View(khachHang);
             }
-            ViewBag.ID_TaiKhoan = new SelectList(db.TaiKhoans, "ID", "TenTaiKhoan", khachHang.ID_TaiKhoan);
-            return View(khachHang);
+            else
+            {
+                return RedirectToAction("Error", "Home1");
+            }
+
+           
         }
 
         // GET: Admin/Customers/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Phanquyen())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                KhachHang khachHang = db.KhachHangs.Find(id);
+                if (khachHang == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(khachHang);
             }
-            KhachHang khachHang = db.KhachHangs.Find(id);
-            if (khachHang == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Error", "Home1");
             }
-            return View(khachHang);
+
         }
 
         // POST: Admin/Customers/Delete/5
@@ -143,10 +217,19 @@ namespace NewProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            KhachHang khachHang = db.KhachHangs.Find(id);
-            db.KhachHangs.Remove(khachHang);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (Phanquyen())
+            {
+                KhachHang khachHang = db.KhachHangs.Find(id);
+                db.KhachHangs.Remove(khachHang);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home1");
+            }
+
+           
         }
 
         protected override void Dispose(bool disposing)

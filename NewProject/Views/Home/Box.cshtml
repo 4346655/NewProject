@@ -22,7 +22,10 @@
                 <ul class="list-option">
                     @foreach (var item in Model)
                     {
+                        if (item.Saches.Count > 0)
+                        {
                         <li><a href="#content-@item.ID">@item.Loaisach</a></li>
+                        }
                     }
                     </ul>
          

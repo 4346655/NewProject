@@ -1,0 +1,30 @@
+﻿@model List<Models.DTO.DonHang>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Account_info</title>
+</head>
+<body>
+    <div class="item-left">
+        <h3>@Model.Count()</h3>
+        <p>Đơn hàng</p>
+        @{
+            var count = 0;
+            foreach (var item in Model)
+            {
+                if (item.Trang_thai == 1)
+                {
+                    count++;
+                }
+            }
+        }
+        <p>Đang chuẩn bị : @count</p>
+    </div>
+</body>
+</html>

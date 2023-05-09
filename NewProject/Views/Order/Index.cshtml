@@ -1,6 +1,6 @@
 ﻿@model List<Models.DTO.DonHang>
 @{
-    Layout = null;
+    
 }
 
 <!DOCTYPE html>
@@ -9,6 +9,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <link href="~/Clientassets/css/cart.css" rel="stylesheet" />
+    <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
     <div id="wrapper" style="margin-top:40px;">
@@ -17,22 +19,23 @@
             <p>ĐƠN HÀNG CỦA BẠN </p>
 
         </div>
-        <div class="content container2">
+        @if (Model.Count > 0)
+        {
+            <div class="content container2">
 
-            <ul class="table" style="display: flex;">
-                <li>Hình Ảnh</li>
-                <li>Sản Phẩm</li>
-                <li>Số Lượng</li>
-                <li>Giá</li>
-                <li>Tổng Tiền</li>
-                <li>#</li>
-            </ul>
-            <hr>
+                <ul class="table" style="display: flex;">
+                    <li>Hình Ảnh</li>
+                    <li>Sản Phẩm</li>
+                    <li>Số Lượng</li>
+                    <li>Giá</li>
+                    <li>Tổng Tiền</li>
+                    <li>#</li>
+                </ul>
+                <hr>
 
 
-            @if (Model.Count > 0)
-            {
-                foreach (var item in Model)
+
+                @foreach (var item in Model)
                 {
                     <ul class="table-product" style="display: flex;">
                         <li style="width:110px;"><img src="@item.Sach.Anh" alt="" width="100"></li>
@@ -50,10 +53,10 @@
                             {
                                 <p style="color:lightcoral">Đã giao</p>
                             }
-					        else
-					        {
+                            else
+                            {
                                 <p style="color:lightcoral">Đã hủy</p>
-					        }
+                            }
                         </li>
                         <li style="width:50px;">@item.SoLuong</li>
                         <li style="width:40px;">@(item.Sach.Gia-item.Sach.Gia_giam)</li>
@@ -67,37 +70,43 @@
                             {
                                 <a href="">Không thể hủy đơn</a>
                             }
-					        
+
                             else
                             {
                                 <a href="/xac-minh-don-hang-@item.ID_Sach-@item.SoLuong">Mua lại</a>
                             }
                         </li>
-                        
-                       
+
+
                     </ul>
                     <hr />
                 }
-
-            }
-
-        <form action="/lich-su-mua-hang" style="height:60px">
-            <button>Lịch sử mua hàng</button>
-        </form>
-        </div>
-        <div class="footer container2" style="display: flex;">
-            <div class="ship">
-                <img src="https://tse3.mm.bing.net/th?id=OIP.CP-sjgkPd7kWOrqsIbBgHAHaDy&pid=Api&P=0" alt="" style="width: 400px; height: auto;">
-
-                <br> <a href="/trang-chu">Tiếp Tục Mua Hàng</a>
+                <form action="/lich-su-mua-hang" style="height:60px">
+                    <button>Lịch sử mua hàng</button>
+                </form>
             </div>
-            <div class="option-buy">
+            <div class="footer container2" style="display: flex;">
+                <div class="ship">
+                    <img src="https://tse3.mm.bing.net/th?id=OIP.CP-sjgkPd7kWOrqsIbBgHAHaDy&pid=Api&P=0" alt="" style="width: 400px; height: auto;">
 
-            </div>
-            <div class="other">
+                    <br> <a href="/trang-chu">Tiếp Tục Mua Hàng</a>
+                </div>
+                <div class="option-buy">
 
+                </div>
+                <div class="other">
+
+                </div>
             </div>
-        </div>
+
+        }
+			else
+			{
+                <h2>Bạn chưa có sản phẩm nào trong giỏ hàng</h2>
+			}
+
+
+
     </div>
 
 

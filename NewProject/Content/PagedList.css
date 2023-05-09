@@ -53,6 +53,10 @@
   background-color: #428bca;
   border-color: #428bca;
 }
+.pagination > .active::marker{
+    content:"";
+    list-style-type:none;
+}
 
 .pagination > .disabled > span,
 .pagination > .disabled > a,

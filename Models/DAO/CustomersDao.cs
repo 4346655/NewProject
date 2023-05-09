@@ -16,7 +16,7 @@ namespace Models.DAO
 		{
 			db = new Model1();
 		}
-		public IEnumerable<KhachHang> Pagelist_kh(string Searchstring, int page, int pagesize)
+		public IEnumerable<KhachHang> DanhSachKhachHang(string Searchstring, int page, int pagesize)
 		{
 			IOrderedQueryable<KhachHang> model = db.KhachHangs.Where(x=>x.TaiKhoan.ID_LoaiTK !=2).OrderByDescending(x => x.ID);
 			if (!string.IsNullOrEmpty(Searchstring))
@@ -142,7 +142,7 @@ namespace Models.DAO
 			return key;
 			
 		}
-		public void offactive(int id )
+		public void Bat_Tat_HoatDong(int id )
 		{
 			var model = db.KhachHangs.Where(x => x.ID == id).SingleOrDefault();
 			model.TaiKhoan.Trangthai = !model.TaiKhoan.Trangthai;

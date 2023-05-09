@@ -1,24 +1,20 @@
-﻿@model List<Models.DTO.Sach>
+﻿@model List<Models.DTO.DonHang>
 @{
-
     Layout = null;
 }
-
 
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>TempProduct</title>
-    
+    <title>Percent_Order</title>
 </head>
 <body>
-
+  
     @foreach (var item in Model)
     {
-        @item.TenSach
+        @Html.Action("Percent_Order1","Home1",new {tensach = item.Sach.TenSach})
     }
 </body>
 </html>
-

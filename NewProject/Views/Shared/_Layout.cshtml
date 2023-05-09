@@ -1,12 +1,15 @@
 ﻿@using NewProject.Models
 @using Models.DAO
 @using NewProject.Controllers
+@using NewProject.HashMD5
 @{
 
     var ac = new AccountDao();
     var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
-
+   
 }
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,69 +21,98 @@
 
 </head>
 <body>
-    <div id="wrapper">
-    <div id="header" class="">
-        <div class="container ds-flex">
-
-            <a href=""><img src="~/Clientassets/image/logochude.png" alt="" style="height: 86px;"></a>
-
-            <form action="/tim-kiem-sach" id="search">
-
-                @Html.Action("HistorySearch", "Home")
-                
-                <button class="search_header"><i class="fa-solid fa-magnifying-glass "></i></button>
-
-
-            </form>
-        </div>
-        <div class="list-product ">
-            <nav>
-                <ul class="container1">
+    <header>
+        <div class="header-list-item">
+            <div class="logo-shop">
+                <img src="~/Clientassets/image/logochude.png" alt="">
+            </div>
+            <div class="box-search">
+                <form action="/tim-kiem-sach" style="display:flex">
+                    @Html.Action("HistorySearch", "Home")
+                  
+                </form>
+            </div>
+            <div class="list-item-header ">
+                <ul class="container2">
                     <li><a href="/trang-chu">Trang Chủ </a></li>
-                    <li><a href="/dang-ki">Đăng Ký </a></li>
-                    <li>
-                                @{
 
-                                    if (session == null)
-                                    {
-                                        <a href="/dang-nhap">Đăng nhập</a>
-                                    }
-                                    else
-                                    {
-                                        var account = ac.Byname(session.username);
-                                        if (account == 2)
-                                        {
-                                            <a href="/trang-chu-quan-li">Quản lí</a>
-                                            <ul class="list-noname colorx">
-                                              
-                                                <li><a href="/dang-xuat">Đăng Xuất</a> <a href=""><i class="fa-solid fa-right-from-bracket red" style="color: white;"></i></a></li>
-                                              
-                                            </ul>
+                    @{
 
-                                        }
-                                        else
-                                        {
-                                            <a href="">@session.username</a>
-                                            <ul class="list-noname colorx">
-                                                <li><a href="/ho-so">Hồ Sơ</a> <a href=""><i class="fa-solid fa-user red" style="color: white;"></i></a></li>
-                                                <li> <a href="/gio-hang">Giỏ Hàng</a>    <a href="" class="cart"> <i class="fa-solid fa-cart-shopping red " style="color: white;"></i> </a></li>
-                                                <li><a href="/dang-xuat">Đăng Xuất</a> <a href=""><i class="fa-solid fa-right-from-bracket red" style="color: white;"></i></a></li>
-                                            </ul>
-                                        }
-                                    }
-                                }
-                        
-                    </li>
+                        if (session == null)
+                        {
+                            <li><a href="/dang-ki">Đăng Ký </a></li>
+                            <li>
+                                <a href="/dang-nhap">Đăng nhập</a>
+                            </li>
+                        }
+                        else
+                        {
+                            var account = ac.Byname(session.username);
+                            if (account == 2)
+                            {
+                                <li>
+                                    <a href="/trang-chu-quan-li">Quản lí</a>
+
+                                </li>
+                                <li>
+                                    <a href="/dang-xuat">Đăng xuất</a>
+
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li><a href="/xem-don-hang">Đơn hàng </a></li>
+                                <li>
+                                    <a href="">@session.username</a>
+                                    <ul class="list-noname colorx">
+                                        <li class="sub-item" style="margin-top: 0px; "><a href="/ho-so">Hồ Sơ</a> <a href=""><i class="fa-solid fa-user red" style="color: white;"></i></a></li>
+                                        <li class="sub-item" style="margin-top: 0px;"> <a href="/gio-hang">Giỏ Hàng</a>    <a href="" class="cart"> <i class="fa-solid fa-cart-shopping red " style="color: white;"></i> </a></li>
+                                        <li class="sub-item" style="margin-top: 0px; "><a href="/dang-xuat">Đăng Xuất</a> <a href=""><i class="fa-solid fa-right-from-bracket red" style="color: white;"></i></a></li>
+                                    </ul>
+                                </li>
+                            }
+                        }
+                    }
+
+
                 </ul>
-            </nav>
-        </div>
 
-    </div>
+            </div>
+
+            
+
         </div>
-    <div class="container body-content">
+    </header>
+   
         @RenderBody()
 
-    </div>
+    
+    <!-- <footer>
+         <div class="footer-1 ft1-1">
+             <h3>WEBSITE BÁN SÁCH</h3>
+             <p>Nơi dành cho bạn khám phá thế giới riêng bản thân được thành lập vởi 3 sinh viên</p>
+             <h4>Số điện thoại :0799163083</h4>
+             <h4>54 - Nguyễn Lương Bằng - Hòa Khánh Bắc </h4>
+             <h4>Liên chiểu - Đà Nẵng</h4>
+         </div>
+         <div class="footer-1 ft1-2">
+             <h3>THÔNG TIN</h3>
+             <p>Nguyễn Văn Nhật : 102210120</p>
+             <p>Nguyễn Văn Nhật : 102210120</p>
+             <p>Nguyễn Văn Nhật : 102210120</p>
+             <p>Nguyễn Văn Nhật : 102210120</p>
+
+         </div>
+         <div class="footer-1 ft1-3">
+             <h3>TÀI KHOẢN</h3>
+             <p>--------------------</p>
+             <p>--------------------</p>
+             <p>--------------------</p>
+             <p>--------------------</p>
+             <p>--------------------</p>
+         </div>
+     </footer>-->
     <script src="~/Content/ckfinder/ckfinder/ckfinder.js"></script>
 
     @RenderSection("scripts", required: false)

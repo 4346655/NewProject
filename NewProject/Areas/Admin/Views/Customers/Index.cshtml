@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int count = 0;
 }
 
 <!DOCTYPE html>
@@ -16,18 +17,7 @@
 
 
     <style>
-        .search {
-            width: 100px;
-            height: 30px;
-            border-radius: 10px;
-            background-color: aquamarine;
-        }
-
-        .ip_search {
-            width: 200px;
-            height: 30px;
-            border-radius: 10px;
-        }
+     
 
         .pagination {
             display: flex;
@@ -64,29 +54,33 @@
                 .pagination span.disabled {
                     display: none;
                 }
-
-        .title_modal_pro {
-            height: 10%;
-            width: 100%;
-            border-bottom: 1px solid;
+        .ip_search {
+            width: 860px;
+            height: 70px;
+            border: none;
+            text-align: center;
+            background-color:lightcyan;
         }
 
-        .content_modal_pro {
-            margin-top: 30px;
-            height: 80%;
-            display: flex;
-            background-color: aquamarine;
+            .ip_search:active {
+                border: none;
+                outline: none;
+            }
+
+        .button-tab {
+            width: 150px;
+            text-align: center;
+            height: 70px;
+            border-right: 1px solid;
+            text-decoration: none;
+            border:none;
         }
 
-        .avt_pro {
-            width: 30%;
-            border-right: 1 solid;
-        }
-
-        .infomation_pro {
-            width: 70%;
+        .button-search:hover {
+            background-color: aqua;
         }
     </style>
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
     <link href="~/Areas/Assets/css/Modal_product.css" rel="stylesheet" />
 </head>
 <body>
@@ -96,22 +90,24 @@
         <div class="detail_list">
             @using (Html.BeginForm("Index", "Customers", FormMethod.Get))
             {
-                <div>
-                    <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
-                    <button type="submit" class="search">Tìm kiếm</button>
-                </div>
+            <div style="display:flex">
+                <button type="submit" class="search button-tab button-search">Tìm kiếm</button>
+                <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." autocomplete="off" />
+
+            </div>
 
             }
             <table>
                 <thead>
                     <tr>
                         <td>STT</td>
-                        <td>Thông tin</td>
+                        <td>Tên tài khoản</td>
+                        <td>Họ tên</td>
                         <td>Gmail</td>
                         <td>Địa Chỉ</td>
                         <td>Số DT</td>
                         <td>Trạng Thái</td>
-                        <td>#</td>
+                 
 
                     </tr>
                 </thead>
@@ -121,8 +117,9 @@
                     {
                     <tr>
 
-                        <td>@item.ID</td>
+                        <td>@(++count)</td>
                         <td>@item.TaiKhoan.TenTaiKhoan</td>
+                        <td>@item.HoTen</td>
                         @if (item.Email != "")
                         {
                             <td>@item.Email</td>
@@ -149,93 +146,14 @@
                         }
                         @if (item.TaiKhoan.Trangthai == true)
                         {
-                            <td>on</td>
-                            <td>
-                                <a onclick="location.reload();" href="/doi-trang-thai-khach-hang-@item.ID">off</a> <hr />
-                                <a class="modal-btn" data-modal-id="modal-@item.ID">Xem</a>
-                                <div id="modal-@item.ID" class="modal">
-                                    <div class="modal-content">
-                                        <div class="title_modal_pro">
-                                            <strong style="text-align: center;font-size:25px;">@item.TaiKhoan.TenTaiKhoan</strong>
-                                        </div>
-                                        <div class="content_modal_pro">
-                                            <div class="avt_pro" style="justify-content: center; align-items: center; display: flex">
-                                                <img src="@item.AnhDaiDien" width="250px;">
-                                            </div>
-                                            <div class="infomation_pro">
-                                                <div class="item_modal_pro">
-                                                    <p>Họ tên : @item.HoTen</p>
-                                                </div>
-                                                <div class="item_modal_pro">
-                                                    <p>Email : @item.Email</p>
-                                                </div>
-                                                <div class="item_modal_pro">
-                                                    <p>Địa chỉ : @item.Diachi</p>
-                                                </div>
-                                                <div class="item_modal_pro">
-                                                    <p>Số điện thoại : @item.SDT</p>
-                                                </div>
-                                                @foreach (var item1 in item.DonHangs)
-                                                {
-                                                    <div class="item_modal_pro">
-                                                        <p>@item1.Sach.TenSach</p>
-                                                        <p>@item1.SoLuong</p>
-                                                        <p>@item1.Tong_gia</p>
-                                                    </div>
-                                                }
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
+                            <td> <a onclick="location.reload();" href="/doi-trang-thai-khach-hang-@item.ID" style="color:green">on</a></td>
                         }
                         else
                         {
-                            <td>off</td>
-                            <td>
-                                <a onclick="location.reload();" href="/doi-trang-thai-khach-hang-@item.ID">on</a>
-                                <hr />
-                         
-                                <a class="modal-btn" data-modal-id="modal-@item.ID">Xem</a>
-                                <div id="modal-@item.ID" class="modal">
-                                    <div class="modal-content">
-                                        <div class="title_modal_pro">
-                                            <strong style="text-align: center;font-size:25px;">@item.TaiKhoan.TenTaiKhoan</strong>
-                                        </div>
-                                        <div class="content_modal_pro">
-                                            <div class="avt_pro" style="justify-content: center; align-items: center; display: flex">
-                                                <img src="@item.AnhDaiDien" width="250px;">
-                                            </div>
-                                            <div class="infomation_pro">
-                                                <div class="item_modal_pro">
-                                                    <p>Họ tên : @item.HoTen</p>
-                                                </div>
-                                                <div class="item_modal_pro">
-                                                    <p>Email : @item.Email</p>
-                                                </div>
-                                                <div class="item_modal_pro">
-                                                    <p>Địa chỉ : @item.Diachi</p>
-                                                </div>
-                                                <div class="item_modal_pro">
-                                                    <p>Số điện thoại : @item.SDT</p>
-                                                </div>
-                                                @foreach (var item1 in item.DonHangs)
-                                                {
-                                                    <div class="item_modal_pro">
-                                                        <p>@item1.Sach.TenSach</p>
-                                                        <p>@item1.SoLuong</p>
-                                                        <p>@item1.Tong_gia</p>
-                                                    </div>
-                                                }
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <td><a onclick="location.reload();" href="/doi-trang-thai-khach-hang-@item.ID" style="color:red">off</a>  </td>
                             
-                            </td>
                         }
+                        
 
 
                     </tr>
@@ -251,33 +169,8 @@
         </div>
         <!-- -----------------HD gan dayh--------- -->
 
-        @Html.Action("list", "Orders")
+        @Html.Action("DanhSachMoiMua", "Orders")
     </div>
-    <script>
-
-        var modalBtns = document.querySelectorAll('.modal-btn');
-
-        modalBtns.forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var modalId = this.getAttribute('data-modal-id');
-                var modal = document.getElementById(modalId);
-                modal.style.display = "block";
-            });
-        });
-
-        var closeBtns = document.querySelectorAll('.close');
-        closeBtns.forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var modal = this.closest('.modal');
-                modal.style.display = "none";
-            });
-        });
-        window.onclick = function (event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = "none";
-            }
-        };
-
-    </script>
+   
 </body>
 </html>

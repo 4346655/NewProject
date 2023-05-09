@@ -15,6 +15,18 @@ namespace NewProject.Areas.Admin
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
+              "thay doi thoi gian voucher",
+              "gia-han",
+              new { Controller = "Vouchers", action = "GianHan", id = UrlParameter.Optional }
+           );
+
+            context.MapRoute(
+              "bo thung rac / khoi phuc voucher",
+              "bo-khoi-phuc-{idvoucher}",
+              new { Controller = "Vouchers", action = "Bo_KhoiPhuc_MGG", id = UrlParameter.Optional }
+           );
+
+            context.MapRoute(
               "phan quyen",
               "phan-quyen",
               new { Controller = "Home1", action = "Error", id = UrlParameter.Optional }
@@ -23,7 +35,7 @@ namespace NewProject.Areas.Admin
             context.MapRoute(
                "Doi trang thai khach hang",
                "Doi-trang-thai-khach-hang-{id}",
-               new { Controller = "Customers", action = "offactive" }
+               new { Controller = "Customers", action = "Bat_Tat_HoatDong" }
             );
             //----------------------------------------------------------------------------
             context.MapRoute(
@@ -108,24 +120,30 @@ namespace NewProject.Areas.Admin
             context.MapRoute(
               "Thung rac san pham",
               "thung-rac-san-pham",
-            new { Controller = "Products", action = "Statefalse" }
+            new { Controller = "Products", action = "ThungRacSanPham" }
             );
             context.MapRoute(
               "Xoa vv san pham",
               "delete-san-pham-{id}",
-            new { Controller = "Products", action = "Dele" }
+            new { Controller = "Products", action = "XoaSanPham" }
             );
 
             context.MapRoute(
               "Bo thung rac san pham",
               "bo-san-pham-{id}",
-            new { Controller = "Products", action = "Del" }
+            new { Controller = "Products", action = "BoThungRac" }
             );
             context.MapRoute(
               "Quay lai san pham",
               "quay-lai-san-pham-{id}",
-            new { Controller = "Products", action = "Restore" }
+            new { Controller = "Products", action = "KhoiPhucSanPham" }
             );
+            context.MapRoute(
+              "Ban hoac dung ban sach",
+              "ban-hoac-dung-{id}",
+            new { Controller = "Products", action = "Ban_DungBan" }
+            );
+
 
             //----------------------------------------------------------------------------
             context.MapRoute(
@@ -136,12 +154,12 @@ namespace NewProject.Areas.Admin
             context.MapRoute(
              "Them danh muc san pham",
              "them-danh-muc",
-            new { Controller = "Categories", action = "Create", id = UrlParameter.Optional }
+            new { Controller = "Categories", action = "ThemDanhMuc" }
             );
             context.MapRoute(
              "Xoa danh muc san pham",
              "xoa-danh-muc-{id}",
-            new { Controller = "Categories", action = "Dele" }
+            new { Controller = "Categories", action = "XoaDanhMuc" }
             );
             context.MapRoute(
              "Sua danh muc san pham",
@@ -151,7 +169,7 @@ namespace NewProject.Areas.Admin
             context.MapRoute(
              "Doi trang thai danh muc",
              "doi-trang-thai-danh-muc-{idls}",
-            new { Controller = "Categories", action = "ChangeStatus" }
+            new { Controller = "Categories", action = "Bat_Tat_HoatDong" }
             );
             //----------------------------------------------------------------------------
             context.MapRoute(
@@ -182,7 +200,7 @@ namespace NewProject.Areas.Admin
              context.MapRoute(
                 "Chuyen qua giao hang",
                 "chuyen-trang-thai-{idor}",
-            new { Controller = "Orders", action = "ChangeStatus" }
+            new { Controller = "Orders", action = "ChuyenTiepTrangThai" }
              );
             context.MapRoute(
                 "huy don admin",

@@ -61,9 +61,9 @@ namespace NewProject.Controllers
 					var id = kh.GetID(session.username);
 					kh.addHistorySearch(id, tensach);
 				}
-					var pr = new ProductsDao();
-				var li = pr.Searchbox(tensach);
-				return View(li);
+					var product = new ProductsDao();
+					var listproduct = product.TimKiemSach(tensach);
+					return View(listproduct);
 			}
 		}
 		public ActionResult HistorySearch()

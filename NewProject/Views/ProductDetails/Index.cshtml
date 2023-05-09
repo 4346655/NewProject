@@ -13,6 +13,7 @@
     <title>HOME</title>
 
     <link href="~/Clientassets/css/sanpham.css" rel="stylesheet" />
+ 
     <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
@@ -42,11 +43,8 @@
                         <li>Số lượng đã bán:@Model.SoLuong_DaBan</li>
                         <li>Thể Loại:@Model.Loai_Sach.Loaisach</li>
                     </ul>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
+                    @Html.Action("Start","ProductDetails",new {idsach = Model.ID})
+                   
                     <span>
                         <h3 class="buy">Giá : @(Model.Gia-Model.Gia_giam)</h3>
                         <del>@Model.Gia</del>
@@ -103,7 +101,11 @@
             <div class="write_comment">
                 <form action="/binh-luan" method="get">
                     <input type="hidden" name="idsach" id="idsach" value="@Model.ID" />
-                    <input class="btn_comment" type="submit" value="Bình luận" />
+                    <input class="btn_comment" type="submit"  value="Bình luận"  />
+                    <select name="andanh" style="height:50px">
+                        <option value="true">Ẩn danh</option>
+                        <option value="false" checked>Tắt ẩn danh   </option>
+                    </select>
                     <input class="input_comment" type="text" name="noidung" id=" noidung" />
 
                 </form>
@@ -130,6 +132,7 @@
         }
 
     </script>
+ 
 </body>
 
 </html>

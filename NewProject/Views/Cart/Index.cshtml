@@ -18,23 +18,20 @@
                 <p>GIỎ HÀNG CỦA BẠN </p>
 
             </div>
-            <div class="content container2">
-
-                <ul class="table" style="display: flex;">
-                    <li><input id="check-all" type="checkbox" style="width:20px;" /></li>
-                    <li>Hình Ảnh</li>
-                    <li>Sản Phẩm</li>
-                    <li>Số Lượng</li>
-                    <li>Giá</li>
-                    <li>Tổng Tiền</li>
-                    <li>#</li>
-                </ul>
-                <hr>
-
-
-                @if (Model.Count > 0)
-                {
-                    foreach (var item in Model)
+            @if (Model.Count > 0)
+            {
+                <div class="content container2">
+                    <ul class="table" style="display: flex;">
+                        <li><input id="check-all" type="checkbox" style="width:20px;" /></li>
+                        <li>Hình Ảnh</li>
+                        <li>Sản Phẩm</li>
+                        <li>Số Lượng</li>
+                        <li>Giá</li>
+                        <li>Tổng Tiền</li>
+                        <li></li>
+                    </ul>
+                    <hr>
+                    @foreach (var item in Model)
                     {
                         <ul class="table-product" style="display: flex;">
                             <li style="width:15px"><input id="check-@item.ID" type="checkbox" style="width:15px" data-id="@item.ID_Sach" /></li>
@@ -44,32 +41,35 @@
                             <li style="width:40px;">@(item.Sach.Gia-item.Sach.Gia_giam)</li>
                             <li style="width:160px;">@(item.SoLuong * (item.Sach.Gia - item.Sach.Gia_giam)) </li>
                             <li>
-                                -<a href="/xoa-gio-hang-@item.ID">Xóa</a> -
-                                <a href="/xac-minh-don-hang-@item.Sach.ID-@item.SoLuong">Mua</a>
+                                <a href="/xoa-gio-hang-@item.ID"><i class="fa-solid fa-trash-can"></i></a> /
+                                <a href="/xac-minh-don-hang-@item.Sach.ID-@item.SoLuong"><i class="fa-solid fa-cart-shopping"></i></a>
                             </li>
                         </ul>
                         <hr />
+
                     }
-                }
-
-            </div>
-            <div class="footer container2" style="display: flex;">
-                <div class="ship">
-
-
-                    <br> <a href="/trang-chu">Tiếp Tục Mua Hàng</a>
-                    <a href="#" id="btn-buy">Mua - (<small id="result"></small>)</a>
-
                 </div>
-                <div class="option-buy">
+                <div class="footer container2">
+                    <div class="ship" style="display: flex;margin-bottom:30px">
+                        <br> <a href="/trang-chu">Tiếp Tục Mua Hàng</a>
+                        <a href="#" id="btn-buy">Mua - (<small id="result"></small>)</a>
 
-                </div>
-                <div class="other">
+                    </div>
+                    <div class="option-buy">
 
+                    </div>
+                    <div class="other">
+
+                    </div>
                 </div>
-            </div>
+            }
+            else
+            {
+                <h2>Bạn chưa có sản phẩm nào trong giỏ hàng</h2>
+            }
+
         </div>
-        @Html.Action("Index", "Order")
+     
     </div>
     <script>
 

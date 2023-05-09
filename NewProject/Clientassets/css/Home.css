@@ -1,20 +1,100 @@
-﻿#header {
+﻿*{
+    margin:0px;
+    padding:0px;
+    box-sizing:border-box;
+}
+header {
     background-color: rgb(49 39 39);
     color: aliceblue;
-    min-height: 80px;
-    padding: 10px 10px;
     text-align: center;
-    margin-top: 0px;
-    margin-bottom: 50px;
-    border-bottom: 1px solid wheat;
-    top: 0px;
-    width: 102%;
-    padding-top: 3px;
-    padding-bottom: 10px;
-    margin-top: -8px;
-    margin-left: -15px;
-    margin-right: 0px;
+    width:1280px;
+    height:100px;
+  
 }
+.header-list-item {
+    width: 1270px;
+    height: 100px;
+    display: flex;
+}
+.logo-shop{
+    width: 300px;
+    height:100px;
+}
+.logo-shop>img{
+    height:80px;
+    margin-top:10px;
+    width:300px;
+}
+.box-search{
+    width:570px;
+    height:100px;
+    
+}
+.box-search>form{
+    margin-top:30px;
+    margin-left:100px;
+}
+.list-item-header{
+    width:400px;
+    height:100px;
+    display:flex;
+}
+.header-item-1{
+    width:120px;
+    height:100px;
+}
+.header-item-1>a{
+    text-decoration:none;
+    color:#fff;
+    font-size:20px;
+   
+}
+ul.container2 li {
+   margin-top:45px;
+}
+
+ul.container2 li a {
+    text-decoration: none;
+    padding-left: 25px;
+    font-size: 18px;
+    color: rgb(158, 218, 246);
+}
+
+    ul.container2 li:hover a {
+        color: red;
+    }
+
+ul.container2 {
+    display: flex;
+    list-style: none;
+}
+
+ul.container2 li:nth-child(3):hover .list-noname {
+    display: block;
+}
+ul.container2 li {
+    position: relative;
+}
+
+    ul.container2 li a {
+        font-size: 20px;
+        color: chartreuse;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .ds-flex {
     display: flex;
@@ -30,7 +110,7 @@
 
 .list-product {
     margin: 0 auto;
-    width: 100%;
+    width: 1270px;
     position: relative;
 }
 
@@ -54,10 +134,7 @@ a.pad-0 img {
     left: 0px;
 }
 
-ul.container1 {
-    position: absolute;
-    right: 40px;
-}
+
 
     ul.container1 li {
         margin-left: 30px;
@@ -79,17 +156,17 @@ ul.container1 {
     list-style: none;
 }
 
+
+
 form#search {
     padding-top: 20px;
-    position: relative;
     height: 50px;
 }
 
 .search_header {
-    position: absolute;
-    right: 17px;
+
     padding-top: 10px;
-    padding-right: 431px;
+
     background: none;
     color: black;
     border: none;
@@ -360,7 +437,7 @@ ul.container1 li {
 }
 
 ul.container1 {
-    right: 104px;
+    
 }
 
 .list-noname {
@@ -387,8 +464,7 @@ ul.container1 {
 }
 
 .search_input {
-    position: absolute;
-    left: -861px;
+   
 }
 
 ul.container1 {

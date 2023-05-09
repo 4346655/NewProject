@@ -18,13 +18,14 @@ namespace NewProject.Controllers
             return View(sach);
         }
         [HttpGet]
-        public ActionResult Addcomment(int idsach,string noidung)
+        public ActionResult Addcomment(int idsach,string noidung,bool andanh)
 		{
             var pr = new ProductsDao();
             var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
             var kh = new CustomersDao();
             var id = kh.GetID(session.username);
-            pr.addcomment(idsach, id, noidung);
+           
+            pr.addcomment(idsach, id, noidung,andanh);
             return RedirectToAction("Index", new { id = idsach });
 		}
         public ActionResult Start(int idsach)

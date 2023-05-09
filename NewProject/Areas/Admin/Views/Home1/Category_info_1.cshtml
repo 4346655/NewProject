@@ -1,0 +1,24 @@
+﻿@model List<Models.DTO.Loai_Sach>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Category_info_1</title>
+</head>
+<body>
+    @foreach (var item in Model)
+    {
+        if (item.Trangthai == true)
+        {
+
+                @Html.Action("Category_1", "Home1", new { idloaisach = item.ID })
+    
+        }
+    }
+</body>
+</html>

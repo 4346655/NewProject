@@ -63,6 +63,7 @@
     <Compile Include="DAO\CartDao.cs" />
     <Compile Include="DAO\CategoriesDao.cs" />
     <Compile Include="DAO\CustomersDao.cs" />
+    <Compile Include="DAO\Hash_MD5.cs" />
     <Compile Include="DAO\LoginConstants.cs" />
     <Compile Include="DAO\OrdersDao.cs" />
     <Compile Include="DAO\ProductsDao.cs" />

@@ -60,13 +60,18 @@ namespace NewProject.Controllers
             }
         }
       
-       
-        public ActionResult Test_TempProduct(int []idsach)
+        public ActionResult Test_TempProduct( List<int> idsach)
         {
-           
-                var pr = new ProductsDao();
-                var product = pr.listIDRange(idsach);
-                return View(product);
+            if(idsach==null)
+			{
+                return HttpNotFound();
+			}
+            {
+
+                var product = new ProductsDao();
+                var listproduct = product.listIDRange(idsach);
+                return View(listproduct);
+            }
            
 
         }
@@ -77,7 +82,15 @@ namespace NewProject.Controllers
             var product = pr.SachDetail(idsach);
             return View(product);
 		}
-       
+        public ActionResult TempVoucher()
+		{
+            var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
+            var customer = new CustomersDao();
+            var id = customer.GetDetailByUsername(session.username).TaiKhoan.ID;
+            var account = new AccountDao();
+            var listvoucher = account.GetListMGG(id);
+            return View(listvoucher);
+		}
         [HttpGet]
         public ActionResult AddtoOrder(int idsach,int idthanhtoan, int soluong,string MGG,string note )
 		{
@@ -100,7 +113,7 @@ namespace NewProject.Controllers
 		{
             var or = new OrdersDao();
             or.HuyDon(idorder);
-            return RedirectToAction("Index","Cart");
+            return RedirectToAction("Index","Orders");
 		}
         public ActionResult Rebuy(int idorder)
 		{

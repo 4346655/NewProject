@@ -13,6 +13,16 @@ namespace NewProject
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+			routes.MapRoute(
+				name: "danh gia",
+				url: "danh-gia",
+				defaults: new { controller = "Start", action = "ProductDetails" }
+			);
+			routes.MapRoute(
+				name: "temp voucher",
+				url: "test-voucher",
+				defaults: new { controller = "Order", action = "TempVoucher" }
+			);
 
 			routes.MapRoute(
 				name: "tesst",
@@ -65,6 +75,12 @@ namespace NewProject
 				url: "xac-minh-don-hang-{idsach}-{soluong}",
 				defaults: new { controller = "Order", action = "TempPage" }
 			);
+			routes.MapRoute(
+				name: "Xem don hang",
+				url: "xem-don-hang",
+				defaults: new { controller = "Order", action = "Index" , id = UrlParameter.Optional }
+			);
+
 			routes.MapRoute(
 				name: "Gio Don hang",
 				url: "gio-don-hang",
