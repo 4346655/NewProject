@@ -176,6 +176,7 @@ namespace NewProject.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    sach.DeleteStatus = false;
                     db.Saches.Add(sach);
                     db.SaveChanges();
                     return RedirectToAction("Index");
