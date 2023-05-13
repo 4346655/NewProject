@@ -57,7 +57,7 @@ namespace NewProject
 			);
 			routes.MapRoute(
 				name: "Huy don",
-				url: "huy-don-{idorder}",
+				url: "huy-don-user-{idorder}",
 				defaults: new { controller = "Order", action = "HuyDon", id = UrlParameter.Optional }
 			);
 			routes.MapRoute(

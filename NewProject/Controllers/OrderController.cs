@@ -113,7 +113,7 @@ namespace NewProject.Controllers
 		{
             var or = new OrdersDao();
             or.HuyDon(idorder);
-            return RedirectToAction("Index","Orders");
+            return RedirectToAction("Index","Order");
 		}
         public ActionResult Rebuy(int idorder)
 		{
