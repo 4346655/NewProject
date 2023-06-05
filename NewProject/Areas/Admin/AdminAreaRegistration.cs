@@ -15,6 +15,28 @@ namespace NewProject.Areas.Admin
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
+           "thong bao",
+           "thong-bao",
+           new { Controller = "Announce", action = "Index", id = UrlParameter.Optional }
+        );
+
+            context.MapRoute(
+            "respond-mail",
+            "tra-loi-mail",
+            new { Controller = "Announce", action = "Respond_mail" }
+         );
+            context.MapRoute(
+             "xoa mail",
+             "xoa-mail-{ID}",
+             new { Controller = "Announce", action = "Delete", id = UrlParameter.Optional }
+          );
+            context.MapRoute(
+            "xoa mail list",
+            "xoa-mail-list",
+            new { Controller = "Announce", action = "DeleteList" }
+         );
+
+            context.MapRoute(
               "thay doi thoi gian voucher",
               "gia-han",
               new { Controller = "Vouchers", action = "GianHan", id = UrlParameter.Optional }

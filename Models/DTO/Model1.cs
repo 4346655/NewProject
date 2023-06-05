@@ -27,6 +27,7 @@ namespace Models.DTO
 		public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
 		public virtual DbSet<Temp> Temps { get; set; }
 		public virtual DbSet<ThanhToan> ThanhToans { get; set; }
+		public virtual DbSet<ThongBao> ThongBaos { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{

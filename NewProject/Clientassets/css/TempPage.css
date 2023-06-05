@@ -4,7 +4,7 @@
 }
 
 .order-content {
-    width: 1280px;
+    width: 100%;
     height: 620px;
     display: flex;
 }
@@ -17,6 +17,7 @@
 
 .info-order {
     flex: 15;
+
 }
 
 .title_voucher {
@@ -97,7 +98,7 @@
 
     .item_info > input {
         width: 60%;
-        border-radius: 5px;
+        text-align:center;
         border: 0.1px solid;
         height: 30px;
     }
@@ -120,7 +121,13 @@
     padding-left:30px;
     margin-top:30px
 }
-.btn-order:hover{
-    background-color:aqua;
-    border-radius:10px;
+.btn-order {
+    width: 300px;
+    height: 30px;
+    margin-top: 30px;
+    margin-left:40px;
+}
+.btn-order:hover {
+    background-color: aqua;
+
 }

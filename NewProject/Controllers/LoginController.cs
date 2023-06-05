@@ -6,11 +6,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NewProject.Areas.Admin.Controllers;
+using Facebook;
+using System.Configuration;
 
 namespace NewProject.Controllers
 {
     public class LoginController : Controller
     {
+        private Uri RedirectUri
+		{
+			get
+			{
+                var uriBuilder = new UriBuilder(Request.Url);
+                uriBuilder.Query = null;
+                uriBuilder.Fragment = null;
+                uriBuilder.Path = Url.Action("FacebookCallback");
+                return uriBuilder.Uri;
+			}
+		}
         // GET: Login
         public ActionResult Index()
         {
@@ -29,9 +42,10 @@ namespace NewProject.Controllers
                     Session.Add(LoginConstants.LOGIN_SESSION, login);
                     var cs = new CustomersDao();
                     var ac = cs.GetDetailByUsername(login.username);
-                   
+             
                         return RedirectToAction("Index", "Home");
-                    
+                   
+
                 }
                 else if(res==0)
 				{
@@ -62,17 +76,17 @@ namespace NewProject.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Forgetpassword(string username, string sodienthoai)
+        public ActionResult Forgetpassword(string username, string email)
         {
             var ac = new AccountDao();
-            var mk = ac.quenmatkhau(username, sodienthoai);
+            var mk = ac.quenmatkhau(username, email);
             if (mk == "0")
             {
                 ModelState.AddModelError("", "Tài khoản không tồn tại.");
             }
             else if (mk == "1")
             {
-                ModelState.AddModelError("", "Số điện thoại không chính xác.");
+                ModelState.AddModelError("", "Email tài khoản không chính xác.");
             }
             else if (mk == "2")
             {
@@ -80,18 +94,73 @@ namespace NewProject.Controllers
             }
             else
             {
+                String content = System.IO.File.ReadAllText(Server.MapPath("~/MailTemplate/QuenMatKhau.html"));
+                content = content.Replace("{{CustommerName}}", username);
+                content = content.Replace("{{NEWPASS}}", mk);
+                
+                Common.MailHelpper.SendMail("LAVADO", "Tài khoản " , content.ToString(), email);
+
                 ViewBag.Alert = mk;
                 username = "";
-                sodienthoai = "";
+                email = "";
+                ModelState.AddModelError("", "Lấy mật khẩu thành công.");
             }
             return View();
         }
         public ActionResult Logout()
 		{
-            var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
-            Session.Remove(session.username);
-            Session.Remove(session.password);
+
+            Session.Clear();
             return RedirectToAction("Index");
+
+        }
+        public ActionResult LoginFacebook()
+		{
+            var facebook = new FacebookClient();
+            var loginUrl = facebook.GetLoginUrl(new
+            {
+                client_id = ConfigurationManager.AppSettings["FbAppId"],
+                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
+                redirect_uri = RedirectUri.AbsoluteUri,
+                respond_type = "code",
+                scope = "email",
+            });
+
+            return Redirect(loginUrl.AbsoluteUri);
+		}
+        public ActionResult FacebookCallback(string code)
+		{
+            var facebook = new FacebookClient();
+           dynamic result = facebook.Post("oauth/access_token",new
+            {
+                client_id = ConfigurationManager.AppSettings["FbAppId"],
+                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
+                redirect_uri = RedirectUri.AbsoluteUri,
+                code= code,
+            });
+            var accesstoken = result.access_token;
+            if(!string.IsNullOrEmpty(accesstoken))
+			{
+                dynamic me = facebook.Get("me?username,password");
+                string username = me.username;
+                string password = me.password;
+
+                var rst = new AccountDao().InsertForFacebook(username, password);
+                if(rst==1)
+				{
+                    var session = new LoginModels();
+                    session.username = username;
+                    session.password = password;
+                    Session.Add(LoginConstants.LOGIN_SESSION, session);
+                   
+				}
+				else
+				{
+                    ModelState.AddModelError("", "Đăng nhập thất bại");
+				}
+			}
+            return RedirectToAction("Index", "Home");
+
 
         }
     }

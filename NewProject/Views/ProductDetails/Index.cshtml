@@ -17,7 +17,7 @@
     <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="wrapper">
+    <div id="wrapper" style="z-index:-10;">
         <div id="content xzx" class="container" style="background-color: antiquewhite; border-radius: 10px;">
             <div id="left-content">
                 <div class="head-img">
@@ -98,18 +98,7 @@
 
         <div class="comment_product">
             <!--    @Html.Action("Start", "ProductDetails", new {idsach = Model.ID})-->
-            <div class="write_comment">
-                <form action="/binh-luan" method="get">
-                    <input type="hidden" name="idsach" id="idsach" value="@Model.ID" />
-                    <input class="btn_comment" type="submit"  value="Bình luận"  />
-                    <select name="andanh" style="height:50px">
-                        <option value="true">Ẩn danh</option>
-                        <option value="false" checked>Tắt ẩn danh   </option>
-                    </select>
-                    <input class="input_comment" type="text" name="noidung" id=" noidung" />
-
-                </form>
-            </div>
+           
             <div class="view_comment">
                 @Html.Action("Listcomment", "ProductDetails", new { idsach = Model.ID })
             </div>
@@ -127,7 +116,7 @@
          function addToOrder() {
              var solng = document.getElementById("solng").value;
              if (solng == 0) solng = 1;
-             var urla = 'xac-minh-don-hang-@Model.ID-' + solng;
+             var urla = 'mua-hang-@Model.ID-' + solng;
             document.querySelector(".select .buy").href = urla;
         }
 

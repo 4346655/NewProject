@@ -82,7 +82,7 @@ namespace NewProject.Controllers
 		{
             var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
             var kh = new CustomersDao();
-            var id = kh.GetID(session.username);
+            var id = kh.GetIDTK(session.username);
             var ac = new AccountDao();
             var key = ac.Changepassword(id, oldpass, newpass, confirm);
             if(key==0)
@@ -96,11 +96,20 @@ namespace NewProject.Controllers
             else if(key==2)
 			{
                 ModelState.AddModelError("", "Mật khẩu không khớp");
-			}
-			else
+            }
+            else if (key == 4)
+            {
+                ModelState.AddModelError("", "Mật khẩu nhiều hơn 8 kí tự");
+            }
+            else if (key == 5)
+            {
+                ModelState.AddModelError("", "Mật khẩu chứa kí tự không cho phép");
+            }
+            else
 			{
                 ModelState.AddModelError("", "Đổi mật khẩu thành công");
             }
+
             if (session != null)
             {
                 ac.CreateNew(session.username);

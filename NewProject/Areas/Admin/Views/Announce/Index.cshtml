@@ -1,0 +1,166 @@
+﻿@model List<Models.DTO.ThongBao>
+@{
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Areas/Assets/fontawesome-free-6.3.0-web/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Areas/Assets/css/announce.css" rel="stylesheet" />
+</head>
+<body>
+    <section class="section-content">
+        <img style="position: absolute;z-index: -1;width: 100%;height: 690px;" src="/assestAdmin/img/hinh-anh-binh-minh-tren-dong-co.jpg" alt="">
+        <div style="width: 100%;">
+            <div style="width: 100%;height: 600px;">
+                <div class="announce-header">
+                    <div style="display: flex;justify-content: space-between;">
+                        <div style="display: flex;">
+                            <i class="fa-solid fa-envelope" style="color: #000000;margin: 20px;width: 80px;"></i>
+                            <p style="margin-top: 20px;">Chính </p>
+                        </div>
+                        <div style="display: flex;justify-content: space-around;width: 150px;margin-top: 20px;">
+
+                            <i class="fa-solid fa-list" style="color: #000000;"></i>
+                            <i class="fa-solid fa-trash"  id="trash" style="color: #000000;"></i>
+                            
+                            <i class="fa-solid fa-image" style="color: #000000;"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="announce-body">
+                    <div class="mail">
+
+                        @foreach (var item in Model)
+                        {
+
+                            <div class="gmail-item" id="seen-gmail-@item.ID" data-modal-id="modal-@item.ID">
+                                <input type="checkbox" data-id="@item.ID">
+                                <p>@item.EmailUser</p>
+                                <i>@item.TieuDe</i>
+                            </div>
+                        }
+
+                    </div>
+                        @foreach (var item in Model)
+                        {
+                            <div class="content-mail" id="modal-@item.ID" style="display:none;">
+                                <div class="head-mail">
+                                    <div>
+                                        <h3 style="margin-top:10px;">Nội dung chính </h3>
+                                        <i><small>Gửi bởi : @item.EmailUser</small></i>
+                                    </div>
+                                </div>
+                                <div class="gmail-content" id="gmail-content">
+                                
+                                    <small style="margin-left: 50px;">
+                                        @item.NoiDung
+                                    </small>
+                                
+                                </div>
+                                <div style="width:100%;display:flex;justify-content:space-around">
+                                    <button class="btn-mail button_respond" type="button" id="button_respond-@item.ID" data-modal-id="button_respond-modal-@item.ID"> Trả lời</button>
+                                    <a href="/xoa-mail-@item.ID" class="btn-mail button_delete_respond" type="button"><p>Xóa</p></a>
+
+                                </div>
+                            </div>
+                         
+                        }
+                 </div>
+               
+               
+                    @foreach (var item in Model)
+                    {
+                    
+                    <div class="content-respond" id="button_respond-modal-@item.ID">
+                        <div class="background-respond">
+                            <div class="head-mail-respond">
+                                <h3>Gửi tới : </h3>
+                                <i> @item.EmailUser</i>
+                            </div>
+                            <form action="/tra-loi-mail" method="get" style="width:100%;height:100%;">
+                                <div class="content-mail-respond">
+                                    <div style="width:100%;padding:20px">
+                                        <i>@item.NoiDung</i>
+                                    </div>
+                                    <input type="hidden" name="usermail" value="@item.EmailUser" />
+                                    <input type="hidden" name="beforecontent" value="@item.NoiDung" />
+                                    <textarea name="content" placeholder="Nhập trả lời ...">
+                                          
+                                    </textarea>
+                                    <button>Gửi đi</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    }
+              
+            </div>
+        </div>
+    </section>
+    <script>
+        var modalBtns = document.querySelectorAll('.gmail-item');
+        var content = document.querySelectorAll('.content-mail');
+        modalBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modalId = this.getAttribute('data-modal-id');
+               
+                var modal = document.getElementById(modalId);
+                content.forEach(function (m) {
+                    m.style.display = "none";
+                });
+                modal.style.display = "block";
+            });
+        });
+
+
+        var modalBtns1 = document.querySelectorAll('.button_respond');
+        var content1 = document.querySelectorAll('.content-respond');
+        modalBtns1.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modalId = this.getAttribute('data-modal-id');
+                var modal = document.getElementById(modalId);
+                modal.style.display = "block";
+            });
+        });
+
+        window.onclick = function (event) {
+            if (event.target.classList.contains('content-respond')) {
+                event.target.style.display = "none";
+            }
+        };
+
+
+
+        document.getElementById("trash").addEventListener("click", function () {
+            
+            var ids = [];
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    ids.push(checkbox.getAttribute("data-id"));
+                }
+            });
+            if (ids.length > 0) {
+                for (let i = 0; i < ids.length; i++) {
+
+                    window.location.href = "/xoa-mail-" + ids[i];
+                }
+            }
+            else {
+                alert("Chọn email muốn xóa ?");
+            }
+
+
+          
+        });
+
+
+    </script>
+</body>  
+</html>

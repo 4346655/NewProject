@@ -34,6 +34,19 @@ namespace Models.DTO
 
         public int? Trang_thai { get; set; }
 
+        public DateTime? Ngay0 { get; set; }
+
+        [StringLength(250)]
+        public string Hoten { get; set; }
+
+        [StringLength(20)]
+        public string SDT { get; set; }
+
+        public string Diachi { get; set; }
+
+        [StringLength(250)]
+        public string Email { get; set; }
+
         public virtual KhachHang KhachHang { get; set; }
 
         public virtual Sach Sach { get; set; }

@@ -1,0 +1,169 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+
+
+<html>
+<head>
+    <title>Info Windows</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            width: 400px;
+            height: 400px;
+            margin-top: 20px;
+            min-width: 300px;
+        }
+
+        .info-shop {
+            width: 50%;
+            min-width: 300px;
+        }
+
+        .title-contact {
+            text-align: center;
+            background-color: aqua;
+            height: 50px;
+            margin-top: 0px;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .content-contact {
+            height: 350px;
+            border: 0.3px solid;
+        }
+
+        .item-contact {
+            display: flex;
+        }
+
+            .item-contact > p {
+                border-right: 0.2px solid;
+                min-width: 100px;
+                margin-left: 20px;
+                font-size: 16px;
+                font-weight: 600;
+                margin-top: 25px;
+            }
+
+            .item-contact > i {
+                margin-top: 25px;
+                margin-left: 10px;
+            }
+
+            .item-contact > div {
+                margin-top: 5px;
+                margin-left: 10px;
+            }
+    </style>
+    <link rel="stylesheet" href="./assets/font/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div style=" display: flex;justify-content: space-around;">
+        <div class="info-shop">
+            <div class="title-contact">
+                <h2>Thông tin liên hệ </h2>
+            </div>
+            <div class="content-contact">
+                <div class="item-contact">
+                    <p>Địa chỉ </p>
+                    <i class="fa-sharp fa-solid fa-location-dot" style="color: #000000;margin-right: 10px;"></i>
+                    <div>
+                        <p>
+                            Da Nang University of Science and Technology
+                            54 Nguyễn Lương Bằng
+                            Hoà Khánh Bắc
+                            Liên Chiểu
+                            Đà Nẵng 550000, Vietnam
+                        </p>
+                    </div>
+                </div>
+                <div class="item-contact">
+                    <p>Số điện thoại</p>
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <p>0799163083</p>
+                    </div>
+                </div>
+                <div class="item-contact">
+                    <p>Email</p>
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <p>nhat1807kk@gmail.com</p>
+                    </div>
+                </div>
+                <div class="item-contact">
+                    <p>Facebook</p>
+                    <i class="fa-brands fa-square-facebook"></i>
+                    <div>
+                        <p>lavado.facebook.com</p>
+                    </div>
+                </div>
+                <div class="item-contact">
+                    <p>Instagram</p>
+                    <i class="fa-brands fa-square-instagram"></i>
+                    <div>
+                        <p>lavado.instagram.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <!--
+      The `defer` attribute causes the callback to execute after the full HTML
+      document has been parsed. For non-blocking uses, avoiding race conditions,
+      and consistent behavior across browsers, consider loading using Promises.
+      See https://developers.google.com/maps/documentation/javascript/load-maps-js-api
+      for more information.
+      -->
+    <script>
+        // This example displays a marker at the center of Australia.
+        // When the user clicks the marker, an info window opens.
+        function initMap() {
+            const uluru = { lat: 16.073900, lng: 108.1500 };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 17,
+                center: uluru,
+            });
+            const contentString = "";
+
+            const infowindow = new google.maps.InfoWindow({
+                content: contentString,
+                ariaLabel: "Uluru",
+            });
+            const marker = new google.maps.Marker({
+                position: uluru,
+                map,
+                title: "Tiêu đề",
+            });
+
+            marker.addListener("click", () => {
+                infowindow.open({
+                    anchor: marker,
+                    map,
+                });
+            });
+        }
+
+        window.initMap = initMap;
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+            defer></script>
+
+</body>
+</html>

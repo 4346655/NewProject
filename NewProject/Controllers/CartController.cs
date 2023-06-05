@@ -29,6 +29,20 @@ namespace NewProject.Views.Home
                 return RedirectToAction("Index", "Login");
 			}
         }
+        public ActionResult Update(int id, int soluong)
+        {
+            var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                var gh = new CartDao();
+                gh.Update(id, soluong);
+                return RedirectToAction("Index");
+            }
+        }
         public ActionResult AddtoCart(int idsach,int soluong)
 		{
             var gh = new CartDao();

@@ -1,0 +1,99 @@
+﻿@model List<Models.DTO.DonHang>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Percent_typeOrder</title>
+</head>
+<body>
+    @{
+        int count1 = 0, count2 = 0, count3 = 0, count4 = 0;
+        int income1 = 0, income2 = 0, income3 = 0;
+
+        foreach (var item in Model)
+        {
+            if (item.Trang_thai == 1) { count1++;income1 += (int)item.Tong_gia; }
+            else if (item.Trang_thai == 2) { count2++; income2 += (int)item.Tong_gia; }
+            else if (item.Trang_thai == 3) { count3++; income3 += (int)item.Tong_gia; }
+            else { count4++; }
+        }
+        <div class="values first-values">
+            <div class="category category-1">
+                <div style="display: flex;">
+                    <h2></h2>
+                    <p style="margin-left: 20px;margin-bottom: 10px;">Đơn hàng đang chuẩn bị : @count1 / @Model.Count()</p>
+                </div>
+                <div style="width: 250px; height: 10px;border-radius: 50px; background-color: rgb(158, 158, 158)">
+                    <div style="width:  @(Convert.ToInt32(count1*250/Model.Count()).ToString())px; height: 10px;border-radius: 50px; background-color:  #33d7d4">
+                    </div>
+                </div>
+            </div>
+            <div class="category category-1">
+                <div style="display: flex;">
+                    <h2></h2>
+                    <p style="margin-left: 20px;margin-bottom: 10px;">Đơn hàng đang giao : @count2 / @Model.Count()</p>
+                </div>
+                <div style="width: 250px; height: 10px;border-radius: 50px; background-color: rgb(158, 158, 158)">
+                    <div style="width:  @(Convert.ToInt32(count2*250/Model.Count).ToString())px; height: 10px;border-radius: 50px; background-color:  #33d7d4">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="values first-values">
+            <div class="category category-1">
+                <div style="display: flex;">
+                    <h2></h2>
+                    <p style="margin-left: 20px;margin-bottom: 10px;">Đơn hàng đã giao : @count3 / @Model.Count()</p>
+                </div>
+                <div style="width: 250px; height: 10px;border-radius: 50px; background-color: rgb(158, 158, 158)">
+                    <div style="width:  @(Convert.ToInt32(count3*250 / Model.Count()).ToString())px; height: 10px;border-radius: 50px; background-color:  #33d7d4">
+                    </div>
+                </div>
+            </div>
+            <div class="category category-1">
+                <div style="display: flex;">
+                    <h2></h2>
+                    <p style="margin-left: 20px;margin-bottom: 10px;">Đơn hàng đã hủy : @count4 / @Model.Count()</p>
+                </div>
+                <div style="width: 250px; height: 10px;border-radius: 50px; background-color: rgb(158, 158, 158)">
+                    <div style="width:  @(Convert.ToInt32(count4*250/Model.Count()).ToString())px; height: 10px;border-radius: 50px; background-color:  #33d7d4">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="values first-values">
+            <h2 style="margin-top: 12px;">Doanh thu</h2>
+            <div class="tongthu">
+                <div style="width: 100%;height: auto;padding:30px ;text-align: center;display:inline-block;background-color: rgb(255, 188, 87);margin-top: 10px; border-radius: 5px;margin-left: 3px;">
+                    <h3 style="color: aliceblue; ">
+                        Đã hoàn thành  @income3 VNĐ
+                    </h3>
+                </div>
+
+                <div style="width: 100%;height: auto;padding:30px ;text-align: center;display:inline-block;background-color: rgb(255, 188, 87);margin-top: 10px; border-radius: 5px;margin-left: 3px;">
+                    <h3 style="color: aliceblue;">Đang giao hàng  @income2 VNĐ</h3>
+                </div>
+                <div style="width: 100%;height: auto;padding: 30px ;text-align: center;display:inline-block;background-color: rgb(255, 188, 87);margin-top: 10px; border-radius: 5px;margin-left: 3px;">
+                    <h3 style="color: aliceblue;">Đang chuẩn bị @income1 VNĐ</h3>
+                </div>
+
+            </div>
+
+            <div style="width: 100%;height: auto;padding: 20px ;text-align: center;display:inline-block;background-color:  #33d7d4;margin-top: 20px; border-radius: 5px;">
+                <h2 style="color: aliceblue;">Tổng thu nhập  : @(income1+income2+income3) VNĐ</h2>
+            </div>
+
+        </div>
+
+
+
+    }
+</body>
+</html>

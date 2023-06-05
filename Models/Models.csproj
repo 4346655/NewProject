@@ -62,11 +62,13 @@
     <Compile Include="DAO\AccountDao.cs" />
     <Compile Include="DAO\CartDao.cs" />
     <Compile Include="DAO\CategoriesDao.cs" />
+    <Compile Include="DAO\ContactDao.cs" />
     <Compile Include="DAO\CustomersDao.cs" />
     <Compile Include="DAO\Hash_MD5.cs" />
     <Compile Include="DAO\LoginConstants.cs" />
     <Compile Include="DAO\OrdersDao.cs" />
     <Compile Include="DAO\ProductsDao.cs" />
+    <Compile Include="DAO\ThongbaoDao.cs" />
     <Compile Include="DAO\VoucherDao.cs" />
     <Compile Include="DTO\BinhLuan.cs" />
     <Compile Include="DTO\DonHang.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="DTO\TaiKhoan.cs" />
     <Compile Include="DTO\Temp.cs" />
     <Compile Include="DTO\ThanhToan.cs" />
+    <Compile Include="DTO\ThongBao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -18,6 +18,12 @@ namespace Models.DAO
 		{
 			return db.GioHangs.Where(x => x.ID_KhachHang == iduser).ToList();
 		}
+		public void Update(int id,int soluong)
+		{
+			var model = db.GioHangs.Find(id);
+			model.SoLuong = soluong;
+			db.SaveChanges();
+		}
 		public void Themsanpham(int idsach, int iduser, int soluong)
 		{
 			var model = db.GioHangs.Where(x => x.ID_KhachHang == iduser && x.ID_Sach == idsach).SingleOrDefault();

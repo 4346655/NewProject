@@ -22,11 +22,19 @@
         }
 
         .ip_search {
-            width: 830px;
-            height: 70px;
+            width:20%;
+            height: 45px;
             border: none;
+            margin-top:10px;
+            margin-left:2.5%;
             text-align: center;
-            background-color: lightcyan;
+            background-color: lightgray;
+            transition:all 1s;
+            border-radius:0px 10px 10px 0px;
+
+        }
+        form{
+            width:100%;
         }
         .ip_search:active{
             border:none;
@@ -79,58 +87,100 @@
             margin-top: 30px;
             height: 80%;
             display: flex;
-            background-color: aquamarine;
+         
         }
 
         .avt_pro {
             width: 30%;
-            border-right: 1 solid;
+            border-right: 1px solid;
         }
 
         .infomation_pro {
             width: 70%;
         }
         .button-tab {
-            width: 150px;
+            width: 70px;
             text-align: center;
             height: 70px;
-            border-right: 1px solid;
-            text-decoration: none
-           
+            text-decoration: none;
+            border-radius: 50px;
+            display: inline-block;
+            background: linear-gradient(to bottom, limegreen, rgb(52 160 160));
         }
+            .button-tab:hover {
+                background: linear-gradient(to bottom, limegreen, limegreen);
+            }
+        .button-tab-0 {
+            width: 70px;
+            text-align: center;
+            height: 100px;
+            text-decoration: none;
+            border-radius: 50px 50px 0px 0px;
+            background-color: rgb(52 160 160);
+        }
+        
         .button-search:hover{
             background-color:aqua;
         }
+       table{
+           background-color:rgb(200,255,255,0.4);
+           border-radius:20px;
+       }
+       tr{
+           transition:all 0.5s;
+       }
+        tr:hover {
+            background-color: rgb(52 160 160);
+            border-radius:50px;
+        }
+        .button-tab-1 {
+            width: 70px;
+            text-align: center;
+            height: 70px;
+            text-decoration: none;
+            border-radius: 50px;
+        }
+            .button-tab-1:hover {
+                background: linear-gradient(to bottom, red, lightgray);
+            }
     </style>
     <link href="~/Content/PagedList.css" rel="stylesheet" />
     <link href="~/Areas/Assets/css/Modal_product.css" rel="stylesheet" />
+    <link href="~/Areas/Assets/fontawesome-free-6.3.0-web/css/all.min.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="detail">
-    
-        </div>
-        <div class="detail_list" style="width:1300px;">
+ 
+        <div class="detail_list">
 
-            <div style="display:flex;background-color:aqua;height:70px">
-                <div style="display:flex;outline:none">
-                    <a class="button-tab" style="background-color:lightcoral"  href="/thung-rac-san-pham">
-                        <p style="margin-top:25px;">Thùng rác</p>
-                    </a>
-                    <a  class="button-tab" style="background-color:lightgreen" href="/them-san-pham">
-                        <p style="margin-top:25px;">Thêm sản phẩm</p>
-                    </a>
-                </div>
-
+            <div style="display:flex;height:70px;justify-content:space-between;width:95%;margin-bottom:20px">
                 @using (Html.BeginForm("Index", "Products", FormMethod.Get))
                 {
-                    <div style="display:flex;  ">
-                        <button type="submit" class="button-tab button-search" style="border:none">Tìm kiếm</button>
-                        <input type="text" class="ip_search" autocomplete="off" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
+                    <div style="width:100%">
+                        <div style="width:70px;height:70px;position:absolute;background-color:gray;border-radius:100px;text-align:center">
+                            <i class="fa-solid fa-magnifying-glass fa-2xl" style="margin-top:35px;"></i>
+                        </div>
+                        <input type="text" id="input-search" class="ip_search" autocomplete="off" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
                     </div>
                 }
+            <div style="outline:none;width:20%;">
+
+                <div style="display:flex;width:100%;height:25px;justify-content:space-around;">
+                    <div class="button-tab-0">
+                        <a class="button-tab" style="z-index:100" href="/them-san-pham">
+                            <i class="fa-solid fa-square-plus fa-2xl " style="margin-top:35px;"></i>
+                        </a>
+                    </div>
+                        <a class="button-tab-1" style="background-color:lightgray;" href="/thung-rac-san-pham">
+                            <i class="fa-solid fa-trash fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+                    </div>
+                    <div style="width: 50%; height: 20px; background: linear-gradient(to left, lightgray, limegreen); margin-left: 25%; "></div>
+                </div>
+
+
             </div>
-            <table>
-                <thead>
+            <table style="width:100%">
+                <thead style="background-color: rgb(52 160 160);">
                     <tr >
                         <td style="color:aqua;font-weight:700">Ảnh</td>
                         <td style="color:aqua">Thể loại</td>
@@ -169,16 +219,27 @@
                                             <strong style="text-align: center;font-size:25px;">@item.TenSach</strong>
                                         </div>
                                         <div class="content_modal_pro">
-                                            <div class="avt_pro" style="justify-content: center; align-items: center; display: flex">
-                                                <img src="@item.Anh" width="250px;">
+                                            <div class="avt_pro">
+                                                <div style="width:100%;height:75%;">
+                                                    <img src="@item.Anh" style="width:200px;">
+                                                </div>
+                                                <div style="width:100%;text-align:start;font-size:20px">
+                                                    <div style="display:flex">
+                                                        <h3 style="min-width:50%"> Giá  </h3>
+                                                        <p>: @item.Gia</p>
+                                                    </div>
+                                                    <div style="display:flex">
+                                                        <h3 style="min-width:50%"> Số lượng  </h3>
+                                                        <p>: @item.SoLuong</p>
+                                                    </div>
+                                                    <div style="display:flex">
+                                                        <h3 style="min-width:50%">Nhà xuất bản  </h3>
+                                                        <p>: @item.NhaXuatBan</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="infomation_pro">
-                                                <div class="item_modal_pro">
-                                                    <p>Giá : @item.Gia</p>
-                                                </div>
-                                                <div class="item_modal_pro">
-                                                    <p>Số lượng : @item.SoLuong</p>
-                                                </div>
+                                               
                                                 <div class="item_modal_pro">
                                                     <p>Đã bán : @item.SoLuong_DaBan</p>
                                                 </div>
@@ -214,7 +275,6 @@
         <!-- -----------------HD gan dayh--------- -->
 
 
-    </div>
     <script>
 
         var modalBtns = document.querySelectorAll('.modal-btn');
@@ -239,6 +299,20 @@
                 event.target.style.display = "none";
             }
         };
+
+
+        var inputsearch = document.getElementById("input-search");
+       
+        inputsearch.addEventListener('mouseover', function () {
+            inputsearch.style.width = "60%";
+            inputsearch.style.borderRadius = "0px 50px 50px 0px";
+            inputsearch.style.backgroundColor = "lightgreen";
+        });
+        inputsearch.addEventListener('mouseout', function () {
+            inputsearch.style.width = "20%";
+            inputsearch.style.borderRadius = "0px 10px 10px 0px";
+            inputsearch.style.backgroundColor = "lightgray";
+        });
 
     </script>
 </body>

@@ -17,12 +17,10 @@
     <link href="~/Clientassets/css/user.css" rel="stylesheet" />
     <style>
         .thongbao {
-            padding-top: 10px;
-            height: 50px;
-            width: 100%;
-            background-color: rgb(0,255,255,0.7);
+            text-align: center;
+            width: 400px;
             font-size: 20px;
-            color: #fff;
+            color: #33d7d4;
         }
     </style>
 </head>
@@ -33,21 +31,29 @@
         <div class="left-body">
             <div class="col-xl-4  top-left-body">
                 <div class="card1">
-                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                        <img src="@Model.AnhDaiDien" alt="" class="round" style="border:1px solid;margin-left:20px;margin-top:30px;">
-                        <h2 style="margin-left:40px;">@Model.HoTen</h2>
-                        <h3 style="margin-left:100px;">@Model.SDT</h3>
+                    <div style="text-align:center">
+                        <img src="@Model.AnhDaiDien" alt="" class="round" style="border:1px solid;margin-top:30px;">
+                        <h2>@Model.HoTen</h2>
+                        <h3>------------------</h3>
 
                     </div>
                 </div>
-
             </div>
             <div class="bot-left-body">
                 <div class="topbutton">
-                    <button class="buttonfunc">Đơn hàng của bạn</button>
-                    <form action="/gio-hang">
-                        <button class="buttonfunc">Giỏ hàng </button>
-                    </form>
+                    <h3>Thông tin chi tiết</h3>
+                    <div style="display:flex;margin-top:20px">
+                        <h4 style="min-width:100px">Họ tên :</h4> <i>@Model.HoTen</i>
+                    </div>
+                    <div style="display:flex">
+                        <h4 style="min-width:100px">Địa chỉ  :</h4> <i>@Model.Diachi</i>
+                    </div>
+                    <div style="display:flex">
+                        <h4 style="min-width:100px">Email  :</h4> <i>@Model.Email</i>
+                    </div>
+                    <div style="display:flex">
+                        <h4 style="min-width:100px">SDT  :</h4> <i>@Model.SDT</i>
+                    </div>
                 </div>
 
             </div>
@@ -56,9 +62,8 @@
         <div class="right-body">
             <div class="title_profile">
                 <div class="center_profile">
-                    <a href="/ho-so" class="btn-func" id="btn1" style="background-color: lightgray"><p style="margin-top:20px;">Thông tin</p></a>
 
-                    <a href="/sua-ho-so" class="btn-func" id="btn2" style="background-color: blue"><p style="margin-top:20px;">Chỉnh sửa</p></a>
+                    <a href="/sua-ho-so" class="btn-func" id="btn2" style="background-color: lightblue"><p style="margin-top:20px;">Chỉnh sửa</p></a>
 
                     <a href="/doi-mat-khau" class="btn-func" id="btn3" style="background-color: lightgray"><p style="margin-top:20px;">Đổi mật khẩu</p> </a>
                 </div>
@@ -69,58 +74,71 @@
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, null, new { @class = "thongbao" })
-                    <form action="/sua-ho-so" method="get">
+                   
+                    <form action="/sua-ho-so" method="get" >
+                        <div style="display:flex;width:100%;height:80%">
+                            <div class="subdiv"  style="width:50%">
+                                <div class='body_content'>
+                                    <div class="contentcolumn img_avt">
+                                        <img src="@Model.AnhDaiDien">
+                                        <div class="pt-2">
+                                            <input type="hidden" id="txtImage" name="avt" />
+                                            <input style="width:100%;height:30px;margin-left:5px;margin-bottom:5px;margin-right:5px;" type="button" value="Tải ảnh" onclick="BrowserServer('txtImage')" />
 
-                        <div class="subdiv">
-                            <div class='body_content'>
-                                <div class="namecolumm"><p class="cnt_column">Ảnh đại diện</p></div>
-                                <div class="contentcolumn img_avt" style="width:100px;">
-                                    <img src="@Model.AnhDaiDien" width="90" style="border-bottom:solid;margin-left:5px;margin-top:5px;">
-                                    <div class="pt-2">
-                                        <input type="hidden" id="txtImage" name="avt" />
-                                        <input style="width:90%;height:30px;margin-left:5px;margin-bottom:5px;margin-right:5px;" type="button" value="Tải ảnh" onclick="BrowserServer('txtImage')" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div style="width:50%">
+                                <div class="subdiv">
+                                    <div class="body_content">
+                                        <div class="namecolumm"><p class="cnt_column">Họ và tên</p></div>
+                                        <div class="contentcolumn"> <input class="content_column" value="@Model.HoTen" name="hoten" /> </div>
 
                                     </div>
                                 </div>
+                                <div class="subdiv">
+                                    <div class="body_content">
+                                        <div class="namecolumm"><p class="cnt_column">Địa chỉ</p></div>
+                                        <div class="contentcolumn"> <input class="content_column" value="@Model.Diachi" name="diachi" /> </div>
 
+                                    </div>
+
+                                </div>
+                                <div class="subdiv">
+
+                                    <div class="body_content">
+
+                                        <div class="namecolumm"><p class="cnt_column">Email </p></div>
+                                        <div class="contentcolumn"> <input class="content_column" value="@Model.Email" name="email" /> </div>
+
+                                    </div>
+                                </div>
+                                <div class="subdiv">
+                                    <div class="body_content">
+
+                                        <div class="namecolumm"><p class="cnt_column">Số điện thoại</p></div>
+                                        <div class="contentcolumn"> <input class="content_column" value="@Model.SDT" name="sdt" /> </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="subdiv" style="margin-left:25px">
+                                    <div style=" margin-left: 20px; margin-top: 40px;">
+                                        <i>@Html.ValidationSummary(true, null, new { @class = "thongbao" })</i>
+                                        <hr />
+                                    </div>
+                                    
+                                </div>
                             </div>
                         </div>
-                        <div class="subdiv">
-                            <div class="body_content">
-                                <div class="namecolumm"><p class="cnt_column">Họ và tên</p></div>
-                                <div class="contentcolumn"> <input class="content_column" value="@Model.HoTen" name="hoten" /> </div>
 
+
+                            <div>
+                                <button type="submit" class="btn btn-primary button-saveinfo">Lưu thông tin</button>
                             </div>
-                            <div class="body_content">
-                                <div class="namecolumm"><p class="cnt_column">Địa chỉ</p></div>
-                                <div class="contentcolumn"> <input class="content_column" value="@Model.Diachi" name="diachi" /> </div>
-
-                            </div>
-
-                        </div>
-                        <div class="subdiv">
-
-                            <div class="body_content">
-
-                                <div class="namecolumm"><p class="cnt_column">Email </p></div>
-                                <div class="contentcolumn"> <input class="content_column" value="@Model.Email" name="email" /> </div>
-
-                            </div>
-                            <div class="body_content">
-
-                                <div class="namecolumm"><p class="cnt_column">Số điện thoại</p></div>
-                                <div class="contentcolumn"> <input class="content_column" value="@Model.SDT" name="sdt" /> </div>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <div>
-                            <button  type="submit"  class="btn btn-primary button-saveinfo">Lưu thông tin</button>
-                        </div>
+                        
                     </form>
                 }
             </div>

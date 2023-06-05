@@ -13,17 +13,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
     <link href="~/Clientassets/css/main.css" rel="stylesheet" />
+    <link href="~/Clientassets/css/reset.css" rel="stylesheet" />
 
     <title>REGISTER-DAng Ky</title>
     <style>
         .thongbao {
             padding-top: 10px;
-            height: 60px;
-            width: 450px;
-            background-color: rgb(252,7,7,0.4);
-            font-size: 20px;
+            font-size: 15px;
             color: #fff;
-            border-radius: 20px;
+            list-style: none;
         }
     </style>
 </head>
@@ -37,7 +35,7 @@
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken();
-                    @Html.ValidationSummary(true, null, new { @class = "thongbao" });
+                 
                     <div class="list-login" style="width:450px">
                         <form action="index.html">
 
@@ -53,6 +51,7 @@
                                     <a href="/trang-chu"><p class="dk">Trang chủ</p></a>
                                 </div>
                             </div>
+                            @Html.ValidationSummary(true, null, new { @class = "thongbao" });
                             <button>Đăng Kí</button>
 
 

@@ -19,8 +19,16 @@
         </div>
        
         <div class="centerpeople-list">
+            @{ 
+                int count = 0;
+            }
             @foreach (var item in Model)
             {
+                count++;
+                if(count==5)
+				{
+                    break;
+				}
                 <div class="centerpeople-item">
                     <span>
                         <img src="@item.KhachHang.AnhDaiDien" alt="">

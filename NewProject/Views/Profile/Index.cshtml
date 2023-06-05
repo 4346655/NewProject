@@ -36,17 +36,26 @@
                     <div style="text-align:center" >
                         <img src="@Model.AnhDaiDien" alt="" class="round" style="border:1px solid;margin-top:30px;">
                         <h2 >@Model.HoTen</h2>
-                        <h3 >@Model.SDT</h3>
+                        <h3 >------------------</h3>
 
                     </div>
                 </div>
             </div>
             <div class="bot-left-body">
                 <div class="topbutton">
-                    <button class="buttonfunc" >Đơn hàng của bạn</button>
-                    <form action="/gio-hang">
-                        <button class="buttonfunc">Giỏ hàng </button>
-                    </form>
+                    <h3>Thông tin chi tiết</h3>
+                    <div style="display:flex;margin-top:20px">
+                        <h4 style="min-width:100px">Họ tên :</h4> <i>@Model.HoTen</i>
+                    </div>
+                    <div style="display:flex">
+                        <h4 style="min-width:100px">Địa chỉ  :</h4> <i>@Model.Diachi</i>
+                    </div>
+                    <div style="display:flex">
+                        <h4 style="min-width:100px">Email  :</h4> <i>@Model.Email</i>
+                    </div>
+                    <div style="display:flex">
+                        <h4 style="min-width:100px">SDT  :</h4> <i>@Model.SDT</i>
+                    </div>
                 </div>
 
             </div>
@@ -133,6 +142,7 @@
             
         </div>
     </div>
+
 
     <script src="~/Clientassets/js/apexcharts.min.js"></script>
     <script src="~/Clientassets/js/bootstrap.bundle.min.js"></script>

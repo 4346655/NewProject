@@ -1,0 +1,128 @@
+@import url('../fontawesome-free-6.3.0-web/css/brands.css');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.announce-header {
+    width: 100%;
+    height: 60px;
+    background-color: rgb(255, 255, 255,0.8);
+    border-bottom: 5px solid;
+}
+.announce-body{
+    width: 100%;
+    height: 105%;
+    display:flex;
+}
+    .announce-body > .mail {
+        width: 100%;
+        height: 480px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        background-color: rgb(255, 255, 255,0.5);
+    }
+        .announce-body >.mail::-webkit-scrollbar {
+            background-color: rgb(255, 255, 255,0);
+        }
+.gmail-item{
+    width: 100%;
+    height: 60px;
+    border-bottom: 0.5px solid;
+    display: flex;
+}
+.gmail-item:hover{
+    background-color: rgb(0, 0, 0,0.3);
+}
+.gmail-item>input{
+    margin: 15px 20px;
+    width: 15px;
+    height: 15px;
+}
+.gmail-item>p{
+  margin-left:40px;
+    margin-top: 13px;
+}
+.gmail-item>i{
+    margin: 15px 60px;
+}
+.gmail-content{
+    width: 100%;
+    padding: 20px;
+    border: 0.2px solid;
+    height:81%;
+    z-index: 1;
+    transition: 1s all;
+    color: rgb(255, 255, 255,0.8);
+}
+.content-mail{
+    width:50%;
+    height:100%;
+    border-left:solid;
+}
+.head-mail{
+    width:100%;
+    height:50px;
+    border-bottom:0.5px solid;
+    text-align:center;
+    
+}
+.btn-mail {
+    width: 50%;
+    height: 60px;
+}
+.button_delete_respond{
+    text-align:center;
+    text-decoration:none;
+    background-color:beige;
+}
+.button_delete_respond>p{
+    margin-top:20px;
+}
+.content-respond {
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: rgb(0,0,0,0.3);
+    position: fixed;
+    top:0;
+    left:0;
+}
+.background-respond {
+    width: 700px;
+    height: 500px;
+    margin-top:2%;
+    margin-left:30%;
+    background-color: #fff;
+    border-radius:50px;
+}
+.head-mail-respond{
+    width:100%;
+    height:15%;
+    border-bottom:0.5px solid;
+    display:flex;
+    
+}
+.head-mail-respond>h3 , .head-mail-respond>i{
+
+    margin-top:30px;
+    margin-right:20px;
+}
+.head-mail-respond>h3{
+    margin-left:30%;
+}
+.content-mail-respond{
+    width:100%;
+    height:100%;
+    background-color:aliceblue;
+}
+.content-mail-respond>textarea{
+    width:100%;
+    height:90%;
+}
+    .content-mail-respond > button {
+        width: 100%;
+        height: 10%;
+    }

@@ -11,150 +11,183 @@
   
 </head>
 <body>
-    <div style="margin-top:40px;">
-        <div id="wrapper">
+   
 
-            <div class="t-head ">
-                <p>GIỎ HÀNG CỦA BẠN </p>
+    <main class="cart-page">
+        <div class="cart-content">
+            <h4 style="font-size: 25px;width: 100%;height: 30px;">Giỏ hàng (@Model.Count)</h4>
+            <div class="cart-main">
+                <div class="cart-item-1">
+                    <div class="cart-sub">
+                        @foreach (var item in Model)
+                        {
+                        <div class="cart-product">
+                            <div class="product-box">
+                                <a>
+                                    <img alt="Bàn phím cơ AKKO 3068B Plus World Tour Tokyo R2" src="@item.Sach.Anh" class=" rounded">
+                                </a>
+                                <div class="infomation-product">
+                                    <div class="info-1">
+                                        <div class="product-values">
+                                            <a href="#">@item.Sach.TenSach</a>
+                                            <p><i style="font-size: 13px;">Tác giả : @item.Sach.TacGia - Nhà xuất bản : @item.Sach.NhaXuatBan</i></p>
+                                        </div>
+                                        <div class="price-product">
+                                            <p style="color: rgb(243, 69, 69);font-size: 20px;font-weight: 600;">@item.Sach.Gia </p>
+                                        </div>
+                                    </div>
+                                    <div class="info-2">
+                                        
+                                        <form action="/cap-nhat-gio-hang">
+                                            <input type="hidden" name="id" value="@item.ID" />
+                                            <div style="display: flex; margin-left: 20px">
+                                                <a class="minus minus-1" id="minus" data-modal-id="modal-@item.ID"><h2><i class="fa-solid fa-square-minus"></i></h2></a>
+                                                <div class="count-product">
+                                                    <input type="number" id="modal-@item.ID" min="1" name="soluong" style="width: 40px;height: 30px;margin:5px 10px;text-align: center;" value="@item.SoLuong" readonly>
+                                                </div>
+                                                <a class="plus plus-1" data-modal-id="modal-@item.ID" id="plus"><h2><i class="fa-solid fa-square-plus"></i></h2></a>
+                                            </div>
+                                            <button type="submit" style="width: 52px; height: 26px; margin-left: -70px; margin-top: -10px; border: none; background: linear-gradient(to top, limegreen, rgb(241, 241, 241)); ">
+                                                <p>Lưu</p>
+                                            </button>
+                                        </form>
+                                           
+                                            <form action="/xoa-gio-hang-@item.ID">
+                                                <button type="submit" style="width: 52px;height: 26px; margin-top: 10px;
+                                                            border: none;background-color: #fff;">
+                                                    <p>Xóa</p>
+                                                </button>
+                                            </form>
+                                        
+                                    </div>
+                                </div>
+                            </div>
 
+                        </div>
+                        }
+                        
+                    </div>
+                </div>
+                <div class="cart-item-2">
+                    <div class="cart-item-2-1">
+                        <h5>Chi tiết đơn hàng</h5>
+                        <div class="price_sell">
+                            <small> Giảm giá </small>
+                            <small>0 VNĐ</small>
+                        </div>
+                        <div class="price_total">
+                            <small> Tổng giá </small>
+                           
+                            <h2 id="total_price">6.000.000</h2>
+                        </div>
+                        @if (Model.Count > 0 )
+                        {
+                        <form action="/dat-hang">
+                            <input type="hidden" name="iduser" value="@Model[0].ID_KhachHang"/>
+                            <button class="btn-order">
+                                <p style="font-size: 15px;color: #fff;">Đặt hàng</p>
+                            </button>
+                        </form>
+                        }
+			            else
+			            {
+                                <form action="">
+                                   
+                                    <button class="btn-order" style="background-color: lightgray">
+                                        <p style="font-size: 15px;color: #fff;">Đặt hàng</p>
+                                    </button>
+                                </form>
+			            }
+                    </div>
+                </div>
             </div>
-            @if (Model.Count > 0)
-            {
-                <div class="content container2">
-                    <ul class="table" style="display: flex;">
-                        <li><input id="check-all" type="checkbox" style="width:20px;" /></li>
-                        <li>Hình Ảnh</li>
-                        <li>Sản Phẩm</li>
-                        <li>Số Lượng</li>
-                        <li>Giá</li>
-                        <li>Tổng Tiền</li>
-                        <li></li>
-                    </ul>
-                    <hr>
-                    @foreach (var item in Model)
-                    {
-                        <ul class="table-product" style="display: flex;">
-                            <li style="width:15px"><input id="check-@item.ID" type="checkbox" style="width:15px" data-id="@item.ID_Sach" /></li>
-                            <li style="width:95px;"><img src="@item.Sach.Anh" alt="" width="100"></li>
-                            <li style="width:280px;">@item.Sach.TenSach</li>
-                            <li style="width:50px;">@item.SoLuong</li>
-                            <li style="width:40px;">@(item.Sach.Gia-item.Sach.Gia_giam)</li>
-                            <li style="width:160px;">@(item.SoLuong * (item.Sach.Gia - item.Sach.Gia_giam)) </li>
-                            <li>
-                                <a href="/xoa-gio-hang-@item.ID"><i class="fa-solid fa-trash-can"></i></a> /
-                                <a href="/xac-minh-don-hang-@item.Sach.ID-@item.SoLuong"><i class="fa-solid fa-cart-shopping"></i></a>
-                            </li>
-                        </ul>
-                        <hr />
-
-                    }
-                </div>
-                <div class="footer container2">
-                    <div class="ship" style="display: flex;margin-bottom:30px">
-                        <br> <a href="/trang-chu">Tiếp Tục Mua Hàng</a>
-                        <a href="#" id="btn-buy">Mua - (<small id="result"></small>)</a>
-
-                    </div>
-                    <div class="option-buy">
-
-                    </div>
-                    <div class="other">
-
-                    </div>
-                </div>
-            }
-            else
-            {
-                <h2>Bạn chưa có sản phẩm nào trong giỏ hàng</h2>
-            }
-
         </div>
+    </main>
+    <script>
+
+
+        var totalPrice = 0;
+        var products = document.querySelectorAll(".cart-product");
+        products.forEach(function (product) {
+            var priceElement = product.querySelector(".price-product p");
+            var quantityElement = product.querySelector(".count-product input");
+
+            var price = parseFloat(priceElement.innerText.replace(/\D/g, ""));
+            var quantity = parseInt(quantityElement.value);
+
+            var productTotal = price * quantity;
+
+            totalPrice += productTotal;
+
+        });
+        var totalElement = document.getElementById("total_price");
+        totalElement.innerText = totalPrice;
      
-    </div>
-    <script>
 
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#check-all)');
-        const result = document.getElementById("result");
 
-        function countChecked() {
-            let count = 0;
-            let ids = [];
-            checkboxes.forEach((checkbox) => {
-                if (checkbox.checked) {
-                    count++;
-                    ids.push(checkbox.dataset.id);
+        var minus = document.querySelectorAll('.minus');
+            minus.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modalId = this.getAttribute('data-modal-id');
+                var modal = document.getElementById(modalId);
+                var soluong = parseInt(modal.value);
+                if (soluong > 1) {
+                    modal.value = soluong - 1;
                 }
+
+
+                //-------------
+                var totalPrice = 0;
+                var products = document.querySelectorAll(".cart-product");
+                products.forEach(function (product) {
+                    var priceElement = product.querySelector(".price-product p");
+                    var quantityElement = product.querySelector(".count-product input");
+
+                    var price = parseFloat(priceElement.innerText.replace(/\D/g, ""));
+                    var quantity = parseInt(quantityElement.value);
+
+                    var productTotal = price * quantity;
+
+                    totalPrice += productTotal;
+                });
+                var totalElement = document.getElementById("total_price");
+                totalElement.innerText = totalPrice;
+              
             });
-            result.innerHTML = `đang chọn : ${count} sản phẩm`;
-            for (let i = 0; i < ids.length; i++) {
-                console.log("ID sản phẩm :" + ids[i]); // Hiển thị giá trị item.ID của các checkbox đã chọn trong console log
-            }
-        }
-
-        countChecked(); // Tính toán số lượng checkbox đã được chọn ban đầu
-
-        checkboxes.forEach((checkbox) => {
-            checkbox.addEventListener("click", countChecked); // Thêm sự kiện click cho từng checkbox để tính lại số lượng checkbox đã được chọn
         });
 
+        var plus = document.querySelectorAll('.plus');
+        plus.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modalId = this.getAttribute('data-modal-id');
+                var modal = document.getElementById(modalId);
+                var soluong = parseInt(modal.value);
 
-    </script>
-    <script>
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#check-all)');
-        const checkAll = document.getElementById("check-all");
-        const result = document.getElementById("result");
+                modal.value = soluong + 1;
 
-        function countChecked() {
-            let count = 0;
-            checkboxes.forEach((checkbox) => {
-                if (checkbox.checked) {
-                    count++;
-                }
+                //------------
+                var totalPrice = 0;
+                var products = document.querySelectorAll(".cart-product");
+                products.forEach(function (product) {
+                    var priceElement = product.querySelector(".price-product p");
+                    var quantityElement = product.querySelector(".count-product input");
+
+                    var price = parseFloat(priceElement.innerText.replace(/\D/g, ""));
+                    var quantity = parseInt(quantityElement.value);
+
+                    var productTotal = price * quantity;
+
+                    totalPrice += productTotal;
+                });
+                var totalElement = document.getElementById("total_price");
+                totalElement.innerText = totalPrice;
             });
-            result.innerHTML = `đang chọn : ${count} sản phẩm`;
-        }
-
-        function checkAllChanged() {
-            checkboxes.forEach((checkbox) => {
-                checkbox.checked = checkAll.checked;
-            });
-            countChecked();
-        }
-
-        checkAll.addEventListener("click", checkAllChanged);
-
-        checkboxes.forEach((checkbox) => {
-            checkbox.addEventListener("click", countChecked);
         });
 
+      
 
-    </script>
-    <script>
-     
-            document.getElementById("btn-buy").addEventListener("click", function () {
-            var ids = [];
-            var checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#check-all)');
-            checkboxes.forEach(function (checkbox) {
-                if (checkbox.checked) {
-                ids.push(checkbox.getAttribute("data-id"));
-                }
-            });
-            if (ids.length > 0) {
 
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "/test-temp-product");
-                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        window.location.href = "/test-temp-product";
-                    }
-                };
-             xhr.send(JSON.stringify({idsach: ids }));
-            } else {
-                alert("Bạn chưa chọn sản phẩm nào!");
-            }
-        });
-
+        
 
     </script>
 </body>

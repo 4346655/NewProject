@@ -1,0 +1,60 @@
+﻿@model List<Models.DTO.GioHang>
+@{
+    ViewBag.Title = "Listproduct";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TempVoucher</title>
+    <link rel="stylesheet" href="~/Clientassets/css/TempPage.css">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <div style="width:100%;height:40px;border-radius:100px;">
+        <p>Danh sách sản phẩm <i class="fa-solid fa-circle-arrow-down fa-2xl" id="list" style="transition:all 1s"></i></p>
+    </div>
+    <div style="width:100%;height:0px;overflow-y:auto;transition:all 0.5s;" id="list-content">
+        @foreach (var item in Model)
+        {
+        <div style="width:90%; background-color:lightgray;border-radius:50px;padding:10px;margin:10px;">
+            <div>
+                <h3>@item.Sach.TenSach</h3>
+            </div>
+            <div style="text-align: center;width:100%;">
+                <div style="display: flex; width: 50%;margin-left:25%; ">
+                    <div style="width:50%;">
+                        <small>@item.SoLuong </small>
+                    </div>
+                    <div style="width:50%;">
+                        <small>@item.Sach.Gia vnđ</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    <script>
+        var btn = document.getElementById("list");
+        var content = document.getElementById("list-content");
+        btn.addEventListener('click', function () {
+            if (content.style.height == "0px") {
+                content.style.height = "150px";
+                btn.style.transform = "rotate(180deg)"
+            }
+            else {
+                content.style.height = "0px";
+                btn.style.transform = "rotate(360deg)"
+            }
+        });
+    </script>
+</body>
+</html>
+
+

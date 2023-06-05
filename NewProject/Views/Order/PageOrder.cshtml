@@ -1,0 +1,191 @@
+﻿@model List<Models.DTO.GioHang>
+@{
+    ViewBag.Title = "Index";
+
+}
+<html>
+<head>
+    <title>gio hang</title>
+    <link href="~/Clientassets/css/cart.css" rel="stylesheet" />
+    <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
+    <style>
+        .order-info-item {
+            width: 100%;
+            height: 120px;
+            border-bottom: 0.5px solid;
+            text-align: center;
+        }
+
+        .choose-delyvery {
+            width: 100%;
+            justify-content: space-evenly;
+            display: flex;
+            height: 50%;
+        }
+
+        .user-info {
+            width: 100%;
+            height: 100%;
+            text-align: center
+        }
+
+        .fill-info {
+            width: 70%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .fill-info-1 {
+            width: 30%;
+            height: 100%;
+           
+        }
+        .input_info {
+            height: 40px;
+            width: 300px;
+            border-radius: 50px;
+            border: none;
+            background-color: rgb(219 219 219);
+            text-align: center;
+        }
+        .get-info>i:hover{
+            color:limegreen;
+        }
+
+        input:required {
+            border: 1px solid red; 
+        }
+
+            input:required:valid {
+                border: 1px solid green; 
+            }
+    </style>
+    <link href="~/Areas/Assets/fontawesome-free-6.3.0-web/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <form action="/dat-hang-gio-hang">
+        <main class="cart-page">
+            <div class="cart-content">
+                <h4 style="font-size: 25px;width: 100%;height: 30px;">Đặt hàng</h4>
+                <div class="cart-main">
+
+                    <div class="cart-item-1" style="background-color: rgb(241, 241, 241);">
+                        <div class="cart-sub">
+                            <div class="order-info-item">
+                                <div style="width:100%;height:50%;">
+                                    <h2>Phương thức nhận hàng</h2>
+                                </div>
+                                <div class="choose-delyvery">
+                                    <div style="display:flex">
+                                        <input type="radio" name="phuongthuc" value="1" style="width: 30px; height: 30px;"  checked />
+                                        <p style="font-size:20px;margin-top:2px;"> Thanh toán khi nhận hàng</p>
+                                    </div>
+                                    <div style="display:flex">
+                                        <input type="radio" name="phuongthuc" value="2" style="width: 30px; height: 30px;" readonly/>
+                                        <p style="font-size:20px;margin-top:2px;"> Thanh toán online</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-info">
+                                <div style="width:100%;height:50%;">
+                                    <h2>Thông tin khách hàng</h2>
+                                </div>
+                                <div style="display:flex">
+                                    <div class="fill-info">
+                                        <div style="width:45%">
+                                            <p>Họ và tên</p>
+                                            <input type="text" class="input_info" name="hoten" id="hoten" required  />
+                                        </div>
+                                        <div style="width:45%">
+                                            <p>Số điện thoại</p>
+                                            <input type="text" class="input_info" name="sdt" id="sdt" required/>
+                                        </div>
+                                        <div style="width:45%">
+                                            <p>Địa chỉ</p>
+                                            <input type="text" class="input_info" name="diachi" id="diachi" required/>
+                                        </div>
+                                        <div style="width:45%">
+                                            <p>Email</p>
+                                            <input type="text" class="input_info" name="email" id="email" required/>
+                                        </div>
+                                        <div style="width:90%;margin-top:50px;">
+                                            <a class="get-info" id="get-info">
+                                                <i class="fa-solid fa-circle-arrow-down fa-rotate-180" style="font-size:25px;"></i>
+                                                <p>Lấy thông tin cá nhân</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="fill-info-1">
+
+                                        <div style="width:100%">
+                                            <p>Lưu ý</p>
+                                            <textarea style="min-height:100px;max-height:100px;min-width:90%;max-width:90%;text-align:start" name="note" id="note">
+                                            
+                                        </textarea>
+                                        </div>
+                                        <!--  <div style="width:100%">
+                                              <p>Mã giảm giá</p>
+                                              @Html.Action("TempVoucher", "Order")
+                                          </div>
+                                            -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="cart-item-2">
+                        <div class="cart-item-2-1">
+                            <h5>Chi tiết đơn hàng</h5>
+                            <div class="price_sell">
+                                <small> Giảm giá </small>
+                                <small>0 VNĐ</small>
+                            </div>
+                            <div class="price_total">
+                                <small> Tổng giá </small>
+
+                                <h2 id="total_price">@ViewBag.Total</h2>
+                            </div>
+                           
+                            
+                                <button  id="btn-order" class="btn-order" style="width:85%;height:50px;">
+                                    <p style="font-size: 15px;color: #fff;">Đặt hàng</p>
+                                </button>
+                            </div>
+                            <div style="width:100%;margin-top:40px;text-align:center">
+                                @Html.Action("Listproduct", "Order")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          
+        </main>
+    </form>
+   
+    <script>
+            
+
+       var btngetinfo = document.getElementById("get-info");
+            btngetinfo.addEventListener('click', function () {
+                var hoten = document.getElementById("hoten");
+                var newHoTen = "@ViewBag.HoTen";
+                hoten.value = newHoTen
+
+                 var sdt = document.getElementById("sdt");
+                var newSDT = "@ViewBag.SDT";
+                sdt.value = newSDT;
+
+                var diachi = document.getElementById("diachi");
+                var newdiachi = "@ViewBag.DiaChi";
+                diachi.value = newdiachi;
+
+                var email = document.getElementById("email");
+                var newemail= "@ViewBag.Email";
+                email.value = newemail;
+            });
+
+    </script>
+    
+</body>
+</html>

@@ -38,6 +38,10 @@ namespace Models.DAO
 				{
 					item.Trangthai = false;
 				}
+				if (item.Time1.Value <= DateTime.Now && item.Time2.Value > DateTime.Now)
+				{
+					item.Trangthai = true;
+				}
 			}
 		}
 		public void GiaHan(int id,DateTime time1,DateTime time2)

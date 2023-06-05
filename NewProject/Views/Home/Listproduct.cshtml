@@ -5,12 +5,12 @@
 }
 
         <div class="body">
-            <ul class="list-product container">
+            <ul class="list-product container" >
                 
                     @foreach (var item in Model)
                     {
                 <li>
-                    <div class="product text-center">
+                    <div class="product text-center" style="border:none">
                         <img src="asset/image/sale.png" alt="" class="sale" width=50>
                         <a href="/chi-tiet-sach-@item.ID"><img src="@item.Anh" alt=" " width="300" height=350></a>
                         <div class="text">

@@ -24,15 +24,24 @@
         }
 
         .ip_search {
-            width: 530px;
-            height: 70px;
+            width: 20%;
+            height: 45px;
             border: none;
+            margin-top: 10px;
+            margin-left: 2.5%;
             text-align: center;
-            background-color: lightcyan;
+            background-color: lightgray;
+            transition: all 1s;
+            border-radius: 0px 10px 10px 0px;
         }
-        .ip_search:active{
-            border:none;
-            outline:none;
+
+        form {
+            width: 100%;
+        }
+
+        .ip_search:active {
+            border: none;
+            outline: none;
         }
 
         .pagination {
@@ -70,58 +79,221 @@
                 .pagination span.disabled {
                     display: none;
                 }
+
+        .title_modal_pro {
+            height: 10%;
+            width: 100%;
+            border-bottom: 1px solid;
+        }
+
+        .content_modal_pro {
+            margin-top: 30px;
+            height: 80%;
+            display: flex;
+        }
+
+        .avt_pro {
+            width: 30%;
+            border-right: 1px solid;
+        }
+
+        .infomation_pro {
+            width: 70%;
+        }
+
         .button-tab {
-            width: 150px;
+            width: 70px;
             text-align: center;
             height: 70px;
-            border-right: 1px solid;
-            text-decoration: none
+            text-decoration: none;
+            border-radius: 50px;
+            display: inline-block;
+            background-color: rgb(52 160 160);
+        }
+
+        thead {
+            background-color: rgb(52 160 160);
+        }
+
+        .button-tab-0 {
+            width: 70px;
+            text-align: center;
+            height: 100px;
+            text-decoration: none;
+            border-radius: 50px 50px 0px 0px;
+            background-color: rgb(52 160 160);
+        }
+
+        .button-tab:hover {
+            background: linear-gradient(to bottom, lightgray, rgb(52 160 160));
         }
 
         .button-search:hover {
             background-color: aqua;
         }
+
+        table {
+            background-color: rgb(200,255,255,0.4);
+            border-radius: 20px;
+        }
+
+        tr {
+            transition: all 0.5s;
+        }
+
+            tr:hover {
+                background-color: rgb(52 160 160);
+                border-radius: 50px;
+            }
+        .btn-giaohang {
+            width: 100%;
+            height: 100%;
+            background-color: limegreen;
+            border: none;
+        }
+        .btn-giaohang:hover{
+            background-color : rgb(38 137 12);
+        }
+        .btn-giaohang-1 {
+            width: 100%;
+            height: 100%;
+            background-color: lightskyblue;
+            border: none;
+        }
+
+            .btn-giaohang-1:hover {
+                background-color: rgb(6 77 134);
+            }
+        .btn-giaohang-2 {
+            width: 100%;
+            height: 100%;
+            background-color: lightcoral;
+            border: none;
+        }
+
+            .btn-giaohang-2:hover {
+                background-color: rgb(127 21 3);
+            }
+    
     </style>
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <link href="~/Areas/Assets/css/Modal_product.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="detail">
 
-        <div class="detail_list" style="width:1300px;">
 
-            <div style="display:flex;background-color:aqua;height:70px;">
-                <div style="display:flex;">
-                    @{ int key = 1; }
-                    <a class="button-tab" style="background-color:antiquewhite" href="/don-hang-@key">
-                        <p style="margin-top:25px;">Đang chuẩn bị</p>
-                    </a>
-                    @{ int key2 = 2; }
-                    <a class="button-tab" style="background-color:palegreen" href="/don-hang-@key2">
-                        <p style="margin-top:25px;">Đang giao </p>
-                    </a>
-                    @{ int key3 = 3; }
-                    <a class="button-tab" style="background-color:lightskyblue"  href="/don-hang-@key3">
-                        <p style="margin-top:25px;">Đã giao </p>
-                    </a>
-                    @{ int key4 = 0; }
-                    <a class="button-tab" style="background-color:lightcoral" href="/don-hang-@key4">
-                        <p style="margin-top:25px;">Đã hủy </p>
-                    </a>
-                </div>
+        <div class="detail_list">
 
+            <div style="display:flex;height:70px;justify-content:space-between;width:95%;margin-bottom:20px">
                 @using (Html.BeginForm("Index", "Orders", FormMethod.Get))
                 {
-                    foreach(var item in Model)
-				    {
+                    foreach (var item in Model)
+                    {
                         <input type="hidden" name="trangthai" value="@item.Trang_thai" />
-                            break;
-                      }
-                    <div style="display:flex;  ">
-                        <button type="submit" class="button-tab button-search" style="border:none">Tìm kiếm</button>
-                        <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" autocomplete="off" placeholder="Tìm kiếm ..." />
+                        break;
+                    }
+                    <div style="width:100%">
+                        <div style="width:70px;height:70px;position:absolute;background-color:gray;border-radius:100px;text-align:center">
+                            <i class="fa-solid fa-magnifying-glass fa-2xl" style="margin-top:35px;"></i>
+                        </div>
+                        <input type="text" id="input-search" class="ip_search" autocomplete="off" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
                     </div>
                 }
+            <div style="outline:none;width:40%;">
+
+                <div style="display:flex;width:100%;height:25px;justify-content:space-around;">
+                    @if (ViewBag.TrangThai == 1)
+                    {
+                        <div class="button-tab-0">
+                            <a class="button-tab" style="background-color:lightgoldenrodyellow" href="/don-hang-1">
+                                <i class="fa-solid fa-truck-ramp-box fa-2xl" style="margin-top:35px;"></i>
+                            </a>
+                        </div>
+                        <a class="button-tab" style="background-color:palegreen" href="/don-hang-2">
+                            <i class="fa-solid fa-truck fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+
+                        <a class="button-tab" style="background-color:lightskyblue" href="/don-hang-3">
+                            <i class="fa-regular fa-circle-check fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+
+                        <a class="button-tab" style="background-color:lightcoral" href="/don-hang-0">
+                            <i class="fa-solid fa-trash fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+                    }
+                    else if (ViewBag.TrangThai == 2)
+                    {
+
+                        <a class="button-tab" href="/don-hang-1">
+                            <i class="fa-solid fa-truck-ramp-box fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+
+                        <div class="button-tab-0">
+                            <a class="button-tab" style="background-color:palegreen" href="/don-hang-2">
+                                <i class="fa-solid fa-truck fa-2xl" style="margin-top:35px;"></i>
+                            </a>
+                        </div>
+                        <a class="button-tab" style="background-color:lightskyblue" href="/don-hang-3">
+                            <i class="fa-regular fa-circle-check fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+
+                        <a class="button-tab" style="background-color:lightcoral" href="/don-hang-0">
+                            <i class="fa-solid fa-trash fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+                    }
+                    else if (ViewBag.TrangThai == 3)
+                    {
+
+                        <a class="button-tab" href="/don-hang-1">
+                            <i class="fa-solid fa-truck-ramp-box fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+
+
+                        <a class="button-tab" style="background-color:palegreen" href="/don-hang-2">
+                            <i class="fa-solid fa-truck fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+
+                        <div class="button-tab-0">
+                            <a class="button-tab" style="background-color:lightskyblue" href="/don-hang-3">
+                                <i class="fa-regular fa-circle-check fa-2xl" style="margin-top:35px;"></i>
+                            </a>
+                        </div>
+                        <a class="button-tab" style="background-color:lightcoral" href="/don-hang-0">
+                            <i class="fa-solid fa-trash fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="button-tab" href="/don-hang-1">
+                            <i class="fa-solid fa-truck-ramp-box fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+
+
+                        <a class="button-tab" style="background-color:palegreen" href="/don-hang-2">
+                            <i class="fa-solid fa-truck fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+
+
+                        <a class="button-tab" style="background-color:lightskyblue" href="/don-hang-3">
+                            <i class="fa-regular fa-circle-check fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+
+                        <div class="button-tab-0">
+                            <a class="button-tab" style="background-color:lightcoral" href="/don-hang-0">
+                                <i class="fa-solid fa-trash fa-2xl" style="margin-top:35px;"></i>
+                            </a>
+                            
+                        </div>
+                    }
+                    </div>
+
+                    <div style="width: 70%; height: 20px; background: linear-gradient(to left, lightcoral,lightskyblue,palegreen,rgb(52 160 160)); margin-left: 15%; "></div>
+
+                </div>
+
+
             </div>
-            <table>
+            <table  style="width:100%">
                 <thead>
                     <tr>
                         <td>Khách hàng</td>
@@ -143,38 +315,421 @@
                         <td>@item.Sach.TenSach</td>
                         <td>@item.SoLuong</td>
                         <td>@(item.SoLuong * (item.Sach.Gia-item.Sach.Gia_giam))</td>
+                        
 
                         @if (item.Trang_thai == 1)
                         {
                             <td>Đang chuẩn bị</td>
                             <td>
-                                <a href=""> Xem</a>|
-                                <a href="/chuyen-trang-thai-@item.ID"> Giao</a>|
-                                <a href="/huy-don-admin-@item.ID">Hủy đơn </a>
+                                <a href="#" data-modal-id="modal-@item.ID" class="modal-btn">
+                                    <i class="fa-solid fa-eye " style="color: #f3f379;"></i>
+                                </a>
+                                <div id="modal-@item.ID" class="modal">
+                                    <div class="modal-content">
+                                        <div class="title_modal_pro">
+                                            <strong style="text-align: center;font-size:25px;">@item.Sach.TenSach</strong>
+                                        </div>
+                                        <div class="content_modal_pro">
+                                            <div class="avt_pro">
+                                                <div style="width:100%;height:75%;">
+                                                    <img src="@item.Sach.Anh" style="width:200px;">
+                                                </div>
+                                                <div style="width:100%;text-align:start;font-size:16px">
+                                                    <div style="display:flex">
+                                                        <h3 style="min-width:50%">Tổng giá  </h3>
+                                                        <p>: @item.Tong_gia</p>
+                                                    </div>
+                                                    <div style="display:flex">
+                                                        <h3 style="min-width:50%"> Số lượng  </h3>
+                                                        <p>: @item.SoLuong</p>
+                                                    </div>
+                                                    <div style="display:flex">
+                                                        <h3 style="min-width:50%">Người mua </h3>
+                                                        <p>: @item.KhachHang.HoTen</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="infomation_pro">
+
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Họ tên </h3>
+                                                    <p>: @item.KhachHang.HoTen</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">SDT</h3>
+                                                    <p>: @item.KhachHang.SDT</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Email </h3>
+                                                    <p>: @item.KhachHang.Email</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Địa chỉ</h3>
+                                                    <p>: @item.KhachHang.Diachi</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Thanh toán</h3>
+                                                    <p>: @item.ThanhToan.TenThanhToan</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    @{
+                                                        string temp = "Không có lưu ý nào của đơn hàng";
+                                                    }
+                                                    <textarea style="max-width:90%;height:80px;min-width:90%;max-height:80px;min-height:80px;border:none;background-color:lightgray" readonly>
+                                                          @if (item.Note == "")
+                                                          {
+                                                              @temp
+                                                          }
+					                                        else
+					                                        {
+                                                                @item.Note
+					                                        }
+                                                    </textarea>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex;text-align:center;height:50px;width:80%">
+                                                    <form action="/chuyen-trang-thai-@item.ID">
+                                                        <button class="btn-giaohang">
+                                                            <i class="fa-solid fa-truck" style="color: #fff ;font-size:25px;"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                |
+                                <a href="#" data-modal-id="modal1-@item.ID" class="modal1-btn">
+                                    <i class="fa-solid fa-truck" style="color: rgb(36 252 0) ;"></i>
+                                </a>
+                                <div id="modal1-@item.ID" class="modal" style="background:none">
+                                    <div class="modal-content-1">
+                                        <div class="title_modal_pro" style="border:none">
+                                            <strong style="text-align: center;font-size:25px;">Thông báo</strong>
+                                        </div>
+                                        <div class="content_modal_pro">
+                                            <div style="height:100%;">
+                                                <div style="height:60%;">
+                                                    <p>Bạn chắc chắn chuyển sang trạng thái đang giao ?</p>
+                                                </div>
+                                                <small><i>Lưu ý : sau khi xác nhận sẽ không thể khổi phục.</i></small>
+                                            </div>
+                                            <div style="height:100%;">
+                                                <form action="/chuyen-trang-thai-@item.ID" style="height:100%;">
+                                                    <button style="height:80%;">Xác nhận</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                |
+                                <a href="#" data-modal-id="modal2-@item.ID" class="modal2-btn">
+                                    <i class="fa-solid fa-trash " style="color: lightcoral;"></i>
+                                </a>
+                                <div id="modal2-@item.ID" class="modal" style="background:none">
+                                    <div class="modal-content-1">
+                                        <div class="title_modal_pro" style="border:none">
+                                            <strong style="text-align: center;font-size:25px;">Thông báo</strong>
+                                        </div>
+                                        <div class="content_modal_pro">
+                                            <div style="height:100%;">
+                                                <div style="height:60%;">
+                                                    <p>Bạn chắc chắn hủy đơn hàng ?</p>
+                                                </div>
+                                                <small><i>Lưu ý : sau khi xác nhận sẽ không thể khôi phục.</i></small>
+                                            </div>
+                                            <div style="height:100%;">
+                                                <form action="/huy-don-admin-@item.ID" style="height:100%;">
+                                                    <button style="height:80%;">Xác nhận</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         }
                         else if (item.Trang_thai == 2)
                         {
                             <td>Đang giao</td>
                             <td>
-                                <a href=""> Xem</a>|
-                                <a href="/chuyen-trang-thai-@item.ID"> Hoàn thành</a>
+                                <a href="#" data-modal-id="modal-@item.ID" class="modal-btn">
+                                    <i class="fa-solid fa-eye " style="color: #f3f379;"></i>
+                                </a>
+                                <div id="modal-@item.ID" class="modal">
+                                    <div class="modal-content">
+                                        <div class="title_modal_pro">
+                                            <strong style="text-align: center;font-size:25px;">@item.Sach.TenSach</strong>
+                                        </div>
+                                        <div class="content_modal_pro">
+                                            <div class="avt_pro">
+                                                <div style="width:100%;height:75%;">
+                                                    <img src="@item.Sach.Anh" style="width:200px;">
+                                                </div>
+                                                <div style="width:100%;text-align:start;font-size:16px">
+                                                    <div style="display:flex">
+                                                        <h3 style="min-width:50%">Tổng giá  </h3>
+                                                        <p>: @item.Tong_gia</p>
+                                                    </div>
+                                                    <div style="display:flex">
+                                                        <h3 style="min-width:50%"> Số lượng  </h3>
+                                                        <p>: @item.SoLuong</p>
+                                                    </div>
+                                                    <div style="display:flex">
+                                                        <h3 style="min-width:50%">Người mua </h3>
+                                                        <p>: @item.KhachHang.HoTen</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="infomation_pro">
+
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Họ tên </h3>
+                                                    <p>: @item.KhachHang.HoTen</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">SDT</h3>
+                                                    <p>: @item.KhachHang.SDT</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Email </h3>
+                                                    <p>: @item.KhachHang.Email</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Địa chỉ</h3>
+                                                    <p>: @item.KhachHang.Diachi</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Thanh toán</h3>
+                                                    <p>: @item.ThanhToan.TenThanhToan</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    @{
+                                                        string temp = "Không có lưu ý nào của đơn hàng";
+                                                    }
+                                                    <textarea style="max-width:90%;height:80px;min-width:90%;max-height:80px;min-height:80px;border:none;background-color:lightgray" readonly>
+                                                          @if (item.Note == "")
+                                                          {
+                                                              @temp
+                                                          }
+					                                        else
+					                                        {
+                                                                @item.Note
+					                                        }
+                                                    </textarea>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex;text-align:center;height:50px;width:80%">
+                                                    <form action="/chuyen-trang-thai-@item.ID">
+                                                        <button class="btn-giaohang-1">
+                                                            <i class="fa-regular fa-circle-check" style="color: #fff ;font-size:25px;"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>|
+                                <a href="#" data-modal-id="modal3-@item.ID" class="modal3-btn">
+                                    <i class="fa-regular fa-circle-check" style="color:lightskyblue"></i>
+                                </a>
+                                <div id="modal3-@item.ID" class="modal" style="background:none">
+                                    <div class="modal-content-1">
+                                        <div class="title_modal_pro" style="border:none">
+                                            <strong style="text-align: center;font-size:25px;">Thông báo</strong>
+                                        </div>
+                                        <div class="content_modal_pro">
+                                            <div style="height:100%;">
+                                                <div style="height:60%;">
+                                                    <p>Bạn chắc chắn đã hoàn thành đơn hàng ?</p>
+                                                </div>
+                                                <small><i>Lưu ý : sau khi xác nhận sẽ không thể khôi phục.</i></small>
+                                            </div>
+                                            <div style="height:100%;">
+                                                <form action="/chuyen-trang-thai-@item.ID" style="height:100%;">
+                                                    <button style="height:80%;">Xác nhận</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         }
                         else if (item.Trang_thai == 3)
                         {
                             <td>Đã giao</td>
                             <td>
-                                <a href=""> Xem</a>|
-                                <a href="/xoa-don-hang-@item.ID"> Xóa</a>
+                                <a href="#" data-modal-id="modal-@item.ID" class="modal-btn">
+                                    <i class="fa-solid fa-eye " style="color: #f3f379;"></i>
+                                </a>
+                                <div id="modal-@item.ID" class="modal">
+                                    <div class="modal-content">
+                                        <div class="title_modal_pro">
+                                            <strong style="text-align: center;font-size:25px;">@item.Sach.TenSach</strong>
+                                        </div>
+                                        <div class="content_modal_pro">
+                                            <div class="avt_pro">
+                                                <div style="width:100%;height:75%;">
+                                                    <img src="@item.Sach.Anh" style="width:200px;">
+                                                </div>
+                                                <div style="width:100%;text-align:start;font-size:16px">
+                                                    <div style="display:flex">
+                                                        <h3 style="min-width:50%">Tổng giá  </h3>
+                                                        <p>: @item.Tong_gia</p>
+                                                    </div>
+                                                    <div style="display:flex">
+                                                        <h3 style="min-width:50%"> Số lượng  </h3>
+                                                        <p>: @item.SoLuong</p>
+                                                    </div>
+                                                    <div style="display:flex">
+                                                        <h3 style="min-width:50%">Người mua </h3>
+                                                        <p>: @item.KhachHang.HoTen</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="infomation_pro">
+
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Họ tên </h3>
+                                                    <p>: @item.KhachHang.HoTen</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">SDT</h3>
+                                                    <p>: @item.KhachHang.SDT</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Email </h3>
+                                                    <p>: @item.KhachHang.Email</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Địa chỉ</h3>
+                                                    <p>: @item.KhachHang.Diachi</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Thanh toán</h3>
+                                                    <p>: @item.ThanhToan.TenThanhToan</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    @{
+                                                        string temp = "Không có lưu ý nào của đơn hàng";
+                                                    }
+                                                    <textarea style="max-width:90%;height:80px;min-width:90%;max-height:80px;min-height:80px;border:none;background-color:lightgray" readonly>
+                                                          @if (item.Note == "")
+                                                          {
+                                                              @temp
+                                                          }
+					                                        else
+					                                        {
+                                                                @item.Note
+					                                        }
+                                                    </textarea>
+                                                </div>
+                                                @{ 
+                                                    int time =10- (DateTime.Now.Day - item.Ngay0.Value.Day);
+                                                }
+                                                <div class="item_modal_pro" style="display:flex;text-align:center;height:50px;width:80%">
+                                                    
+                                                        <button class="btn-giaohang-2">
+                                                            Còn @time ngày 
+                                                        </button>
+                                                   
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                               
                             </td>
-                        }
-                        else
-                        {
+                            }
+                            else
+                             {
                             <td>Đã hủy</td>
                             <td>
-                                <a href=""> Xem</a>|
-                                <a href="/xoa-don-hang-@item.ID"> Xóa</a>
+                                <a href="#" data-modal-id="modal-@item.ID" class="modal-btn">
+                                    <i class="fa-solid fa-eye " style="color: #f3f379;"></i>
+                                </a>
+                                <div id="modal-@item.ID" class="modal">
+                                    <div class="modal-content">
+                                        <div class="title_modal_pro">
+                                            <strong style="text-align: center;font-size:25px;">@item.Sach.TenSach</strong>
+                                        </div>
+                                        <div class="content_modal_pro">
+                                            <div class="avt_pro">
+                                                <div style="width:100%;height:75%;">
+                                                    <img src="@item.Sach.Anh" style="width:200px;">
+                                                </div>
+                                                <div style="width:100%;text-align:start;font-size:16px">
+                                                    <div style="display:flex">
+                                                        <h3 style="min-width:50%">Tổng giá  </h3>
+                                                        <p>: @item.Tong_gia</p>
+                                                    </div>
+                                                    <div style="display:flex">
+                                                        <h3 style="min-width:50%"> Số lượng  </h3>
+                                                        <p>: @item.SoLuong</p>
+                                                    </div>
+                                                    <div style="display:flex">
+                                                        <h3 style="min-width:50%">Người mua </h3>
+                                                        <p>: @item.KhachHang.HoTen</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="infomation_pro">
+
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Họ tên </h3>
+                                                    <p>: @item.KhachHang.HoTen</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">SDT</h3>
+                                                    <p>: @item.KhachHang.SDT</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Email </h3>
+                                                    <p>: @item.KhachHang.Email</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Địa chỉ</h3>
+                                                    <p>: @item.KhachHang.Diachi</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    <h3 style="min-width:70px;">Thanh toán</h3>
+                                                    <p>: @item.ThanhToan.TenThanhToan</p>
+                                                </div>
+                                                <div class="item_modal_pro" style="display:flex">
+                                                    @{
+                                                        string temp = "Không có lưu ý nào của đơn hàng";
+                                                    }
+                                                    <textarea style="max-width:90%;height:80px;min-width:90%;max-height:80px;min-height:80px;border:none;background-color:lightgray" readonly>
+                                                          @if (item.Note == "")
+                                                          {
+                                                              @temp
+                                                          }
+					                                        else
+					                                        {
+                                                                @item.Note
+					                                        }
+                                                    </textarea>
+                                                </div>
+                                                @{
+                                                    int time =10- (DateTime.Now.Day - item.Ngay0.Value.Day);
+                                                }
+                                                <div class="item_modal_pro" style="display:flex;text-align:center;height:50px;width:80%">
+                                                   
+                                                        <button class="btn-giaohang-2">
+                                                            Còn @time ngày
+                                                        </button>
+                                                 
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
                             </td>
                         }
 
@@ -193,8 +748,75 @@
         <!-- -----------------HD gan dayh--------- -->
 
 
-    </div>
+    <script>
+        var modalBtns = document.querySelectorAll('.modal-btn');
 
+        modalBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modalId = this.getAttribute('data-modal-id');
+                var modal = document.getElementById(modalId);
+                modal.style.display = "block";
+            });
+        });
+
+        var modal1Btns = document.querySelectorAll('.modal1-btn');
+
+        modal1Btns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modalId1 = this.getAttribute('data-modal-id');
+                var modal1 = document.getElementById(modalId1);
+                modal1.style.display = "block";
+            });
+        });
+
+        var modal2Btns = document.querySelectorAll('.modal2-btn');
+
+        modal2Btns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modalId2 = this.getAttribute('data-modal-id');
+                var modal2 = document.getElementById(modalId2);
+                modal2.style.display = "block";
+            });
+        });
+
+        var modal3Btns = document.querySelectorAll('.modal3-btn');
+
+        modal3Btns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modalId3 = this.getAttribute('data-modal-id');
+                var modal3 = document.getElementById(modalId3);
+                modal3.style.display = "block";
+            });
+        });
+
+        var closeBtns = document.querySelectorAll('.close');
+      
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        };
+
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        };
+
+
+         var inputsearch = document.getElementById("input-search");
+       
+        inputsearch.addEventListener('mouseover', function () {
+            inputsearch.style.width = "60%";
+            inputsearch.style.borderRadius = "0px 50px 50px 0px";
+            inputsearch.style.backgroundColor = "lightgreen";
+        });
+        inputsearch.addEventListener('mouseout', function () {
+            inputsearch.style.width = "20%";
+            inputsearch.style.borderRadius = "0px 10px 10px 0px";
+            inputsearch.style.backgroundColor = "lightgray";
+        });
+    </script>
 </body>
 </html>
 

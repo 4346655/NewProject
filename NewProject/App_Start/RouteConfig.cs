@@ -13,6 +13,34 @@ namespace NewProject
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+			routes.IgnoreRoute("{botdetect}",new { BotDetect = @"(.*)BotDetectCaptcha\.ashx" });
+
+			routes.MapRoute(
+				name: "phan hoi",
+				url: "phan-hoi",
+				defaults: new { controller = "Order", action = "Respond" }
+			);
+			routes.MapRoute(
+				name: "dat-hang-gio-hang",
+				url: "dat-hang-gio-hang",
+				defaults: new { controller = "Order", action = "OrderProduct", id = UrlParameter.Optional }
+			);
+			routes.MapRoute(
+				name: "dat-hang-gio-hang-one",
+				url: "dat-hang-gio-hang-one",
+				defaults: new { controller = "Order", action = "OrderProduct_Oneproduct", id = UrlParameter.Optional }
+			);
+			routes.MapRoute(
+				name: "dang nhap face book",
+				url: "dang-nhap-face-book",
+				defaults: new { controller = "Login", action = "LoginFacebook", id = UrlParameter.Optional }
+			);
+
+			routes.MapRoute(
+				name: "lien he",
+				url: "lien-he",
+				defaults: new { controller = "Contact", action = "Index", id = UrlParameter.Optional }
+			);
 			routes.MapRoute(
 				name: "danh gia",
 				url: "danh-gia",
@@ -23,12 +51,14 @@ namespace NewProject
 				url: "test-voucher",
 				defaults: new { controller = "Order", action = "TempVoucher" }
 			);
-
 			routes.MapRoute(
-				name: "tesst",
-				url: "test-temp-product",
-				defaults: new { controller = "Order", action = "Test_TempProduct" }
+				name: "mua-hang",
+				url: "mua-hang-{idsach}-{soluong}",
+				defaults: new { controller = "Order", action = "PageOrder_Oneproduct" }
 			);
+
+
+			
 
 			routes.MapRoute(
 				name: "Tim kiem sach",
@@ -40,16 +70,7 @@ namespace NewProject
 				url: "lich-su-mua-hang",
 				defaults: new { controller = "Order", action = "HistoryBuyandCancel", id = UrlParameter.Optional }
 			);
-			routes.MapRoute(
-				name: "Xem sach temp",
-				url: "xem-sach-{idsach}",
-				defaults: new { controller = "Order", action = "TempProduct" }
-			);
-			routes.MapRoute(
-				name: "Xem nguoi dung",
-				url: "xem-nguoi-dung",
-				defaults: new { controller = "Order", action = "TempUser", id = UrlParameter.Optional }
-			);
+			
 			routes.MapRoute(
 				name: "Mua lai",
 				url: "mua-lai-{idorder}",
@@ -65,16 +86,7 @@ namespace NewProject
 				url: "dang-xuat",
 				defaults: new { controller = "Login", action = "Logout", id = UrlParameter.Optional }
 			);
-			routes.MapRoute(
-				name: "Them moi don hang",
-				url: "them-moi-don-hang",
-				defaults: new { controller = "Order", action = "AddtoOrder" }
-			);
-			routes.MapRoute(
-				name: "Xac minh don hang",
-				url: "xac-minh-don-hang-{idsach}-{soluong}",
-				defaults: new { controller = "Order", action = "TempPage" }
-			);
+			
 			routes.MapRoute(
 				name: "Xem don hang",
 				url: "xem-don-hang",
@@ -116,6 +128,17 @@ namespace NewProject
 				name: "Dang ki",
 				url: "dang-ki",
 				defaults: new { controller = "Register", action = "Index", id = UrlParameter.Optional }
+			);
+
+			routes.MapRoute(
+				name: "cap nhat gio hang",
+				url: "cap-nhat-gio-hang",
+				defaults: new { controller = "Cart", action = "Update", id = UrlParameter.Optional }
+			);
+			routes.MapRoute(
+				name: "dat hang",
+				url: "dat-hang",
+				defaults: new { controller = "Order", action = "PageOrder", id = UrlParameter.Optional }
 			);
 			routes.MapRoute(
 				name: "xoa gio hang",

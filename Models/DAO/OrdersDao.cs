@@ -14,8 +14,29 @@ namespace Models.DAO
 		public OrdersDao()
 		{
 			db = new Model1();
+			setTimeDelete();
 		}
-	
+		public void setTimeDelete()
+		{
+			var model = db.DonHangs.Where(x=>x.Trang_thai ==3 && x.Trang_thai ==0 ).ToList();
+			List<int> id = new List<int>();
+			foreach(var item in model)
+			{
+				if (item.Ngay0.HasValue && (DateTime.Now - item.Ngay0.Value).TotalDays == 10)
+				{
+					id.Add(item.ID);	
+				}
+			}
+			foreach(var item in id)
+			{
+				db.DonHangs.Remove(db.DonHangs.Find(id));
+			}
+			db.SaveChanges();
+		}
+		public DonHang Donhang(int idorder)
+		{
+			return db.DonHangs.Find(idorder);
+		}
 		public List<DonHang> List()
 		{
 			return db.DonHangs.ToList();
@@ -74,9 +95,9 @@ namespace Models.DAO
 				};
 			}
 		}
-		public void CreateNew(int idsach, int iduser, int idthanhtoan, int soluong, string MGG, string note)
+		public DonHang CreateNew(int idsach, int iduser, int idthanhtoan, int soluong, string MGG, string note,string hoten,string sdt,string diachi,string email)
 		{
-			
+
 			DonHang a = new DonHang
 			{
 				ID_KhachHang = iduser,
@@ -87,6 +108,10 @@ namespace Models.DAO
 				Note = note,
 				Trang_thai = 1,
 				Tong_gia = 0,
+				Hoten = hoten,
+				SDT = sdt,
+				Diachi = diachi,
+				Email = email,
 			};
 			db.Saches.Where(x => x.ID == idsach).SingleOrDefault().SoLuong -= soluong;
 			db.Saches.Where(x => x.ID == idsach).SingleOrDefault().SoLuong_DaBan += soluong;
@@ -117,12 +142,14 @@ namespace Models.DAO
 			}
 			db.DonHangs.Add(a);
 			db.SaveChanges();
+			return db.DonHangs.Find(a.ID);
 
 		}
 		public void HuyDon(int idorder)
 		{
 			var model = db.DonHangs.Where(x => x.ID == idorder).SingleOrDefault();
 			model.Trang_thai = 0;
+			model.Ngay0 = DateTime.Now;
 			db.SaveChanges();
 		}
 		public void Mualai(int idorder)
@@ -134,7 +161,12 @@ namespace Models.DAO
 		public void ChuyenTiepTrangThai(int idor)
 		{
 			var model = db.DonHangs.Where(x => x.ID == idor).SingleOrDefault();
+			if(model.Trang_thai ==2)
+			{
+				model.Ngay0 = DateTime.Now;
+			}	
 			model.Trang_thai += 1;
+			
 			db.SaveChanges();
 		}
 		public int LayTrangThai(int idor)
@@ -143,7 +175,7 @@ namespace Models.DAO
 		}
 		public List<DonHang> Historysearch(int iduser)
 		{
-			var model = db.DonHangs.Where(x => x.ID_KhachHang == iduser && (x.Trang_thai == 4 || x.Trang_thai == 0)).ToList();
+			var model = db.DonHangs.Where(x => x.ID_KhachHang == iduser && (x.Trang_thai == 3 || x.Trang_thai == 0)).ToList();
 			return model;
 		}
 		public bool checkDonhang(int idsach,int soluong)
@@ -153,15 +185,6 @@ namespace Models.DAO
 				return false;
 			return true;
 		}
-		public void CreateNewRange(List<GioHang> li,int iduser, int idthanhtoan, string MGG, string note)
-		{
-			foreach(var item in li)
-			{
-				if(checkDonhang((int)item.ID_Sach,(int)item.SoLuong) == true)
-				{
-					CreateNew((int)item.ID_Sach, iduser, idthanhtoan, (int)item.SoLuong, MGG, note);
-				}
-			}
-		}
+		
 	}
 }

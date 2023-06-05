@@ -10,22 +10,33 @@
     <meta name="viewport" content="width=device-width" />
     <title>TempVoucher</title>
     <link rel="stylesheet" href="~/Clientassets/css/TempPage.css">
+    <style>
+        select{
+            width:80%;
+            height:40px;
+            border-radius:50px;
+            background-color:lightgray;
+            border:none;
+            text-align:center
+        }
+    </style>
 </head>
 <body>
-    
-    <div class="body-voucher">
-        @foreach (var item in Model)
+    <select name="mgg" id="mgg">
+        @if (Model.Count < 1)
         {
-        <div class="content-voucher">
-            <div class="content-voucher-1">
-                <p><strong>Mã </strong>: @item.Magiamgia.Ma</p>
-
-            </div>
-            <div class="content-voucher-2">
-                <p><strong>Giá trị</strong> : @item.Magiamgia.Giatri đ</p>
-            </div>
-        </div>
+            <option value="">Bạn chưa có mã giảm giá</option>
         }
-    </div>
+        else
+        {
+            foreach (var item in Model)
+            {
+            <option value="@item.Magiamgia.Ma">@item.Magiamgia.Ma - @item.Magiamgia.Giatri</option>
+            }
+        }
+
+    </select>
+  
+ 
 </body>
 </html>

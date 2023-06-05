@@ -47,6 +47,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BotDetect, Version=4.4.2.0, Culture=neutral, PublicKeyToken=74616036388b765f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Captcha.4.4.2\lib\net35\BotDetect.dll</HintPath>
+    </Reference>
+    <Reference Include="BotDetect.Web.Mvc, Version=4.4.2.0, Culture=neutral, PublicKeyToken=74616036388b765f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Captcha.4.4.2\lib\net35\BotDetect.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="CaptchaMvc, Version=2.5.0.0, Culture=neutral, PublicKeyToken=fe46ad421dd3b0e6, processorArchitecture=MSIL">
+      <HintPath>..\packages\CaptchaMvc.Mvc5.1.5.0\lib\net45-full\CaptchaMvc.dll</HintPath>
+    </Reference>
     <Reference Include="CKFinder, Version=2.4.0.2631, Culture=neutral, PublicKeyToken=579e7adc719a1423, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Desktop\ckfinder\ckfinder\bin\Debug\CKFinder.dll</HintPath>
@@ -57,6 +66,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -66,6 +78,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -140,6 +155,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AnnounceController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Admin\Controllers\Home1Controller.cs" />
@@ -147,6 +163,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\VouchersController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -162,6 +179,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Assets\css\announce.css" />
     <Content Include="Areas\Assets\css\create.css" />
     <Content Include="Areas\Assets\css\edit.css" />
     <Content Include="Areas\Assets\css\Homeadmin.css" />
@@ -2227,13 +2245,16 @@
     <Content Include="Areas\Assets\fontawesome-free-6.3.0-web\svgs\solid\yen-sign.svg" />
     <Content Include="Areas\Assets\fontawesome-free-6.3.0-web\svgs\solid\yin-yang.svg" />
     <Content Include="Areas\Assets\fontawesome-free-6.3.0-web\svgs\solid\z.svg" />
+    <Content Include="Areas\Assets\image\VanHoc1.jpg" />
     <Content Include="Areas\Assets\js\main.js" />
     <Content Include="Areas\Assets\js\Temp.js" />
     <Content Include="Clientassets\css\bootstrap-icons.css" />
+    <Content Include="Clientassets\css\bootstrap-social.css" />
     <Content Include="Clientassets\css\bootstrap.min.css" />
     <Content Include="Clientassets\css\cart.css" />
     <Content Include="Clientassets\css\Home.css" />
     <Content Include="Clientassets\css\main.css" />
+    <Content Include="Clientassets\css\Modal_contact.css" />
     <Content Include="Clientassets\css\product.css" />
     <Content Include="Clientassets\css\register1.css" />
     <Content Include="Clientassets\css\reset.css" />
@@ -3168,6 +3189,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="MailTemplate\AdminMail.html" />
+    <Content Include="MailTemplate\CancelOrder.html" />
+    <Content Include="MailTemplate\neworder.html" />
+    <Content Include="MailTemplate\QuenMatKhau.html" />
+    <Content Include="MailTemplate\RespondMail.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\ckeditor\ckeditor\CHANGES.md" />
@@ -3291,6 +3317,8 @@
     <Content Include="Areas\Admin\Views\Home1\Category_1.cshtml" />
     <Content Include="Areas\Admin\Views\Home1\Percent_Order.cshtml" />
     <Content Include="Areas\Admin\Views\Home1\Percent_Order1.cshtml" />
+    <Content Include="Areas\Admin\Views\Home1\Percent_typeOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\Announce\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3326,25 +3354,25 @@
     <Content Include="Views\ProductDetails\Listcomment.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Home\CartOrder.cshtml" />
-    <Content Include="Views\Order\TempPage.cshtml" />
     <Content Include="Views\ProductDetails\Start.cshtml" />
-    <Content Include="Views\Order\ViewMGG.cshtml" />
-    <Content Include="Views\Order\TempUser.cshtml" />
-    <Content Include="Views\Order\TempProduct.cshtml" />
     <Content Include="Views\Order\HistoryBuyandCancel.cshtml" />
     <Content Include="Views\Home\Searchbox.cshtml" />
     <Content Include="Views\Home\HistorySearch.cshtml" />
     <Content Include="Views\Profile\Doimatkhau.cshtml" />
     <Content Include="Views\Profile\Suathongtin.cshtml" />
-    <Content Include="Views\Order\Test_TempProduct.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Order\Muahet.cshtml" />
+    <Content Include="Views\Order\PageOrder.cshtml" />
+    <Content Include="Views\Order\Listproduct.cshtml" />
+    <Content Include="Views\Order\PageOrder_OneProduct.cshtml" />
     <Content Include="Views\Order\TempVoucher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Assets\image\" />
     <Folder Include="Content\ckfinder\ckfinder\userfiles\" />
     <Folder Include="Views\decentralization\" />
+    <Folder Include="Views\Example\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -3360,6 +3388,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{dc1e42e0-8689-4910-8f19-f01daee55d41}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{d4aca18c-8f52-4a89-a5a7-3261857be424}</Project>
       <Name>Models</Name>
@@ -3402,7 +3434,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

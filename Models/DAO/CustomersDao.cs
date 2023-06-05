@@ -16,6 +16,15 @@ namespace Models.DAO
 		{
 			db = new Model1();
 		}
+		public int CheckInfo(int id)
+		{
+			var model = db.KhachHangs.SingleOrDefault(x => x.ID == id);
+			if(String.IsNullOrEmpty(model.Diachi) || String.IsNullOrEmpty(model.Email) || String.IsNullOrEmpty(model.SDT))
+			{
+				return 0;
+			}
+			return 1;
+		}
 		public IEnumerable<KhachHang> DanhSachKhachHang(string Searchstring, int page, int pagesize)
 		{
 			IOrderedQueryable<KhachHang> model = db.KhachHangs.Where(x=>x.TaiKhoan.ID_LoaiTK !=2).OrderByDescending(x => x.ID);
@@ -30,7 +39,12 @@ namespace Models.DAO
 			var model = db.KhachHangs.Where(x => x.TaiKhoan.TenTaiKhoan == username).SingleOrDefault();
 			return model.ID;
 		}
-		
+		public int GetIDTK(string username)
+		{
+			var model = db.KhachHangs.Where(x => x.TaiKhoan.TenTaiKhoan == username).SingleOrDefault();
+			return (int)model.ID_TaiKhoan;
+		}
+
 		public KhachHang GetDetailByUsername(string username)
 		{
 			var model = db.KhachHangs.Where(x => x.TaiKhoan.TenTaiKhoan == username).SingleOrDefault();
@@ -67,11 +81,8 @@ namespace Models.DAO
 		public int checkChangeInfo(string hoten, string email, string sdt)
 		{
 			int key =0;
-			if(IsValidTEN(hoten) ==false)
-			{
-				key = 1;
-			}
-			if (key != 0) return key;
+			
+		
 
 			for (int i = 0; i < sdt.Length; i++)
 			{
@@ -119,7 +130,15 @@ namespace Models.DAO
 				var model = db.KhachHangs.Where(x => x.ID == id).SingleOrDefault();
 				if (!string.IsNullOrEmpty(hoten))
 				{
-					model.HoTen = hoten;
+					if (IsValidTEN(hoten) == true)
+					{
+						model.HoTen = hoten;
+					}
+					else
+					{
+						key = 1;
+					}
+					
 				}
 				if (!string.IsNullOrEmpty(diachi))
 				{

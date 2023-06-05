@@ -25,7 +25,7 @@
             align-items: center;
             font-size: 14px;
         }
-
+            
             .pagination a,
             .pagination span {
                 display: inline-block;
@@ -36,11 +36,13 @@
                 background-color: #fff;
                 border: 1px solid #007bff;
                 text-decoration: none;
+                
+               
             }
 
                 .pagination a:hover,
                 .pagination span.current {
-                    color: #fff;
+                    color: #000;
                     background-color: #007bff;
                     border-color: #007bff;
                 }
@@ -55,17 +57,16 @@
                     display: none;
                 }
         .ip_search {
-            width: 860px;
+            width: 10%;
             height: 70px;
+            border-radius: 50px;
             border: none;
             text-align: center;
-            background-color:lightcyan;
+            background-color: var(--blue);
+            transition:all 1s;
+        
         }
 
-            .ip_search:active {
-                border: none;
-                outline: none;
-            }
 
         .button-tab {
             width: 150px;
@@ -75,10 +76,18 @@
             text-decoration: none;
             border:none;
         }
+        .button-search{
+            background-color:lightgray;
+            border-radius:100px;
+        }
 
         .button-search:hover {
             background-color: aqua;
         }
+        i{
+            color:lightcoral;
+        }
+      
     </style>
     <link href="~/Content/PagedList.css" rel="stylesheet" />
     <link href="~/Areas/Assets/css/Modal_product.css" rel="stylesheet" />
@@ -90,14 +99,17 @@
         <div class="detail_list">
             @using (Html.BeginForm("Index", "Customers", FormMethod.Get))
             {
-            <div style="display:flex">
-                <button type="submit" class="search button-tab button-search">Tìm kiếm</button>
-                <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." autocomplete="off" />
-
+            <div style="text-align:center;" id="divsearch";>
+                <div style="height:10px;width:100%;">
+                    <input type="text" id="input-search" class="ip_search" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm Kiếm" autocomplete="off" />
+                </div>
+                <div id="bgr-search" style="background-color:lightgray; width:90%;height:50px;margin-bottom:40px;border-radius:50px;margin-left:5%;transition:all 1s;">
+                    
+                </div>
             </div>
 
             }
-            <table>
+            <table >
                 <thead>
                     <tr>
                         <td>STT</td>
@@ -119,14 +131,22 @@
 
                         <td>@(++count)</td>
                         <td>@item.TaiKhoan.TenTaiKhoan</td>
-                        <td>@item.HoTen</td>
+                        @if (item.HoTen != "")
+                        {
+                            <td>@item.HoTen</td>
+                        }
+                        else
+                        {
+                            <td><small><i>Chưa có thông tin</i></small></td>
+                        }
+
                         @if (item.Email != "")
                         {
                             <td>@item.Email</td>
                         }
                         else
                         {
-                            <td>----------------------</td>
+                            <td><small><i>Chưa có thông tin</i></small></td>
                         }
                         @if (item.Diachi != "")
                         {
@@ -134,7 +154,7 @@
                         }
                         else
                         {
-                            <td>------------</td>
+                            <td><small><i>Chưa có thông tin</i></small></td>
                         }
                         @if (item.SDT != "")
                         {
@@ -142,7 +162,7 @@
                         }
                         else
                         {
-                            <td>------------</td>
+                            <td><small><i>Chưa có thông tin</i></small></td>
                         }
                         @if (item.TaiKhoan.Trangthai == true)
                         {
@@ -151,9 +171,9 @@
                         else
                         {
                             <td><a onclick="location.reload();" href="/doi-trang-thai-khach-hang-@item.ID" style="color:red">off</a>  </td>
-                            
+
                         }
-                        
+
 
 
                     </tr>
@@ -171,6 +191,26 @@
 
         @Html.Action("DanhSachMoiMua", "Orders")
     </div>
-   
+   <script>
+       var inputsearch = document.getElementById("input-search");
+       var bgrsearch = document.getElementById("bgr-search");
+       inputsearch.addEventListener('mouseover', function () {
+           inputsearch.style.width = "80%";
+           inputsearch.style.height = "50px";
+           inputsearch.style.marginTop = "10px";
+
+           bgrsearch.style.width = "100%";
+           bgrsearch.style.marginLeft = "0%";
+       });
+       inputsearch.addEventListener('mouseout', function () {
+           inputsearch.style.width = "10%";
+           inputsearch.style.height = "70px";
+           inputsearch.style.marginTop = "0px";
+
+           bgrsearch.style.width = "90%";
+           bgrsearch.style.marginLeft = "5%";
+       });
+       
+   </script>
 </body>
 </html>

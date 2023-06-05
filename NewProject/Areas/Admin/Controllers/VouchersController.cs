@@ -60,7 +60,7 @@ namespace NewProject.Areas.Admin.Controllers
         {
             var voucher = new VoucherDao();
             voucher.GiaHan(id, time1, time2);
-            return RedirectToAction("Index", new {trangthai =true });
+            return RedirectToAction("Index", new {trangthai =false });
 		}
        public ActionResult Bo_KhoiPhuc_MGG(int idvoucher)
 		{

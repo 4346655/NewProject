@@ -11,6 +11,7 @@
     <title>Index</title>
     <link href="~/Clientassets/css/cart.css" rel="stylesheet" />
     <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
+    <link href="~/Clientassets/css/Modal_contact.css" rel="stylesheet" />
 </head>
 <body>
     <div id="wrapper" style="margin-top:40px;">
@@ -42,7 +43,7 @@
                             <p>@item.Sach.TenSach</p>
                            @if (item.Trang_thai == 3)
                             {
-                                <p style="color:lightcoral">Đã giao</p>
+                                <p style="color:lightgreen">Đã giao</p>
                             }
                             else
                             {
@@ -53,14 +54,87 @@
                         <li style="width:40px;">@(item.Sach.Gia-item.Sach.Gia_giam)</li>
                         <li style="width:160px;">@item.Tong_gia </li>
                         <li>
-   
-                                <a href="/xac-minh-don-hang-@item.ID_Sach-@item.SoLuong">Mua lại</a>
+                            @if (item.Trang_thai == 3)
+                            {
+                                <a href="/xac-minh-don-hang-@item.ID_Sach-@item.SoLuong" style="text-decoration:none;color:black">Mua lại</a>
+                                <br />
+
+                                <a class="modal-btn" data-modal-id="modal-@item.ID">Đánh giá</a>
+                                <div id="modal-@item.ID" class="modal">
+                                    <form action="/phan-hoi" method="post">
+                                        <input type="hidden" name="idsach" value="@item.ID_Sach" />
+                                        <input type="hidden" name="iduser" value="@item.ID_KhachHang" />
+                                        <input type="hidden" name="email" value="@item.KhachHang.Email" />
+                                        <div class="modal-content">
+                                            <div class="header-respond">
+                                                <h3>Chất lượng sản phẩm</h3>
+                                                <div style="display:flex" class="danhgia">
+                                                    <div style="width:20%">
+                                                        <input type="radio" name="sao" class="sao" id="sao1" value="1" />
+                                                        <p>1 sao</p>
+                                                    </div>
+                                                    <div style="width:20%">
+                                                        <input type="radio" name="sao" class="sao" id="sao2" value="2" />
+                                                        <p>2 sao</p>
+                                                    </div>
+                                                    <div style="width:20%">
+                                                        <input type="radio" name="sao" class="sao" id="sao3" value="3" />
+                                                        <p>3 sao</p>
+                                                    </div>
+                                                    <div style="width:20%">
+                                                        <input type="radio" name="sao" class="sao" id="sao4" value="4" />
+                                                        <p>4 sao</p>
+                                                    </div>
+                                                    <div style="width:20%">
+                                                        <input type="radio" name="sao" class="sao" id="sao5" value="5" />
+                                                        <p>5 sao</p>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="body-respond">
+                                                <h3>Bình luận về sản phẩm </h3>
+                                                <div style="display:flex;justify-content:space-between">
+                                                    <div style="display:flex">
+                                                        <input type="radio" name="andanh" value="1" />
+                                                        <small>Ẩn danh</small>
+                                                    </div>
+                                                    <div style="display:flex">
+                                                        <input type="radio" name="andanh" value="0" />
+                                                        <small>Công khai</small>
+                                                    </div>
+                                                </div>
+                                                <textarea class="nhanxet" name="binhluan"></textarea>
+                                            </div>
+                                            <div class="footer-respond">
+                                                <h3>Liên hệ</h3>
+                                                <label>Tiêu đề</label><input style="margin-left:15px;width:80%;height:50px" name="tieude" value="Báo cáo @item.KhachHang.HoTen - @item.Sach.TenSach" />
+                                                <textarea class="nhanxet" placeholder="Nếu có vấn đề trong quá trình phục vụ ,vui lòng hãy gửi báo cáo cho chúng tôi. Chúng tôi sẽ cố gắng khắc phục sớm nhất để quý khách có trải nghiệm tốt nhất." name="nhanxet"></textarea>
+
+                                            </div>
+                                            <div class="button-confirm">
+                                                <button type="submit"> Gửi</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            }
+                            else
+                            {
+                                <a href="/xac-minh-don-hang-@item.ID_Sach-@item.SoLuong" style="text-decoration:none;color:black">Mua lại</a>
+                            }
+
 
                         </li>
 
 
                     </ul>
                     <hr />
+                    <div class="respond">
+
+                    </div>
                 }
             }
 
@@ -80,7 +154,31 @@
         </div>
     </div>
 
+    <script>
+        
+    </script>
+    <script>
 
+         var modalBtns = document.querySelectorAll('.modal-btn');
+
+        modalBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modalId = this.getAttribute('data-modal-id');
+                var modal = document.getElementById(modalId);
+                modal.style.display = "block";
+            });
+        });
+
+        
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        };
+
+
+       
+    </script>
 
 </body>
 </html>

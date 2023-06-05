@@ -101,5 +101,11 @@ namespace NewProject.Areas.Admin.Controllers
             ViewBag.list = list.Count()*100 / list1.Count();
             return View(list);
         }
+        public ActionResult Percent_typeOrder()
+		{
+            var order = new OrdersDao();
+            var list = order.List();
+            return View(list);
+		}
     }
 }

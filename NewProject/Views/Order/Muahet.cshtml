@@ -1,0 +1,132 @@
+﻿@model List<Models.DTO.DonHang>
+
+@{
+    ViewBag.Title = "TempPage";
+    var iduser = Model[0].ID_KhachHang;
+   
+}
+
+<html>
+<head>
+    <title>Thông tin</title>
+    <link rel="stylesheet" href="~/Clientassets/css/TempPage.css">
+
+</head>
+<body>
+
+    <div class="order-content">
+        <div class="voucher">
+            <div class="title_voucher">
+                <p>Mã giảm giá </p>
+            </div>
+            @Html.Action("TempVoucher", "Order")
+
+        </div>
+        <div class="info-order">
+            <div class="info_user">
+                <div class="title-info">
+                    <h3>Thông tin của bạn</h3>
+                    <small><i>(Vui lòng xác nhận thông tin)</i></small>
+                </div>
+                @Html.Action("TempUser", "Order")
+            </div>
+            <div class="info_product">
+                <div class="title-info">
+                    <h3>Thông tin sản phẩm</h3>
+                    <small><i>(Vui lòng xác nhận thông tin)</i></small>
+                </div>
+                <div class="body_product" style="padding-top: 50px;margin-left:40px">
+
+                   
+                        <div style="overflow-x:hidden;overflow-y:auto;height:170px">
+                            @foreach (var item in Model)
+                            {
+                                <div class="product-info" style="display:flex"  data-id="@item.ID">
+                                    @Html.Action("TempProduct", "Order", new { idsach = item.ID_Sach })
+                                </div>
+                                <p style="margin-left:30px">Số lượng : <input type="number" style="width:50px" value="@item.SoLuong" name="soluong"  data-id="@item.ID" /></p>
+                            }
+                        </div>
+                        <div class="thanhtoan">
+                            <label> Phương thức thanh toán</label>
+                            <select name="idthanhtoan" style="height:30px">
+                                <option value="1">Thanh toán khi nhận hàng</option>
+                            </select>
+                        </div>
+
+                       
+                        <div class="thanhtoan">
+
+                            <textarea id="note" style="width:450px;height:100px;max-height:100px;max-width:450px;" name="note" placeholder="Lưu ý đơn hàng của bạn ..."></textarea>
+
+                        </div>
+
+
+                        <button class="btn-order" id="btn-order-all">Đặt hàng</button>
+                    
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        document.getElementById("btn-order-all").addEventListener('click', function () {
+           
+            var idssoluong = [];
+            var checkboxes = document.querySelectorAll('input[type="number"]');
+
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    idssoluong.push(checkbox.getAttribute("data-id"));
+                }
+            });
+
+
+            var idsid = [];
+            var checkboxes1 = document.querySelectorAll('.product-info');
+            checkboxes1.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    idsid.push(checkbox.getAttribute("data-id"));
+                }
+            });
+            for (let i = 0; i < idsid.length; i++)
+        {
+            alert(idsid[i]);
+        }
+            if (idssoluong.length > 0) {
+                for (let i = 0; i < idssoluong.length; i++) {
+                    alert("/them-moi-don-hang-all-" + idsid[i] + "-" + 1 + "-" + idssoluong[i] + "-" + note.value)
+                    window.location.href = "/them-moi-don-hang-all-" + idsid[i] + "-" + 1 + "-" + idssoluong[i] + "-" + note.value;
+                }
+            }
+        });
+    </script>
+    <script>
+
+                var form = document.querySelector('form');
+                var text1 = document.getElementById('hoten');
+                var text2 = document.getElementById('sdt');
+                var text3 = document.getElementById('email');
+                var text4 = document.getElementById('diachi');
+
+                form.addEventListener('submit', function(event) {
+            if (text1.value === '' || text2.value === '' || text3.value === '' || text4.value === '') {
+                    event.preventDefault(); // Ngăn chặn hành động mặc định của form (chuyển tới action trong form)
+                alert('Vui lòng nhập đầy đủ thông tin!'); // Hiển thị thông báo
+            }
+            // Không cần else, nếu các input đều có giá trị, form sẽ tự động chuyển tới action trong form
+                });
+
+
+        var note = document.getElementById("note");
+
+       
+
+    </script>
+
+
+
+
+</body>
+</html>

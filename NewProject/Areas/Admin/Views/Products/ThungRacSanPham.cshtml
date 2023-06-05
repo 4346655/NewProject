@@ -26,8 +26,24 @@
         }
 
         .ip_search {
-            width: 860px;
-            height: 37px;
+            width: 20%;
+            height: 45px;
+            border: none;
+            margin-top: 10px;
+            margin-left: 2.5%;
+            text-align: center;
+            background-color: lightgray;
+            transition: all 1s;
+            border-radius: 0px 10px 10px 0px;
+        }
+
+        form {
+            width: 100%;
+        }
+
+        .ip_search:active {
+            border: none;
+            outline: none;
         }
 
         .pagination {
@@ -65,134 +81,197 @@
                 .pagination span.disabled {
                     display: none;
                 }
-        .ip_search {
-            width: 960px;
-            height: 70px;
-            border: none;
-            background-color: lightcyan;
-            text-align: center;
+
+        .title_modal_pro {
+            height: 10%;
+            width: 100%;
+            border-bottom: 1px solid;
         }
 
-            .ip_search:active {
-                border: none;
-                outline: none;
-            }
+        .content_modal_pro {
+            margin-top: 30px;
+            height: 80%;
+            display: flex;
+            background-color: aquamarine;
+        }
+
+        .avt_pro {
+            width: 30%;
+            border-right: 1px solid;
+        }
+
+        .infomation_pro {
+            width: 70%;
+        }
+
         .button-tab {
-            width: 150px;
+            width: 70px;
             text-align: center;
             height: 70px;
-            border-right: 1px solid;
             text-decoration: none;
-            border:none;
-                
+            border-radius: 50px;
         }
+        .button-tab-0 {
+            width: 70px;
+            text-align: center;
+            height: 100px;
+            text-decoration: none;
+            border-radius: 50px 50px 0px 0px;
+            background-color: rgb(245,155,155);
+        }
+
+            .button-tab:hover {
+                background: linear-gradient(to left, lightgray, limegreen);
+            }
 
         .button-search:hover {
             background-color: aqua;
         }
-    </style>
 
+        table {
+            background-color: rgb(245 ,155 ,155,0.3);
+            border-radius: 20px;
+        }
+
+        tr {
+            transition: all 0.5s;
+        }
+
+            tr:hover {
+                background-color: rgb(245,155,155);
+                border-radius: 50px;
+            }
+
+        .button-tab-1 {
+            width: 70px;
+            text-align: center;
+            height: 70px;
+            text-decoration: none;
+            border-radius: 50px;
+            display: inline-block;
+            background: linear-gradient(to bottom, blue,rgb(245,155,155));
+          
+        }
+
+            .button-tab-1:hover {
+                background: linear-gradient(to left, blue, blue);
+            }
+    </style>
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
     <link href="~/Areas/Assets/css/Modal_thungrac_product.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="detail">
+   
 
-        <div class="detail_list" style="width:1300px;">
+    <div class="detail_list">
 
-            <div style="display:flex;background-color:aqua;height:70px;">
-                <div style="display: flex; ">
-                    <a class="button-tab" href="/san-pham">
-                        <p style="margin-top:25px;">Trở về</p>
-                    </a>
-                   
-                </div>
+        <div style="display:flex;height:70px;justify-content:space-between;width:95%;margin-bottom:20px">
 
-                @using (Html.BeginForm("Statefalse", "Products", FormMethod.Get))
-                {
-                    <div style="display:flex;  ">
-                        <button type="submit" class="button-tab button-search">Tìm kiếm</button>
-                        <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" autocomplete="off" placeholder="Tìm kiếm ..." />
+
+            @using (Html.BeginForm("Statefalse", "Products", FormMethod.Get))
+            {
+                <div style="width:100%">
+                    <div style="width:70px;height:70px;position:absolute;background-color:gray;border-radius:100px;text-align:center">
+                        <i class="fa-solid fa-magnifying-glass fa-2xl" style="margin-top:35px;"></i>
                     </div>
-                }
+                    <input type="text" id="input-search" class="ip_search" autocomplete="off" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
+                </div>
+            }
+        <div style="outline:none;width:20%;">
+
+            <div style="display:flex;width:100%;height:25px;justify-content:space-around;">
+
+                <a class="button-tab" style="background-color:lightgray;" href="/them-san-pham">
+                    <i class="fa-solid fa-square-plus fa-2xl " style="margin-top:35px;"></i>
+                </a>
+            
+                <div class="button-tab-0">
+                    <a class="button-tab-1" style="background-color: lightblue;" href="/san-pham">
+                        <i class="fa-solid fa-arrow-left fa-2xl" style="margin-top:35px;"></i>
+                    </a>
+                </div>
             </div>
-            <table>
-                <thead>
+            <div style="width: 50%; height: 20px; background: linear-gradient(to left, blue, lightgray); margin-left: 25%; "></div>
+        </div>
+        </div>
+        <table style="width:100%">
+            <thead style=" background-color: rgb(245,155,155);">
+                <tr>
+                    <td>Ảnh</td>
+                    <td>Thể loại</td>
+                    <td>Tên sách</td>
+                    <td>Số lượng </td>
+                    <td>Giá</td>
+                    <td>Trạng Thái</td>
+                    <td>#</td>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
                     <tr>
-                        <td>Ảnh</td>
-                        <td>Thể loại</td>
-                        <td>Tên sách</td>
-                        <td>Số lượng </td>
-                        <td>Giá</td>
-                        <td>Trạng Thái</td>
-                        <td>#</td>
 
-                    </tr>
-                </thead>
+                        <td><img class="img_anh" src="@item.Anh" width="100" /></td>
+                        <td>@item.Loai_Sach.Loaisach</td>
+                        <td>@item.TenSach</td>
+                        <td>@item.SoLuong</td>
+                        <td>@item.Gia</td>
+                        @if (item.Trangthai == true)
+                        {
+                            <td>Đang bán</td>
+                        }
+                        else
+                        {
+                            <td>Dừng bán</td>
+                        }
+                        <td>
+                            <a href="/quay-lai-san-pham-@item.ID">Khôi phục</a> |
 
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
+                            <a class="modal-btn" data-modal-id="modal-@item.ID">Xóa</a>
+                            <div id="modal-@item.ID" class="modal">
+                                <div class="modal-content">
+                                    <div class="main_modal">
+                                        <div class="title_modal">
+                                            <p style="text-align:center;height:30px;">Thông báo</p>
 
-                            <td><img class="img_anh" src="@item.Anh" width="100" /></td>
-                            <td>@item.Loai_Sach.Loaisach</td>
-                            <td>@item.TenSach</td>
-                            <td>@item.SoLuong</td>
-                            <td>@item.Gia</td>
-                            @if (item.Trangthai == true)
-                            {
-                                <td>Đang bán</td>
-                            }
-                            else
-                            {
-                                <td>Dừng bán</td>
-                            }
-                            <td>
-                                <a href="/quay-lai-san-pham-@item.ID">Khôi phục</a> |
-                               
-                                <a class="modal-btn" data-modal-id="modal-@item.ID">Xóa</a>
-                                <div id="modal-@item.ID" class="modal">
-                                    <div class="modal-content">
-                                        <div class="main_modal">
-                                            <div class="title_modal">
-                                                <p style="text-align:center;height:30px;">Thông báo</p>
-                                                
+                                        </div>
+                                        <div class="content_modal">
+                                            <p class="question">Bạn muốn xóa sản phẩm này ?</p>
+                                            <div class="main_body">
+                                                <div class="main_body1">
+                                                    <img style="width:90px;" src="@item.Anh" />
+                                                </div>
+                                                <div class="main_body1" style="border-left:1px solid">
+                                                    <p>@item.TenSach</p>
+                                                    <p>Giá :@item.Gia</p>
+                                                </div>
                                             </div>
-                                            <div class="content_modal">
-                                                <p class="question">Bạn muốn xóa sản phẩm này ?</p>
-                                                <div class="main_body">
-                                                    <div class="main_body1">
-                                                        <img style="width:90px;" src="@item.Anh"  />
-                                                    </div>
-                                                    <div class="main_body1" style="border-left:1px solid">
-                                                        <p>@item.TenSach</p>
-                                                        <p>Giá :@item.Gia</p>
-                                                    </div>
-                                                </div>
-                                                <div class="btn_sumit">
-                                                    <a class="btnsub" href="">Hủy</a>
-                                                    <a class="btnsub" href="/delete-san-pham-@item.ID">Xóa</a>
-                                                </div>
+                                            <div class="btn_sumit">
+                                                <a class="btnsub" href="">Hủy</a>
+                                                <a class="btnsub" href="/delete-san-pham-@item.ID">Xóa</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            </div>
+                        </td>
 
-                        </tr>
-                    }
-
-
-
+                    </tr>
+                }
 
 
-                </tbody>
-            </table>
-            @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
-        </div>
 
 
+
+            </tbody>
+        </table>
+        @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
     </div>
+
+
+ 
     <script>
 
         var modalBtns = document.querySelectorAll('.modal-btn');
@@ -217,6 +296,19 @@
                 event.target.style.display = "none";
             }
         };
+
+        var inputsearch = document.getElementById("input-search");
+
+        inputsearch.addEventListener('mouseover', function () {
+            inputsearch.style.width = "60%";
+            inputsearch.style.borderRadius = "0px 50px 50px 0px";
+            inputsearch.style.backgroundColor = "lightgreen";
+        });
+        inputsearch.addEventListener('mouseout', function () {
+            inputsearch.style.width = "20%";
+            inputsearch.style.borderRadius = "0px 10px 10px 0px";
+            inputsearch.style.backgroundColor = "lightgray";
+        });
 
     </script>
 

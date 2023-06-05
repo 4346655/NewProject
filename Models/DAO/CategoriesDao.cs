@@ -77,7 +77,22 @@ namespace Models.DAO
 		}
 		public List<Loai_Sach> List()
 		{
-			return db.Loai_Sach.Where(x => x.Trangthai == true ).ToList();
+			var model = db.Loai_Sach.Where(x => x.Trangthai == true).ToList();
+			List<Loai_Sach> loai_Saches = new List<Loai_Sach>();
+
+			foreach(var item in model)
+			{
+				var listsach = db.Saches.Where(x => x.ID_LoaiSach == item.ID).ToList();
+				foreach(var item1 in listsach)
+				{
+					if(item1.Trangthai == true)
+					{
+						loai_Saches.Add(item);
+						break;
+					}
+				}
+			}
+			return loai_Saches;
 		}
 		public void Bat_Tat_HoatDong(int idls)
 		{

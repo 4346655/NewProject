@@ -16,17 +16,14 @@
     <link href="~/Clientassets/css/main.css" rel="stylesheet" />
     <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
     <link href="~/Clientassets/css/reset.css" rel="stylesheet" />
-
+    <link href="~/Clientassets/css/bootstrap-social.css" rel="stylesheet" />
     <title>Đăng nhập</title>
     <style>
-        .thongbao{
-            padding-top:10px;
-            height:50px;
-            width:450px;
-            background-color:rgb(252,7,7,0.4);
-            font-size:20px;
-            color:#fff;
-          
+        .thongbao {
+            padding-top: 10px;
+            font-size: 15px;
+            color: #fff;
+            list-style: none;
         }
     </style>
 </head>
@@ -38,7 +35,7 @@
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken();
-                    @Html.ValidationSummary(true, null, new { @class = "thongbao" });
+                 
                     <div class="list-login" style="width:450px">
                         <form action="" class="list-login">
                             <h3>ĐĂNG NHẬP</h3>
@@ -52,11 +49,20 @@
                                 <input class="login" id="password" name="password" type="password" placeholder="Mật Khẩu"> <br />
                                 <div class="about">
                                     <a href="/quen-mat-khau"><p class="qmk">Quên mật khẩu?</p></a>
+                                    <a href="@Url.Action("Index","Home")" class="item">Trang chủ</a>
                                     <a href="/dang-ki"><p class="dk">Đăng kí</p></a>
                                 </div>
 
                             </div>
+                            @Html.ValidationSummary(true, null, new { @class = "thongbao" });
                             <button>Đăng Nhập</button>
+                            <!--
+    <div style="width:370px;border:1px solid #fff;margin-top:15px;height:50px;border-radius:10px">
+        <a href="/dang-nhap-face-book" style="color:#fff">
+            <img src="~/Clientassets/image/facebook.jfif" style="width:40px;height:40px;border-radius:4px;margin-top:5px"/>
+            Đăng nhập bằng Facebook
+        </a>
+    </div>-->
                         </form>
                     </div>
                 }

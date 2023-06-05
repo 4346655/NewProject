@@ -19,6 +19,37 @@ namespace Models.DAO
 		{
 			return db.TaiKhoans.ToList();
 		}
+		public int InsertForFacebook(string username,string password)
+		{
+			if(db.TaiKhoans.Count(x=>x.TenTaiKhoan == username) ==0)
+			{
+				string pass = Hash_MD5.EncryptMD5(password);
+				TaiKhoan a = new TaiKhoan
+				{
+					ID_LoaiTK = 1,
+					TenTaiKhoan = username,
+					MatKhau = pass,
+					Trangthai = true,
+				};
+				db.TaiKhoans.Add(a);
+
+				db.SaveChanges();
+				CreateNew(username);
+				Temp b = new Temp
+				{
+					ID_TK = a.ID,
+					ID_MGG = 1,
+
+				};
+				db.Temps.Add(b);
+				db.SaveChanges();
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
+		}
 		public int login(string username,string password)
 		{
 			if(String.IsNullOrEmpty(username)|| String.IsNullOrEmpty(password))
@@ -130,9 +161,10 @@ namespace Models.DAO
 		public int register(string username, string newpassword, string confirm)
 		{
 			int key = checkregister(username, newpassword, confirm);
-			string pass = Hash_MD5.EncryptMD5(newpassword);
+			
 			if (key == 4)
 			{
+				string pass = Hash_MD5.EncryptMD5(newpassword);
 				TaiKhoan a = new TaiKhoan {
 					ID_LoaiTK = 1,
 					TenTaiKhoan = username,
@@ -160,15 +192,15 @@ namespace Models.DAO
 		public int Byname(string username)
 		{
 			var model = db.TaiKhoans.Where(x => x.TenTaiKhoan == username).SingleOrDefault();
-			if (model.LoaiTK.Ten_LoaiTK == "user")
+			if (model.ID_LoaiTK == 1)
 				return 1;
-			else if (model.LoaiTK.Ten_LoaiTK == "admin")
+			else if (model.ID_LoaiTK == 2)
 				return 2;
 			else return 3;
 		}
-		public string quenmatkhau(string username, string sodienthoai)
+		public string quenmatkhau(string username, string email)
 		{
-			if (username != "" && sodienthoai != "")
+			if (username != "" && email != "")
 			{
 				var model = db.TaiKhoans.Where(x => x.TenTaiKhoan == username).Single();
 				if (model == null)
@@ -178,7 +210,7 @@ namespace Models.DAO
 				else
 				{
 					var model1 = db.KhachHangs.Where(x => x.TaiKhoan.TenTaiKhoan == username).SingleOrDefault();
-					if (model1.SDT != sodienthoai)
+					if (model1.Email != email)
 					{
 						return "1";
 					}
@@ -256,6 +288,7 @@ namespace Models.DAO
 		}
 		public int Changepassword(int id , string oldpass,string newpass, string confirm)
 		{
+			oldpass = Hash_MD5.EncryptMD5(oldpass);
 			var model = db.TaiKhoans.Where(x => x.ID == id).SingleOrDefault();
 			if(string.IsNullOrEmpty(oldpass) || string.IsNullOrEmpty(newpass) || string.IsNullOrEmpty(confirm))
 			{
@@ -273,9 +306,24 @@ namespace Models.DAO
 				}
 				else
 				{
-					model.MatKhau = Hash_MD5.EncryptMD5( newpass);
-					db.SaveChanges();
-					return 3;
+					if (newpass.Length < 8)
+					{
+						return 4;
+					}
+					else
+					{
+						for (int i = 0; i < newpass.Length; i++)
+						{
+							if ((int)newpass[i] == 32)
+							{
+								return  5; // mat khau chua dau cach
+								break;
+							}
+						}
+						model.MatKhau = Hash_MD5.EncryptMD5(newpass);
+						db.SaveChanges();
+						return 3;
+					}
 				}
 			}
 		}

@@ -8,6 +8,15 @@
     <link href="~/Areas/Assets/fontawesome-free-6.3.0-web/css/all.min.css" rel="stylesheet" />
     <link href="~/Areas/Assets/css/navigation.css" rel="stylesheet" />
     <link href="~/Areas/Assets/css/Maintemp.css" rel="stylesheet" />
+    <style>
+        a{
+            text-decoration:none;
+
+        }
+        .navigation{
+            transition:all 0.2s;  
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -50,7 +59,7 @@
                 </li>
 
                 <li>
-                    @{ 
+                    @{
                         int key = 1;
                     }
                     <a href="/don-hang-@key">
@@ -62,7 +71,7 @@
                 </li>
 
                 <li>
-                    
+
                     <a href="/danh-muc-true">
                         <span class="icon">
                             <ion-icon name="copy-outline"></ion-icon>
@@ -70,8 +79,17 @@
                         <span class="title">Danh mục </span>
                     </a>
                 </li>
+                <li>
 
-              
+                    <a href="/thong-bao">
+                        <span class="icon">
+                            <ion-icon name="copy-outline"></ion-icon>
+                        </span>
+                        <span class="title">Thông báo </span>
+                    </a>
+                </li>
+
+
                 <li>
                     <a href="/ma-giam-gia-false">
                         <span class="icon">

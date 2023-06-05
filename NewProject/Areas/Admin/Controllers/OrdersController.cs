@@ -44,6 +44,7 @@ namespace NewProject.Areas.Admin.Controllers
         {
             if (Phanquyen())
             {
+                ViewBag.TrangThai = trangthai;
                 var order = new OrdersDao();
                 var listorder = order.DanhSachDonHang(Searchstring, page, pagesize, trangthai);
                 ViewBag.Search = Searchstring;

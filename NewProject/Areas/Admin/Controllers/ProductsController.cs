@@ -40,7 +40,7 @@ namespace NewProject.Areas.Admin.Controllers
         }
 
         // GET: Admin/Products
-        public ActionResult Index(string Searchstring, int page = 1, int pagesize = 20)
+        public ActionResult Index(string Searchstring, int page = 1, int pagesize = 10)
         {
             if (Phanquyen())
             {
