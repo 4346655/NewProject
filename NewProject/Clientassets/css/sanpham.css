@@ -554,6 +554,8 @@ input::placeholder {
 .comment_product {
     background-color: antiquewhite;
     border-radius: 10px;
+    width:83%;
+    margin-left:8.5%;
 }
 
 .input_comment {

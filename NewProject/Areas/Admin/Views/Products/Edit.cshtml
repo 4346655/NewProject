@@ -32,10 +32,13 @@
                                 <img src="@Model.Anh">
                                 @Html.EditorFor(model => model.Anh, new { htmlAttributes = new { @id = "txtImage", @class = "form-control",@type="hidden" } })
                                 @Html.ValidationMessageFor(model => model.Anh, "", new { @class = "text-danger" })
-                                <input style="width:70px" type="button" value="Tải ảnh" onclick="BrowserServer('txtImage')" />
+                                <input  type="button" value="Tải ảnh" onclick="BrowserServer('txtImage')" />
                             </div>
                         </div>
                         <div class="right-mid">
+                            <div class="title-page">
+                                <h3>Thông tin sản phẩm</h3>
+                            </div>
                             <div class="right-mid-item" style="margin-top: 70px;">
                                 <h4>Thể loại</h4>
                                 <select style="width: 150px;" id="ID_LoaiSach" name="ID_LoaiSach">

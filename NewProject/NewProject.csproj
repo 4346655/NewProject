@@ -2255,6 +2255,8 @@
     <Content Include="Clientassets\css\Home.css" />
     <Content Include="Clientassets\css\main.css" />
     <Content Include="Clientassets\css\Modal_contact.css" />
+    <Content Include="Clientassets\css\modal_order.css" />
+    <Content Include="Clientassets\css\order.css" />
     <Content Include="Clientassets\css\product.css" />
     <Content Include="Clientassets\css\register1.css" />
     <Content Include="Clientassets\css\reset.css" />

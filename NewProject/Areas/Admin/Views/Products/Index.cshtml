@@ -130,7 +130,7 @@
            transition:all 0.5s;
        }
         tr:hover {
-            background-color: rgb(52 160 160);
+            background-color: lightgoldenrodyellow;
             border-radius:50px;
         }
         .button-tab-1 {
@@ -182,21 +182,21 @@
             <table style="width:100%">
                 <thead style="background-color: rgb(52 160 160);">
                     <tr >
-                        <td style="color:aqua;font-weight:700">Ảnh</td>
-                        <td style="color:aqua">Thể loại</td>
-                        <td style="color:aqua">Tên sách</td>
-                        <td style="color:aqua">Số lượng </td>
-                        <td style="color:aqua">Giá</td>
-                        <td style="color:aqua">Trạng Thái</td>
-                        <td style="color:aqua">#</td>
+                        <td id="title-table" style="color:aqua;font-weight:700">Ảnh</td>
+                        <td id="title-table-1" style="color:aqua">Thể loại</td>
+                        <td id="title-table-2" style="color:aqua">Tên sách</td>
+                        <td id="title-table-3" style="color:aqua">Số lượng </td>
+                        <td id="title-table-4" style="color:aqua">Giá</td>
+                        <td id="title-table-5" style="color:aqua">Trạng Thái</td>
+                        <td id="title-table-6" style="color:aqua">#</td>
 
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody id="body-table">
                     @foreach (var item in Model)
                     {
-                        <tr>
+                        <tr id="row-table">
 
                             <td><img class="img_anh" src="@item.Anh" width="100" /></td>
                             <td>@item.Loai_Sach.Loaisach</td>
@@ -205,7 +205,7 @@
                             <td>@item.Gia</td>
                             @if (item.Trangthai == true)
                             {
-                                <td><a href="/ban-hoac-dung-@item.ID" style="color:aquamarine">Đang bán</a></td>
+                                <td><a href="/ban-hoac-dung-@item.ID" style="color:rgb(15 147 0)">Đang bán</a></td>
                             }
                             else
                             {
@@ -216,7 +216,7 @@
                                 <div id="modal-@item.ID" class="modal">
                                     <div class="modal-content">
                                         <div class="title_modal_pro">
-                                            <strong style="text-align: center;font-size:25px;">@item.TenSach</strong>
+                                            <strong style="text-align: center;font-size:35px;">@item.TenSach</strong>
                                         </div>
                                         <div class="content_modal_pro">
                                             <div class="avt_pro">
@@ -277,6 +277,8 @@
 
     <script>
 
+
+
         var modalBtns = document.querySelectorAll('.modal-btn');
 
         modalBtns.forEach(function (btn) {
@@ -313,6 +315,36 @@
             inputsearch.style.borderRadius = "0px 10px 10px 0px";
             inputsearch.style.backgroundColor = "lightgray";
         });
+
+        var bodytable = document.getElementById("body-table");
+        var titletable = document.getElementById("title-table");
+        var titletable0 = document.getElementById("title-table-1");
+        var titletable1 = document.getElementById("title-table-2");
+        var titletable2 = document.getElementById("title-table-3");
+        var titletable3 = document.getElementById("title-table-4");
+        var titletable4 = document.getElementById("title-table-5");
+        var titletable5 = document.getElementById("title-table-6");
+        bodytable.addEventListener('mouseover', function () {
+            titletable.style.color = "#fff";
+            titletable0.style.color = "#fff";
+            titletable1.style.color = "#fff";
+            titletable2.style.color = "#fff";
+            titletable3.style.color = "#fff";
+            titletable4.style.color = "#fff";
+            titletable5.style.color = "#fff";
+         
+        });
+        bodytable.addEventListener('mouseout', function () {
+            titletable.style.color = "aqua";
+            titletable0.style.color = "aqua";
+            titletable1.style.color = "aqua";
+            titletable2.style.color = "aqua";
+            titletable3.style.color = "aqua";
+            titletable4.style.color = "aqua";
+            titletable5.style.color = "aqua";
+           
+        });
+       
 
     </script>
 </body>

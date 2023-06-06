@@ -9,108 +9,199 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-    <link href="~/Clientassets/css/cart.css" rel="stylesheet" />
+    <link href="~/Clientassets/css/order.css" rel="stylesheet" />
     <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
+    <link href="~/Clientassets/css/modal_order.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="wrapper" style="margin-top:40px;">
+    <main class="cart-page">
+        <div class="cart-content">
+            <div style="display:flex;justify-content:space-between;">
+                <h4 style="font-size: 25px;width: 100%;height: 30px;">Đơn hàng (@Model.Count)</h4>
+                <a href="/lich-su-mua-hang" style="color:black;text-decoration:none;width:20%;">Lịch sử mua hàng</a>
+            </div>
+            <div class="cart-main">
+                <div class="cart-item-1">
+                    <div class="cart-sub">
+                        @foreach (var item in Model)
+                        {
+                            <div class="cart-product">
+                                <div class="product-box">
+                                    <a>
+                                        <img alt="Bàn phím cơ AKKO 3068B Plus World Tour Tokyo R2" src="@item.Sach.Anh" class=" rounded">
+                                        <p style="color: rgb(243, 69, 69);font-size: 20px;font-weight: 600;width:150px;"><small><i>@(item.Sach.Gia * item.SoLuong) vnđ </i></small> </p>
+                                    </a>
+                                    <div class="infomation-product">
+                                        <div class="info-1">
+                                            <div class="product-values">
+                                                <a href="#">@item.Sach.TenSach</a>
+                                                <p><i style="font-size: 13px;">Tác giả : @item.Sach.TacGia - Nhà xuất bản : @item.Sach.NhaXuatBan</i></p>
+                                            </div>
+                                            <div class="price-product">
+                                                @if (item.Trang_thai == 1)
+                                                {
+                                                    <div style="display:flex;width:100%;justify-content:space-evenly;">
+                                                        <a href="/huy-don-user-@item.ID">
+                                                            <i class="fa-solid fa-rectangle-xmark fa-2xl cancel-order" style="color:lightcoral"></i>
+                                                        </a>
+                                                        <a href="#" class="modal-btn" data-modal-id="modal-@item.ID">
+                                                            <i class="fa-solid fa-eye fa-2xl" style="color: rgb(213 211 0)"></i>
+                                                        </a>
 
-        <div class="t-head ">
-            <p>ĐƠN HÀNG CỦA BẠN </p>
+                                                        <div id="modal-@item.ID" class="modal">
+                                                                <div class="modal-content">
+                                                                    <div class="header-respond">
+                                                                        <h3>Thông tin đơn hàng</h3>
+                                                                    </div>
+                                                                    <div class="body-respond">
+                                                                        <div class="body-respond-1">
+                                                                            <img src="@item.Sach.Anh" style="width:50%;height:50%;"/>
+                                                                        </div>
+                                                                        <div class="body-respond-2">
+                                                                            <div class="info-user">
 
+                                                                            </div>
+                                                                            <div class="info_receive">
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                  
+                                                        </div>
+                                                    </div>
+
+                                                    <i class="fa-solid fa-truck-ramp-box fa-2xl" style="color: rgb(182 152 0);margin-top:30px;margin-left:20px;"></i>
+                                                    <h3 style="margin-top: 10px; margin-left: 20px;">Đang chuẩn bị</h3>
+
+                                                }
+                                                else if (item.Trang_thai == 2)
+                                                {
+                                            <div style="width:100%;margin-left:20px;">
+                                                <i class="fa-solid fa-truck fa-2xl" style="color:rgb(0 143 9)"></i>
+                                                <h3 style="margin-top:10px;">Đang giao</h3>
+                                                <button class="cancel-order-2 modal-btn" data-modal-id="modal-@item.ID">
+                                                    Xem
+                                                </button>
+                                                <div id="modal-@item.ID" class="modal">
+                                                    <div class="modal-content">
+                                                        <div class="header-respond">
+                                                            <h3>Thông tin đơn hàng</h3>
+                                                        </div>
+                                                        <div class="body-respond">
+                                                            <div class="body-respond-1">
+                                                                <img src="@item.Sach.Anh" style="width:50%;height:50%;" />
+                                                            </div>
+                                                            <div class="body-respond-2">
+                                                                <div class="info-user">
+
+                                                                </div>
+                                                                <div class="info_receive">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                                }
+                                               
+
+                                            </div>
+                                        </div>
+                                        <div class="info-2">
+                                            <input type="hidden" name="id" value="@item.ID" />
+                                            <div style="display: flex; margin-left: 20px">
+                                                <div class="count-product">
+                                                    <small>Số lượng :@item.SoLuong</small>
+                                                </div>
+                                            </div>
+                                            <div class="progress" style="margin-top:5px;">
+                                                @if (item.Trang_thai == 1)
+                                                {
+                                                    <div class="base-line">
+                                                        <div class="line-process"></div>
+                                                    </div>
+                                                    <div class="progress1">
+
+                                                        <div class="process">
+                                                            <i class="fa-solid fa-truck-ramp-box fa-2xl" style="color: rgb(182 152 0)"></i>
+                                                        </div>
+                                                        <div class="process">
+                                                            <i class="fa-solid fa-truck fa-2xl" style="color:black  "></i>
+                                                        </div>
+                                                        <div class="process">
+                                                            <i class="fa-regular fa-circle-check fa-2xl" style="color: black"></i>
+                                                        </div>
+                                                        <div class="process">
+                                                            <i class="fa-solid fa-trash fa-2xl" style="color: black"></i>
+                                                        </div>
+
+                                                    </div>
+                                                }
+                                                else if (item.Trang_thai == 2)
+                                                {
+                                                    <div class="base-line">
+                                                        <div class="line-process-1"></div>
+                                                    </div>
+                                                    <div class="progress1">
+
+                                                        <div class="process">
+                                                            <i class="fa-solid fa-truck-ramp-box fa-2xl" style="color: rgb(182 152 0)"></i>
+                                                        </div>
+                                                        <div class="process">
+                                                            <i class="fa-solid fa-truck fa-2xl" style="color:rgb(0 143 9)"></i>
+                                                        </div>
+                                                        <div class="process">
+                                                            <i class="fa-regular fa-circle-check fa-2xl" style="color: black"></i>
+                                                        </div>
+                                                        <div class="process">
+                                                            <i class="fa-solid fa-trash fa-2xl" style="color: black"></i>
+                                                        </div>
+
+                                                    </div>
+                                                }
+                                               
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+           
         </div>
-        @if (Model.Count > 0)
-        {
-            <div class="content container2">
+    </main>
+    <script>
 
-                <ul class="table" style="display: flex;">
-                    <li>Hình Ảnh</li>
-                    <li>Sản Phẩm</li>
-                    <li>Số Lượng</li>
-                    <li>Giá</li>
-                    <li>Tổng Tiền</li>
-                    <li>#</li>
-                </ul>
-                <hr>
+         var modalBtns = document.querySelectorAll('.modal-btn');
 
+        modalBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modalId = this.getAttribute('data-modal-id');
+                var modal = document.getElementById(modalId);
+                modal.style.display = "block";
+            });
+        });
 
 
-                @foreach (var item in Model)
-                {
-                    <ul class="table-product" style="display: flex;">
-                        <li style="width:110px;"><img src="@item.Sach.Anh" alt="" width="100"></li>
-                        <li style="width:300px;">
-                            <p>@item.Sach.TenSach</p>
-                            @if (item.Trang_thai == 1)
-                            {
-                                <p style="color:lightcoral">Đang chuẩn bị</p>
-                            }
-                            else if (item.Trang_thai == 2)
-                            {
-                                <p style="color:lightcoral">Đang giao</p>
-                            }
-                            else if (item.Trang_thai == 3)
-                            {
-                                <p style="color:lightcoral">Đã giao</p>
-                            }
-                            else
-                            {
-                                <p style="color:lightcoral">Đã hủy</p>
-                            }
-                        </li>
-                        <li style="width:50px;">@item.SoLuong</li>
-                        <li style="width:40px;">@(item.Sach.Gia-item.Sach.Gia_giam)</li>
-                        <li style="width:160px;">@item.Tong_gia </li>
-                        <li>
-                            @if (item.Trang_thai == 1)
-                            {
-                                <a href="/huy-don-user-@item.ID" >Hủy</a>
-                            }
-                            else if (item.Trang_thai == 2)
-                            {
-                                <a href="" style="text-decoration: line-through;">Hủy</a>
-
-                            }
-
-                            else
-                            {
-                                <a href="/xac-minh-don-hang-@item.ID_Sach-@item.SoLuong">Mua lại</a>
-                            }
-                        </li>
-
-
-                    </ul>
-                    <hr />
-                }
-                <form action="/lich-su-mua-hang" style="height:60px">
-                    <button style="border:none;font-size:20px;background-color:#fff;margin-left:80%">Lịch sử mua hàng</button>
-                </form>
-            </div>
-            <div class="footer container2" style="display: flex;">
-                <div class="ship">
-                    <img src="https://tse3.mm.bing.net/th?id=OIP.CP-sjgkPd7kWOrqsIbBgHAHaDy&pid=Api&P=0" alt="" style="width: 400px; height: auto;">
-
-                    <br> <a href="/trang-chu">Tiếp Tục Mua Hàng</a>
-                </div>
-                <div class="option-buy">
-
-                </div>
-                <div class="other">
-
-                </div>
-            </div>
-
-        }
-			else
-			{
-                <h2>Bạn chưa có sản phẩm nào trong giỏ hàng</h2>
-			}
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        };
 
 
 
-    </div>
-
-
-   
+    </script>
 </body>
 </html>
