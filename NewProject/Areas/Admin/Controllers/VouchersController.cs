@@ -116,14 +116,20 @@ namespace NewProject.Areas.Admin.Controllers
         {
             if (Phanquyen())
             {
+                var voucher = new VoucherDao();
                 if (ModelState.IsValid)
                 {
-                    db.Magiamgias.Add(magiamgia);
-                    db.SaveChanges();
-                    return RedirectToAction("Index",new { trangthai = false });
+                    int result = voucher.CheckCode(magiamgia);
+                    if (result == 0)
+                    {
+                        db.Magiamgias.Add(magiamgia);
+                        db.SaveChanges();
+                        voucher.giveout(magiamgia, (int)magiamgia.Soluong);
+                    }
+                   
+                    
                 }
-
-                return View(magiamgia);
+                 return RedirectToAction("Index",new { trangthai = false });
             }
             else
             {

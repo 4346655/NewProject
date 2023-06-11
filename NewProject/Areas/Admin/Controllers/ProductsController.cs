@@ -38,7 +38,12 @@ namespace NewProject.Areas.Admin.Controllers
 
 
         }
-
+        public ActionResult GetListCategories()
+		{
+            var category = new CategoriesDao();
+            var list = category.List1();
+            return View(list);
+		}
         // GET: Admin/Products
         public ActionResult Index(string Searchstring, int page = 1, int pagesize = 10)
         {
@@ -54,7 +59,7 @@ namespace NewProject.Areas.Admin.Controllers
                 return RedirectToAction("Error", "Home1");
             }
         }
-        public ActionResult ThungRacSanPham(string Searchstring, int page = 1, int pagesize = 20)
+        public ActionResult ThungRacSanPham(string Searchstring, int page = 1, int pagesize = 10)
         {
             if (Phanquyen())
             {

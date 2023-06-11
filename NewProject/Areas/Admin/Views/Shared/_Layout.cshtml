@@ -8,13 +8,14 @@
     <link href="~/Areas/Assets/fontawesome-free-6.3.0-web/css/all.min.css" rel="stylesheet" />
     <link href="~/Areas/Assets/css/navigation.css" rel="stylesheet" />
     <link href="~/Areas/Assets/css/Maintemp.css" rel="stylesheet" />
+    
     <style>
-        a{
-            text-decoration:none;
-
+        a {
+            text-decoration: none;
         }
-        .navigation{
-            transition:all 0.2s;  
+
+        .navigation {
+            transition: all 0.2s;
         }
     </style>
 </head>
@@ -109,13 +110,12 @@
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
                 <div class="header__search">
-                    <label>
-                        <input type="text" placeholder="Tìm kiếm ở đây ">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
+
                 </div>
                 <div class="header__user">
-                    <img src="https://haycafe.vn/wp-content/uploads/2022/02/Anh-gai-xinh-Viet-Nam.jpg" alt="">
+                    <a href="/tai-khoan-admin" class="modal-btn " data-modal-id="modal-000">
+                        <i class="fa-solid fa-gear fa-2xl icon-setting"></i>
+                    </a>
                 </div>
             </div>
             @RenderBody()
@@ -127,7 +127,22 @@
  
 
    
+    <script>
+        var modalBtns = document.querySelectorAll('.modal-btn');
 
+        modalBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modalId = this.getAttribute('data-modal-id');
+                var modal = document.getElementById(modalId);
+                modal.style.display = "block";
+            });
+        });
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        };
+    </script>
 
     <script src="~/Areas/Assets/js/Temp.js"></script>
    

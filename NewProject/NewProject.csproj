@@ -181,6 +181,7 @@
   <ItemGroup>
     <Content Include="Areas\Assets\css\announce.css" />
     <Content Include="Areas\Assets\css\create.css" />
+    <Content Include="Areas\Assets\css\detailadmin.css" />
     <Content Include="Areas\Assets\css\edit.css" />
     <Content Include="Areas\Assets\css\Homeadmin.css" />
     <Content Include="Areas\Assets\css\main.css" />
@@ -189,6 +190,7 @@
     <Content Include="Areas\Assets\css\Modal_thungrac_product.css" />
     <Content Include="Areas\Assets\css\Modal_product.css" />
     <Content Include="Areas\Assets\css\navigation.css" />
+    <Content Include="Areas\Assets\css\voucher.css" />
     <Content Include="Areas\Assets\fontawesome-free-6.3.0-web\css\all.css" />
     <Content Include="Areas\Assets\fontawesome-free-6.3.0-web\css\all.min.css" />
     <Content Include="Areas\Assets\fontawesome-free-6.3.0-web\css\brands.css" />
@@ -2257,6 +2259,7 @@
     <Content Include="Clientassets\css\Modal_contact.css" />
     <Content Include="Clientassets\css\modal_order.css" />
     <Content Include="Clientassets\css\order.css" />
+    <Content Include="Clientassets\css\order_2.css" />
     <Content Include="Clientassets\css\product.css" />
     <Content Include="Clientassets\css\register1.css" />
     <Content Include="Clientassets\css\reset.css" />
@@ -3321,6 +3324,9 @@
     <Content Include="Areas\Admin\Views\Home1\Percent_Order1.cshtml" />
     <Content Include="Areas\Admin\Views\Home1\Percent_typeOrder.cshtml" />
     <Content Include="Areas\Admin\Views\Announce\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\GetListProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\GetListCategories.cshtml" />
+    <Content Include="Areas\Admin\Views\Accounts\DoimatkhauAdmin.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

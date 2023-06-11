@@ -202,7 +202,7 @@ namespace Models.DAO
 		{
 			if (username != "" && email != "")
 			{
-				var model = db.TaiKhoans.Where(x => x.TenTaiKhoan == username).Single();
+				var model = db.TaiKhoans.Where(x => x.TenTaiKhoan == username).SingleOrDefault();
 				if (model == null)
 				{
 					return "0";

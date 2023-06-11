@@ -1,0 +1,56 @@
+﻿@model List<Models.DTO.Sach>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetListProduct</title>
+    <style>
+        .list-item{
+            width:100%;
+            height:100%;
+            
+        }
+        .item-product-sub{
+            width:100%;
+            height:80px;
+            margin-bottom:10px;
+            display:flex;
+            background-color:rgb(128, 128, 128,0.2);
+            margin-top:5px;
+            border-radius:4px;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="list-item"> 
+        @foreach(var item in Model)
+			{
+                <div class="item-product-sub">
+                    <div style="width:80%;">
+                        <p>@item.TenSach</p>
+                        @if (item.Trangthai == true)
+                        {
+                            <p>Hoạt động</p>
+                        }
+				        else
+				        {
+                            <p>Ngừng hoạt động</p>
+				        }
+
+                        <p>Số lượng : @item.SoLuong</p>
+                    </div>
+                    <div>
+                        <p>Giá :@item.Gia</p>
+                       
+                    </div>
+                </div>
+			}
+    </div>
+</body>
+</html>

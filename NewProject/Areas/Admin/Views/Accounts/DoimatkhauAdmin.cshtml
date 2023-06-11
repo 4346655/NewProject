@@ -16,7 +16,7 @@
     <style>
         .thongbao {
             font-size: 15px;
-            color:var(--blue);
+            color: var(--blue);
             list-style: none;
         }
     </style>
@@ -31,7 +31,7 @@
                     <div class="header-setting-item">
                         <p>Thông tin</p>
                     </div>
-                    
+
                 </div>
                 <div class="content-setting ">
                     <div class="body-setting">
@@ -52,7 +52,7 @@
                         <div class="infomation-setting">
                             <div class="change-info">
                                 <form action="/chinh-sua-thong-tin" method="post" style=" width: 100%; height: 100%;">
-                                    
+
                                     <div class="upload-image" id="upload-image">
                                         <div style="width:100%;height:10%;text-align:center;display:flex;justify-content:center">
                                             <h3 style="margin-top:20px">Ảnh đại diện </h3>
@@ -109,7 +109,7 @@
                                     <div class="upload-info-1">
                                         <div style="width: 100%; height: 10%; text-align: center; display: flex; justify-content: center">
                                             <h3 style="margin-top:20px">Đổi mật khẩu </h3>
-                                           
+
                                         </div>
                                         <div class="fill-info" style="margin-top:30px;">
                                             <div class="item-info">
@@ -124,12 +124,12 @@
                                                 <p>Xác nhận </p>
                                                 <input type="password" name="confirm" required />
                                             </div>
-                                            <div style=" width:100%;margin-left:40%; ">
+                                            <div style=" width:100%;margin-left:40%; margin-top:30px;">
                                                 <i>@Html.ValidationSummary(true, null, new { @class = "thongbao" })</i>
 
                                             </div>
                                         </div>
-                                       
+                                        
                                         <button class="button-save"> Lưu </button>
                                     </div>
                                 </form>
@@ -178,6 +178,6 @@
             }
         });
     </script>
-    
+
 </body>
 </html>

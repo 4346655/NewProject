@@ -13,11 +13,15 @@
     <link href="~/Clientassets/css/order.css" rel="stylesheet" />
     <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
     <link href="~/Clientassets/css/Modal_contact.css" rel="stylesheet" />
+    <link href="~/Clientassets/css/order_2.css" rel="stylesheet" />
 </head>
 <body>
     <main class="cart-page">
         <div class="cart-content">
-            <h4 style="font-size: 25px;width: 100%;height: 30px;">Đơn hàng (@Model.Count)</h4>
+            <div class="first-title">
+                <h4>Đơn hàng (@Model.Count)</h4>
+                <a href="/xem-don-hang">Trở lại</a>
+            </div>
             <div class="cart-main">
                 <div class="cart-item-1">
                     <div class="cart-sub">
@@ -27,7 +31,7 @@
                                 <div class="product-box">
                                     <a>
                                         <img alt="Bàn phím cơ AKKO 3068B Plus World Tour Tokyo R2" src="@item.Sach.Anh" class=" rounded">
-                                        <p style="color: rgb(243, 69, 69);font-size: 20px;font-weight: 600;width:150px;"><small><i>@(item.Sach.Gia * item.SoLuong) vnđ </i></small> </p>
+                                        <p class="price"><small><i>@(item.Sach.Gia * item.SoLuong) vnđ </i></small> </p>
                                     </a>
                                     <div class="infomation-product">
                                         <div class="info-1">
@@ -38,92 +42,193 @@
                                             <div class="price-product">
                                                 @if (item.Trang_thai == 3)
                                                 {
-                                                    <div style="display:flex;width:100%;justify-content:space-evenly;">
+                                                <div class="list-function">
 
-                                                        <a class="modal-btn" data-modal-id="modal-@item.ID">
-                                                            <i class="fa-solid fa-file-pen fa-xl" style="color: rgb(213 211 0)"></i>
-                                                        </a>
-                                                        <div id="modal-@item.ID" class="modal">
-                                                            <form action="/phan-hoi" method="post">
-                                                                <input type="hidden" name="idsach" value="@item.ID_Sach" />
-                                                                <input type="hidden" name="iduser" value="@item.ID_KhachHang" />
-                                                                <input type="hidden" name="email" value="@item.KhachHang.Email" />
-                                                                <div class="modal-content">
-                                                                    <div class="header-respond">
-                                                                        <h3 style="color: rgb(158 156 0)">Chất lượng sản phẩm</h3>
-                                                                        <div style="display:flex" class="danhgia">
-                                                                            <div style="width:20%">
-                                                                                <input type="radio" name="sao" class="sao" id="sao1" value="1" />
-                                                                                <p>1 sao</p>
-                                                                            </div>
-                                                                            <div style="width:20%">
-                                                                                <input type="radio" name="sao" class="sao" id="sao2" value="2" />
-                                                                                <p>2 sao</p>
-                                                                            </div>
-                                                                            <div style="width:20%">
-                                                                                <input type="radio" name="sao" class="sao" id="sao3" value="3" />
-                                                                                <p>3 sao</p>
-                                                                            </div>
-                                                                            <div style="width:20%">
-                                                                                <input type="radio" name="sao" class="sao" id="sao4" value="4" />
-                                                                                <p>4 sao</p>
-                                                                            </div>
-                                                                            <div style="width:20%">
-                                                                                <input type="radio" name="sao" class="sao" id="sao5" value="5" />
-                                                                                <p>5 sao</p>
-
-                                                                            </div>
+                                                    <a class="modal-btn" data-modal-id="modal-@item.ID">
+                                                        <i class="fa-solid fa-file-pen fa-xl" style="color: rgb(213 211 0)"></i>
+                                                    </a>
+                                                    <div id="modal-@item.ID" class="modal">
+                                                        <form action="/phan-hoi" method="post">
+                                                            <input type="hidden" name="idsach" value="@item.ID_Sach" />
+                                                            <input type="hidden" name="iduser" value="@item.ID_KhachHang" />
+                                                            <input type="hidden" name="email" value="@item.KhachHang.Email" />
+                                                            <div class="modal-content">
+                                                                <div class="header-respond">
+                                                                    <h3 style="color: rgb(158 156 0)">Chất lượng sản phẩm</h3>
+                                                                    <div style="display:flex" class="danhgia">
+                                                                        <div style="width:20%">
+                                                                            <input type="radio" name="sao" class="sao" id="sao1" value="1" />
+                                                                            <p>1 sao</p>
                                                                         </div>
-
-                                                                    </div>
-                                                                    <div class="body-respond">
-                                                                        <h3 style="color: rgb(158 156 0) ">Bình luận về sản phẩm </h3>
-                                                                        <div style="display:flex;justify-content:space-between">
-                                                                            <div style="display:flex">
-                                                                                <input type="radio" name="andanh" value="1" />
-                                                                                <small>Ẩn danh</small>
-                                                                            </div>
-                                                                            <div style="display:flex">
-                                                                                <input type="radio" name="andanh" value="0" />
-                                                                                <small>Công khai</small>
-                                                                            </div>
+                                                                        <div style="width:20%">
+                                                                            <input type="radio" name="sao" class="sao" id="sao2" value="2" />
+                                                                            <p>2 sao</p>
                                                                         </div>
-                                                                        <textarea class="nhanxet" name="binhluan"></textarea>
-                                                                    </div>
-                                                                    <div class="footer-respond">
-                                                                        <h3 style="color: rgb(158 156 0) ">Liên hệ</h3>
-                                                                        <label>Tiêu đề</label><input style="margin-left:15px;width:80%;height:50px" name="tieude" value="Báo cáo @item.KhachHang.HoTen - @item.Sach.TenSach" />
-                                                                        <textarea class="nhanxet" placeholder="Nếu có vấn đề trong quá trình phục vụ ,vui lòng hãy gửi báo cáo cho chúng tôi. Chúng tôi sẽ cố gắng khắc phục sớm nhất để quý khách có trải nghiệm tốt nhất." name="nhanxet"></textarea>
+                                                                        <div style="width:20%">
+                                                                            <input type="radio" name="sao" class="sao" id="sao3" value="3" />
+                                                                            <p>3 sao</p>
+                                                                        </div>
+                                                                        <div style="width:20%">
+                                                                            <input type="radio" name="sao" class="sao" id="sao4" value="4" />
+                                                                            <p>4 sao</p>
+                                                                        </div>
+                                                                        <div style="width:20%">
+                                                                            <input type="radio" name="sao" class="sao" id="sao5" value="5" />
+                                                                            <p>5 sao</p>
 
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="button-confirm">
-                                                                        <button type="submit"> Gửi</button>
+
+                                                                </div>
+                                                                <div class="body-respond">
+                                                                    <h3 style="color: rgb(158 156 0) ">Bình luận về sản phẩm </h3>
+                                                                    <div style="display:flex;justify-content:space-between">
+                                                                        <div style="display:flex">
+                                                                            <input type="radio" name="andanh" value="1" />
+                                                                            <small>Ẩn danh</small>
+                                                                        </div>
+                                                                        <div style="display:flex">
+                                                                            <input type="radio" name="andanh" value="0" />
+                                                                            <small>Công khai</small>
+                                                                        </div>
+                                                                    </div>
+                                                                    <textarea class="nhanxet" name="binhluan"></textarea>
+                                                                </div>
+                                                                <div class="footer-respond">
+                                                                    <h3 style="color: rgb(158 156 0) ">Liên hệ</h3>
+                                                                    <label>Tiêu đề</label><input style="margin-left:15px;width:80%;height:50px" name="tieude" value="Báo cáo @item.KhachHang.HoTen - @item.Sach.TenSach" />
+                                                                    <textarea class="nhanxet" placeholder="Nếu có vấn đề trong quá trình phục vụ ,vui lòng hãy gửi báo cáo cho chúng tôi. Chúng tôi sẽ cố gắng khắc phục sớm nhất để quý khách có trải nghiệm tốt nhất." name="nhanxet"></textarea>
+
+                                                                </div>
+                                                                <div class="button-confirm">
+                                                                    <button type="submit"> Gửi</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                    <a href="#" class="modal-btn-1" data-modal-id="modal-1-@item.ID">
+                                                        <i class="fa-solid fa-eye fa-2xl" style="color: rgb(213 211 0)"></i>
+                                                    </a>
+
+                                                    <div id="modal-1-@item.ID" class="modal-1">
+                                                        <div class="modal-content-1">
+                                                            <div class="header-respond-1">
+                                                                <h3>Thông tin đơn hàng</h3>
+                                                            </div>
+                                                            <div class="body-respond-1">
+                                                                <div class="body-respond-1-1">
+                                                                    <img src="@item.Sach.Anh" style="width:60%;height:50%;" />
+                                                                    <div style="width:100%;">
+                                                                        <p>Giá : <i>@item.Tong_gia</i></p>
+                                                                        <p>Sách : <i>@item.Sach.TenSach</i></p>
+                                                                        <p>Số lượng : <i>@item.SoLuong</i></p>
+                                                                        <p>Tác giả : <i>@item.Sach.TacGia</i></p>
+                                                                        <p>Nhà xuất bản : <i>@item.Sach.NhaXuatBan</i></p>
                                                                     </div>
                                                                 </div>
-                                                            </form>
+                                                                <div class="body-respond-2-1">
+                                                                    <div class="info-user-1">
+                                                                        <h3><i>Thông tin người đặt hàng</i></h3>
+                                                                        <div>
+                                                                            <p>Họ tên : <i>@item.KhachHang.HoTen</i></p>
+                                                                            <p>Số điện thoại : <i>@item.KhachHang.SDT</i></p>
+                                                                            <p>Địa chỉ : <i>@item.KhachHang.Diachi</i></p>
+                                                                            <p>Email : <i>@item.KhachHang.Email</i></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info_receive-1">
+                                                                        <h3><i>Thông tin người nhận hàng</i></h3>
+                                                                        <div>
+                                                                            <p>Họ tên : <i>@item.Hoten</i></p>
+                                                                            <p>Số điện thoại : <i>@item.SDT</i></p>
+                                                                            <p>Địa chỉ : <i>@item.Diachi</i></p>
+                                                                            <p>Email : <i>@item.Email</i></p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div style="width:100%;">
+                                                                        <form action="/mua-hang-@item.ID_Sach-@item.SoLuong">
+                                                                            <button class="Button-cancel" style="background-color:lightgreen">Mua lại</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
-
-                                                        <a href="#">
-                                                            <i class="fa-solid fa-eye fa-2xl" style="color: rgb(213 211 0)"></i>
-                                                        </a>
-
 
                                                     </div>
 
-                                                    <i class="fa-regular fa-circle-check fa-2xl" style="color: lightskyblue;margin-top:30px;margin-left:20px;"></i>
+
+
+                                                </div>
+
+                                                    <i class="fa-regular fa-circle-check fa-2xl icon-order" style="color: lightskyblue;"></i>
                                                     <h3 style="margin-top: 10px; margin-left: 20px;">Đã giao</h3>
 
                                                 }
                                                 else if (item.Trang_thai == 0)
-                                                {<div style="width:100%;margin-left:20px;">
-                                                <i class="fa-solid fa-trash fa-2xl" style="color: lightcoral"></i>
-                                                <h3 style="margin-top:10px;">Đã hủy</h3>
-                                                <button class="cancel-order-2">Xem</button>
+                                                {
+                                            <div class="list-function">
+                                                <a>
+                                                    <i class="fa-solid fa-file-pen fa-xl" style="color: lightgray"></i>
+                                                </a>
+                                                <a href="#" class="modal-btn-1" data-modal-id="modal-1-@item.ID">
+                                                    <i class="fa-solid fa-eye fa-2xl" style="color: rgb(213 211 0)"></i>
+                                                </a>
+
+                                                <div id="modal-1-@item.ID" class="modal-1">
+                                                    <div class="modal-content-1">
+                                                        <div class="header-respond-1">
+                                                            <h3>Thông tin đơn hàng</h3>
+                                                        </div>
+                                                        <div class="body-respond-1">
+                                                            <div class="body-respond-1-1">
+                                                                <img src="@item.Sach.Anh" style="width:60%;height:50%;" />
+                                                                <div style="width:100%;">
+                                                                    <p>Giá : <i>@item.Tong_gia</i></p>
+                                                                    <p>Sách : <i>@item.Sach.TenSach</i></p>
+                                                                    <p>Số lượng : <i>@item.SoLuong</i></p>
+                                                                    <p>Tác giả : <i>@item.Sach.TacGia</i></p>
+                                                                    <p>Nhà xuất bản : <i>@item.Sach.NhaXuatBan</i></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="body-respond-2-1">
+                                                                <div class="info-user-1">
+                                                                    <h3><i>Thông tin người đặt hàng</i></h3>
+                                                                    <div>
+                                                                        <p>Họ tên : <i>@item.KhachHang.HoTen</i></p>
+                                                                        <p>Số điện thoại : <i>@item.KhachHang.SDT</i></p>
+                                                                        <p>Địa chỉ : <i>@item.KhachHang.Diachi</i></p>
+                                                                        <p>Email : <i>@item.KhachHang.Email</i></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="info_receive-1">
+                                                                    <h3><i>Thông tin người nhận hàng</i></h3>
+                                                                    <div>
+                                                                        <p>Họ tên : <i>@item.Hoten</i></p>
+                                                                        <p>Số điện thoại : <i>@item.SDT</i></p>
+                                                                        <p>Địa chỉ : <i>@item.Diachi</i></p>
+                                                                        <p>Email : <i>@item.Email</i></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div style="width:100%;">
+                                                                    <form action="/mua-hang-@item.ID_Sach-@item.SoLuong">
+                                                                        <button class="Button-cancel" style="background-color:lightgreen">Mua lại</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
                                                 </div>
-    }
+                                            </div>
+                                                    <i class="fa-solid fa-trash fa-2xl icon-order"  style="color: lightcoral;"></i>
+                                                    <h3 style="margin-top: 10px; margin-left: 20px;">Đã hủy</h3>
+                                                }
 
 
-</div>
+                                            </div>
                                         </div>
                                         <div class="info-2">
                                             <input type="hidden" name="id" value="@item.ID" />
@@ -211,6 +316,23 @@
             }
         };
 
+
+        var modalBtns1 = document.querySelectorAll('.modal-btn-1');
+
+        modalBtns1.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var modalId = this.getAttribute('data-modal-id');
+                var modal = document.getElementById(modalId);
+                modal.style.display = "block";
+            });
+        });
+
+
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal-1')) {
+                event.target.style.display = "none";
+            }
+        };
 
 
     </script>

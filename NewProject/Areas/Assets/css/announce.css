@@ -57,11 +57,30 @@
     transition: 1s all;
     color: rgb(255, 255, 255,0.8);
 }
-.content-mail{
-    width:50%;
-    height:100%;
-    border-left:solid;
+.content-mail {
+    width: 50%;
+    height: 95%;
+    border-left: solid;
+    display: none;
+    transition: all 0.5s;
+    animation-name: contentmail;
+    animation-duration: 1s;
+    background-color: rgb(118,235, 255,0.2);
 }
+@keyframes contentmail{
+    0% {
+        height: 0%;
+        background-color: #fff;
+    }
+    50% {
+        background-color: lightgray;
+    }
+    100% {
+        height: 95%;
+        background-color: rgb(118 ,235, 255,0.2);
+    }
+}
+
 .head-mail{
     width:100%;
     height:50px;

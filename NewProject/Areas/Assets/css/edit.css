@@ -1,43 +1,42 @@
-﻿*{
-    margin:0px;
-    padding:0px;
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+    color: #000;
 }
+
 main {
+    position: relative;
     width: 100%;
-    height: 600px;
-    display: flex;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px;
+    margin-top: 20px;
 }
 
-.left-main {
-    width: 40px;
-    height: 100%;
-}
-
-.right-main {
-    width: 1000px;
-    height: 520px;
-}
-
-.mid-right-main {
-    width: 100%;
-    height: 600px;
-    display: flex;
+.right-mid > .title-page > h3 {
+    color: rgb(116, 125, 15);
+    font-size: 40px;
 }
 
 .left-mid {
-    height: 100%;
-    width: 50%;
+    position: relative;
+    height: 500px;
+    margin-right: 20%;
 }
 
 .image-product {
-    height: 100%;
-    width: 100%;
+    max-width: 500px;
+    height: auto;
     margin: 35px 25px;
     background-color: #fff;
 }
 
     .image-product > img {
-        height: 80%;;
+        height: 80%;
+        ;
         width: 100%;
         border-radius: 4px;
     }
@@ -62,9 +61,14 @@ main {
     margin-top: 20px;
 }
 
+    .right-mid-item select {
+        width: 400px;
+    }
+
     .right-mid-item > h4 {
-        min-width: 100px;
-        margin-left: 50px;
+        width: 150px;
+        text-align: start;
+        /* margin-left: 50px; */
     }
 
     .right-mid-item > input {
@@ -87,13 +91,23 @@ main {
     margin: 20px 10px;
 }
 
-    .right-mid-item-1 > .input-1 {
-        width: 100px;
-    }
+.left-mid > .image-product > input {
+    font-weight: 900;
+    font-size: larger;
+    color: aqua;
+    font-family: 'Times New Roman', Times, serif;
+}
 
-    .right-mid-item-1 > h4 {
-        margin-bottom: 10px;
-    }
+.right-mid-item-1 > .input-1 {
+    width: 100px;
+}
+
+.right-mid-item-1 > h4 {
+    margin-bottom: 10px;
+    width: 150px;
+    text-align: start;
+}
+
 
 .btn-confirm {
     margin-left: 200px;
@@ -109,3 +123,9 @@ main {
         .btn-confirm > button:active {
             background-color: rgb(97, 166, 245);
         }
+.type-book{
+    height:30px;
+    border-radius:50px;
+    background-color:lightgray;
+    border:none;
+}

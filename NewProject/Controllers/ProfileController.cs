@@ -28,14 +28,7 @@ namespace NewProject.Controllers
                 return RedirectToAction("Index", "Login");
 			}
         }
-        public ActionResult Suathongtin()
-		{
-            var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
-            var kh = new CustomersDao();
-            var detail = kh.GetDetailByUsername(session.username);
-            return View(detail);
-		}
-
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Suathongtin(string hoten, string diachi, string email , string sdt,string avt)

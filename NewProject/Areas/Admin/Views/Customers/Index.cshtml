@@ -15,7 +15,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-
     <style>
      
 
@@ -166,11 +165,16 @@
                         }
                         @if (item.TaiKhoan.Trangthai == true)
                         {
-                            <td> <a onclick="location.reload();" href="/doi-trang-thai-khach-hang-@item.ID" style="color:green">on</a></td>
+                            <td> <a onclick="location.reload();" href="/doi-trang-thai-khach-hang-@item.ID" >
+                                     <i class="fa-solid fa-toggle-on" style="color:green"></i>
+                                 </a>
+                            </td>
                         }
                         else
                         {
-                            <td><a onclick="location.reload();" href="/doi-trang-thai-khach-hang-@item.ID" style="color:red">off</a>  </td>
+                            <td><a onclick="location.reload();" href="/doi-trang-thai-khach-hang-@item.ID" >
+                                    <i class="fa-solid fa-toggle-off" style="color:red"></i>
+                                </a>  </td>
 
                         }
 
@@ -189,7 +193,6 @@
         </div>
         <!-- -----------------HD gan dayh--------- -->
 
-        @Html.Action("DanhSachMoiMua", "Orders")
     </div>
    <script>
        var inputsearch = document.getElementById("input-search");

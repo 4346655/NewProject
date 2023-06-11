@@ -3,28 +3,69 @@
     ViewBag.Title = "HistorySearch";
     Layout = null;
 }
-@if (Model != null && Model.Count>0)
-{
-<select class="search_input" type="text" name="tensach" placeholder="Bạn muốn tìm gì?" width="200px" style="border:none">
-
-    @if (Model.Count > 5)
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            <option value="@Model[i].NoiDung">@Model[i].NoiDung</option>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <link href="~/Clientassets/css/Home.css" rel="stylesheet" />
+    <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
+    <style>
+        .box-history {
+            width: 80%;
+            text-align: left;
+            margin-left: 10%;
+            z-index: 1000;
+            border: 1px solid #000000;
+            border-radius: 10px;
+            display: none;
+            background-color: rgb(128,128, 128,0.5);
+            animation-name: animationboxsearch;
+            animation-duration: 0.3s;
         }
+
+        .row-history {
+            width: 80%;
+            margin-left: 10%;
+            height: 30px;
+            background-color: rgb(255, 255, 255,0.5);
+            color: black;
+            animation-name: animationboxsearch;
+            animation-duration: 0.3s;
+        }
+            .row-history:hover {
+                background-color: rgb(255, 255, 255);
+            }
+    </style>
+</head>
+<body>
+    @if (Model.Count > 0)
+
+    {
+        <div class="box-history" id="box-history">
+            @if (Model.Count > 3)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    <p class="row-history" id="row-history-@Model[i].ID" data-modal-id="row-history-@Model[i].ID">@Model[i].NoiDung</p>
+                }
+            }
+            else
+            {
+                foreach (var itemm in Model)
+                {
+                    <p class="row-history" id="row-history-@itemm.ID" data-modal-id="row-history-@itemm.ID">@itemm.NoiDung</p>
+                }
+            }
+        </div>
     }
     else
     {
-        foreach (var item in Model)
-        {
-            <option value="@item.NoiDung">@item.NoiDung </option>
-        }
-    }
-</select>
-}
-else
-{
-    <input class="search_input" type="text" name="tensach" placeholder="Bạn muốn tìm gì?" width="200px" autocomplete="off">
- }
+        <div class="box-history" id="box-history">
+           
+        </div>
 
+    }
+    </body>
+</html>

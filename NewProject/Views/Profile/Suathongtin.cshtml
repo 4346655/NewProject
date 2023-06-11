@@ -80,9 +80,9 @@
                             <div class="subdiv"  style="width:50%">
                                 <div class='body_content'>
                                     <div class="contentcolumn img_avt">
-                                        <img src="@Model.AnhDaiDien">
+                                        <img src="@Model.AnhDaiDien" id="anhdaidien">
                                         <div class="pt-2">
-                                            <input type="hidden" id="txtImage" name="avt" />
+                                            <input type="hidden" id="txtImage" name="avt"  />
                                             <input style="width:100%;height:30px;margin-left:5px;margin-bottom:5px;margin-right:5px;" type="button" value="Tải ảnh" onclick="BrowserServer('txtImage')" />
 
                                         </div>
@@ -149,12 +149,13 @@
     <script src="~/Clientassets/js/apexcharts.min.js"></script>
     <script src="~/Clientassets/js/bootstrap.bundle.min.js"></script>
 
-
     <script>
         function BrowserServer(field) {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
+                var image = document.getElementById("anhdaidien");
                 document.getElementById(field).value = fileUrl;
+                image.src = fileUrl;
             };
             finder.popup();
         }

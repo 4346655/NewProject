@@ -82,6 +82,7 @@ namespace NewProject.Areas.Admin.Controllers
             var product = new ProductsDao();
             var list1 = product.List(idloaisach);
             var list = product.List();
+            ViewBag.Loaisach = list[0].Loai_Sach.Loaisach;
             int percent =  ( list1.Count() * 100 )/ list.Count();
 
             ViewBag.list = (int)percent;

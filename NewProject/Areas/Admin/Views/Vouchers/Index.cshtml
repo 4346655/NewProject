@@ -7,254 +7,203 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <html>
 <head>
-    <title>Mã giảm giá</title>
-    <style>
-        .table-product {
-            background-color: lightcyan;
-        }
-
-        .search {
-            width: 100px;
-            height: 30px;
-            border-radius: 10px;
-            background-color: aquamarine;
-        }
-
-
-        .ip_search {
-            width: 830px;
-            height: 70px;
-            border: none;
-            text-align: center;
-            background-color: lightcyan;
-        }
-
-            .ip_search:active {
-                border: none;
-                outline: none;
-            }
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 14px;
-        }
-
-            .pagination a,
-            .pagination span {
-                display: inline-block;
-                padding: 6px 12px;
-                margin-right: 5px;
-                border-radius: 3px;
-                color: #007bff;
-                background-color: #fff;
-                border: 1px solid #007bff;
-                text-decoration: none;
-            }
-
-                .pagination a:hover,
-                .pagination span.current {
-                    color: #fff;
-                    background-color: #007bff;
-                    border-color: #007bff;
-                }
-
-                .pagination span.ellipsis {
-                    display: inline-block;
-                    margin-right: 5px;
-                    color: #007bff;
-                }
-
-                .pagination span.disabled {
-                    display: none;
-                }
-        .button-tab {
-            width: 150px;
-            text-align: center;
-            height: 70px;
-            border-right: 1px solid;
-            text-decoration: none
-        }
-
-        .button-search:hover {
-            background-color: aqua;
-        }
-    </style>
+    <title>Sản phẩm</title>
     <link href="~/Content/PagedList.css" rel="stylesheet" />
-    <link href="~/Areas/Assets/css/Modal_categories.css" rel="stylesheet" />
+  
+    <link href="~/Areas/Assets/fontawesome-free-6.3.0-web/css/all.min.css" rel="stylesheet" />
+    <link href="~/Areas/Assets/css/voucher.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="detail">
 
-        <div class="detail_list" style="width:1300px;">
+    <div class="detail_list">
 
-            <div style="display:flex;background-color:aqua;height:70px;">
-                <div style="display:flex;">
+        <div style="display:flex;height:70px;justify-content:space-between;width:95%;margin-bottom:20px">
+            @using (Html.BeginForm("Index", "Vouchers", FormMethod.Get))
+            {
+                <div class="divsearch" >
+                    <div>
+                        <i class="fa-solid fa-magnifying-glass fa-2xl" style="margin-top:35px;"></i>
+                    </div>
+                    <input type="text" id="input-search" class="ip_search" autocomplete="off" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
+                </div>
+            }
+            <div class="list-button">
+                <div class="button-add">
                     @if (ViewBag.Status == false)
                     {
-                        <a class="button-tab" href="/ma-giam-gia-true" style="background-color: lightcoral">
-                            <p style="margin-top:25px;">Thùng rác</p>
-                        </a>
+                        <div class="button-tab-0">
+                            <a class="button-tab modal-btn" data-modal-id="modal-0">
+                                <i class="fa-solid fa-square-plus fa-2xl " style="margin-top:35px;"></i>
+                            </a>
+                        </div>
                     }
                     else
                     {
-                        <a class="button-tab" href="/ma-giam-gia-false" style="background-color: lightcoral">
-                            <p style="margin-top:25px;">Trở lại</p>
+                        <a class="button-tab modal-btn" data-modal-id="modal-0">
+                            <i class="fa-solid fa-square-plus fa-2xl " style="margin-top:35px;"></i>
                         </a>
                     }
-
-                    <a class="button-tab modal-btn" href="#" data-modal-id="modal-0" style="background-color: lightgreen">
-                        <p style="margin-top:25px;">Thêm mã giảm giá</p>
-                    </a>
-
-             
-
-
                     <div id="modal-0" class="modal">
-                        <div class="modal-content" style="height:350px;width:800px">
+                        <div class="modal-content" >
+
                             <div class="title_modal_pro">
-                                <strong style="text-align: center;font-size:25px;">Thêm mã giảm giá</strong>
+                                <strong >Mã giảm giá</strong>
                             </div>
-                            <div class="content_modal_pro" style="height:220px">
-                                <div class="avt_pro" style="justify-content: center; align-items: center;">
+                            <div class="content_modal_pro" >
+                                <div class="avt_pro" >
                                     <form action="/them-ma-giam-gia" method="post" style="display:flex">
                                         @Html.AntiForgeryToken()
-                                        <div style="width:400px;">
-                                            <div style="display:flex;margin:40px 0 0 20px">
+                                        <div class="list-item-info">
+                                            <div class="item_modal_pro">
                                                 <p style="width:100px">Mã giảm giá :</p>
-                                                <input type="text" name="Ma" />
+                                                <input type="text" name="Ma" required/>
                                             </div>
-                                            <div style="display: flex; margin: 20px 0 0 20px">
+                                            <div class="item_modal_pro">
                                                 <p style="width:100px"> Giá trị : </p>
-                                                <input type="number" min="0" name="Giatri" />
+                                                <input type="number" min="1" name="Giatri" required/>
                                             </div>
-                                            <div style="display: flex; margin: 20px 0 0 20px">
+                                            <div class="item_modal_pro">
                                                 <p style="width:100px"> Số lượng : </p>
-                                                <input type="number" min="0" name="Soluong" />
+                                                <input type="number" min="1" name="Soluong" required/>
                                             </div>
-                                        </div>
-                                        <div style="width:400px;margin-left:100px">
+
                                             <input type="hidden" name="DeleteStatus" value="false" />
                                             <input type="hidden" name="Trangthai" value="true" />
                                             <div class="item_modal_pro">
-                                                <p style="flex:1">Thời gian bắt đầu</p>
-                                                <input class="form-control text-box single-line" id="time1" name="time1" type="datetime-local" style="flex:1;width:250px">
+                                                <p >Thời gian bắt đầu</p>
+                                                <input class="form-control text-box single-line" id="time1" name="time1" type="datetime-local"  required>
                                             </div>
                                             <div class="item_modal_pro">
-                                                <p style="flex:1">Thời gian kết thúc</p>
-                                                <input class="form-control text-box single-line" id="time2" name="time2" type="datetime-local" style="flex: 1; width: 250px">
+                                                <p s>Thời gian kết thúc</p>
+                                                <input class="form-control text-box single-line" id="time2" name="time2" type="datetime-local"  required>
                                             </div>
-                                            <div class="item_modal_pro">
-                                                <button style="margin-left:40%;height:30px;width:100px;background-color:aqua" type="submit">Tạo mới</button>
+                                            <div class="item_modal_pro" >
+                                                <button type="submit">Tạo mới</button>
                                             </div>
                                         </div>
+                                        
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </td>
-                </div>
 
-                @using (Html.BeginForm("Index", "Vouchers", FormMethod.Get))
-                {
-                    <div style="display:flex;  ">
-                        <button type="submit" class="button-tab button-search" style="border:none">Tìm kiếm</button>
-                        <input type="text" class="ip_search" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
-                    </div>
-                }
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <td>Mã giảm giá</td>
-                        <td>Giá trị</td>
-                        <td>Số lượng</td>
-
-                        <td>Thời gian bắt đầu</td>
-                        <td>Thời gian kết thúc</td>
-                        <td>Trạng Thái</td>
-                        <td>#</td>
-
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach (var item in Model)
+                    @if (ViewBag.Status == false)
                     {
-                    <tr>
+                        <a class="button-tab-1" style="background-color:lightgray;" href="/ma-giam-gia-true">
+                            <i class="fa-solid fa-trash fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+                    }
+			        else
+			        {
 
-                        <td>@item.Ma</td>
-                        <td>@item.Giatri</td>
-                        <td>@item.Soluong</td>
-                        <td>@item.Time1</td>
-                        <td>@item.Time2</td>
-                        @if (item.DeleteStatus == false)
+                    <div class="button-tab-0">
+                        <a class="button-tab-2" style="background-color: lightblue;" href="/ma-giam-gia-false">
+                            <i class="fa-solid fa-arrow-left fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+                    </div>
+			        }
+
+                    </div>
+                <div style="width: 50%; height: 20px; background: linear-gradient(to left, lightgray, limegreen); margin-left: 25%; "></div>
+            </div>
+
+
+        </div>
+        <table style="width:100%">
+            <thead style="background-color: rgb(52 160 160);">
+                <tr>
+                    <td id="title-table" style="color:aqua;font-weight:700">Mã giảm giá</td>
+                    <td id="title-table-1" style="color:aqua">Giá trị</td>
+                    <td id="title-table-2" style="color:aqua">Số lượng</td>
+                    <td id="title-table-3" style="color:aqua">Thời gian bắt đầu </td>
+                    <td id="title-table-4" style="color:aqua">Thời gian kết thúc</td>
+                    <td id="title-table-7" style="color:aqua">Trạng thái</td>
+                    <td id="title-table-5" style="color:aqua">Bỏ</td>
+                    <td id="title-table-6" style="color:aqua">Gia hạn</td>
+
+                </tr>
+            </thead>
+
+            <tbody id="body-table">
+                @foreach (var item in Model)
+                {
+                <tr id="row-table">
+
+                    <td>@item.Ma</td>
+                    <td>@item.Giatri</td>
+                    <td>@item.Soluong</td>
+                    <td>@item.Time1</td>
+                    <td>@item.Time2</td>
+                    @if (item.DeleteStatus == false)
+                    {
+                        if (item.Trangthai == true)
                         {
-                            if (item.Trangthai == true)
-                            {
-                                <td style="color:lightgreen">Hoạt động</td>
-                            }
-                            else
-                            {
-                                <td style="color:lightcoral">Khóa</td>
-                            }
-                            <td><a href="bo-khoi-phuc-@item.ID">Bỏ thùng rác</a></td>
-                            <td>
-                                <a class="modal-btn" data-modal-id="modal-@item.ID" href="#">Gia hạn</a>
-
-
-                                <div id="modal-@item.ID" class="modal">
-                                    <div class="modal-content" style="height:280px;">
-                                        <div class="title_modal_pro">
-                                            <strong style="text-align: center;font-size:25px;">Thay đổi thời gian</strong>
-                                        </div>
-                                        <div class="content_modal_pro">
-                                            <div class="avt_pro" style="justify-content: center; align-items: center;">
-                                                <form action="/gia-han" method="post">
-                                                    <input type="hidden" name="id" id="id" value="@item.ID" />
-                                                    <div class="item_modal_pro" style="margin-top:40px;padding-top:40px">
-                                                        <p style="flex:1">Thời gian bắt đầu</p>
-                                                        <input class="form-control text-box single-line" id="time1" name="time1" type="datetime-local" placeholder="@item.Time1" style="flex:1;width:250px">
-                                                    </div>
-                                                    <div class="item_modal_pro">
-                                                        <p style="flex:1">Thời gian kết thúc</p>
-                                                        <input class="form-control text-box single-line" id="time2" name="time2" type="datetime-local" placeholder="@item.Time2" style="flex: 1; width: 250px">
-                                                    </div>
-                                                    <div class="item_modal_pro">
-                                                        <button style="margin-left:40%;height:30px;width:100px;background-color:aqua" type="submit">Gia hạn</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
+                            <td style="color:lightgreen">Hoạt động</td>
                         }
                         else
                         {
-                            <td><a href="bo-khoi-phuc-@item.ID"> Khôi phục</a></td>
+                            <td style="color:lightcoral">Khóa</td>
                         }
+                        <td><a href="bo-khoi-phuc-@item.ID">Bỏ thùng rác</a></td>
+                        <td>
+                            <a class="modal-btn" data-modal-id="modal-@item.ID" href="#">Gia hạn</a>
 
-                    </tr>
+
+                            <div id="modal-@item.ID" class="modal">
+                                <div class="modal-content" style="height:280px;">
+                                    <div class="title_modal_pro">
+                                        <strong style="text-align: center;font-size:25px;">Thay đổi thời gian</strong>
+                                    </div>
+                                    <div class="content_modal_pro">
+                                        <div class="avt_pro" style="justify-content: center; align-items: center;">
+                                            <form action="/gia-han" method="post">
+                                                <input type="hidden" name="id" id="id" value="@item.ID" />
+                                                <div class="item_modal_pro" >
+                                                    <p style="flex:1">Thời gian bắt đầu</p>
+                                                    <input class="form-control text-box single-line" id="time1" name="time1" type="datetime-local" value="@item.Time1" style="flex:1;width:250px" required>
+                                                </div>
+                                                <div class="item_modal_pro">
+                                                    <p style="flex:1">Thời gian kết thúc</p>
+                                                    <input class="form-control text-box single-line" id="time2" name="time2" type="datetime-local" value="@item.Time2" style="flex: 1; width: 250px" required>
+                                                </div>
+                                                <div class="item_modal_pro">
+                                                    <button style="margin-left:30%" type="submit">Gia hạn</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     }
-                    
+                    else
+                    {
+                        <td><a href="bo-khoi-phuc-@item.ID"> Khôi phục</a></td>
+                    }
+
+                </tr>
+                }
 
 
 
 
 
-                </tbody>
-            </table>
-            @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
-        </div>
-        <!-- -----------------HD gan dayh--------- -->
+            </tbody>
+        </table>
 
-
+        @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @Searchstring = @ViewBag.Search }))
     </div>
+    <!-- -----------------HD gan dayh--------- -->
+
+
     <script>
+
+
 
         var modalBtns = document.querySelectorAll('.modal-btn');
 
@@ -266,19 +215,58 @@
             });
         });
 
-        var closeBtns = document.querySelectorAll('.close');
-        closeBtns.forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var modal = this.closest('.modal');
-                modal.style.display = "none";
-            });
-        });
+        
         window.onclick = function (event) {
             if (event.target.classList.contains('modal')) {
                 event.target.style.display = "none";
             }
         };
-    </script>
 
+
+        var inputsearch = document.getElementById("input-search");
+
+        inputsearch.addEventListener('mouseover', function () {
+            inputsearch.style.width = "60%";
+            inputsearch.style.borderRadius = "0px 50px 50px 0px";
+            inputsearch.style.backgroundColor = "lightgreen";
+        });
+        inputsearch.addEventListener('mouseout', function () {
+            inputsearch.style.width = "20%";
+            inputsearch.style.borderRadius = "0px 10px 10px 0px";
+            inputsearch.style.backgroundColor = "lightgray";
+        });
+
+        var bodytable = document.getElementById("body-table");
+        var titletable = document.getElementById("title-table");
+        var titletable0 = document.getElementById("title-table-1");
+        var titletable1 = document.getElementById("title-table-2");
+        var titletable2 = document.getElementById("title-table-3");
+        var titletable3 = document.getElementById("title-table-4");
+        var titletable4 = document.getElementById("title-table-5");
+        var titletable5 = document.getElementById("title-table-6");
+        var titletable6 = document.getElementById("title-table-7");
+        bodytable.addEventListener('mouseover', function () {
+            titletable.style.color = "#fff";
+            titletable0.style.color = "#fff";
+            titletable1.style.color = "#fff";
+            titletable2.style.color = "#fff";
+            titletable3.style.color = "#fff";
+            titletable4.style.color = "#fff";
+            titletable5.style.color = "#fff";
+            titletable6.style.color = "#fff";
+        });
+        bodytable.addEventListener('mouseout', function () {
+            titletable.style.color = "aqua";
+            titletable0.style.color = "aqua";
+            titletable1.style.color = "aqua";
+            titletable2.style.color = "aqua";
+            titletable3.style.color = "aqua";
+            titletable4.style.color = "aqua";
+            titletable5.style.color = "aqua";
+            titletable6.style.color = "aqua";
+        });
+
+
+    </script>
 </body>
 </html>

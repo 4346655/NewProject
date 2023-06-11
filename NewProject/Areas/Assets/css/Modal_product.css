@@ -19,7 +19,7 @@
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 40%;
+    width: 45%;
     height: 90%;
     border-radius: 10px;
 }
@@ -60,7 +60,8 @@
 }
 
 .infomation_pro {
-    width: 50%;
+    width: 600px;
+    margin-left:30px;
 }
 .item_modal_pro{
     margin-top:30px;
@@ -76,4 +77,8 @@
     width: 400px;
     height: 200px;
     border-radius: 10px;
+}
+.info-receive {
+    background-color: rgba(0,0,0,0.8);
+    color:white;
 }

@@ -12,14 +12,28 @@ namespace NewProject.Areas.Admin
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
+            context.MapRoute(
+             "chinh sua mat khau admin",
+             "chinh-sua-mat-khau",
+             new { Controller = "Accounts", action = "DoimatkhauAdmin", id = UrlParameter.Optional }
+          );
+                context.MapRoute(
+             "chinh sua thong tin admin",
+             "chinh-sua-thong-tin",
+             new { Controller = "Accounts", action = "Index" }
+          );
             context.MapRoute(
            "thong bao",
            "thong-bao",
            new { Controller = "Announce", action = "Index", id = UrlParameter.Optional }
         );
-
+            context.MapRoute(
+         "tai khoan admin",
+         "tai-khoan-admin",
+         new { Controller = "Accounts", action = "Index"}
+      );
             context.MapRoute(
             "respond-mail",
             "tra-loi-mail",

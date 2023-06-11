@@ -7,95 +7,97 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="~/Areas/Assets/css/create.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Areas/Assets/css/edit.css">
+    <style>
+        html {
+            font-family: Times New Roman;
+        }
+    </style>
 </head>
 <body>
-    <div class="include">
-        <div class="left">
 
             <form action="/Admin/Products/Create" method="post" id="myForm">
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="main-left">
-                    <div class="item-1">
-                        <div class="item">
-                            <label>Hinh anh </label>
-                            <input class="form-control text-box single-line" id="txtImage" name="Anh" type="text" value="" placeholder="................">
-                            <input style="width:70px" type="button" value="Upload" onclick="BrowserServer('txtImage')" />
+                <main>
+                    <div class="left-mid">
+                        <div class="image-product" style="max-width :400px; height: auto; margin-left:80px;">
+                            <img src="" id="anhdaidien">
+                            <input class="form-control text-box single-line" id="txtImage" name="Anh" type="hidden" value="" placeholder="................">
+                            <input style="margin-top:20px ;font-size: larger; font-weight: 800; color: rgb(116, 125, 15);" type="button" value="Tai anh" onclick="BrowserServer('txtImage')" />
                         </div>
-                        <div class="item">
-                            <label>Ten sach</label>
-                            <input class="form-control text-box single-line" id="TenSach" name="TenSach" type="text" value="" placeholder="................" required >
-
-                        </div>
-                        <div class="item">
-                            <label>Gia</label>
-                            <input class="form-control text-box single-line" data-val="true" data-val-number="The field Gia must be a number." id="Gia" name="Gia" type="number" value="" placeholder="................" required >
-
-                        </div>
-                        <div class="item">
-                            <label>The loai</label>
-                            <select class="form-control" id="ID_LoaiSach" name="ID_LoaiSach">
-                                <option value="1">Tieu thuyet</option>
-                                <option value="2">Truyen tranh</option>
-                                <option value="3">Van hoc</option>
-                            </select>
-
-                        </div>
-                        <div class="item">
-                            <label for="">Trang thai</label>
-                            <select class="list-box tri-state" id="Trangthai" name="Trangthai">
-                                <option value="true">Hoat dong</option>
-                                <option value="false">Khoa</option>
-                            </select>
-
-                        </div>
-
                     </div>
-                    <div class="item-2">
-                        <div class="item">
-                            <label for="">So luong</label>
-                            <input class="form-control text-box single-line" data-val="true" data-val-number="The field SoLuong must be a number." id="SoLuong" name="SoLuong" type="number" value="" placeholder="................" required >
+                    <div class="right-mid">
+                        <div class="title-page" style=" align-content: center;">
+                            <h3 style="color: rgb(116, 125, 15); font-size: 50px;  font-weight: 800;">Thong tin san pham</h3>
+                        </div>
+                        <div class="right-mid-item" style="margin-top: 70px;">
+                            <h4>The loai</h4>
+                            <select class="form-control type-book" style="width:400px;" id="ID_LoaiSach" name="ID_LoaiSach">
+                                @Html.Action("GetListCategories", "Products")
+                            </select>
+                        </div>
+                        <div class="right-mid-item" style="margin-top: 40px;">
+                            <h4>Ten sach</h4>
+                            <input class="form-control type-book" id="TenSach" name="TenSach" type="text" value="" placeholder="................" required>
+                        </div>
+                        <div class="right-mid-item" style="margin-top: 40px;">
+                            <h4>Tac gia</h4>
+                            <input class="form-control type-book" data-val="true" data-val-length="The field TacGia must be a string with a maximum length of 500." data-val-length-max="500" id="TacGia" name="TacGia" type="text" value="" placeholder="................" required>
+                        </div>
+                        <div class="right-mid-item" style="margin-top: 40px;">
+                            <h4>Nha xuat ban</h4>
+                            <input class="form-control type-book" data-val="true" data-val-length="The field NhaXuatBan must be a string with a maximum length of 500." data-val-length-max="500" id="NhaXuatBan" name="NhaXuatBan" type="text" value="" placeholder="................" required>
+                        </div>
+                        <div class="right-mid-item" style="margin-top: 40px;">
+                            <h4>Mo ta</h4>
+                            <textarea name="Mota" id="Mota"></textarea>
+                        </div>
+                        <hr style="margin-top: 10px;width: 500px;margin-left: 50px;">
+                        <div class="number-product">
 
+                            <div class="right-mid-item-1">
+                                <h4>So luong</h4>
+                                <input class="form-control type-book" data-val="true" min="1" data-val-number="The field SoLuong must be a number." id="SoLuong" name="SoLuong" type="number" value="1" placeholder="................" required>
+                            </div>
+                            <div class="right-mid-item-1">
+                                <h4>Gia</h4>
+                                <input class="form-control type-book" data-val="true" data-val-number="The field Gia must be a number." id="Gia" name="Gia" type="number" value="1" placeholder="................" required>
+                            </div>
+                            <div class="right-mid-item-1">
+                                <h4>Trang thai</h4>
+                                <div style="display: flex;">
+                                    <select class="type-book" id="Trangthai" name="Trangthai">
+                                        <option value="true">Hoat dong</option>
+                                        <option value="false">Khoa</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="hidden" name="DeleteStatus" value="false" />
                         </div>
-                        <div class="item">
-                            <label for="">Tac gia</label>
-                            <input class="form-control text-box single-line" data-val="true" data-val-length="The field TacGia must be a string with a maximum length of 500." data-val-length-max="500" id="TacGia" name="TacGia" type="text" value="" placeholder="................" required>
-                        </div>
-                        <div class="item">
-                            <label for="">Nha xuat ban </label>
-                            <input class="form-control text-box single-line" data-val="true" data-val-length="The field NhaXuatBan must be a string with a maximum length of 500." data-val-length-max="500" id="NhaXuatBan" name="NhaXuatBan" type="text" value="" placeholder="................" required >
-                        </div>
-                        <div class="item">
-                            <label for="">Gia giam </label>
-                            <input class="form-control text-box single-line" data-val="true" data-val-number="The field Gia_giam must be a number." id="Gia_giam" name="Gia_giam" type="number" value="" placeholder="................">
-                        </div>
-                        <div class="item">
-                            <label for="">Mo ta</label>
-                            <input class="form-control text-box single-line" id="Mota" name="Mota" type="text" value="" placeholder="................">
-                        </div>
-
                     </div>
-                </div>
-                <div class="btn_submit">
-                    <button type="submit">Tao moi</button>
-                    @Html.ActionLink("Tro lai", "Index")
-                </div>
+                    <div class="btn-confirm" style="width:100%;text-align:right;">
+                        <button type="submit"> Tao</button>
+                        <form action="/san-pham">
+                            <button>Tro lai</button>
+                        </form>
+                    </div>
+                </main>
 
             </form>
-        </div>
-    </div>
+       
     <script>
         function BrowserServer(field) {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
+                var image = document.getElementById("anhdaidien");
                 document.getElementById(field).value = fileUrl;
+                image.src = fileUrl;
             };
             finder.popup();
         }

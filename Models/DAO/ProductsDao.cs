@@ -175,5 +175,9 @@ namespace Models.DAO
 			db.SaveChanges();
 
 		}
+		public List<Sach> GetListSach_IDcategory(int iddanhmuc)
+		{
+			return db.Saches.Where(x => x.Loai_Sach.ID == iddanhmuc).ToList();
+		}
 	}
 }

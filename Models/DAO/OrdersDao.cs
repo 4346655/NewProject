@@ -118,7 +118,7 @@ namespace Models.DAO
 			
 			
 
-			var model = db.Magiamgias.Where(x => x.Ma == MGG).SingleOrDefault();
+			var model = db.Magiamgias.Where(x => x.Ma == MGG && x.DeleteStatus == true).SingleOrDefault();
 			int gia = db.Saches.Where(x=>x.ID == idsach).SingleOrDefault().Gia.Value;
 			if (model != null)
 			{
@@ -133,7 +133,8 @@ namespace Models.DAO
 					a.Tong_gia = a.SoLuong * gia;
 
 				}
-				var mgg = db.Temps.Where(x => x.ID_TK == iduser && x.Magiamgia.Ma == MGG).SingleOrDefault();
+				var user = db.KhachHangs.Find(iduser);
+				var mgg = db.Temps.Where(x => x.ID_TK == user.TaiKhoan.ID && x.Magiamgia.Ma == MGG).SingleOrDefault();
 				db.Temps.Remove(mgg);
 			}
 			else

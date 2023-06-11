@@ -1,0 +1,19 @@
+﻿@model List<Models.DTO.Loai_Sach>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetListCategories</title>
+</head>
+<body>
+            @foreach(var item in Model)
+			{
+                <option value="@item.ID">@item.Loaisach</option>
+			}
+</body>
+</html>

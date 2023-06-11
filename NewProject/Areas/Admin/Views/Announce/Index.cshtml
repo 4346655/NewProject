@@ -21,8 +21,8 @@
                 <div class="announce-header">
                     <div style="display: flex;justify-content: space-between;">
                         <div style="display: flex;">
-                            <i class="fa-solid fa-envelope" style="color: #000000;margin: 20px;width: 80px;"></i>
-                            <p style="margin-top: 20px;">Chính </p>
+                            <i id="check-all" class="fa-solid fa-envelope" style="color: #000000;margin: 20px;width: 80px;"></i>
+                            <p  style="margin-top: 20px;">Chính </p>
                         </div>
                         <div style="display: flex;justify-content: space-around;width: 150px;margin-top: 20px;">
 
@@ -49,7 +49,7 @@
                     </div>
                         @foreach (var item in Model)
                         {
-                            <div class="content-mail" id="modal-@item.ID" style="display:none;">
+                            <div class="content-mail" id="modal-@item.ID" >
                                 <div class="head-mail">
                                     <div>
                                         <h3 style="margin-top:10px;">Nội dung chính </h3>
@@ -126,6 +126,7 @@
                 var modalId = this.getAttribute('data-modal-id');
                 var modal = document.getElementById(modalId);
                 modal.style.display = "block";
+                
             });
         });
 
@@ -148,18 +149,22 @@
             });
             if (ids.length > 0) {
                 for (let i = 0; i < ids.length; i++) {
-
                     window.location.href = "/xoa-mail-" + ids[i];
                 }
             }
             else {
                 alert("Chọn email muốn xóa ?");
             }
-
-
-          
         });
 
+        var checkall = document.getElementById("check-all");
+        var input = document.querySelectorAll("input[type='checkbox']");
+
+        checkall.addEventListener('click', function () {
+            input.forEach(function (checkbox) {
+                checkbox.checked = true;
+            });
+        });
 
     </script>
 </body>  

@@ -67,6 +67,8 @@
 <body>
 
     <form action="/dat-hang-gio-hang-one">
+        <input type="hidden" name="idsach" value="@ViewBag.IDSach" />
+        <input type="hidden" name="soluong" value="@ViewBag.SoLuong" />
         <main class="cart-page">
             <div class="cart-content">
                 <h4 style="font-size: 25px;width: 100%;height: 30px;">Đặt hàng</h4>
@@ -97,19 +99,19 @@
                                     <div class="fill-info">
                                         <div style="width:45%">
                                             <p>Họ và tên</p>
-                                            <input type="text" class="input_info" name="hoten" id="hoten" required />
+                                            <input type="text" class="input_info" name="hoten" id="hoten" data-val-required-message="Vui lòng nhập thông tin" required />
                                         </div>
                                         <div style="width:45%">
                                             <p>Số điện thoại</p>
-                                            <input type="text" class="input_info" name="sdt" id="sdt" required />
+                                            <input type="text" class="input_info" name="sdt" id="sdt" data-val-required-message="Vui lòng nhập thông tin" required />
                                         </div>
                                         <div style="width:45%">
                                             <p>Địa chỉ</p>
-                                            <input type="text" class="input_info" name="diachi" id="diachi" required />
+                                            <input type="text" class="input_info" name="diachi" id="diachi" data-val-required-message="Vui lòng nhập thông tin" required />
                                         </div>
                                         <div style="width:45%">
                                             <p>Email</p>
-                                            <input type="text" class="input_info" name="email" id="email" required />
+                                            <input type="text" class="input_info" name="email" id="email" data-val-required-message="Vui lòng nhập thông tin" required />
                                         </div>
                                         <div style="width:90%;margin-top:50px;">
                                             <a class="get-info" id="get-info">
@@ -146,8 +148,7 @@
                             </div>
                             <div class="price_total">
                                 <small> Tổng giá </small>
-
-                                <h2 id="total_price">@ViewBag.Total</h2>
+                                <h2 id="total_price">@ViewBag.Total  </h2>
                             </div>
 
 
@@ -177,9 +178,9 @@
                                 </div>
 
                             </div>
-                            </div>
                         </div>
                     </div>
+                </div>
             </div>
 
         </main>
@@ -219,6 +220,7 @@
                 var newemail= "@ViewBag.Email";
                 email.value = newemail;
             });
+     
 
     </script>
 

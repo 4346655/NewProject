@@ -6,7 +6,7 @@
 
     var ac = new AccountDao();
     var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
-   
+
 }
 
 
@@ -18,7 +18,14 @@
     <title>Trang chủ</title>
     <link href="~/Clientassets/css/Home.css" rel="stylesheet" />
     <link href="~/Clientassets/font/fontawesome/css/all.css" rel="stylesheet" />
-
+    <style>
+        .search_input{
+            text-align:center;
+        }
+        .search_input::placeholder{
+            color:rgb(193 193 193);
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -26,10 +33,13 @@
             <div class="logo-shop">
                 <img src="~/Clientassets/image/logochude.png" alt="">
             </div>
-            <div class="box-search">
-                <form action="/tim-kiem-sach" style="display:flex">
-                    @Html.Action("HistorySearch", "Home")
-                  
+            <div class="box-search" id="box-search">
+                <form action="/tim-kiem-sach" >
+                    <input class="search_input" type="text" id="tensach" name="tensach" placeholder="Bạn muốn tìm gì?"  autocomplete="off">
+                    @if (session != null)
+                    {
+                        @Html.Action("HistorySearch", "Home")
+                    }
                 </form>
             </div>
             <div class="list-item-header ">
@@ -162,6 +172,25 @@
     <br> <br>
     <br>
 </div>
+    <script>
+        var boxsearch = document.getElementById("box-search");
+        var boxhistory = document.getElementById("box-history");
+        boxsearch.addEventListener('mouseover', function () {
+            boxhistory.style.display = "block";
+        });
+        boxsearch.addEventListener('mouseout', function () {
+            boxhistory.style.display = "none";
+        });
+
+        var paragraphs = document.getElementsByClassName("row-history");
+        var input = document.getElementById("tensach");
+
+        for (var i = 0; i < paragraphs.length; i++) {
+            paragraphs[i].addEventListener("click", function () {
+                input.value = this.innerText;
+            });
+        }
+    </script>
     <script src="~/Content/ckfinder/ckfinder/ckfinder.js"></script>
 
     @RenderSection("scripts", required: false)

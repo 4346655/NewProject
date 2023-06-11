@@ -45,11 +45,18 @@
                     </ul>
                     @Html.Action("Start","ProductDetails",new {idsach = Model.ID})
                    
-                    <span>
-                        <h3 class="buy">Giá : @(Model.Gia-Model.Gia_giam)</h3>
+                <span>
+                    @if (Model.Gia_giam != 0)
+                    {
+                        <h3 class="buy">Giá : @(Model.Gia - Model.Gia_giam)</h3>
                         <del>@Model.Gia</del>
+                    }
+                    else
+                    {
+                        <h3 class="buy">Giá : @(Model.Gia)</h3>
+                    }
 
-                    </span>
+                </span>
                     <div class="sol">
                         <span class="sl">Số lượng</span>
                         <input type="number" class="number" id="solng">

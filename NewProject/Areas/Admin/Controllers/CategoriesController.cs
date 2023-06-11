@@ -48,6 +48,7 @@ namespace NewProject.Areas.Admin.Controllers
             {
                 var category = new CategoriesDao();
                 var listcategory = category.DanhSachDanhMuc(Searchstring, trangthai, page, pagesize);
+                ViewBag.Trangthai = trangthai.ToString();
                 ViewBag.Search = Searchstring;
                 return View(listcategory);
             }
@@ -58,6 +59,12 @@ namespace NewProject.Areas.Admin.Controllers
 
 
         }
+        public ActionResult GetListProduct(int iddanhmuc)
+		{
+            var product = new ProductsDao();
+            var list = product.GetListSach_IDcategory(iddanhmuc);
+            return View(list);
+		}
         public ActionResult ThemDanhMuc(string tendanhmuc)
 		{
             var category = new CategoriesDao();
@@ -138,8 +145,10 @@ namespace NewProject.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Loai_Sach.Add(loai_Sach);
-                    db.SaveChanges();
+                   
+                        db.Loai_Sach.Add(loai_Sach);
+                        db.SaveChanges();
+                  
                     return RedirectToAction("Index");
                 }
 

@@ -19,6 +19,11 @@ namespace Models.DAO
 		{
 			return db.Loai_Sach.ToList();
 		}
+		
+		public List<Loai_Sach> List1()
+		{
+			return db.Loai_Sach.Where(x=>x.Trangthai ==true).ToList();
+		}
 		public IEnumerable<Loai_Sach> DanhSachDanhMuc(string Searchstring,bool trangthai, int page, int pagesize)
 		{
 			IOrderedQueryable<Loai_Sach> model = db.Loai_Sach.Where(x=>x.Trangthai == trangthai).OrderByDescending(x => x.ID);
@@ -62,18 +67,27 @@ namespace Models.DAO
 		}
 		public int ThemDanhMuc(string name,bool trangthai)
 		{
-			if(IsValidTEN(name))
+			var model = db.Loai_Sach.SingleOrDefault(x => x.Loaisach == name);
+			if (model != null)
 			{
-				Loai_Sach a = new Loai_Sach
-				{
-					Loaisach = name,
-					Trangthai = trangthai,
-				};
-				db.Loai_Sach.Add(a);
-				db.SaveChanges();
 				return 1;
 			}
-			return 0;
+			else
+			{
+				if (IsValidTEN(name))
+				{
+					Loai_Sach a = new Loai_Sach
+					{
+						Loaisach = name,
+						Trangthai = trangthai,
+					};
+					db.Loai_Sach.Add(a);
+					db.SaveChanges();
+				}
+				return 0;
+			}
+
+			
 		}
 		public List<Loai_Sach> List()
 		{

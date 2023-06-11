@@ -65,18 +65,26 @@ namespace NewProject.Controllers
         {
             var customer = new CustomersDao();
             var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
-            var infocustomer = customer.GetDetailByUsername(session.username);
+            if (session == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                var infocustomer = customer.GetDetailByUsername(session.username);
 
-            ViewBag.HoTen = infocustomer.HoTen;
-            ViewBag.SDT = infocustomer.SDT;
-            ViewBag.DiaChi = infocustomer.Diachi;
-            ViewBag.Email = infocustomer.Email;
-            ViewBag.SoLuong = soluong.ToString();
-            var pr = new ProductsDao();
-            var sach = pr.SachDetail(idsach);
-            ViewBag.GiaGiam = sach.Gia_giam.ToString();
-            ViewBag.Total = ((sach.Gia-sach.Gia_giam)*soluong).ToString();
-            return View(sach);
+                ViewBag.IDSach = idsach;
+                ViewBag.HoTen = infocustomer.HoTen;
+                ViewBag.SDT = infocustomer.SDT;
+                ViewBag.DiaChi = infocustomer.Diachi;
+                ViewBag.Email = infocustomer.Email;
+                ViewBag.SoLuong = soluong.ToString();
+                var pr = new ProductsDao();
+                var sach = pr.SachDetail(idsach);
+                ViewBag.GiaGiam = sach.Gia_giam.ToString();
+                ViewBag.Total = ((sach.Gia - sach.Gia_giam) * soluong).ToString();
+                return View(sach);
+            }
         }
         public ActionResult OrderProduct(int phuongthuc, string hoten, string sdt,string diachi,string email , string note)
 		{
@@ -137,18 +145,16 @@ namespace NewProject.Controllers
 
             return RedirectToAction("Index");
 		}
-        public ActionResult OrderProduct_Oneproduct(int phuongthuc, string hoten, string sdt, string diachi, string email, string note)
+        public ActionResult OrderProduct_Oneproduct(int idsach,int soluong,string magiamgia,int phuongthuc, string hoten, string sdt, string diachi, string email, string note)
         {
 
             var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
             var kh = new CustomersDao();
             var id = kh.GetID(session.username);
-            var gh = new CartDao();
-            var list = gh.GioHang_IDUser(id);
+           
             var order1 = new OrdersDao();
-            foreach (var item in list)
-            {
-                var order = order1.CreateNew((int)item.ID_Sach, id, phuongthuc, (int)item.SoLuong, "", note, hoten, sdt, diachi, email);
+         
+                var order = order1.CreateNew(idsach, id, phuongthuc, soluong, magiamgia, note, hoten, sdt, diachi, email);
 
                 var model = kh.GetDetailByUsername(session.username);
 
@@ -192,7 +198,7 @@ namespace NewProject.Controllers
                 ThongbaoDao tbd = new ThongbaoDao();
                 tbd.Add(a);
 
-            }
+            
 
             return RedirectToAction("Index");
         }

@@ -15,32 +15,128 @@ namespace NewProject.Areas.Admin.Controllers
     public class AccountsController : Controller
     {
         private Model1 db = new Model1();
-
-        // GET: Admin/Accounts
-        public ActionResult Index()
+        public bool Phanquyen()
         {
-            var ac = new AccountDao();
             var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
             if (session == null)
             {
-                return RedirectToAction("Error", "Home1");
+
+                return false;
+
             }
             else
             {
-                var account = ac.Byname(session.username);
-                if (account != 2)
+                var account = new AccountDao();
+                var id = account.Byname(session.username);
+                if (id != 2)
                 {
-                    return RedirectToAction("Error", "Home1");
+                    return false;
+
+                }
+            }
+            return true;
+
+
+        }
+        // GET: Admin/Accounts
+        public ActionResult Index()
+        {
+            var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
+            var kh = new CustomersDao();
+            var khachhang = kh.GetDetailByUsername(session.username);
+            return View(khachhang);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(string hoten, string diachi, string email, string sdt, string avt)
+        {
+            var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
+            var kh = new CustomersDao();
+            var detail = kh.GetDetailByUsername(session.username);
+            var id = kh.GetID(session.username);
+            int key = kh.ChangeInfo(id, hoten, diachi, email, sdt, avt);
+            if (key == 0)
+            {
+                ModelState.AddModelError("", "Thay đổi thành công");
+            }
+            else if (key == 1)
+            {
+                ModelState.AddModelError("", "Họ và tên của bạn chứa kí tự không hợp lệ");
+            }
+            else if (key == 3)
+            {
+                ModelState.AddModelError("", "Email không hợp lệ");
+            }
+            else if (key == 2)
+            {
+                ModelState.AddModelError("", "Số điện thoại chứa kí tự không hợp lệ");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Vui lòng nhập đúng số điện thoại");
+            }
+            return View(detail);
+        }
+
+
+        public ActionResult DoimatkhauAdmin()
+        {
+            var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
+            var kh = new CustomersDao();
+            var khachhang = kh.GetDetailByUsername(session.username);
+            return View(khachhang);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DoimatkhauAdmin(string oldpass, string newpass, string confirm)
+        {
+            var session = (LoginModels)Session[LoginConstants.LOGIN_SESSION];
+            if (session != null)
+            {
+                var kh = new CustomersDao();
+                var id = kh.GetIDTK(session.username);
+                var ac = new AccountDao();
+                var key = ac.Changepassword(id, oldpass, newpass, confirm);
+                if (key == 0)
+                {
+                    ModelState.AddModelError("", "Nhập đầy đủ thông tin");
+                }
+                else if (key == 1)
+                {
+                    ModelState.AddModelError("", "Mật khẩu cũ không chính xác");
+                }
+                else if (key == 2)
+                {
+                    ModelState.AddModelError("", "Mật khẩu không khớp");
+                }
+                else if (key == 4)
+                {
+                    ModelState.AddModelError("", "Mật khẩu nhiều hơn 8 kí tự");
+                }
+                else if (key == 5)
+                {
+                    ModelState.AddModelError("", "Mật khẩu chứa kí tự không cho phép");
                 }
                 else
                 {
-                    var taiKhoans = db.TaiKhoans.Include(t => t.LoaiTK);
-                    return View(taiKhoans.ToList());
+                    ModelState.AddModelError("", "Đổi mật khẩu thành công");
                 }
+
+
+                ac.CreateNew(session.username);
+                var khachhang = kh.GetDetailByUsername(session.username);
+                return View(khachhang);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
             }
 
-           
         }
+
+
 
         // GET: Admin/Accounts/Details/5
         public ActionResult Details(int? id)
@@ -63,6 +159,8 @@ namespace NewProject.Areas.Admin.Controllers
             ViewBag.ID_LoaiTK = new SelectList(db.LoaiTKs, "ID", "Ten_LoaiTK");
             return View();
         }
+
+
 
         // POST: Admin/Accounts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 

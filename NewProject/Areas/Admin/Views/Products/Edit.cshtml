@@ -1,147 +1,112 @@
-﻿@model Models.DTO.Sach
+﻿
+@model Models.DTO.Sach
 
-@{
-    ViewBag.Title = "Edit";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-}
+@{ ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
 <html>
-    <head>
-        <title>
-           Chỉnh sửa thông tin
-            
-        </title>
-        <link rel="stylesheet" href="~/Areas/Assets/css/edit.css">
-    </head>
-    <body >
+<head>
+    <title>
+        Chỉnh sửa thông tin
+    </title>
+    <link rel="stylesheet" href="~/Areas/Assets/css/edit.css">
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.ID)
+</head>
+<body>
 
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
 
             <main>
-                <div class="left-main">
-
-                </div>
-                <div class="right-main">
-                    <div class="mid-right-main">
-                        <div class="left-mid">
-                            <div class="image-product">
-                                <img src="@Model.Anh">
-                                @Html.EditorFor(model => model.Anh, new { htmlAttributes = new { @id = "txtImage", @class = "form-control",@type="hidden" } })
-                                @Html.ValidationMessageFor(model => model.Anh, "", new { @class = "text-danger" })
-                                <input  type="button" value="Tải ảnh" onclick="BrowserServer('txtImage')" />
-                            </div>
+                  <div class="left-mid">
+                        <div class="image-product" style="max-width :400px; height: auto; margin-left:80px;">
+                             <img src="@Model.Anh" id="anhdaidien">
+                             @Html.EditorFor(model => model.Anh, new { htmlAttributes = new { @id = "txtImage", @class = "form-control", @type = "hidden" } })
+                             @Html.ValidationMessageFor(model => model.Anh, "", new { @class = "text-danger" })
+                             <input style="margin-top:20px ;font-size: larger; font-family: Times; font-weight: 800; color: rgb(116, 125, 15);" type="button" value="Tải ảnh" onclick="BrowserServer('txtImage')" />
                         </div>
-                        <div class="right-mid">
-                            <div class="title-page">
-                                <h3>Thông tin sản phẩm</h3>
-                            </div>
-                            <div class="right-mid-item" style="margin-top: 70px;">
-                                <h4>Thể loại</h4>
-                                <select style="width: 150px;" id="ID_LoaiSach" name="ID_LoaiSach">
-                                    @if (Model.ID_LoaiSach == 1)
-                                    {
-                                        <option value="1" selected>Tiểu thuyết</option>
-                                        <option value="2">Truyện tranh</option>
-                                        <option value="3">Văn học</option>
-                                    }
-                                    else if (Model.ID_LoaiSach == 2)
-                                    {
-                                        <option value="1">Tiểu thuyết</option>
-                                        <option value="2" selected>Truyện tranh</option>
-                                        <option value="3">Văn học</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="1">Tiểu thuyết</option>
-                                        <option value="2" >Truyện tranh</option>
-                                        <option value="3" selected>Văn học</option>
-                                    }
-                                </select>
-                            </div>
-                            <div class="right-mid-item">
-                                <h4>Tên sách</h4>
-                                @Html.EditorFor(model => model.TenSach, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="right-mid-item">
-                                <h4>Tác giả</h4>
-                                @Html.EditorFor(model => model.TacGia, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="right-mid-item">
-                                <h4>Nhà xuất bản</h4>
-                                @Html.EditorFor(model => model.NhaXuatBan, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="right-mid-item">
-                                <h4>Mô tả</h4>
-                                <textarea name="Mota" id="Mota">@Model.Mota</textarea>
-                            </div>
-                            <hr style="margin-top: 10px;width: 500px;margin-left: 50px;">
-                            <div class="number-product">
-                                <div class="right-mid-item-1">
-                                    <h4>Số lượng</h4>
-                                    @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="right-mid-item-1">
-                                    <h4>Giá</h4>
-                                    @Html.EditorFor(model => model.Gia, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="right-mid-item-1">
-                                   
-                                    <h4>Trạng thái</h4>
-                                    <div style="display: flex;">
-                                        @if (Model.Trangthai == true)
-                                        {
-                                            <p>Bật</p><input type="radio" name="Trangthai" id="Trangthai" value="true" checked>
-                                            <p style="margin-left: 20px;">Tắt</p><input type="radio" name="Trangthai" id="Trangthai" value="false">
-                                        }
-                                        else
-                                        {
-                                            <p>Bật</p><input type="radio" name="Trangthai" id="Trangthai" value="true" >
-                                            <p style="margin-left: 20px;">Tắt</p><input type="radio" name="Trangthai" id="Trangthai" value="false" checked>
-                                        }
-                                    </div>
-                                </div>
-                                <input type="hidden" name="DeleteStatus" value="false" />
-                            </div>
-                            <div class="btn-confirm">
-                                <button type="submit"> Lưu</button>
-                                <form action="/san-pham">
-                                    <button>Trở lại</button>
-                                </form>
-                            </div>
-                        </div>
+                   </div>
+                   <div class="right-mid">
+                         <div class="title-page" style=" align-content: center;">
+                              <h3 style="color: rgb(116, 125, 15); font-size: 50px; font-family: Times; font-weight: 800;">Thông tin sản phẩm</h3>
+                         </div>
+                   <div class="right-mid-item" style="margin-top: 70px;">
+                         <h4>Thể loại</h4>
+                         <select class="form-control type-book" style="width:400px;" id="ID_LoaiSach" name="ID_LoaiSach">
+                              <option value="@Model.Loai_Sach.ID" checked> @Model.Loai_Sach.Loaisach  </option>
+                               @Html.Action("GetListCategories", "Products")
+                         </select>
+                   </div>
+                   <div class="right-mid-item" style="margin-top: 40px;">
+                         <h4>Tên sách</h4>
+                         @Html.EditorFor(model => model.TenSach, new { htmlAttributes = new { @class = "form-control type-book" } })
+                         @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
+                   </div>
+                   <div class="right-mid-item" style="margin-top: 40px;">
+                         <h4>Tác giả</h4>
+                         @Html.EditorFor(model => model.TacGia, new { htmlAttributes = new { @class = "form-control type-book" } })
+                         @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
+                   </div>
+                                                        <div class="right-mid-item" style="margin-top: 40px;">
+                                                            <h4>Nhà xuất bản</h4>
+                                                            @Html.EditorFor(model => model.NhaXuatBan, new { htmlAttributes = new { @class = "form-control type-book" } })
+                                                            @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="right-mid-item" style="margin-top: 40px;">
+                                                            <h4>Mô tả</h4>
+                                                            <textarea name="Mota" id="Mota">@Model.Mota</textarea>
+                                                        </div>
+                                                        <hr style="margin-top: 10px;width: 500px;margin-left: 50px;">
+                                                        <div class="number-product">
+                                                            <div class="right-mid-item-1">
+                                                                <h4>Số lượng</h4>
+                                                                @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control type-book" } })
+                                                                @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            <div class="right-mid-item-1">
+                                                                <h4>Giá</h4>
+                                                                @Html.EditorFor(model => model.Gia, new { htmlAttributes = new { @class = "form-control type-book" } })
+                                                                @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            <div class="right-mid-item-1">
 
-                    </div>
-                </div>
-            </main>
-
-
-
-
-            
-          
-        }
-
-
-        @section scripts
+                                                                <h4>Trạng thái</h4>
+                                                                <div style="display: flex;">
+                                                                    @if (Model.Trangthai == true)
+                                                                    {
+                                                                        <p>Bật</p><input type="radio" name="Trangthai" id="Trangthai" value="true" checked>
+                                                                        <p style="margin-left: 20px;">Tắt</p><input type="radio" name="Trangthai" id="Trangthai" value="false"> }
+                                                                    else
+                                                                    {
+                                                                     <p>Bật</p><input type="radio" name="Trangthai" id="Trangthai" value="true">
+                                                                        <p style="margin-left: 20px;">Tắt</p><input type="radio" name="Trangthai" id="Trangthai" value="false" checked>}
+                                                                </div>
+                                                            </div>
+                                                            <input type="hidden" name="DeleteStatus" value="false" />
+                                                        </div>
+                                                        <div class="btn-confirm">
+                                                            <button type="submit"> Lưu</button>
+                                                            <form action="/san-pham">
+                                                                <button>Trở lại</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </main>}
+    @section scripts
 {
-            <script>
-                function BrowserServer(field) {
-                    var finder = new CKFinder();
-                    finder.selectActionFunction = function (fileUrl) {
-                        document.getElementById(field).value = fileUrl;
-                    };
-                    finder.popup();
-                }
-            </script>
-        }
-    </body>
+        <script>
+            function BrowserServer(field) {
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (fileUrl) {
+                    var image = document.getElementById("anhdaidien");
+                    document.getElementById(field).value = fileUrl;
+                    image.src = fileUrl;
+                };
+                finder.popup();
+            }
+        </script>
+    }
+</body>
 </html>

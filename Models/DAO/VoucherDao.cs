@@ -44,6 +44,23 @@ namespace Models.DAO
 				}
 			}
 		}
+		public int CheckCode(Magiamgia a)
+		{
+			var model = db.Magiamgias.SingleOrDefault(x => x.Ma == a.Ma);
+			if(model != null)
+			{
+				model.Soluong = a.Soluong;
+				model.Giatri = a.Giatri;
+				model.Time1 = a.Time1;
+				model.Time2 = a.Time2;
+				db.SaveChanges();
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
+		}
 		public void GiaHan(int id,DateTime time1,DateTime time2)
 		{
 			var model = db.Magiamgias.Where(x => x.ID == id).SingleOrDefault();
@@ -55,6 +72,52 @@ namespace Models.DAO
 		{
 			var model = db.Magiamgias.Find(idvoucher);
 			model.DeleteStatus = !model.DeleteStatus;
+			db.SaveChanges();
+		}
+		public void giveout(Magiamgia a ,int soluong)
+		{
+			var account = db.TaiKhoans.ToList();
+			if(account.Count <= soluong)
+			{
+				foreach(var item in account)
+				{
+					Temp a1 = new Temp
+					{
+						ID_MGG = a.ID,
+						ID_TK = item.ID
+					};
+					db.Temps.Add(a1);
+				}
+			}
+			else
+			{
+				Random random = new Random();
+				int minValue = 0;
+				int maxValue = account.Count;
+				int count = soluong;
+
+				List<int> randomNumbers = new List<int>();
+
+				while (randomNumbers.Count < count)
+				{
+					int randomNumber = random.Next(minValue, maxValue);
+
+					if (!randomNumbers.Contains(randomNumber))
+					{
+						randomNumbers.Add(randomNumber);
+					}
+				}
+				foreach(var item in randomNumbers)
+				{
+					Temp a1 = new Temp
+					{
+						ID_MGG = a.ID,
+						ID_TK = account[item].ID,
+					};
+					db.Temps.Add(a1);
+				}	
+
+			}
 			db.SaveChanges();
 		}
 	}

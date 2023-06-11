@@ -147,34 +147,26 @@ text-align: left;
 }
 
 .header__user{
-    position: relative;
-    width: 40px;
-    height:40px;
-    border-radius: 50%;
-    overflow: hidden;
-    cursor: pointer;
+    width: 60px;
+    height:60px;
+    text-align:center;
 }
-.header__user img{
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-object-fit: cover;
-
+.icon-setting{
+    transition:all 1s;
 }
-
+.icon-setting:hover {
+    transform: rotate(180deg);
+    color:red;
+}
 /* ==============List========= */
-
-.detail{
-position: relative;
-width: 100%;
-padding: 20px;
-display: grid;
-grid-template-columns: 2fr 1fr;
-grid-gap: 30px;
-margin-top: 20px;
-
+.detail {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+    margin-top: 20px;
 }
 
 .detail a{

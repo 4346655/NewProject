@@ -22,16 +22,27 @@
     </style>
 </head>
 <body>
-    <select name="mgg" id="mgg">
+    <select name="magiamgia" id="magiamgia">
+
         @if (Model.Count < 1)
         {
+            ViewBag.Magiamgia = 0;
             <option value="">Bạn chưa có mã giảm giá</option>
         }
         else
         {
+            <option value="">Không chọn mã nào</option>
             foreach (var item in Model)
             {
-            <option value="@item.Magiamgia.Ma">@item.Magiamgia.Ma - @item.Magiamgia.Giatri</option>
+                if (item.Magiamgia.Trangthai == false || item.Magiamgia.Time2.Value < DateTime.Now)
+                {
+                    <option value="@item.Magiamgia.Ma" disabled>@item.Magiamgia.Ma - @item.Magiamgia.Giatri <i><small style="color:lightcoral">( Hết hạn )</small></i></option>
+                }
+                else
+                {
+                    <option value="@item.Magiamgia.Ma">@item.Magiamgia.Ma - @item.Magiamgia.Giatri</option>
+                }
+
             }
         }
 

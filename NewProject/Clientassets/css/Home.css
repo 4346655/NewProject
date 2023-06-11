@@ -561,3 +561,8 @@ ul.list-contact {
     border-radius: 20px;
     box-shadow: 5px 5px 2px rgb(230, 70, 70);
 }
+@keyframes animationboxsearch {
+    0%{
+        height:0px;
+    }
+}

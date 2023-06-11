@@ -168,7 +168,7 @@
         <div style="display:flex;height:70px;justify-content:space-between;width:95%;margin-bottom:20px">
 
 
-            @using (Html.BeginForm("Statefalse", "Products", FormMethod.Get))
+            @using (Html.BeginForm("ThungRacSanPham", "Products", FormMethod.Get))
             {
                 <div style="width:100%">
                     <div style="width:70px;height:70px;position:absolute;background-color:gray;border-radius:100px;text-align:center">
@@ -177,22 +177,22 @@
                     <input type="text" id="input-search" class="ip_search" autocomplete="off" name="Searchstring" value="@ViewBag.Search" placeholder="Tìm kiếm ..." />
                 </div>
             }
-        <div style="outline:none;width:20%;">
+            <div style="outline:none;width:20%;">
 
-            <div style="display:flex;width:100%;height:25px;justify-content:space-around;">
+                <div style="display:flex;width:100%;height:25px;justify-content:space-around;">
 
-                <a class="button-tab" style="background-color:lightgray;" href="/them-san-pham">
-                    <i class="fa-solid fa-square-plus fa-2xl " style="margin-top:35px;"></i>
-                </a>
-            
-                <div class="button-tab-0">
-                    <a class="button-tab-1" style="background-color: lightblue;" href="/san-pham">
-                        <i class="fa-solid fa-arrow-left fa-2xl" style="margin-top:35px;"></i>
+                    <a class="button-tab" style="background-color:lightgray;" href="/them-san-pham">
+                        <i class="fa-solid fa-square-plus fa-2xl " style="margin-top:35px;"></i>
                     </a>
+            
+                    <div class="button-tab-0">
+                        <a class="button-tab-1" style="background-color: lightblue;" href="/san-pham">
+                            <i class="fa-solid fa-arrow-left fa-2xl" style="margin-top:35px;"></i>
+                        </a>
+                    </div>
                 </div>
-            </div>
             <div style="width: 50%; height: 20px; background: linear-gradient(to left, blue, lightgray); margin-left: 25%; "></div>
-        </div>
+            </div>
         </div>
         <table style="width:100%">
             <thead style=" background-color: rgb(245,155,155);">
@@ -227,9 +227,13 @@
                             <td>Dừng bán</td>
                         }
                         <td>
-                            <a href="/quay-lai-san-pham-@item.ID">Khôi phục</a> |
+                            <a href="/quay-lai-san-pham-@item.ID">
+                                <i class="fa-solid fa-rotate-left"></i>    
+                            </a> |
 
-                            <a class="modal-btn" data-modal-id="modal-@item.ID">Xóa</a>
+                            <a class="modal-btn" data-modal-id="modal-@item.ID">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
                             <div id="modal-@item.ID" class="modal">
                                 <div class="modal-content">
                                     <div class="main_modal">
